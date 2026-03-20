@@ -4,128 +4,165 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Server Wiki</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+  tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:'#1a40b5',900:'#0e266a'}},fontFamily:{sans:['Inter','Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','sans-serif']}}}}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="header-brand">
-        <div class="logo-icon">&#9935;</div>
-        <div><h1>Server Wiki</h1><span class="subtitle">Minecraft Server Plugin Documentation</span></div>
-      </a>
-      <div class="header-search">
-        <span class="search-icon">&#128269;</span>
-        <input type="text" class="search-input" placeholder="プラグインを検索...">
-        <div class="search-results"></div>
+<body class="bg-gray-50 min-h-screen text-slate-900">
+
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 h-16 bg-white/80 backdrop-blur border-b border-slate-200 z-50 flex items-center px-4 lg:px-8">
+    <button id="menu-btn" class="lg:hidden mr-3 p-2 rounded-lg hover:bg-gray-50" aria-label="メニュー">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <a href="index.html" class="flex items-center gap-2 text-slate-900 no-underline">
+      <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"/></svg>
       </div>
-      <button class="mobile-menu-btn">&#9776;</button>
+      <span class="font-semibold text-lg hidden sm:inline">Server Wiki</span>
+    </a>
+    <div id="search-box" class="relative ml-auto w-64 hidden sm:block">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input id="search-input" type="text" placeholder="検索..." class="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500">
+      <div id="search-results" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden z-50"></div>
     </div>
   </header>
-  <div class="sidebar-overlay"></div>
-  <div class="page-wrapper">
-    <nav class="sidebar">
-      <div class="sidebar-section">
-        <div class="sidebar-section-title">ナビゲーション</div>
-        <div class="sidebar-nav">
-          <a href="index.html" class="active"><span class="nav-icon">&#127968;</span>ホーム</a>
-          <a href="ars-noveau.html"><span class="nav-icon">&#10024;</span>Ars Noveau</a>
-          <a href="diamond-compressor.html"><span class="nav-icon">&#128142;</span>Diamond Compressor</a>
-          <a href="storage-drawers.html"><span class="nav-icon">&#128452;&#65039;</span>Storage Drawers</a>
-          <a href="mypet.html"><span class="nav-icon">&#128062;</span>MyPet</a>
-          <a href="levelmobs.html"><span class="nav-icon">&#9876;&#65039;</span>LevelledMobs</a>
+
+  <!-- Overlay -->
+  <div id="overlay" class="hidden fixed inset-0 bg-black/30 z-40 lg:hidden"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-56 bg-white border-r border-slate-200 z-40 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform duration-200">
+    <nav class="p-4 space-y-1">
+      <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">プラグイン</p>
+      <a href="index.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">ホーム</a>
+      <a href="ars-noveau.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Ars Noveau</a>
+      <a href="diamond-compressor.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Diamond Compressor</a>
+      <a href="storage-drawers.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Storage Drawers</a>
+      <a href="mypet.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">MyPet</a>
+      <a href="levelmobs.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">LevelledMobs</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="pt-16 lg:pl-56">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12 py-10">
+
+      <!-- Hero -->
+      <div class="mb-10">
+        <h1 class="text-3xl font-bold text-slate-900 mb-3">Server Plugin Wiki</h1>
+        <p class="text-body leading-relaxed max-w-2xl">当サーバーで稼働中のプラグインの完全なドキュメント。各プラグインの使い方、設定値、レシピ、コマンドを網羅しています。</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <div class="text-2xl font-bold text-slate-900">5</div>
+          <div class="text-sm text-slate-500 mt-1">プラグイン</div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <div class="text-2xl font-bold text-slate-900">60+</div>
+          <div class="text-sm text-slate-500 mt-1">スペル</div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <div class="text-2xl font-bold text-slate-900">30+</div>
+          <div class="text-sm text-slate-500 mt-1">エンチャント上限突破</div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <div class="text-2xl font-bold text-slate-900">50+</div>
+          <div class="text-sm text-slate-500 mt-1">ペット種類</div>
         </div>
       </div>
-    </nav>
-    <main class="main-content">
-      <div class="hero animate-in">
-        <h1>Server Plugin Wiki</h1>
-        <p>当サーバーで稼働中のプラグインの完全なドキュメント。<br>各プラグインの使い方、設定値、レシピ、コマンドを網羅しています。</p>
-      </div>
 
-      <div class="stat-grid animate-in animate-delay-1">
-        <div class="stat-item"><div class="stat-value">5</div><div class="stat-label">プラグイン</div></div>
-        <div class="stat-item"><div class="stat-value">60+</div><div class="stat-label">スペル</div></div>
-        <div class="stat-item"><div class="stat-value">100+</div><div class="stat-label">エンチャント上限</div></div>
-        <div class="stat-item"><div class="stat-value">50+</div><div class="stat-label">ペット種類</div></div>
-      </div>
+      <!-- Plugin Cards -->
+      <h2 class="text-xl font-semibold text-slate-900 mb-6">プラグイン一覧</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
 
-      <h2>プラグイン一覧</h2>
-      <div class="plugin-grid">
-        <a href="ars-noveau.html" class="plugin-card card-emerald animate-in animate-delay-1">
-          <span class="card-icon">&#10024;</span>
-          <h3>Ars Noveau</h3>
-          <p>Ars Nouveau MODの魔法システムを再現。60以上のスペル、9種の防具セット、15種のスレッド強化。</p>
-          <div class="card-tags">
-            <span class="tag tag-emerald">魔法</span>
-            <span class="tag tag-diamond">スペル</span>
-            <span class="tag tag-amethyst">防具</span>
-            <span class="tag tag-gold">儀式</span>
+        <a href="ars-noveau.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
+          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">Ars Noveau</h3>
+          <p class="text-sm text-body leading-relaxed mb-4">Ars Nouveau MODの魔法システムを再現。60以上のスペル、9種の防具セット、15種のスレッド強化。</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">魔法</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">スペル</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">防具</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">儀式</span>
           </div>
         </a>
-        <a href="diamond-compressor.html" class="plugin-card card-diamond animate-in animate-delay-2">
-          <span class="card-icon">&#128142;</span>
-          <h3>Diamond Compressor</h3>
-          <p>ダイヤモンドを圧縮してエンチャントを限界突破。バニラの最大レベルを超える強化が可能。</p>
-          <div class="card-tags">
-            <span class="tag tag-diamond">圧縮</span>
-            <span class="tag tag-lapis">エンチャント</span>
-            <span class="tag tag-amethyst">強化</span>
+
+        <a href="diamond-compressor.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
+          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">Diamond Compressor</h3>
+          <p class="text-sm text-body leading-relaxed mb-4">ダイヤモンドを圧縮してエンチャントを限界突破。バニラの最大レベルを超える強化が可能。</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">圧縮</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">エンチャント</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">強化</span>
           </div>
         </a>
-        <a href="storage-drawers.html" class="plugin-card card-gold animate-in animate-delay-3">
-          <span class="card-icon">&#128452;&#65039;</span>
-          <h3>Storage Drawers</h3>
-          <p>大量のアイテムを効率的に管理。7段階のティアと最大131,072アイテムの収納力。</p>
-          <div class="card-tags">
-            <span class="tag tag-gold">ストレージ</span>
-            <span class="tag tag-emerald">収納</span>
-            <span class="tag tag-diamond">ホッパー</span>
+
+        <a href="storage-drawers.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
+          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">Storage Drawers</h3>
+          <p class="text-sm text-body leading-relaxed mb-4">大量のアイテムを効率的に管理。7段階のティアと最大131,072アイテムの収納力。</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ストレージ</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">収納</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ホッパー</span>
           </div>
         </a>
-        <a href="mypet.html" class="plugin-card card-amethyst animate-in animate-delay-4">
-          <span class="card-icon">&#128062;</span>
-          <h3>MyPet</h3>
-          <p>50以上のモブをペットに。レアリティ、性格、進化、装備、図鑑コンプリートを目指そう。</p>
-          <div class="card-tags">
-            <span class="tag tag-amethyst">ペット</span>
-            <span class="tag tag-emerald">テイム</span>
-            <span class="tag tag-gold">進化</span>
-            <span class="tag tag-redstone">レアリティ</span>
+
+        <a href="mypet.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
+          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">MyPet</h3>
+          <p class="text-sm text-body leading-relaxed mb-4">50以上のモブをペットに。レアリティ、性格、進化、装備、図鑑コンプリートを目指そう。</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ペット</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">テイム</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">進化</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">レアリティ</span>
           </div>
         </a>
-        <a href="levelmobs.html" class="plugin-card card-redstone animate-in animate-delay-5">
-          <span class="card-icon">&#9876;&#65039;</span>
-          <h3>LevelledMobs</h3>
-          <p>距離・高度・プレイヤー数に応じたモブレベリング。カスタムドロップと難易度調整。</p>
-          <div class="card-tags">
-            <span class="tag tag-redstone">モブ</span>
-            <span class="tag tag-gold">レベル</span>
-            <span class="tag tag-emerald">ドロップ</span>
+
+        <a href="levelmobs.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group md:col-span-2">
+          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">LevelledMobs</h3>
+          <p class="text-sm text-body leading-relaxed mb-4">距離・高度・プレイヤー数に応じたモブレベリング。カスタムドロップと難易度調整。</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">モブ</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">レベル</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ドロップ</span>
           </div>
         </a>
       </div>
 
-      <h2>サーバー情報</h2>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>項目</th><th>詳細</th></tr></thead>
-          <tbody>
-            <tr><td>対応バージョン</td><td>Minecraft 1.21 / Paper</td></tr>
-            <tr><td>統合版対応</td><td>Geyser + Floodgate によるBedrock Edition互換</td></tr>
-            <tr><td>プラグイン数</td><td>5 (Ars Noveau, Diamond Compressor, Storage Drawers, MyPet, LevelledMobs)</td></tr>
+      <!-- Server Info -->
+      <h2 class="text-xl font-semibold text-slate-900 mb-4">サーバー情報</h2>
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-12">
+        <table class="w-full text-sm">
+          <thead class="border-b border-slate-200 bg-gray-50">
+            <tr>
+              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">項目</th>
+              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">詳細</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-6 py-3 font-medium text-slate-900">対応バージョン</td><td class="px-6 py-3 text-body">Minecraft 1.21 / Paper</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-slate-900">統合版対応</td><td class="px-6 py-3 text-body">Geyser + Floodgate による Bedrock Edition 互換</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-slate-900">プラグイン数</td><td class="px-6 py-3 text-body">5 (Ars Noveau, Diamond Compressor, Storage Drawers, MyPet, LevelledMobs)</td></tr>
           </tbody>
         </table>
       </div>
 
-      <footer class="site-footer">
-        <p>Server Plugin Wiki &copy; 2026 &mdash; All Rights Reserved</p>
+      <!-- Footer -->
+      <footer class="pt-8 border-t border-slate-200 text-center text-sm text-slate-400">
+        Server Plugin Wiki &copy; 2026
       </footer>
-    </main>
-  </div>
-  <button class="back-to-top">&uarr;</button>
+    </div>
+  </main>
+
+  <button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center text-slate-500 hover:bg-gray-50 transition-all opacity-0 pointer-events-none z-50" aria-label="トップへ戻る">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
   <script src="js/main.js"></script>
 </body>
 </html>

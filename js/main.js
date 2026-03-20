@@ -1,41 +1,69 @@
 document.addEventListener('DOMContentLoaded',()=>{
-  const menuBtn=document.querySelector('.mobile-menu-btn');
-  const sidebar=document.querySelector('.sidebar');
-  const overlay=document.querySelector('.sidebar-overlay');
-  if(menuBtn){menuBtn.addEventListener('click',()=>{sidebar.classList.toggle('open');overlay.classList.toggle('active')})}
-  if(overlay){overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('active')})}
-  document.querySelectorAll('.sidebar-nav a').forEach(link=>{link.addEventListener('click',()=>{if(window.innerWidth<=1024){sidebar.classList.remove('open');overlay.classList.remove('active')}})});
-  // FAQ
-  document.querySelectorAll('.faq-question').forEach(q=>{q.addEventListener('click',()=>{const item=q.parentElement;const answer=item.querySelector('.faq-answer');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-answer').style.maxHeight='0'});if(!isOpen){item.classList.add('open');answer.style.maxHeight=answer.scrollHeight+'px'}})});
-  // Tabs
-  document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{const g=btn.closest('.tab-group');const t=btn.dataset.tab;g.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));g.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));btn.classList.add('active');g.querySelector('#'+t).classList.add('active')})});
-  // Back to top
-  const btt=document.querySelector('.back-to-top');
-  if(btt){window.addEventListener('scroll',()=>{btt.classList.toggle('visible',window.scrollY>300)});btt.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})})}
-  // Active sidebar
-  const cur=window.location.pathname.split('/').pop()||'index.html';
-  document.querySelectorAll('.sidebar-nav > a, .sidebar-nav .nav-links > a').forEach(l=>{const h=l.getAttribute('href');if(h===cur||(cur===''&&h==='index.html'))l.classList.add('active')});
-  // Scroll spy
-  const tocLinks=document.querySelectorAll('.sidebar-toc a');
-  if(tocLinks.length>0){const headings=[];tocLinks.forEach(l=>{const id=l.getAttribute('href').replace('#','');const el=document.getElementById(id);if(el)headings.push({el,link:l})});const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const m=headings.find(h=>h.el===e.target);if(m)m.link.classList.add('active')}})},{rootMargin:'-80px 0px -60% 0px'});headings.forEach(h=>obs.observe(h.el))}
-  // Search
-  const si=document.querySelector('.search-input');const sr=document.querySelector('.search-results');
-  if(si&&sr){const data=[
-    {title:'Ars Noveau',section:'魔法プラグイン',url:'ars-noveau.html',kw:'ars magic spell mana マナ スペル 魔法 グリフ 儀式'},
-    {title:'スペルシステム',section:'Ars Noveau',url:'ars-noveau.html#spell-system',kw:'投射 接触 自己 足元'},
-    {title:'防具システム',section:'Ars Noveau',url:'ars-noveau.html#armor-system',kw:'guardian arcane weaver 守護 魔導 魔織'},
-    {title:'スレッドシステム',section:'Ars Noveau',url:'ars-noveau.html#thread-system',kw:'thread slot 飛行 暗視'},
-    {title:'儀式システム',section:'Ars Noveau',url:'ars-noveau.html#ritual-system',kw:'ritual core pedestal 儀式 台座'},
-    {title:'Diamond Compressor',section:'圧縮・強化',url:'diamond-compressor.html',kw:'diamond compress enchant 圧縮 ダイヤ エンチャント 強化'},
-    {title:'オーバーエンチャント',section:'Diamond Compressor',url:'diamond-compressor.html#overenchant',kw:'強化 成功率 金床'},
-    {title:'Storage Drawers',section:'ストレージ',url:'storage-drawers.html',kw:'drawer storage barrel ドロワー 収納'},
-    {title:'MyPet',section:'ペットシステム',url:'mypet.html',kw:'pet tame evolve skill テイム 進化 ペット レアリティ'},
-    {title:'レアリティ',section:'MyPet',url:'mypet.html#rarity',kw:'common uncommon rare epic legendary mythic'},
-    {title:'進化',section:'MyPet',url:'mypet.html#evolution',kw:'evolve zombie skeleton 進化'},
-    {title:'スキルツリー',section:'MyPet',url:'mypet.html#skilltree',kw:'combat farm pvp ride tank support'},
-    {title:'LevelledMobs',section:'モブシステム',url:'levelmobs.html',kw:'level mob monster レベル モブ ドロップ'},
-    {title:'ドロップテーブル',section:'LevelledMobs',url:'levelmobs.html#drops',kw:'drop loot 報酬'}
-  ];
-  si.addEventListener('input',()=>{const q=si.value.toLowerCase().trim();if(q.length<2){sr.classList.remove('active');return}const m=data.filter(i=>i.title.toLowerCase().includes(q)||i.kw.toLowerCase().includes(q)||i.section.toLowerCase().includes(q));if(m.length>0){sr.innerHTML=m.map(i=>'<a class="search-result-item" href="'+i.url+'"><div class="result-title">'+i.title+'</div><div class="result-section">'+i.section+'</div></a>').join('');sr.classList.add('active')}else{sr.innerHTML='<div class="search-result-item"><div class="result-title">結果が見つかりませんでした</div></div>';sr.classList.add('active')}});
-  document.addEventListener('click',e=>{if(!e.target.closest('.header-search'))sr.classList.remove('active')})}
+  const btn=document.getElementById('menu-btn');
+  const sidebar=document.getElementById('sidebar');
+  const overlay=document.getElementById('overlay');
+  const close=()=>{sidebar.classList.add('-translate-x-full');overlay.classList.add('hidden')};
+  const open=()=>{sidebar.classList.remove('-translate-x-full');overlay.classList.remove('hidden')};
+  if(btn)btn.addEventListener('click',open);
+  if(overlay)overlay.addEventListener('click',close);
+  document.querySelectorAll('#sidebar a').forEach(a=>a.addEventListener('click',()=>{if(window.innerWidth<1024)close()}));
+
+  document.querySelectorAll('[data-faq]').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const ans=el.nextElementSibling;
+      const icon=el.querySelector('[data-icon]');
+      const isOpen=!ans.classList.contains('hidden');
+      document.querySelectorAll('[data-faq]').forEach(q=>{
+        q.nextElementSibling.classList.add('hidden');
+        const ic=q.querySelector('[data-icon]');if(ic)ic.textContent='+';
+      });
+      if(!isOpen){ans.classList.remove('hidden');if(icon)icon.textContent='\u2212';}
+    });
+  });
+
+  document.querySelectorAll('[data-tab-btn]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const g=b.closest('[data-tab-group]');
+      g.querySelectorAll('[data-tab-btn]').forEach(x=>{x.classList.remove('text-primary-500','border-primary-500');x.classList.add('text-slate-500','border-transparent')});
+      g.querySelectorAll('[data-tab-panel]').forEach(p=>p.classList.add('hidden'));
+      b.classList.add('text-primary-500','border-primary-500');b.classList.remove('text-slate-500','border-transparent');
+      const p=g.querySelector(`[data-tab-panel="${b.dataset.tabBtn}"]`);if(p)p.classList.remove('hidden');
+    });
+  });
+
+  const cur=location.pathname.split('/').pop()||'index.html';
+  document.querySelectorAll('#sidebar a[href]').forEach(a=>{
+    if(a.getAttribute('href')===cur||(!cur&&a.getAttribute('href')==='index.html')){
+      a.classList.add('bg-primary-50','text-primary-700','font-medium');a.classList.remove('text-slate-600','hover:bg-gray-50');
+    }
+  });
+
+  const tocLinks=document.querySelectorAll('#toc a');
+  if(tocLinks.length){
+    const entries=[];
+    tocLinks.forEach(l=>{const el=document.getElementById(l.getAttribute('href').slice(1));if(el)entries.push({el,link:l})});
+    new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tocLinks.forEach(l=>{l.classList.remove('text-primary-700','font-medium');l.classList.add('text-slate-500')});const m=entries.find(x=>x.el===e.target);if(m){m.link.classList.add('text-primary-700','font-medium');m.link.classList.remove('text-slate-500')}}})},{rootMargin:'-80px 0px -60% 0px'}).observe&&entries.forEach(e=>new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){tocLinks.forEach(l=>{l.classList.remove('text-primary-700','font-medium');l.classList.add('text-slate-500')});const m=entries.find(x=>x.el===en.target);if(m){m.link.classList.add('text-primary-700','font-medium');m.link.classList.remove('text-slate-500')}}})},{rootMargin:'-80px 0px -60% 0px'}).observe(e.el));
+  }
+
+  const si=document.getElementById('search-input'),sr=document.getElementById('search-results');
+  if(si&&sr){
+    const data=[
+      {t:'Ars Noveau',s:'魔法',u:'ars-noveau.html',k:'magic spell mana マナ スペル 魔法 グリフ 儀式 防具'},
+      {t:'Diamond Compressor',s:'圧縮・強化',u:'diamond-compressor.html',k:'diamond compress enchant 圧縮 ダイヤ エンチャント 強化'},
+      {t:'Storage Drawers',s:'ストレージ',u:'storage-drawers.html',k:'drawer storage ドロワー 収納 ホッパー'},
+      {t:'MyPet',s:'ペット',u:'mypet.html',k:'pet tame evolve テイム 進化 ペット レアリティ 性格'},
+      {t:'LevelledMobs',s:'モブ',u:'levelmobs.html',k:'level mob レベル モブ ドロップ'}
+    ];
+    si.addEventListener('input',()=>{
+      const q=si.value.toLowerCase().trim();
+      if(q.length<2){sr.classList.add('hidden');return}
+      const m=data.filter(i=>i.t.toLowerCase().includes(q)||i.k.includes(q)||i.s.includes(q));
+      sr.innerHTML=m.length?m.map(i=>`<a href="${i.u}" class="block px-4 py-3 hover:bg-gray-50 border-b border-slate-100 last:border-0"><div class="text-sm font-medium text-slate-900">${i.t}</div><div class="text-xs text-slate-500">${i.s}</div></a>`).join(''):'<div class="px-4 py-3 text-sm text-slate-500">結果なし</div>';
+      sr.classList.remove('hidden');
+    });
+    document.addEventListener('click',e=>{if(!e.target.closest('#search-box'))sr.classList.add('hidden')});
+  }
+
+  const btt=document.getElementById('btt');
+  if(btt){window.addEventListener('scroll',()=>{btt.classList.toggle('opacity-0',scrollY<300);btt.classList.toggle('pointer-events-none',scrollY<300)});btt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}))}
 });

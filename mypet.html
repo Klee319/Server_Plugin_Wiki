@@ -1,717 +1,779 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyPet - Server Wiki</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyPet - Server Wiki</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:'#1a40b5',900:'#0e266a'}},fontFamily:{sans:['Inter','Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','sans-serif']}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="header-brand">
-        <div class="logo-icon">&#9935;</div>
-        <div><h1>Server Wiki</h1><span class="subtitle">Minecraft Server Plugin Documentation</span></div>
-      </a>
-      <div class="header-search">
-        <span class="search-icon">&#128269;</span>
-        <input type="text" class="search-input" placeholder="プラグインを検索...">
-        <div class="search-results"></div>
+<body class="bg-gray-50 min-h-screen text-slate-900">
+
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 h-16 bg-white/80 backdrop-blur border-b border-slate-200 z-50 flex items-center px-4 lg:px-8">
+    <button id="menu-btn" class="lg:hidden mr-3 p-2 rounded-lg hover:bg-gray-50" aria-label="メニュー">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <a href="index.html" class="flex items-center gap-2 text-slate-900 no-underline">
+      <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"/></svg>
       </div>
-      <button class="mobile-menu-btn">&#9776;</button>
+      <span class="font-semibold text-lg hidden sm:inline">Server Wiki</span>
+    </a>
+    <div id="search-box" class="relative ml-auto w-64 hidden sm:block">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input id="search-input" type="text" placeholder="検索..." class="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500">
+      <div id="search-results" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden z-50"></div>
     </div>
   </header>
-  <div class="sidebar-overlay"></div>
-  <div class="page-wrapper">
-    <nav class="sidebar">
-      <div class="sidebar-section">
-        <div class="sidebar-section-title">ナビゲーション</div>
-        <div class="sidebar-nav">
-          <a href="index.html"><span class="nav-icon">&#127968;</span>ホーム</a>
-          <a href="ars-noveau.html"><span class="nav-icon">&#10024;</span>Ars Noveau</a>
-          <a href="diamond-compressor.html"><span class="nav-icon">&#128142;</span>Diamond Compressor</a>
-          <a href="storage-drawers.html"><span class="nav-icon">&#128452;&#65039;</span>Storage Drawers</a>
-          <a href="mypet.html" class="active"><span class="nav-icon">&#128062;</span>MyPet</a>
-          <a href="levelmobs.html"><span class="nav-icon">&#9876;&#65039;</span>LevelledMobs</a>
-        </div>
-      </div>
-      <div class="sidebar-section sidebar-toc">
-        <div class="sidebar-section-title">目次</div>
-        <div class="sidebar-nav">
-          <a href="#intro">はじめに</a>
-          <a href="#basics">MyPet基本機能</a>
-          <a href="#taming">テイム</a>
-          <a href="#rarity">レアリティ</a>
-          <a href="#personality">性格</a>
-          <a href="#bond">親密度</a>
-          <a href="#stats">ステータス</a>
-          <a href="#skilltree">スキルツリー</a>
-          <a href="#evolution">進化</a>
-          <a href="#equipment">装備</a>
-          <a href="#petdex">図鑑</a>
-          <a href="#commands">コマンド</a>
-          <a href="#reroll">リロール</a>
-          <a href="#permissions">権限</a>
-          <a href="#faq">FAQ</a>
-        </div>
-      </div>
-    </nav>
-    <main class="main-content">
-      <div class="breadcrumb">
-        <a href="index.html">ホーム</a>
-        <span class="separator">/</span>
-        <span>MyPet</span>
-      </div>
 
-      <div class="page-header">
-        <h1>&#128062; MyPet</h1>
-        <p class="page-description">MyPetAddon によるペットシステム。レアリティ・性格・親密度・進化・装備・図鑑を追加し、Mobをあなたの相棒にできます。</p>
+  <!-- Overlay -->
+  <div id="overlay" class="hidden fixed inset-0 bg-black/30 z-40 lg:hidden"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-56 bg-white border-r border-slate-200 z-40 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform duration-200">
+    <nav class="p-4 space-y-1">
+      <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">プラグイン</p>
+      <a href="index.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">ホーム</a>
+      <a href="ars-noveau.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Ars Noveau</a>
+      <a href="diamond-compressor.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Diamond Compressor</a>
+      <a href="storage-drawers.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Storage Drawers</a>
+      <a href="mypet.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-primary-50 text-primary-700 font-medium">MyPet</a>
+      <a href="levelmobs.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">LevelledMobs</a>
+    </nav>
+    <div id="toc" class="px-4 pb-6 border-t border-slate-100 pt-4 space-y-1">
+      <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">目次</p>
+      <a href="#intro" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">はじめに</a>
+      <a href="#basics" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">MyPet基本機能</a>
+      <a href="#taming" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">テイム</a>
+      <a href="#rarity" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">レアリティ</a>
+      <a href="#personality" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">性格</a>
+      <a href="#bond" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">親密度</a>
+      <a href="#stats" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">ステータス</a>
+      <a href="#skilltree" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">スキルツリー</a>
+      <a href="#evolution" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">進化</a>
+      <a href="#equipment" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">装備</a>
+      <a href="#petdex" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">図鑑</a>
+      <a href="#commands" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">コマンド</a>
+      <a href="#reroll" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">リロール</a>
+      <a href="#permissions" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">権限</a>
+      <a href="#faq" class="block px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-primary-700 hover:bg-gray-50">FAQ</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="pt-16 lg:pl-56">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12 py-10">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-slate-500 mb-6">
+        <a href="index.html" class="hover:text-primary-700">ホーム</a>
+        <span>/</span>
+        <span class="text-slate-900 font-medium">MyPet</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="mb-10">
+        <h1 class="text-3xl font-bold text-slate-900 mb-3">MyPet</h1>
+        <p class="text-body leading-relaxed max-w-3xl">MyPetAddon によるペットシステム。レアリティ・性格・親密度・進化・装備・図鑑を追加し、Mobをあなたの相棒にできます。</p>
       </div>
 
       <!-- ========== はじめに ========== -->
-      <h2 id="intro">はじめに</h2>
-      <p><strong>MyPetAddon</strong> は MyPet プラグインを拡張し、<strong>レアリティ</strong>・<strong>性格</strong>・<strong>親密度</strong>・<strong>進化</strong>・<strong>装備</strong>・<strong>図鑑</strong>などの要素を追加するアドオンです。</p>
-      <div class="callout callout-info">
-        <div class="callout-title">&#128712; 動作要件</div>
-        <ul>
-          <li>Paper 1.21.4 以降</li>
-          <li>MyPet 3.14 以降</li>
-        </ul>
-      </div>
+      <section id="intro" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">はじめに</h2>
+        <p class="text-body leading-relaxed mb-4"><strong>MyPetAddon</strong> は MyPet プラグインを拡張し、<strong>レアリティ</strong>・<strong>性格</strong>・<strong>親密度</strong>・<strong>進化</strong>・<strong>装備</strong>・<strong>図鑑</strong>などの要素を追加するアドオンです。</p>
+        <div class="bg-primary-50 border border-primary-500/20 rounded-xl p-4">
+          <p class="text-sm font-semibold text-primary-700 mb-2">動作要件</p>
+          <ul class="text-sm text-body space-y-1 list-disc list-inside">
+            <li>Paper 1.21.4 以降</li>
+            <li>MyPet 3.14 以降</li>
+          </ul>
+        </div>
+      </section>
 
       <!-- ========== MyPet基本機能 ========== -->
-      <h2 id="basics">MyPet基本機能</h2>
+      <section id="basics" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">MyPet基本機能</h2>
 
-      <h3>基本操作</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><code>/petcall</code></td><td>ペットを召喚する</td></tr>
-            <tr><td><code>/petsendaway</code></td><td>ペットをしまう</td></tr>
-            <tr><td><code>/petswitch</code></td><td>アクティブペットを切り替える</td></tr>
-            <tr><td><code>/petstore</code></td><td>ペットを預ける</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">基本操作</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">コマンド</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">説明</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petcall</code></td><td class="px-4 py-3 text-body">ペットを召喚する</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petsendaway</code></td><td class="px-4 py-3 text-body">ペットをしまう</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petswitch</code></td><td class="px-4 py-3 text-body">アクティブペットを切り替える</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petstore</code></td><td class="px-4 py-3 text-body">ペットを預ける</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>情報確認</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><code>/mypet</code></td><td>ペット情報のメインメニュー</td></tr>
-            <tr><td><code>/petskill</code></td><td>習得済みスキル一覧</td></tr>
-            <tr><td><code>/petinfo</code></td><td>ペットの詳細情報</td></tr>
-            <tr><td><code>/pettype</code></td><td>Mob種別ごとの食べ物・スキル情報</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">情報確認</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">コマンド</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">説明</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/mypet</code></td><td class="px-4 py-3 text-body">ペット情報のメインメニュー</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petskill</code></td><td class="px-4 py-3 text-body">習得済みスキル一覧</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petinfo</code></td><td class="px-4 py-3 text-body">ペットの詳細情報</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettype</code></td><td class="px-4 py-3 text-body">Mob種別ごとの食べ物・スキル情報</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>名前・解放</h3>
-      <ul>
-        <li><code>/petname &lt;名前&gt;</code> &mdash; ペットの名前を変更する</li>
-        <li><code>/petrelease &lt;名前&gt;</code> &mdash; ペットを解放する（<strong>取り消し不可</strong>）</li>
-      </ul>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">名前・解放</h3>
+        <ul class="text-sm text-body space-y-2 list-disc list-inside mb-6">
+          <li><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petname &lt;名前&gt;</code> &mdash; ペットの名前を変更する</li>
+          <li><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petrelease &lt;名前&gt;</code> &mdash; ペットを解放する（<strong>取り消し不可</strong>）</li>
+        </ul>
 
-      <h3>レベル・経験値</h3>
-      <p>ペットは<strong>敵を倒して経験値（EXP）を獲得</strong>し、レベルアップするとスキルが解放されます。</p>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">レベル・経験値</h3>
+        <p class="text-sm text-body leading-relaxed mb-6">ペットは<strong>敵を倒して経験値（EXP）を獲得</strong>し、レベルアップするとスキルが解放されます。</p>
 
-      <h3>空腹</h3>
-      <p>ペットには種類ごとに決まった食べ物が必要です。<code>/pettype</code> で確認できます。</p>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">空腹</h3>
+        <p class="text-sm text-body leading-relaxed mb-6">ペットには種類ごとに決まった食べ物が必要です。<code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettype</code> で確認できます。</p>
 
-      <h3>死亡</h3>
-      <p>ペットが死亡しても <code>/petcall</code> で再召喚できます。ただし<strong>親密度EXPが -20</strong> されます。</p>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">死亡</h3>
+        <p class="text-sm text-body leading-relaxed mb-6">ペットが死亡しても <code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petcall</code> で再召喚できます。ただし<strong>親密度EXPが -20</strong> されます。</p>
 
-      <h3>行動モード</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>モード</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><strong>friendly</strong></td><td>一切攻撃しない</td></tr>
-            <tr><td><strong>farm</strong></td><td>モンスターのみ攻撃</td></tr>
-            <tr><td><strong>duel</strong></td><td>プレイヤーが攻撃した対象のみ攻撃</td></tr>
-            <tr><td><strong>aggro</strong></td><td>全ての敵対Mobを攻撃</td></tr>
-            <tr><td><strong>raid</strong></td><td>全対象を攻撃</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">行動モード</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">モード</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">説明</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">friendly</td><td class="px-4 py-3 text-body">一切攻撃しない</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">farm</td><td class="px-4 py-3 text-body">モンスターのみ攻撃</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">duel</td><td class="px-4 py-3 text-body">プレイヤーが攻撃した対象のみ攻撃</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">aggro</td><td class="px-4 py-3 text-body">全ての敵対Mobを攻撃</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">raid</td><td class="px-4 py-3 text-body">全対象を攻撃</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>騎乗</h3>
-      <p><strong>Shift + 右クリック</strong>でペットに騎乗できます。<strong>Control</strong>スキルを習得すると操作が可能になります。</p>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">騎乗</h3>
+        <p class="text-sm text-body leading-relaxed mb-6"><strong>Shift + 右クリック</strong>でペットに騎乗できます。<strong>Control</strong>スキルを習得すると操作が可能になります。</p>
 
-      <h3>インベントリ</h3>
-      <p><strong>Backpack</strong>スキルを習得すると、ペットにアイテムを収納できます。<strong>右クリック</strong>または<strong>Shift + 右クリック</strong>でアクセスします。</p>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">インベントリ</h3>
+        <p class="text-sm text-body leading-relaxed mb-6"><strong>Backpack</strong>スキルを習得すると、ペットにアイテムを収納できます。<strong>右クリック</strong>または<strong>Shift + 右クリック</strong>でアクセスします。</p>
 
-      <h3>スキル詳細</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>スキル</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Damage</strong></td><td>攻撃力を強化</td></tr>
-            <tr><td><strong>Life</strong></td><td>最大HPを増加</td></tr>
-            <tr><td><strong>Ride</strong></td><td>ペットに騎乗可能</td></tr>
-            <tr><td><strong>Control</strong></td><td>騎乗中の操作を可能にする</td></tr>
-            <tr><td><strong>Sprint</strong></td><td>騎乗中のダッシュ</td></tr>
-            <tr><td><strong>Ranged</strong></td><td>遠距離攻撃</td></tr>
-            <tr><td><strong>Beacon</strong></td><td>周囲にバフ効果を付与</td></tr>
-            <tr><td><strong>Heal</strong></td><td>オーナーを回復</td></tr>
-            <tr><td><strong>Thorns</strong></td><td>反射ダメージ</td></tr>
-            <tr><td><strong>Knockback</strong></td><td>ノックバック付与</td></tr>
-            <tr><td><strong>Fire</strong></td><td>炎上付与</td></tr>
-            <tr><td><strong>Poison</strong></td><td>毒付与</td></tr>
-            <tr><td><strong>Slow</strong></td><td>鈍化付与</td></tr>
-            <tr><td><strong>Wither</strong></td><td>ウィザー効果付与</td></tr>
-            <tr><td><strong>Lightning</strong></td><td>雷撃</td></tr>
-            <tr><td><strong>Backpack</strong></td><td>ペットにインベントリを追加</td></tr>
-            <tr><td><strong>Pickup</strong></td><td>アイテムを自動回収</td></tr>
-            <tr><td><strong>Behavior</strong></td><td>行動モードの変更</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">スキル詳細</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">スキル</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">説明</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Damage</td><td class="px-4 py-3 text-body">攻撃力を強化</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Life</td><td class="px-4 py-3 text-body">最大HPを増加</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Ride</td><td class="px-4 py-3 text-body">ペットに騎乗可能</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Control</td><td class="px-4 py-3 text-body">騎乗中の操作を可能にする</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Sprint</td><td class="px-4 py-3 text-body">騎乗中のダッシュ</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Ranged</td><td class="px-4 py-3 text-body">遠距離攻撃</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Beacon</td><td class="px-4 py-3 text-body">周囲にバフ効果を付与</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Heal</td><td class="px-4 py-3 text-body">オーナーを回復</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Thorns</td><td class="px-4 py-3 text-body">反射ダメージ</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Knockback</td><td class="px-4 py-3 text-body">ノックバック付与</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Fire</td><td class="px-4 py-3 text-body">炎上付与</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Poison</td><td class="px-4 py-3 text-body">毒付与</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Slow</td><td class="px-4 py-3 text-body">鈍化付与</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Wither</td><td class="px-4 py-3 text-body">ウィザー効果付与</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Lightning</td><td class="px-4 py-3 text-body">雷撃</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Backpack</td><td class="px-4 py-3 text-body">ペットにインベントリを追加</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Pickup</td><td class="px-4 py-3 text-body">アイテムを自動回収</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Behavior</td><td class="px-4 py-3 text-body">行動モードの変更</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>Beaconバフ</h3>
-      <p>Beaconスキルで付与できるバフ効果:</p>
-      <ul>
-        <li>Regeneration（再生）</li>
-        <li>Strength（攻撃力上昇）</li>
-        <li>Resistance（耐性）</li>
-        <li>Speed（移動速度上昇）</li>
-        <li>Water Breathing（水中呼吸）</li>
-      </ul>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">Beaconバフ</h3>
+        <p class="text-sm text-body leading-relaxed mb-2">Beaconスキルで付与できるバフ効果:</p>
+        <ul class="text-sm text-body space-y-1 list-disc list-inside">
+          <li>Regeneration（再生）</li>
+          <li>Strength（攻撃力上昇）</li>
+          <li>Resistance（耐性）</li>
+          <li>Speed（移動速度上昇）</li>
+          <li>Water Breathing（水中呼吸）</li>
+        </ul>
+      </section>
 
       <!-- ========== テイム ========== -->
-      <h2 id="taming">テイム</h2>
+      <section id="taming" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">テイム</h2>
 
-      <h3>動物のテイム</h3>
-      <ol>
-        <li><strong>金のリンゴ</strong>（成功率 100%）を手に持つ</li>
-        <li>対象の動物を<strong>右クリック</strong></li>
-        <li>30秒以内に <code>/pettame &lt;名前&gt;</code> を実行</li>
-      </ol>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">動物のテイム</h3>
+        <ol class="text-sm text-body space-y-2 list-decimal list-inside mb-6">
+          <li><strong>金のリンゴ</strong>（成功率 100%）を手に持つ</li>
+          <li>対象の動物を<strong>右クリック</strong></li>
+          <li>30秒以内に <code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettame &lt;名前&gt;</code> を実行</li>
+        </ol>
 
-      <h3>モンスターのテイム</h3>
-      <ol>
-        <li><strong>ネザースター</strong>を手に持ち、対象を<strong>右クリック</strong>（マーキング）</li>
-        <li>マーキングしたモンスターを<strong>倒す</strong></li>
-        <li>30秒以内に <code>/pettame &lt;名前&gt;</code> を実行</li>
-      </ol>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">モンスターのテイム</h3>
+        <ol class="text-sm text-body space-y-2 list-decimal list-inside mb-6">
+          <li><strong>ネザースター</strong>を手に持ち、対象を<strong>右クリック</strong>（マーキング）</li>
+          <li>マーキングしたモンスターを<strong>倒す</strong></li>
+          <li>30秒以内に <code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettame &lt;名前&gt;</code> を実行</li>
+        </ol>
 
-      <div class="callout callout-danger">
-        <div class="callout-title">&#9888;&#65039; テイム不可</div>
-        <ul>
-          <li>エンダードラゴン</li>
-          <li>村人</li>
-          <li>行商人</li>
-        </ul>
-      </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
+          <p class="text-sm font-semibold text-red-700 mb-2">テイム不可</p>
+          <ul class="text-sm text-body space-y-1 list-disc list-inside">
+            <li>エンダードラゴン</li>
+            <li>村人</li>
+            <li>行商人</li>
+          </ul>
+        </div>
 
-      <div class="callout callout-info">
-        <div class="callout-title">&#128712; サイズ変更</div>
-        <ul>
-          <li>ウィザー: 70% に縮小</li>
-          <li>エルダーガーディアン: 70% に縮小</li>
-        </ul>
-      </div>
+        <div class="bg-primary-50 border border-primary-500/20 rounded-xl p-4">
+          <p class="text-sm font-semibold text-primary-700 mb-2">サイズ変更</p>
+          <ul class="text-sm text-body space-y-1 list-disc list-inside">
+            <li>ウィザー: 70% に縮小</li>
+            <li>エルダーガーディアン: 70% に縮小</li>
+          </ul>
+        </div>
+      </section>
 
       <!-- ========== レアリティ ========== -->
-      <h2 id="rarity">レアリティ</h2>
+      <section id="rarity" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">レアリティ</h2>
 
-      <h3>レアリティ一覧</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>レアリティ</th><th>色</th><th>ステータス倍率</th><th>装備スロット</th><th>進化可能</th></tr></thead>
-          <tbody>
-            <tr><td>コモン</td><td>白</td><td>&times;1.00</td><td>1</td><td>不可</td></tr>
-            <tr><td>アンコモン</td><td>緑</td><td>&times;1.15</td><td>2</td><td>不可</td></tr>
-            <tr><td>レア</td><td>青</td><td>&times;1.35</td><td>3</td><td>不可</td></tr>
-            <tr><td>エピック</td><td>紫</td><td>&times;1.60</td><td>4</td><td>可能</td></tr>
-            <tr><td>レジェンダリー</td><td>金</td><td>&times;2.00</td><td>5</td><td>可能</td></tr>
-            <tr><td>ミシック</td><td>ピンク</td><td>&times;2.50</td><td>6</td><td>可能</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">レアリティ一覧</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">レアリティ</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">色</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">ステータス倍率</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">装備スロット</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">進化可能</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">コモン</td><td class="px-4 py-3 text-body">白</td><td class="px-4 py-3 text-body">&times;1.00</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">不可</td></tr>
+              <tr><td class="px-4 py-3 text-body">アンコモン</td><td class="px-4 py-3 text-body">緑</td><td class="px-4 py-3 text-body">&times;1.15</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">不可</td></tr>
+              <tr><td class="px-4 py-3 text-body">レア</td><td class="px-4 py-3 text-body">青</td><td class="px-4 py-3 text-body">&times;1.35</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">不可</td></tr>
+              <tr><td class="px-4 py-3 text-body">エピック</td><td class="px-4 py-3 text-body">紫</td><td class="px-4 py-3 text-body">&times;1.60</td><td class="px-4 py-3 text-body">4</td><td class="px-4 py-3 text-body">可能</td></tr>
+              <tr><td class="px-4 py-3 text-body">レジェンダリー</td><td class="px-4 py-3 text-body">金</td><td class="px-4 py-3 text-body">&times;2.00</td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">可能</td></tr>
+              <tr><td class="px-4 py-3 text-body">ミシック</td><td class="px-4 py-3 text-body">ピンク</td><td class="px-4 py-3 text-body">&times;2.50</td><td class="px-4 py-3 text-body">6</td><td class="px-4 py-3 text-body">可能</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>LevelledMobs連携時の確率</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>Mobレベル</th><th>コモン</th><th>アンコモン</th><th>レア</th><th>エピック</th><th>レジェンダリー</th><th>ミシック</th></tr></thead>
-          <tbody>
-            <tr><td>Lv 1-10</td><td>60%</td><td>25%</td><td>10%</td><td>4%</td><td>1%</td><td>0%</td></tr>
-            <tr><td>Lv 11-25</td><td>35%</td><td>30%</td><td>20%</td><td>10%</td><td>4%</td><td>1%</td></tr>
-            <tr><td>Lv 26-50</td><td>15%</td><td>25%</td><td>25%</td><td>20%</td><td>10%</td><td>5%</td></tr>
-            <tr><td>Lv 51+</td><td>5%</td><td>10%</td><td>20%</td><td>30%</td><td>20%</td><td>15%</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">LevelledMobs連携時の確率</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">Mobレベル</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">コモン</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">アンコモン</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">レア</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">エピック</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">レジェンダリー</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">ミシック</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Lv 1-10</td><td class="px-4 py-3 text-body">60%</td><td class="px-4 py-3 text-body">25%</td><td class="px-4 py-3 text-body">10%</td><td class="px-4 py-3 text-body">4%</td><td class="px-4 py-3 text-body">1%</td><td class="px-4 py-3 text-body">0%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Lv 11-25</td><td class="px-4 py-3 text-body">35%</td><td class="px-4 py-3 text-body">30%</td><td class="px-4 py-3 text-body">20%</td><td class="px-4 py-3 text-body">10%</td><td class="px-4 py-3 text-body">4%</td><td class="px-4 py-3 text-body">1%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Lv 26-50</td><td class="px-4 py-3 text-body">15%</td><td class="px-4 py-3 text-body">25%</td><td class="px-4 py-3 text-body">25%</td><td class="px-4 py-3 text-body">20%</td><td class="px-4 py-3 text-body">10%</td><td class="px-4 py-3 text-body">5%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Lv 51+</td><td class="px-4 py-3 text-body">5%</td><td class="px-4 py-3 text-body">10%</td><td class="px-4 py-3 text-body">20%</td><td class="px-4 py-3 text-body">30%</td><td class="px-4 py-3 text-body">20%</td><td class="px-4 py-3 text-body">15%</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>固定確率（LevelledMobs非使用時）</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>コモン</th><th>アンコモン</th><th>レア</th><th>エピック</th><th>レジェンダリー</th><th>ミシック</th></tr></thead>
-          <tbody>
-            <tr><td>40%</td><td>25%</td><td>18%</td><td>10%</td><td>5%</td><td>2%</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">固定確率（LevelledMobs非使用時）</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">コモン</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">アンコモン</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">レア</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">エピック</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">レジェンダリー</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">ミシック</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">40%</td><td class="px-4 py-3 text-body">25%</td><td class="px-4 py-3 text-body">18%</td><td class="px-4 py-3 text-body">10%</td><td class="px-4 py-3 text-body">5%</td><td class="px-4 py-3 text-body">2%</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>環境ボーナス</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>条件</th><th>ボーナス</th></tr></thead>
-          <tbody>
-            <tr><td>満月</td><td>+5%</td></tr>
-            <tr><td>雷雨</td><td>+8%</td></tr>
-            <tr><td>ディープダーク</td><td>+12%</td></tr>
-            <tr><td>ネザー</td><td>+7%</td></tr>
-            <tr><td>エンド</td><td>+10%</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="callout callout-info">
-        <div class="callout-title">&#128712; ボーナス上限</div>
-        環境ボーナスの合計は<strong>最大20%</strong>に制限されます。
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">環境ボーナス</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">条件</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">ボーナス</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">満月</td><td class="px-4 py-3 text-body">+5%</td></tr>
+              <tr><td class="px-4 py-3 text-body">雷雨</td><td class="px-4 py-3 text-body">+8%</td></tr>
+              <tr><td class="px-4 py-3 text-body">ディープダーク</td><td class="px-4 py-3 text-body">+12%</td></tr>
+              <tr><td class="px-4 py-3 text-body">ネザー</td><td class="px-4 py-3 text-body">+7%</td></tr>
+              <tr><td class="px-4 py-3 text-body">エンド</td><td class="px-4 py-3 text-body">+10%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-primary-50 border border-primary-500/20 rounded-xl p-4">
+          <p class="text-sm font-semibold text-primary-700 mb-1">ボーナス上限</p>
+          <p class="text-sm text-body">環境ボーナスの合計は<strong>最大20%</strong>に制限されます。</p>
+        </div>
+      </section>
 
       <!-- ========== 性格 ========== -->
-      <h2 id="personality">性格</h2>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>性格</th><th>名前</th><th>効果</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Brave</strong></td><td>勇敢</td><td>ダメージ+10%, HP-5%</td></tr>
-            <tr><td><strong>Sturdy</strong></td><td>頑強</td><td>HP+15%, ダメージ-5%, ノックバック耐性+30%</td></tr>
-            <tr><td><strong>Agile</strong></td><td>俊敏</td><td>速度+15%, HP-10%, 回避率8%</td></tr>
-            <tr><td><strong>Loyal</strong></td><td>忠誠</td><td>HP+5%, 親密度EXP+25%</td></tr>
-            <tr><td><strong>Fierce</strong></td><td>獰猛</td><td>ダメージ+20%, HP-10%, 速度-5%, クリティカル率10%</td></tr>
-            <tr><td><strong>Cautious</strong></td><td>慎重</td><td>HP+10%, 速度+5%, ダメージ-10%</td></tr>
-            <tr><td><strong>Lucky</strong></td><td>幸運</td><td>ドロップ+15%</td></tr>
-            <tr><td><strong>Genius</strong></td><td>天才</td><td>ダメージ+5%, スキルEXP+30%</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <section id="personality" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">性格</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">性格</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">名前</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">効果</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Brave</td><td class="px-4 py-3 text-body">勇敢</td><td class="px-4 py-3 text-body">ダメージ+10%, HP-5%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Sturdy</td><td class="px-4 py-3 text-body">頑強</td><td class="px-4 py-3 text-body">HP+15%, ダメージ-5%, ノックバック耐性+30%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Agile</td><td class="px-4 py-3 text-body">俊敏</td><td class="px-4 py-3 text-body">速度+15%, HP-10%, 回避率8%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Loyal</td><td class="px-4 py-3 text-body">忠誠</td><td class="px-4 py-3 text-body">HP+5%, 親密度EXP+25%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Fierce</td><td class="px-4 py-3 text-body">獰猛</td><td class="px-4 py-3 text-body">ダメージ+20%, HP-10%, 速度-5%, クリティカル率10%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Cautious</td><td class="px-4 py-3 text-body">慎重</td><td class="px-4 py-3 text-body">HP+10%, 速度+5%, ダメージ-10%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Lucky</td><td class="px-4 py-3 text-body">幸運</td><td class="px-4 py-3 text-body">ドロップ+15%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Genius</td><td class="px-4 py-3 text-body">天才</td><td class="px-4 py-3 text-body">ダメージ+5%, スキルEXP+30%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ========== 親密度 ========== -->
-      <h2 id="bond">親密度</h2>
+      <section id="bond" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">親密度</h2>
 
-      <h3>親密度レベル</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>レベル</th><th>必要EXP</th><th>HP</th><th>ダメージ</th><th>速度</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Stranger</strong>（他人）</td><td>0</td><td>なし</td><td>なし</td><td>なし</td></tr>
-            <tr><td><strong>Acquaintance</strong>（知人）</td><td>100</td><td>+5%</td><td>+3%</td><td>+2%</td></tr>
-            <tr><td><strong>Companion</strong>（仲間）</td><td>300</td><td>+10%</td><td>+7%</td><td>+5%</td></tr>
-            <tr><td><strong>Trusted</strong>（信頼）</td><td>600</td><td>+18%</td><td>+12%</td><td>+8%</td></tr>
-            <tr><td><strong>Soulbound</strong>（魂の絆）</td><td>1000</td><td>+28%</td><td>+20%</td><td>+12%</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">親密度レベル</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">レベル</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">必要EXP</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">HP</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">ダメージ</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">速度</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Stranger（他人）</td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">なし</td><td class="px-4 py-3 text-body">なし</td><td class="px-4 py-3 text-body">なし</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Acquaintance（知人）</td><td class="px-4 py-3 text-body">100</td><td class="px-4 py-3 text-body">+5%</td><td class="px-4 py-3 text-body">+3%</td><td class="px-4 py-3 text-body">+2%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Companion（仲間）</td><td class="px-4 py-3 text-body">300</td><td class="px-4 py-3 text-body">+10%</td><td class="px-4 py-3 text-body">+7%</td><td class="px-4 py-3 text-body">+5%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Trusted（信頼）</td><td class="px-4 py-3 text-body">600</td><td class="px-4 py-3 text-body">+18%</td><td class="px-4 py-3 text-body">+12%</td><td class="px-4 py-3 text-body">+8%</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">Soulbound（魂の絆）</td><td class="px-4 py-3 text-body">1000</td><td class="px-4 py-3 text-body">+28%</td><td class="px-4 py-3 text-body">+20%</td><td class="px-4 py-3 text-body">+12%</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>EXP獲得方法</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>行動</th><th>獲得EXP</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr><td>敵を倒す</td><td>+5</td><td>5秒クールダウン</td></tr>
-            <tr><td>餌やり</td><td>+3</td><td>10秒クールダウン</td></tr>
-            <tr><td>ログイン</td><td>+2</td><td>&mdash;</td></tr>
-            <tr><td>騎乗</td><td>+1/分</td><td>&mdash;</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">EXP獲得方法</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">行動</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">獲得EXP</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">備考</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">敵を倒す</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">5秒クールダウン</td></tr>
+              <tr><td class="px-4 py-3 text-body">餌やり</td><td class="px-4 py-3 text-body">+3</td><td class="px-4 py-3 text-body">10秒クールダウン</td></tr>
+              <tr><td class="px-4 py-3 text-body">ログイン</td><td class="px-4 py-3 text-body">+2</td><td class="px-4 py-3 text-body">&mdash;</td></tr>
+              <tr><td class="px-4 py-3 text-body">騎乗</td><td class="px-4 py-3 text-body">+1/分</td><td class="px-4 py-3 text-body">&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>EXP減少</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>原因</th><th>減少量</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr><td>オフライン</td><td>-2/日</td><td>最大 -50</td></tr>
-            <tr><td>死亡</td><td>-20</td><td>&mdash;</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">EXP減少</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">原因</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">減少量</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">備考</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">オフライン</td><td class="px-4 py-3 text-body">-2/日</td><td class="px-4 py-3 text-body">最大 -50</td></tr>
+              <tr><td class="px-4 py-3 text-body">死亡</td><td class="px-4 py-3 text-body">-20</td><td class="px-4 py-3 text-body">&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ========== ステータス ========== -->
-      <h2 id="stats">ステータス</h2>
+      <section id="stats" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">ステータス</h2>
 
-      <h3>計算式</h3>
-      <div class="callout callout-info">
-        <div class="callout-title">&#128202; ステータス計算式</div>
-        <code>((基礎値 + 強化値) &times; レアリティ倍率 &times; 性格補正) &times; (1 + 親密度%) + 装備ボーナス</code>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">計算式</h3>
+        <div class="bg-primary-50 border border-primary-500/20 rounded-xl p-4 mb-6">
+          <p class="text-sm font-semibold text-primary-700 mb-2">ステータス計算式</p>
+          <code class="text-sm text-slate-700">((基礎値 + 強化値) &times; レアリティ倍率 &times; 性格補正) &times; (1 + 親密度%) + 装備ボーナス</code>
+        </div>
 
-      <h3>Mobティア</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>ティア</th><th>代表Mob</th><th>HP</th><th>ダメージ</th><th>速度</th></tr></thead>
-          <tbody>
-            <tr><td><strong>T1</strong>（最弱）</td><td>ニワトリ, ウサギ</td><td>10-20</td><td>1-3</td><td>0.20-0.30</td></tr>
-            <tr><td><strong>T2</strong>（一般）</td><td>ブタ, ウシ</td><td>20-40</td><td>2-5</td><td>0.22-0.32</td></tr>
-            <tr><td><strong>T3</strong>（標準）</td><td>ゾンビ, スケルトン</td><td>30-60</td><td>4-8</td><td>0.25-0.35</td></tr>
-            <tr><td><strong>T4</strong>（強敵）</td><td>ブレイズ, エヴォーカー</td><td>50-100</td><td>6-14</td><td>0.25-0.38</td></tr>
-            <tr><td><strong>T5</strong>（ボス級）</td><td>ウォーデン, ウィザー</td><td>100-200</td><td>12-25</td><td>0.28-0.40</td></tr>
-            <tr><td><strong>特殊</strong></td><td>ウィザー</td><td>150-300</td><td>15-30</td><td>0.30-0.42</td></tr>
-            <tr><td><strong>特殊</strong></td><td>ウォーデン</td><td>200-400</td><td>20-40</td><td>0.30-0.45</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">Mobティア</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">ティア</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">代表Mob</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">HP</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">ダメージ</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">速度</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">T1（最弱）</td><td class="px-4 py-3 text-body">ニワトリ, ウサギ</td><td class="px-4 py-3 text-body">10-20</td><td class="px-4 py-3 text-body">1-3</td><td class="px-4 py-3 text-body">0.20-0.30</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">T2（一般）</td><td class="px-4 py-3 text-body">ブタ, ウシ</td><td class="px-4 py-3 text-body">20-40</td><td class="px-4 py-3 text-body">2-5</td><td class="px-4 py-3 text-body">0.22-0.32</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">T3（標準）</td><td class="px-4 py-3 text-body">ゾンビ, スケルトン</td><td class="px-4 py-3 text-body">30-60</td><td class="px-4 py-3 text-body">4-8</td><td class="px-4 py-3 text-body">0.25-0.35</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">T4（強敵）</td><td class="px-4 py-3 text-body">ブレイズ, エヴォーカー</td><td class="px-4 py-3 text-body">50-100</td><td class="px-4 py-3 text-body">6-14</td><td class="px-4 py-3 text-body">0.25-0.38</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">T5（ボス級）</td><td class="px-4 py-3 text-body">ウォーデン, ウィザー</td><td class="px-4 py-3 text-body">100-200</td><td class="px-4 py-3 text-body">12-25</td><td class="px-4 py-3 text-body">0.28-0.40</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">特殊</td><td class="px-4 py-3 text-body">ウィザー</td><td class="px-4 py-3 text-body">150-300</td><td class="px-4 py-3 text-body">15-30</td><td class="px-4 py-3 text-body">0.30-0.42</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">特殊</td><td class="px-4 py-3 text-body">ウォーデン</td><td class="px-4 py-3 text-body">200-400</td><td class="px-4 py-3 text-body">20-40</td><td class="px-4 py-3 text-body">0.30-0.45</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ========== スキルツリー ========== -->
-      <h2 id="skilltree">スキルツリー</h2>
+      <section id="skilltree" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">スキルツリー</h2>
 
-      <h3>汎用スキルツリー（9種）</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>スキルツリー</th><th>特化</th></tr></thead>
-          <tbody>
-            <tr><td><strong>コンバット</strong></td><td>近接特化</td></tr>
-            <tr><td><strong>ファーム</strong></td><td>収集</td></tr>
-            <tr><td><strong>PvP</strong></td><td>対プレイヤー</td></tr>
-            <tr><td><strong>ライド</strong></td><td>騎乗</td></tr>
-            <tr><td><strong>ユーティリティ</strong></td><td>運搬</td></tr>
-            <tr><td><strong>タンク</strong></td><td>防御</td></tr>
-            <tr><td><strong>アサシン</strong></td><td>瞬殺</td></tr>
-            <tr><td><strong>レンジャー</strong></td><td>遠距離</td></tr>
-            <tr><td><strong>サポート</strong></td><td>パーティ支援</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">汎用スキルツリー（9種）</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">スキルツリー</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">特化</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">コンバット</td><td class="px-4 py-3 text-body">近接特化</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ファーム</td><td class="px-4 py-3 text-body">収集</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">PvP</td><td class="px-4 py-3 text-body">対プレイヤー</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ライド</td><td class="px-4 py-3 text-body">騎乗</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ユーティリティ</td><td class="px-4 py-3 text-body">運搬</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">タンク</td><td class="px-4 py-3 text-body">防御</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">アサシン</td><td class="px-4 py-3 text-body">瞬殺</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">レンジャー</td><td class="px-4 py-3 text-body">遠距離</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">サポート</td><td class="px-4 py-3 text-body">パーティ支援</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>モブ固有スキルツリー（7種）</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>スキルツリー</th><th>対応Mob</th></tr></thead>
-          <tbody>
-            <tr><td><strong>アンデッドマイト</strong></td><td>ゾンビ系</td></tr>
-            <tr><td><strong>ボーンショット</strong></td><td>スケルトン系</td></tr>
-            <tr><td><strong>ヴェノムストライク</strong></td><td>クモ系</td></tr>
-            <tr><td><strong>ネザーフレイム</strong></td><td>ブレイズ系</td></tr>
-            <tr><td><strong>ヴォイドウォーカー</strong></td><td>エンダーマン系</td></tr>
-            <tr><td><strong>パックハンター</strong></td><td>オオカミ系</td></tr>
-            <tr><td><strong>タイダルガード</strong></td><td>ガーディアン系</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">モブ固有スキルツリー（7種）</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">スキルツリー</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">対応Mob</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">アンデッドマイト</td><td class="px-4 py-3 text-body">ゾンビ系</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ボーンショット</td><td class="px-4 py-3 text-body">スケルトン系</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ヴェノムストライク</td><td class="px-4 py-3 text-body">クモ系</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ネザーフレイム</td><td class="px-4 py-3 text-body">ブレイズ系</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ヴォイドウォーカー</td><td class="px-4 py-3 text-body">エンダーマン系</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">パックハンター</td><td class="px-4 py-3 text-body">オオカミ系</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">タイダルガード</td><td class="px-4 py-3 text-body">ガーディアン系</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>割り当てルール</h3>
-      <ul>
-        <li><strong>テイム時:</strong> 重み付き抽選（モブ固有ツリーの当選確率 40-55%）</li>
-        <li><strong>進化時:</strong> 固定のスキルツリーが割り当てられる</li>
-        <li><strong>リロール:</strong> エコーシャードを使用して再抽選可能</li>
-      </ul>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">割り当てルール</h3>
+        <ul class="text-sm text-body space-y-2 list-disc list-inside">
+          <li><strong>テイム時:</strong> 重み付き抽選（モブ固有ツリーの当選確率 40-55%）</li>
+          <li><strong>進化時:</strong> 固定のスキルツリーが割り当てられる</li>
+          <li><strong>リロール:</strong> エコーシャードを使用して再抽選可能</li>
+        </ul>
+      </section>
 
       <!-- ========== 進化 ========== -->
-      <h2 id="evolution">進化</h2>
+      <section id="evolution" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">進化</h2>
 
-      <h3>ゾンビ系</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>進化前</th><th>進化後</th><th>必要Lv</th><th>親密度</th><th>バイオーム</th><th>素材</th></tr></thead>
-          <tbody>
-            <tr><td>ゾンビ</td><td>ハスク</td><td>20</td><td>3</td><td>砂漠</td><td>金リンゴ &times;1</td></tr>
-            <tr><td>ゾンビ</td><td>ドラウンド</td><td>20</td><td>3</td><td>海洋</td><td>海の心 &times;1</td></tr>
-            <tr><td>ゾンビ</td><td>村人ゾンビ</td><td>25</td><td>4</td><td>&mdash;</td><td>エメラルド &times;10</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">ゾンビ系</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">進化前</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">進化後</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">必要Lv</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">親密度</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">バイオーム</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">素材</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">ゾンビ</td><td class="px-4 py-3 font-medium text-slate-900">ハスク</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">砂漠</td><td class="px-4 py-3 text-body">金リンゴ &times;1</td></tr>
+              <tr><td class="px-4 py-3 text-body">ゾンビ</td><td class="px-4 py-3 font-medium text-slate-900">ドラウンド</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">海洋</td><td class="px-4 py-3 text-body">海の心 &times;1</td></tr>
+              <tr><td class="px-4 py-3 text-body">ゾンビ</td><td class="px-4 py-3 font-medium text-slate-900">村人ゾンビ</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">4</td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">エメラルド &times;10</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>スケルトン系</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>進化前</th><th>進化後</th><th>必要Lv</th><th>親密度</th><th>バイオーム</th><th>素材</th></tr></thead>
-          <tbody>
-            <tr><td>スケルトン</td><td>ウィザースケルトン</td><td>30</td><td>4</td><td>ネザー</td><td>ウィザスケ頭 &times;1</td></tr>
-            <tr><td>スケルトン</td><td>ボグド</td><td>20</td><td>3</td><td>湿地</td><td>毒じゃがいも &times;5</td></tr>
-            <tr><td>スケルトン</td><td>ストレイ</td><td>20</td><td>3</td><td>雪原</td><td>氷塊 &times;3</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">スケルトン系</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">進化前</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">進化後</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">必要Lv</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">親密度</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">バイオーム</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">素材</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">スケルトン</td><td class="px-4 py-3 font-medium text-slate-900">ウィザースケルトン</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">4</td><td class="px-4 py-3 text-body">ネザー</td><td class="px-4 py-3 text-body">ウィザスケ頭 &times;1</td></tr>
+              <tr><td class="px-4 py-3 text-body">スケルトン</td><td class="px-4 py-3 font-medium text-slate-900">ボグド</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">湿地</td><td class="px-4 py-3 text-body">毒じゃがいも &times;5</td></tr>
+              <tr><td class="px-4 py-3 text-body">スケルトン</td><td class="px-4 py-3 font-medium text-slate-900">ストレイ</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">雪原</td><td class="px-4 py-3 text-body">氷塊 &times;3</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>その他の進化</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>進化前</th><th>進化後</th><th>必要Lv</th><th>親密度</th><th>バイオーム</th><th>素材</th></tr></thead>
-          <tbody>
-            <tr><td>シルバーフィッシュ</td><td>エンダーマイト</td><td>25</td><td>3</td><td>&mdash;</td><td>エンダーパール &times;5</td></tr>
-            <tr><td>ウマ</td><td>ゾンビホース</td><td>25</td><td>3</td><td>&mdash;</td><td>腐肉 &times;32</td></tr>
-            <tr><td>ウマ</td><td>スケルトンホース</td><td>25</td><td>3</td><td>&mdash;</td><td>骨 &times;16</td></tr>
-            <tr><td>ピリジャー</td><td>ヴィンディケーター</td><td>25</td><td>3</td><td>&mdash;</td><td>鉄の斧 &times;1</td></tr>
-            <tr><td>ヴィンディケーター</td><td>エヴォーカー</td><td>35</td><td>4</td><td>&mdash;</td><td>不死のトーテム &times;1</td></tr>
-            <tr><td>ホグリン</td><td>ゾグリン</td><td>25</td><td>3</td><td>ネザー</td><td>真紅のキノコ &times;10</td></tr>
-            <tr><td>ピグリン</td><td>ゾンビ化ピグリン</td><td>20</td><td>3</td><td>&mdash;</td><td>金インゴット &times;16</td></tr>
-            <tr><td>ピグリン</td><td>ピグリンブルート</td><td>30</td><td>4</td><td>ネザー</td><td>金ブロック &times;3</td></tr>
-            <tr><td>スライム</td><td>マグマキューブ</td><td>20</td><td>3</td><td>ネザー</td><td>マグマクリーム &times;10</td></tr>
-            <tr><td>クモ</td><td>洞窟グモ</td><td>15</td><td>2</td><td>&mdash;</td><td>発酵したクモの目 &times;3</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">その他の進化</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">進化前</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">進化後</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">必要Lv</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">親密度</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">バイオーム</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">素材</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">シルバーフィッシュ</td><td class="px-4 py-3 font-medium text-slate-900">エンダーマイト</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">エンダーパール &times;5</td></tr>
+              <tr><td class="px-4 py-3 text-body">ウマ</td><td class="px-4 py-3 font-medium text-slate-900">ゾンビホース</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">腐肉 &times;32</td></tr>
+              <tr><td class="px-4 py-3 text-body">ウマ</td><td class="px-4 py-3 font-medium text-slate-900">スケルトンホース</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">骨 &times;16</td></tr>
+              <tr><td class="px-4 py-3 text-body">ピリジャー</td><td class="px-4 py-3 font-medium text-slate-900">ヴィンディケーター</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">鉄の斧 &times;1</td></tr>
+              <tr><td class="px-4 py-3 text-body">ヴィンディケーター</td><td class="px-4 py-3 font-medium text-slate-900">エヴォーカー</td><td class="px-4 py-3 text-body">35</td><td class="px-4 py-3 text-body">4</td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">不死のトーテム &times;1</td></tr>
+              <tr><td class="px-4 py-3 text-body">ホグリン</td><td class="px-4 py-3 font-medium text-slate-900">ゾグリン</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">ネザー</td><td class="px-4 py-3 text-body">真紅のキノコ &times;10</td></tr>
+              <tr><td class="px-4 py-3 text-body">ピグリン</td><td class="px-4 py-3 font-medium text-slate-900">ゾンビ化ピグリン</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">金インゴット &times;16</td></tr>
+              <tr><td class="px-4 py-3 text-body">ピグリン</td><td class="px-4 py-3 font-medium text-slate-900">ピグリンブルート</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">4</td><td class="px-4 py-3 text-body">ネザー</td><td class="px-4 py-3 text-body">金ブロック &times;3</td></tr>
+              <tr><td class="px-4 py-3 text-body">スライム</td><td class="px-4 py-3 font-medium text-slate-900">マグマキューブ</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">ネザー</td><td class="px-4 py-3 text-body">マグマクリーム &times;10</td></tr>
+              <tr><td class="px-4 py-3 text-body">クモ</td><td class="px-4 py-3 font-medium text-slate-900">洞窟グモ</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">発酵したクモの目 &times;3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ========== 装備 ========== -->
-      <h2 id="equipment">装備</h2>
-      <p>ペットには<strong>6つの装備スロット</strong>があります。<code>/petequip</code> でGUIを開いて装備を管理できます。</p>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>スロット</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><strong>HEAD</strong></td><td>頭装備</td></tr>
-            <tr><td><strong>CHEST</strong></td><td>胸装備</td></tr>
-            <tr><td><strong>LEGS</strong></td><td>脚装備</td></tr>
-            <tr><td><strong>FEET</strong></td><td>足装備</td></tr>
-            <tr><td><strong>WEAPON</strong></td><td>武器</td></tr>
-            <tr><td><strong>ACCESSORY</strong></td><td>アクセサリー</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="callout callout-info">
-        <div class="callout-title">&#128712; PDCタグ</div>
-        装備アイテムにはPDC（PersistentDataContainer）タグでステータスボーナスが付与されます。
-      </div>
+      <section id="equipment" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">装備</h2>
+        <p class="text-sm text-body leading-relaxed mb-4">ペットには<strong>6つの装備スロット</strong>があります。<code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petequip</code> でGUIを開いて装備を管理できます。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">スロット</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">説明</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">HEAD</td><td class="px-4 py-3 text-body">頭装備</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">CHEST</td><td class="px-4 py-3 text-body">胸装備</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">LEGS</td><td class="px-4 py-3 text-body">脚装備</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">FEET</td><td class="px-4 py-3 text-body">足装備</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">WEAPON</td><td class="px-4 py-3 text-body">武器</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ACCESSORY</td><td class="px-4 py-3 text-body">アクセサリー</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-primary-50 border border-primary-500/20 rounded-xl p-4">
+          <p class="text-sm font-semibold text-primary-700 mb-1">PDCタグ</p>
+          <p class="text-sm text-body">装備アイテムにはPDC（PersistentDataContainer）タグでステータスボーナスが付与されます。</p>
+        </div>
+      </section>
 
       <!-- ========== 図鑑 ========== -->
-      <h2 id="petdex">図鑑</h2>
-      <p><code>/petdex</code> でペット図鑑を開けます。テイムしたペットが記録され、達成率に応じて報酬が獲得できます。</p>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>達成率</th><th>報酬</th></tr></thead>
-          <tbody>
-            <tr><td><strong>25%</strong></td><td>ダイヤモンド &times;5</td></tr>
-            <tr><td><strong>50%</strong></td><td>エメラルド &times;10 + 金のリンゴ &times;3</td></tr>
-            <tr><td><strong>75%</strong></td><td>ネザースター + エンチャントされた金のリンゴ</td></tr>
-            <tr><td><strong>100%</strong></td><td>ネザースター &times;3 + エリトラ + 不死のトーテム</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <section id="petdex" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">図鑑</h2>
+        <p class="text-sm text-body leading-relaxed mb-4"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petdex</code> でペット図鑑を開けます。テイムしたペットが記録され、達成率に応じて報酬が獲得できます。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">達成率</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">報酬</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">25%</td><td class="px-4 py-3 text-body">ダイヤモンド &times;5</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">50%</td><td class="px-4 py-3 text-body">エメラルド &times;10 + 金のリンゴ &times;3</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">75%</td><td class="px-4 py-3 text-body">ネザースター + エンチャントされた金のリンゴ</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">100%</td><td class="px-4 py-3 text-body">ネザースター &times;3 + エリトラ + 不死のトーテム</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ========== コマンド ========== -->
-      <h2 id="commands">コマンド</h2>
+      <section id="commands" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">コマンド</h2>
 
-      <h3>MyPet基本コマンド</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><code>/petcall</code></td><td>ペットを召喚</td></tr>
-            <tr><td><code>/petsendaway</code></td><td>ペットをしまう</td></tr>
-            <tr><td><code>/petswitch</code></td><td>ペットを切り替え</td></tr>
-            <tr><td><code>/petstore</code></td><td>ペットを預ける</td></tr>
-            <tr><td><code>/mypet</code></td><td>メインメニュー</td></tr>
-            <tr><td><code>/petskill</code></td><td>スキル一覧</td></tr>
-            <tr><td><code>/petinfo</code></td><td>ペット情報</td></tr>
-            <tr><td><code>/pettype</code></td><td>Mob種別情報</td></tr>
-            <tr><td><code>/petname &lt;名前&gt;</code></td><td>名前変更</td></tr>
-            <tr><td><code>/petbehavior</code></td><td>行動モード変更</td></tr>
-            <tr><td><code>/petchooseskilltree</code></td><td>スキルツリー選択</td></tr>
-            <tr><td><code>/petrelease &lt;名前&gt;</code></td><td>ペット解放（取消不可）</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">MyPet基本コマンド</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">コマンド</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">説明</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petcall</code></td><td class="px-4 py-3 text-body">ペットを召喚</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petsendaway</code></td><td class="px-4 py-3 text-body">ペットをしまう</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petswitch</code></td><td class="px-4 py-3 text-body">ペットを切り替え</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petstore</code></td><td class="px-4 py-3 text-body">ペットを預ける</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/mypet</code></td><td class="px-4 py-3 text-body">メインメニュー</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petskill</code></td><td class="px-4 py-3 text-body">スキル一覧</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petinfo</code></td><td class="px-4 py-3 text-body">ペット情報</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettype</code></td><td class="px-4 py-3 text-body">Mob種別情報</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petname &lt;名前&gt;</code></td><td class="px-4 py-3 text-body">名前変更</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petbehavior</code></td><td class="px-4 py-3 text-body">行動モード変更</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petchooseskilltree</code></td><td class="px-4 py-3 text-body">スキルツリー選択</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petrelease &lt;名前&gt;</code></td><td class="px-4 py-3 text-body">ペット解放（取消不可）</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>MyPetAddonコマンド</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>コマンド</th><th>エイリアス</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><code>/pettame &lt;名前&gt;</code></td><td>tame</td><td>Mobをテイム</td></tr>
-            <tr><td><code>/petstatus</code></td><td>status</td><td>拡張ステータス表示</td></tr>
-            <tr><td><code>/petevolve</code></td><td>evolve</td><td>ペットを進化</td></tr>
-            <tr><td><code>/petequip</code></td><td>equip</td><td>装備GUI</td></tr>
-            <tr><td><code>/petdex</code></td><td>encyclopedia</td><td>ペット図鑑</td></tr>
-            <tr><td><code>/petadmin reload</code></td><td>&mdash;</td><td>設定リロード</td></tr>
-            <tr><td><code>/petadmin setrarity &lt;レアリティ&gt;</code></td><td>&mdash;</td><td>レアリティ変更</td></tr>
-            <tr><td><code>/petadmin setbond &lt;値&gt;</code></td><td>&mdash;</td><td>親密度設定</td></tr>
-            <tr><td><code>/petadmin migrate</code></td><td>&mdash;</td><td>データ移行</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">MyPetAddonコマンド</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">コマンド</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">エイリアス</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">説明</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettame &lt;名前&gt;</code></td><td class="px-4 py-3 text-body">tame</td><td class="px-4 py-3 text-body">Mobをテイム</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petstatus</code></td><td class="px-4 py-3 text-body">status</td><td class="px-4 py-3 text-body">拡張ステータス表示</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petevolve</code></td><td class="px-4 py-3 text-body">evolve</td><td class="px-4 py-3 text-body">ペットを進化</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petequip</code></td><td class="px-4 py-3 text-body">equip</td><td class="px-4 py-3 text-body">装備GUI</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petdex</code></td><td class="px-4 py-3 text-body">encyclopedia</td><td class="px-4 py-3 text-body">ペット図鑑</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petadmin reload</code></td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">設定リロード</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petadmin setrarity &lt;レアリティ&gt;</code></td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">レアリティ変更</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petadmin setbond &lt;値&gt;</code></td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">親密度設定</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petadmin migrate</code></td><td class="px-4 py-3 text-body">&mdash;</td><td class="px-4 py-3 text-body">データ移行</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ========== リロール ========== -->
-      <h2 id="reroll">リロール</h2>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>アイテム</th><th>効果</th><th>成功率</th><th>消費</th></tr></thead>
-          <tbody>
-            <tr><td><strong>アメジストの欠片</strong></td><td>基礎ステータス再抽選</td><td>100%</td><td>消費あり</td></tr>
-            <tr><td><strong>ネザースター</strong></td><td>レアリティアップグレード</td><td>50%</td><td>消費あり</td></tr>
-            <tr><td><strong>エコーシャード</strong></td><td>スキルツリー再抽選</td><td>100%</td><td>消費あり</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <section id="reroll" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">リロール</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">アイテム</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">効果</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">成功率</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">消費</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 font-medium text-slate-900">アメジストの欠片</td><td class="px-4 py-3 text-body">基礎ステータス再抽選</td><td class="px-4 py-3 text-body">100%</td><td class="px-4 py-3 text-body">消費あり</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">ネザースター</td><td class="px-4 py-3 text-body">レアリティアップグレード</td><td class="px-4 py-3 text-body">50%</td><td class="px-4 py-3 text-body">消費あり</td></tr>
+              <tr><td class="px-4 py-3 font-medium text-slate-900">エコーシャード</td><td class="px-4 py-3 text-body">スキルツリー再抽選</td><td class="px-4 py-3 text-body">100%</td><td class="px-4 py-3 text-body">消費あり</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ========== 権限 ========== -->
-      <h2 id="permissions">権限</h2>
-      <div class="table-wrapper">
-        <table>
-          <thead><tr><th>権限ノード</th><th>説明</th><th>デフォルト</th></tr></thead>
-          <tbody>
-            <tr><td><code>mypetaddon.*</code></td><td>全権限</td><td>OP</td></tr>
-            <tr><td><code>mypetaddon.tame</code></td><td>テイム</td><td>全プレイヤー</td></tr>
-            <tr><td><code>mypetaddon.status</code></td><td>ステータス表示</td><td>全プレイヤー</td></tr>
-            <tr><td><code>mypetaddon.evolve</code></td><td>進化</td><td>全プレイヤー</td></tr>
-            <tr><td><code>mypetaddon.equip</code></td><td>装備</td><td>全プレイヤー</td></tr>
-            <tr><td><code>mypetaddon.encyclopedia</code></td><td>図鑑</td><td>全プレイヤー</td></tr>
-            <tr><td><code>mypetaddon.admin</code></td><td>管理者コマンド</td><td>OP</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <section id="permissions" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">権限</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">権限ノード</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">説明</th><th class="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase">デフォルト</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">mypetaddon.*</code></td><td class="px-4 py-3 text-body">全権限</td><td class="px-4 py-3 text-body">OP</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">mypetaddon.tame</code></td><td class="px-4 py-3 text-body">テイム</td><td class="px-4 py-3 text-body">全プレイヤー</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">mypetaddon.status</code></td><td class="px-4 py-3 text-body">ステータス表示</td><td class="px-4 py-3 text-body">全プレイヤー</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">mypetaddon.evolve</code></td><td class="px-4 py-3 text-body">進化</td><td class="px-4 py-3 text-body">全プレイヤー</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">mypetaddon.equip</code></td><td class="px-4 py-3 text-body">装備</td><td class="px-4 py-3 text-body">全プレイヤー</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">mypetaddon.encyclopedia</code></td><td class="px-4 py-3 text-body">図鑑</td><td class="px-4 py-3 text-body">全プレイヤー</td></tr>
+              <tr><td class="px-4 py-3"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">mypetaddon.admin</code></td><td class="px-4 py-3 text-body">管理者コマンド</td><td class="px-4 py-3 text-body">OP</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ========== FAQ ========== -->
-      <h2 id="faq">FAQ</h2>
+      <section id="faq" class="mb-12">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">FAQ</h2>
+        <div class="space-y-3">
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. テイムの手順は？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>動物の場合: 金のリンゴを手に持って右クリック → 30秒以内に <code>/pettame &lt;名前&gt;</code><br>
-          モンスターの場合: ネザースターで右クリック（マーキング）→ 倒す → 30秒以内に <code>/pettame &lt;名前&gt;</code></p>
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. テイムの手順は？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">動物の場合: 金のリンゴを手に持って右クリック &rarr; 30秒以内に <code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettame &lt;名前&gt;</code><br>モンスターの場合: ネザースターで右クリック（マーキング）&rarr; 倒す &rarr; 30秒以内に <code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettame &lt;名前&gt;</code></p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. レアリティは変更できる？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">ネザースターを使用するとレアリティが1段階上がります（成功率50%）。失敗してもネザースターは消費されます。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. 性格は変更できる？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed"><strong>性格は変更できません。</strong>テイム時にランダムで決定され、以降固定です。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. 進化すると何が変わる？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">Mob種別が変化し、基礎ステータスやスキルツリーが進化先のものに更新されます。レアリティ・親密度・レベルは引き継がれます。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. 進化に失敗することはある？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">条件（レベル・親密度・バイオーム・素材）を全て満たしていれば<strong>100%成功</strong>します。条件を満たしていない場合はコマンド実行時にエラーが表示されます。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. ペットが死んだらどうなる？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petcall</code> で再召喚できます。ただし親密度EXPが<strong>-20</strong>されます。ペット自体は失われません。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. 複数のペットを持てる？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">はい。<code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petswitch</code> でアクティブペットを切り替えられます。同時に召喚できるのは1体のみです。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. 行動モードを変えるには？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petbehavior</code> コマンドで friendly / farm / duel / aggro / raid の中から選択できます。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. ペットに騎乗するには？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">Rideスキルを習得した状態で<strong>Shift + 右クリック</strong>で騎乗できます。Controlスキルがあれば操作も可能です。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. ペットのインベントリはどう使う？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">Backpackスキルを習得後、ペットを<strong>右クリック</strong>または<strong>Shift + 右クリック</strong>でインベントリGUIが開きます。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. /petname と /pettame の違いは？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettame</code> はMobをテイムするコマンド、<code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/petname</code> は既にテイム済みのペットの名前を変更するコマンドです。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. ペットの食べ物はどこで確認できる？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed"><code class="text-sm bg-gray-50 px-1.5 py-0.5 rounded text-slate-700">/pettype</code> コマンドで各Mob種別ごとの食べ物が確認できます。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. 装備はどうやって入手する？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">通常の防具や武器にPDCタグが付与されたアイテムがペット装備として使用できます。モンスタードロップやクラフトで入手可能です。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. LevelledMobsがないと使えない？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">LevelledMobsは必須ではありません。未導入の場合は固定確率テーブル（コモン40%〜ミシック2%）が使用されます。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. 図鑑報酬は何度でも受け取れる？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">各達成率の報酬は<strong>1回のみ</strong>受け取れます。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50">
+              <span>Q. 覚醒とは？</span>
+              <span data-icon class="text-slate-400 text-lg leading-none flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-5 pb-4">
+              <p class="text-sm text-body leading-relaxed">親密度がSoulbound（最大レベル）に到達し、特定の条件を満たすことで発動する特別な強化状態です。詳細は今後のアップデートで拡張予定です。</p>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
 
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. レアリティは変更できる？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>ネザースターを使用するとレアリティが1段階上がります（成功率50%）。失敗してもネザースターは消費されます。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. 性格は変更できる？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p><strong>性格は変更できません。</strong>テイム時にランダムで決定され、以降固定です。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. 進化すると何が変わる？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Mob種別が変化し、基礎ステータスやスキルツリーが進化先のものに更新されます。レアリティ・親密度・レベルは引き継がれます。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. 進化に失敗することはある？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>条件（レベル・親密度・バイオーム・素材）を全て満たしていれば<strong>100%成功</strong>します。条件を満たしていない場合はコマンド実行時にエラーが表示されます。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. ペットが死んだらどうなる？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p><code>/petcall</code> で再召喚できます。ただし親密度EXPが<strong>-20</strong>されます。ペット自体は失われません。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. 複数のペットを持てる？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>はい。<code>/petswitch</code> でアクティブペットを切り替えられます。同時に召喚できるのは1体のみです。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. 行動モードを変えるには？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p><code>/petbehavior</code> コマンドで friendly / farm / duel / aggro / raid の中から選択できます。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. ペットに騎乗するには？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Rideスキルを習得した状態で<strong>Shift + 右クリック</strong>で騎乗できます。Controlスキルがあれば操作も可能です。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. ペットのインベントリはどう使う？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Backpackスキルを習得後、ペットを<strong>右クリック</strong>または<strong>Shift + 右クリック</strong>でインベントリGUIが開きます。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. /petname と /pettame の違いは？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p><code>/pettame</code> はMobをテイムするコマンド、<code>/petname</code> は既にテイム済みのペットの名前を変更するコマンドです。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. ペットの食べ物はどこで確認できる？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p><code>/pettype</code> コマンドで各Mob種別ごとの食べ物が確認できます。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. 装備はどうやって入手する？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>通常の防具や武器にPDCタグが付与されたアイテムがペット装備として使用できます。モンスタードロップやクラフトで入手可能です。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. LevelledMobsがないと使えない？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>LevelledMobsは必須ではありません。未導入の場合は固定確率テーブル（コモン40%〜ミシック2%）が使用されます。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. 図鑑報酬は何度でも受け取れる？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>各達成率の報酬は<strong>1回のみ</strong>受け取れます。</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Q. 覚醒とは？</span><span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>親密度がSoulbound（最大レベル）に到達し、特定の条件を満たすことで発動する特別な強化状態です。詳細は今後のアップデートで拡張予定です。</p>
-        </div>
-      </div>
-
-      <footer class="site-footer">
-        <p>Server Plugin Wiki &copy; 2026 &mdash; All Rights Reserved</p>
+      <!-- Footer -->
+      <footer class="border-t border-slate-200 pt-8 pb-4 text-center">
+        <p class="text-sm text-slate-400">Server Plugin Wiki &copy; 2026 &mdash; All Rights Reserved</p>
       </footer>
-    </main>
-  </div>
-  <button class="back-to-top">&uarr;</button>
+
+    </div>
+  </main>
+
+  <!-- Back to Top -->
+  <button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center text-slate-500 hover:text-primary-700 hover:border-primary-500 transition opacity-0 pointer-events-none z-50">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
   <script src="js/main.js"></script>
 </body>
 </html>
