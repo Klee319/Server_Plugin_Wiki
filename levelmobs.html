@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LevelledMobs - Server Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="header-brand">
+        <div class="logo-icon">&#9935;</div>
+        <div><h1>Server Wiki</h1><span class="subtitle">Minecraft Server Plugin Documentation</span></div>
+      </a>
+      <div class="header-search">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" class="search-input" placeholder="プラグインを検索...">
+        <div class="search-results"></div>
+      </div>
+      <button class="mobile-menu-btn">&#9776;</button>
+    </div>
+  </header>
+  <div class="sidebar-overlay"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">ナビゲーション</div>
+        <div class="sidebar-nav">
+          <a href="index.html"><span class="nav-icon">&#127968;</span>ホーム</a>
+          <a href="ars-noveau.html"><span class="nav-icon">&#10024;</span>Ars Noveau</a>
+          <a href="diamond-compressor.html"><span class="nav-icon">&#128142;</span>Diamond Compressor</a>
+          <a href="storage-drawers.html"><span class="nav-icon">&#128452;&#65039;</span>Storage Drawers</a>
+          <a href="mypet.html"><span class="nav-icon">&#128062;</span>MyPet</a>
+          <a href="levelmobs.html" class="active"><span class="nav-icon">&#9876;&#65039;</span>LevelledMobs</a>
+        </div>
+      </div>
+      <div class="sidebar-section sidebar-toc">
+        <div class="sidebar-section-title">目次</div>
+        <div class="sidebar-nav nav-links">
+          <a href="#overview">概要</a>
+          <a href="#strategies">レベリング戦略</a>
+          <a href="#presets">難易度プリセット</a>
+          <a href="#nametag">ネームタグ</a>
+          <a href="#drops">カスタムドロップ</a>
+          <a href="#rules">ルール設定</a>
+          <a href="#plugins">外部プラグイン連携</a>
+          <a href="#settings">基本設定</a>
+          <a href="#commands">コマンド</a>
+          <a href="#mob-groups">モブグループ</a>
+        </div>
+      </div>
+    </nav>
+    <main class="main-content">
+      <div class="breadcrumb animate-in">
+        <a href="index.html">ホーム</a>
+        <span class="separator">/</span>
+        <span>LevelledMobs</span>
+      </div>
+
+      <div class="page-header animate-in">
+        <h1>&#9876;&#65039; LevelledMobs</h1>
+        <p class="page-description">LevelledMobs 4.x - モブレベリングシステム。距離、高度、プレイヤー数に応じてモブにレベルを付与し、戦闘の難易度とドロップ報酬をダイナミックに調整します。</p>
+      </div>
+
+      <div class="stat-grid animate-in animate-delay-1">
+        <div class="stat-item"><div class="stat-value">4</div><div class="stat-label">戦略</div></div>
+        <div class="stat-item"><div class="stat-value">13</div><div class="stat-label">プリセット</div></div>
+        <div class="stat-item"><div class="stat-value">100+</div><div class="stat-label">ドロップ設定</div></div>
+        <div class="stat-item"><div class="stat-value">12</div><div class="stat-label">プラグイン連携</div></div>
+      </div>
+
+      <!-- 概要 -->
+      <h2 id="overview">概要</h2>
+      <p>LevelledMobs 4.x は、サーバー内のモブにレベルを付与する高度なモブレベリングシステムです。スポーン地点からの距離、Y座標の高度、周囲のプレイヤー数などの条件に基づき、モブのレベルが自動的に決定されます。</p>
+      <p>レベルが高いモブほどHP・攻撃力・防御力が上昇し、より良いドロップアイテムを落とすようになります。これにより、探索が進むほど歯ごたえのある戦闘と、それに見合った報酬が得られるプログレッション体験を実現しています。</p>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128161; ポイント</div>
+        レベルは1〜100の範囲で付与され、4種類の戦略を組み合わせることで多様なレベリングパターンを構築できます。
+      </div>
+
+      <!-- レベリング戦略 -->
+      <h2 id="strategies">レベリング戦略</h2>
+      <p>モブのレベルを決定する4つの戦略が用意されています。サーバーの目的やワールドの構成に合わせて最適な戦略を選択できます。</p>
+
+      <h3>1. ランダム</h3>
+      <p>最もシンプルな戦略です。モブがスポーンした際に、設定された範囲内でランダムにレベルが割り当てられます。条件に依存しないため、均等な難易度分布を実現します。</p>
+
+      <h3>2. 重み付きランダム</h3>
+      <p>ランダム戦略の拡張版です。レベル範囲1〜50に対して重み（0〜100）を設定でき、特定のレベル帯が出現しやすくなるよう調整可能です。低レベルの出現率を高めつつ、稀に高レベルモブが出現するような設計に向いています。</p>
+      <div class="callout callout-warning">
+        <div class="callout-title">&#9888;&#65039; 重みの設定</div>
+        重みが0のレベルは出現しません。すべての重みを均等にすると通常のランダムと同じ挙動になります。
+      </div>
+
+      <h3>3. 距離ベース</h3>
+      <p>ワールドのスポーン地点からの距離に基づいてレベルが決定されます。拠点周辺は安全で、遠征するほど強敵が出現するRPG的なゲーム体験を提供します。</p>
+      <ul>
+        <li><strong>バッファ距離:</strong> 250ブロック（スポーン周辺の安全圏）</li>
+        <li><strong>リング幅:</strong> 210ブロック単位でゾーンが拡大</li>
+      </ul>
+<pre><code>スポーン地点からの距離とレベルゾーン
+
+[Spawn] ──250b──▶ [Zone 1: Lv1-10] ──210b──▶ [Zone 2: Lv11-20]
+                  ──210b──▶ [Zone 3: Lv21-35] ──210b──▶ [Zone 4: Lv36-50]
+                  ──210b──▶ [Zone 5: Lv51-65] ──210b──▶ [Zone 6: Lv66-80]
+                  ──210b──▶ [Zone 7: Lv81-100]
+
+※ バッファ圏内（250ブロック以内）ではモブにレベルが付与されません</code></pre>
+
+      <h3>4. Y座標ベース</h3>
+      <p>モブのスポーンしたY座標（高度）に基づいてレベルが決定されます。地下深くに潜るほど強力なモブが出現する、洞窟探索向けの戦略です。</p>
+      <ul>
+        <li><strong>開始Y座標:</strong> Y=100（レベル最低）</li>
+        <li><strong>終了Y座標:</strong> Y=20（レベル最大）</li>
+        <li>深いほど高レベル — ディープダーク付近では最高レベルのモブが出現</li>
+      </ul>
+
+      <!-- 難易度プリセット -->
+      <h2 id="presets">難易度プリセット</h2>
+      <p>13段階の難易度プリセットが用意されており、サーバー全体の難易度を簡単に調整できます。各プリセットはHP・攻撃力・防御力・速度・経験値の倍率を定義しています。</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>プリセット</th>
+              <th>HP倍率</th>
+              <th>攻撃力倍率</th>
+              <th>防御力倍率</th>
+              <th>速度倍率</th>
+              <th>経験値倍率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Vanilla</strong></td><td>×1.0</td><td>×1.0</td><td>×1.0</td><td>×1.0</td><td>×1.0</td></tr>
+            <tr><td><strong>Easy</strong></td><td>×1.5</td><td>×1.25</td><td>×1.2</td><td>×1.0</td><td>×1.5</td></tr>
+            <tr><td><strong>Normal</strong></td><td>×2.0</td><td>×1.5</td><td>×1.5</td><td>×1.05</td><td>×2.0</td></tr>
+            <tr><td><strong>Hard</strong></td><td>×2.5</td><td>×1.75</td><td>×1.75</td><td>×1.1</td><td>×2.5</td></tr>
+            <tr><td><strong>Hardcore</strong></td><td>×3.0</td><td>×2.0</td><td>×2.0</td><td>×1.15</td><td>×3.0</td></tr>
+            <tr><td><strong>Extreme</strong></td><td>×3.25</td><td>×2.25</td><td>×2.25</td><td>×1.15</td><td>×3.25</td></tr>
+            <tr><td><strong>Insane</strong></td><td>×3.5</td><td>×2.5</td><td>×2.5</td><td>×1.2</td><td>×3.5</td></tr>
+            <tr><td><strong>Nightmare</strong></td><td>×3.75</td><td>×2.75</td><td>×2.75</td><td>×1.2</td><td>×3.75</td></tr>
+            <tr><td><strong>Apocalypse</strong></td><td>×4.0</td><td>×3.0</td><td>×3.0</td><td>×1.25</td><td>×4.0</td></tr>
+            <tr><td><strong>Inferno</strong></td><td>×4.25</td><td>×3.25</td><td>×3.25</td><td>×1.25</td><td>×4.25</td></tr>
+            <tr><td><strong>Titanium</strong></td><td>×4.5</td><td>×3.5</td><td>×3.5</td><td>×1.3</td><td>×4.5</td></tr>
+            <tr><td><strong>Diamond</strong></td><td>×4.75</td><td>×3.75</td><td>×3.75</td><td>×1.3</td><td>×4.75</td></tr>
+            <tr><td><strong>Platinum</strong></td><td>×5.0+</td><td>×4.0+</td><td>×4.0+</td><td>×1.35+</td><td>×5.0+</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-danger">
+        <div class="callout-title">&#128293; 高難度プリセット</div>
+        Apocalypse以上のプリセットでは、フル装備のプレイヤーでも複数人での協力が推奨されます。ソロプレイには十分な準備が必要です。
+      </div>
+
+      <!-- ネームタグ -->
+      <h2 id="nametag">ネームタグ</h2>
+      <p>レベル付きモブには自動的にネームタグが表示されます。Java EditionとBedrock Editionの両方に対応しており、レベルに応じたティアカラーでモブの強さを視覚的に識別できます。最大表示距離は<strong>30ブロック</strong>です。</p>
+
+      <h3>ティアカラーリング（7段階）</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>レベル範囲</th><th>カラー</th><th>危険度</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lv 1 - 10</td><td><span style="color:#50c878">&#9632; 緑</span></td><td>安全</td></tr>
+            <tr><td>Lv 11 - 20</td><td><span style="color:#8bc34a">&#9632; 黄緑</span></td><td>低</td></tr>
+            <tr><td>Lv 21 - 35</td><td><span style="color:#ffd54f">&#9632; 黄</span></td><td>注意</td></tr>
+            <tr><td>Lv 36 - 50</td><td><span style="color:#ff9800">&#9632; オレンジ</span></td><td>警戒</td></tr>
+            <tr><td>Lv 51 - 65</td><td><span style="color:#ef5350">&#9632; 赤</span></td><td>危険</td></tr>
+            <tr><td>Lv 66 - 85</td><td><span style="color:#b71c1c">&#9632; 暗赤</span></td><td>非常に危険</td></tr>
+            <tr><td>Lv 86 - 100</td><td><span style="color:#ce93d8">&#9632; 紫</span></td><td>致命的</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- カスタムドロップ -->
+      <h2 id="drops">カスタムドロップ</h2>
+      <p>レベル付きモブを倒すと、レベル帯に応じた追加ドロップアイテムが入手できます。高レベルのモブほど貴重なアイテムをドロップします。</p>
+
+      <h3>基本設定</h3>
+      <ul>
+        <li><strong>ドロップ確率 (chance):</strong> 0.2（20%）</li>
+        <li><strong>トリガー条件:</strong> プレイヤー起因のキルのみ</li>
+        <li><strong>全体倍率 (overall):</strong> 1.0</li>
+      </ul>
+
+      <h3>レベル帯別ドロップテーブル</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>レベル帯</th><th>ドロップアイテム</th><th>レアリティ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lv 1 - 25</td><td>石炭 / 銅インゴット / ラピスラズリ</td><td><span class="rarity-common">コモン</span></td></tr>
+            <tr><td>Lv 20 - 50</td><td>鉄インゴット / 金インゴット</td><td><span class="rarity-uncommon">アンコモン</span></td></tr>
+            <tr><td>Lv 40 - 75</td><td>エメラルド / レッドストーン</td><td><span class="rarity-rare">レア</span></td></tr>
+            <tr><td>Lv 70 - 100</td><td>ダイヤモンド / ネザライトの欠片</td><td><span class="rarity-legendary">レジェンダリー</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-success">
+        <div class="callout-title">&#127775; ドロップの重複</div>
+        レベル帯が重複する範囲（Lv20-25, Lv40-50, Lv70-75）では、複数のドロップテーブルから同時に抽選が行われます。
+      </div>
+
+      <!-- ルール設定 -->
+      <h2 id="rules">ルール設定</h2>
+      <p>11のカスタムルールにより、ワールドやモブの種類ごとに細かいレベリング設定を行えます。</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>#</th><th>ルール名</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>オーバーワールド基本</strong></td><td>通常ワールドのデフォルトレベリング設定</td></tr>
+            <tr><td>2</td><td><strong>ネザー基本</strong></td><td>ネザーワールド専用の高難度設定</td></tr>
+            <tr><td>3</td><td><strong>エンド基本</strong></td><td>エンドワールド専用の最高難度設定</td></tr>
+            <tr><td>4</td><td><strong>アンデッドグループ</strong></td><td>ゾンビ・スケルトン系モブの強化ルール</td></tr>
+            <tr><td>5</td><td><strong>ボスモブ</strong></td><td>ウィザー・エンダードラゴンの特別設定</td></tr>
+            <tr><td>6</td><td><strong>スポナー対策</strong></td><td>スポナー産モブのレベル制限（トラップ対策）</td></tr>
+            <tr><td>7</td><td><strong>プレイヤー変数</strong></td><td>プレイヤー数に応じた動的レベル調整</td></tr>
+            <tr><td>8</td><td><strong>夜間強化</strong></td><td>夜間にスポーンするモブのレベル上昇</td></tr>
+            <tr><td>9</td><td><strong>洞窟ルール</strong></td><td>Y座標に基づく地下専用レベリング</td></tr>
+            <tr><td>10</td><td><strong>バイオーム別</strong></td><td>特定バイオームでのレベル補正</td></tr>
+            <tr><td>11</td><td><strong>イベントルール</strong></td><td>特定条件トリガーによる一時的レベル変更</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 外部プラグイン連携 -->
+      <h2 id="plugins">外部プラグイン連携</h2>
+      <p>LevelledMobsは12の外部プラグインと連携し、レベリング対象の除外や特別な処理を適用できます。</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>プラグイン</th><th>ステータス</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>MyPet</strong></td><td><span class="tag tag-emerald">有効</span></td><td>ペット化モブのレベリング除外</td></tr>
+            <tr><td><strong>MythicMobs</strong></td><td><span class="tag tag-emerald">有効</span></td><td>MythicMobsのカスタムモブとの互換</td></tr>
+            <tr><td><strong>ShopKeepers</strong></td><td><span class="tag tag-emerald">有効</span></td><td>ショップキーパーNPCの除外</td></tr>
+            <tr><td><strong>EcoBosses</strong></td><td><span class="tag tag-emerald">有効</span></td><td>EcoBossesのボスモブとの統合</td></tr>
+            <tr><td><strong>EliteMobs</strong></td><td><span class="tag tag-emerald">有効</span></td><td>EliteMobsのエリートモブとの連携</td></tr>
+            <tr><td><strong>InfernalMobs</strong></td><td><span class="tag tag-emerald">有効</span></td><td>インファーナルモブの特殊処理</td></tr>
+            <tr><td><strong>Citizens</strong></td><td><span class="tag tag-emerald">有効</span></td><td>CitizensのNPCを除外</td></tr>
+            <tr><td><strong>Dangerous Caves</strong></td><td><span class="tag tag-emerald">有効</span></td><td>洞窟カスタムモブとの統合</td></tr>
+            <tr><td><strong>WorldGuard</strong></td><td><span class="tag tag-emerald">有効</span></td><td>リージョン別レベリング制御</td></tr>
+            <tr><td><strong>PlaceholderAPI</strong></td><td><span class="tag tag-emerald">有効</span></td><td>プレースホルダー変数の提供</td></tr>
+            <tr><td><strong>NBT-API</strong></td><td><span class="tag tag-emerald">有効</span></td><td>NBTタグ経由のカスタムデータ</td></tr>
+            <tr><td><strong>ProtocolLib</strong></td><td><span class="tag tag-emerald">有効</span></td><td>パケットレベルのネームタグ制御</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 基本設定 -->
+      <h2 id="settings">基本設定</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>設定項目</th><th>値</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Debug</strong></td><td><code>false</code></td><td>デバッグモード（無効）</td></tr>
+            <tr><td><strong>AsyncTaskPeriod</strong></td><td><code>3 ticks</code></td><td>非同期タスクの実行間隔</td></tr>
+            <tr><td><strong>MaxBlocks</strong></td><td><code>320</code></td><td>距離計算の最大ブロック数</td></tr>
+            <tr><td><strong>MaxPlayers</strong></td><td><code>10</code></td><td>レベル計算に影響するプレイヤー上限</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>キルスキップ条件</h3>
+      <p>以下の条件に該当するモブはレベリングの対象から除外されます。</p>
+      <ul>
+        <li><strong>名札付き:</strong> プレイヤーが名札で名前を付けたモブ</li>
+        <li><strong>テイム済み:</strong> プレイヤーに懐いたモブ（オオカミ、猫など）</li>
+        <li><strong>リーシュ付き:</strong> リードで繋がれたモブ</li>
+        <li><strong>変身中:</strong> 変身プラグインによる変身状態のモブ</li>
+        <li><strong>村人:</strong> 村人および行商人</li>
+      </ul>
+
+      <h3>イベント優先順位</h3>
+      <p>レベル付与イベントの優先順位設定により、他プラグインとの競合を制御できます。デフォルトでは<code>NORMAL</code>に設定されており、大半のプラグインとの互換性を維持しています。</p>
+
+      <!-- コマンド -->
+      <h2 id="commands">コマンド</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>コマンド</th><th>説明</th><th>権限</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>/lm debug</code></td><td>デバッグモードの切替</td><td>levelledmobs.admin</td></tr>
+            <tr><td><code>/lm egg</code></td><td>指定レベルのモブエッグを生成</td><td>levelledmobs.admin</td></tr>
+            <tr><td><code>/lm help</code></td><td>ヘルプメッセージの表示</td><td>levelledmobs.use</td></tr>
+            <tr><td><code>/lm info</code></td><td>ターゲットモブの情報を表示</td><td>levelledmobs.use</td></tr>
+            <tr><td><code>/lm kill</code></td><td>レベル付きモブの一括キル</td><td>levelledmobs.admin</td></tr>
+            <tr><td><code>/lm reload</code></td><td>設定ファイルのリロード</td><td>levelledmobs.admin</td></tr>
+            <tr><td><code>/lm rules</code></td><td>現在のルール設定を表示</td><td>levelledmobs.admin</td></tr>
+            <tr><td><code>/lm summon</code></td><td>モブを召喚（here / atPlayer / atLocation）</td><td>levelledmobs.admin</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128221; summon サブコマンド</div>
+        <code>/lm summon</code> は3つの召喚モードに対応しています:<br>
+        <strong>here</strong> - 実行者の現在地に召喚<br>
+        <strong>atPlayer &lt;player&gt;</strong> - 指定プレイヤーの位置に召喚<br>
+        <strong>atLocation &lt;x&gt; &lt;y&gt; &lt;z&gt;</strong> - 指定座標に召喚
+      </div>
+
+      <!-- モブグループ -->
+      <h2 id="mob-groups">モブグループ</h2>
+      <p>ルール設定で使用できるモブグループの一覧です。グループ名を指定することで、複数のモブに一括でルールを適用できます。</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>グループ名</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>all_mobs</code></td><td>全モブ</td></tr>
+            <tr><td><code>all_levellable_mobs</code></td><td>レベル付与可能な全モブ</td></tr>
+            <tr><td><code>all_hostile_mobs</code></td><td>全ての敵対モブ</td></tr>
+            <tr><td><code>all_passive_mobs</code></td><td>全ての中立・友好モブ</td></tr>
+            <tr><td><code>all_overworld_mobs</code></td><td>オーバーワールドのモブ</td></tr>
+            <tr><td><code>all_nether_mobs</code></td><td>ネザーのモブ</td></tr>
+            <tr><td><code>all_flying_mobs</code></td><td>飛行モブ（ファントム、ブレイズ等）</td></tr>
+            <tr><td><code>all_ground_mobs</code></td><td>地上モブ</td></tr>
+            <tr><td><code>all_aquatic_mobs</code></td><td>水生モブ（ドラウンド、ガーディアン等）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <footer class="site-footer">
+        <p>Server Plugin Wiki &copy; 2026 &mdash; All Rights Reserved</p>
+      </footer>
+    </main>
+  </div>
+  <button class="back-to-top">&uarr;</button>
+  <script src="js/main.js"></script>
+</body>
+</html>

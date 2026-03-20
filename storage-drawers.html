@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storage Drawers - Server Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="header-brand">
+        <div class="logo-icon">&#9935;</div>
+        <div><h1>Server Wiki</h1><span class="subtitle">Minecraft Server Plugin Documentation</span></div>
+      </a>
+      <div class="header-search">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" class="search-input" placeholder="プラグインを検索...">
+        <div class="search-results"></div>
+      </div>
+      <button class="mobile-menu-btn">&#9776;</button>
+    </div>
+  </header>
+  <div class="sidebar-overlay"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">ナビゲーション</div>
+        <div class="sidebar-nav">
+          <a href="index.html"><span class="nav-icon">&#127968;</span>ホーム</a>
+          <a href="ars-noveau.html"><span class="nav-icon">&#10024;</span>Ars Noveau</a>
+          <a href="diamond-compressor.html"><span class="nav-icon">&#128142;</span>Diamond Compressor</a>
+          <a href="storage-drawers.html" class="active"><span class="nav-icon">&#128452;&#65039;</span>Storage Drawers</a>
+          <a href="mypet.html"><span class="nav-icon">&#128062;</span>MyPet</a>
+          <a href="levelmobs.html"><span class="nav-icon">&#9876;&#65039;</span>LevelledMobs</a>
+        </div>
+      </div>
+      <div class="sidebar-section sidebar-toc">
+        <div class="sidebar-section-title">目次</div>
+        <div class="sidebar-nav">
+          <a href="#overview">概要</a>
+          <a href="#drawer-list">ドロワー一覧</a>
+          <a href="#recipes">クラフトレシピ</a>
+          <a href="#usage">使い方</a>
+          <a href="#void-drawer">ボイドドロワー</a>
+          <a href="#drawer-key">ドロワーキー</a>
+          <a href="#hopper">ホッパー連携</a>
+          <a href="#commands">コマンド</a>
+          <a href="#permissions">権限</a>
+          <a href="#config">設定ファイル</a>
+        </div>
+      </div>
+    </nav>
+    <main class="main-content">
+      <div class="breadcrumb">
+        <a href="index.html">ホーム</a>
+        <span class="separator">/</span>
+        <span>Storage Drawers</span>
+      </div>
+
+      <div class="page-header">
+        <h1>&#128452;&#65039; Storage Drawers</h1>
+        <p class="page-description">バレルベースのストレージドロワープラグイン。大量のアイテムを効率的に管理できます。</p>
+      </div>
+
+      <h2 id="overview">概要</h2>
+      <p>Minecraft 1.21 / Paper 対応のストレージドロワープラグインです。Bedrock Edition にも Floodgate 経由で互換性があります。</p>
+      <p>バレルベースのストレージドロワーで、<strong>破壊しても中身が保持</strong>されます（シュルカーボックスと同様の挙動）。7段階のティアにより、最大131,072アイテムまで収納可能です。</p>
+
+      <h2 id="drawer-list">ドロワー一覧</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ティア</th>
+              <th>名前</th>
+              <th>容量 (スタック数)</th>
+              <th>容量 (アイテム数)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Tier 1</td><td>基本のドロワー</td><td>32 stacks</td><td>2,048</td></tr>
+            <tr><td>Tier 2</td><td>銅のドロワー</td><td>64 stacks</td><td>4,096</td></tr>
+            <tr><td>Tier 3</td><td>鉄のドロワー</td><td>128 stacks</td><td>8,192</td></tr>
+            <tr><td>Tier 4</td><td>金のドロワー</td><td>256 stacks</td><td>16,384</td></tr>
+            <tr><td>Tier 5</td><td>ダイヤのドロワー</td><td>512 stacks</td><td>32,768</td></tr>
+            <tr><td>Tier 6</td><td>ネザライトのドロワー</td><td>1,024 stacks</td><td>65,536</td></tr>
+            <tr><td>Tier 7</td><td>クリエイティブドロワー</td><td>2,048 stacks</td><td>131,072</td></tr>
+            <tr><td>-</td><td>ボイドドロワー</td><td>&#8734;（消滅）</td><td>-</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128712; Tier 7 について</div>
+        Tier 7（クリエイティブドロワー）はデフォルトでは無効です。サーバー設定で有効化する必要があります。
+      </div>
+
+      <h2 id="recipes">クラフトレシピ</h2>
+
+      <h3>Tier 1 - 基本のドロワー</h3>
+      <p>板材 8 + チェスト 1（3x3 クラフト）</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot filled">板材</div>
+        <div class="recipe-slot filled">板材</div>
+        <div class="recipe-slot filled">板材</div>
+        <div class="recipe-slot filled">板材</div>
+        <div class="recipe-slot filled">チェスト</div>
+        <div class="recipe-slot filled">板材</div>
+        <div class="recipe-slot filled">板材</div>
+        <div class="recipe-slot filled">板材</div>
+        <div class="recipe-slot filled">板材</div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>基本のドロワー x1</strong>
+      </div>
+
+      <h3>Tier 2 - 銅のドロワー</h3>
+      <p>銅インゴット 4 + Tier 1（十字配置）</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">銅インゴット</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">銅インゴット</div>
+        <div class="recipe-slot filled">Tier 1</div>
+        <div class="recipe-slot filled">銅インゴット</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">銅インゴット</div>
+        <div class="recipe-slot"></div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>銅のドロワー x1</strong>
+      </div>
+
+      <h3>Tier 3 - 鉄のドロワー</h3>
+      <p>鉄インゴット 4 + Tier 2（十字配置）</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">鉄インゴット</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">鉄インゴット</div>
+        <div class="recipe-slot filled">Tier 2</div>
+        <div class="recipe-slot filled">鉄インゴット</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">鉄インゴット</div>
+        <div class="recipe-slot"></div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>鉄のドロワー x1</strong>
+      </div>
+
+      <h3>Tier 4 - 金のドロワー</h3>
+      <p>金インゴット 4 + Tier 3（十字配置）</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">金インゴット</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">金インゴット</div>
+        <div class="recipe-slot filled">Tier 3</div>
+        <div class="recipe-slot filled">金インゴット</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">金インゴット</div>
+        <div class="recipe-slot"></div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>金のドロワー x1</strong>
+      </div>
+
+      <h3>Tier 5 - ダイヤのドロワー</h3>
+      <p>ダイヤモンド 4 + Tier 4（十字配置）</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">ダイヤモンド</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">ダイヤモンド</div>
+        <div class="recipe-slot filled">Tier 4</div>
+        <div class="recipe-slot filled">ダイヤモンド</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">ダイヤモンド</div>
+        <div class="recipe-slot"></div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>ダイヤのドロワー x1</strong>
+      </div>
+
+      <h3>Tier 6 - ネザライトのドロワー</h3>
+      <p>ネザライトインゴット 4 + Tier 5（十字配置）</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">ネザライト</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">ネザライト</div>
+        <div class="recipe-slot filled">Tier 5</div>
+        <div class="recipe-slot filled">ネザライト</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">ネザライト</div>
+        <div class="recipe-slot"></div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>ネザライトのドロワー x1</strong>
+      </div>
+
+      <h3>Tier 7 - クリエイティブドロワー</h3>
+      <p>ネザースター 8 + Tier 6（デフォルトでは無効）</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot filled">ネザースター</div>
+        <div class="recipe-slot filled">ネザースター</div>
+        <div class="recipe-slot filled">ネザースター</div>
+        <div class="recipe-slot filled">ネザースター</div>
+        <div class="recipe-slot filled">Tier 6</div>
+        <div class="recipe-slot filled">ネザースター</div>
+        <div class="recipe-slot filled">ネザースター</div>
+        <div class="recipe-slot filled">ネザースター</div>
+        <div class="recipe-slot filled">ネザースター</div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>クリエイティブドロワー x1</strong>
+      </div>
+
+      <h3>ボイドドロワー</h3>
+      <p>黒曜石 4 + エンダーパール 4 + チェスト 1</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot filled">黒曜石</div>
+        <div class="recipe-slot filled">エンダーパール</div>
+        <div class="recipe-slot filled">黒曜石</div>
+        <div class="recipe-slot filled">エンダーパール</div>
+        <div class="recipe-slot filled">チェスト</div>
+        <div class="recipe-slot filled">エンダーパール</div>
+        <div class="recipe-slot filled">黒曜石</div>
+        <div class="recipe-slot filled">エンダーパール</div>
+        <div class="recipe-slot filled">黒曜石</div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>ボイドドロワー x1</strong>
+      </div>
+
+      <h3>ドロワーキー</h3>
+      <p>金塊 1 + 棒 2 → 3個</p>
+      <div class="recipe-grid">
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">金塊</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">棒</div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot"></div>
+        <div class="recipe-slot filled">棒</div>
+        <div class="recipe-slot"></div>
+      </div>
+      <div class="recipe-result">
+        <span class="recipe-arrow">&#10132;</span>
+        <strong>ドロワーキー x3</strong>
+      </div>
+
+      <h2 id="usage">使い方</h2>
+
+      <h3>格納（右クリック）</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>操作</th>
+              <th>効果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>右クリック</td><td>手持ちアイテムを1個格納</td></tr>
+            <tr><td>Shift + 右クリック</td><td>手持ちスタック全体を格納</td></tr>
+            <tr><td>ダブル右クリック（150ms以内）</td><td>インベントリ内の同種アイテムを全部格納</td></tr>
+            <tr><td>素手で右クリック</td><td>インベントリを検索して1個格納</td></tr>
+            <tr><td>素手で Shift + 右クリック</td><td>インベントリを検索してスタック格納</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>取り出し（左クリック）</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>操作</th>
+              <th>効果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>左クリック（中央）</td><td>1個取り出し</td></tr>
+            <tr><td>Shift + 左クリック（中央）</td><td>1スタック取り出し</td></tr>
+            <tr><td>左クリック（端）</td><td>通常破壊（ドロワーを壊す）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>破壊</h3>
+      <p>シュルカーボックスのように<strong>中身を保持したままドロップ</strong>します。安心してドロワーを移動できます。</p>
+
+      <h2 id="void-drawer">ボイドドロワー</h2>
+      <div class="callout callout-danger">
+        <div class="callout-title">&#9888;&#65039; 警告: アイテム消滅</div>
+        ボイドドロワーに格納された<strong>全てのアイテムは即座に消滅</strong>します。ホッパーからの搬入も同様に消滅します。<strong>一度消滅したアイテムは復元できません。</strong>使用には十分注意してください。
+      </div>
+
+      <h2 id="drawer-key">ドロワーキー</h2>
+      <ul>
+        <li><strong>アイテムが入っている状態で右クリック</strong> → ドロワーをロック（アイテムタイプを固定）</li>
+        <li><strong>ロック済みのドロワーに右クリック</strong> → ロック解除</li>
+        <li><strong>空のスロット</strong> → ロック不可（アイテムが入っている必要があります）</li>
+      </ul>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128161; ロックの活用</div>
+        ロックすると、ドロワーが空になってもアイテムタイプが維持されます。自動仕分け装置に便利です。
+      </div>
+
+      <h2 id="hopper">ホッパー連携</h2>
+      <ul>
+        <li><strong>ホッパー → ドロワー</strong>: ホッパーからドロワーへアイテムを搬入できます</li>
+        <li><strong>ドロワー → ホッパー</strong>: ドロワーの真下にホッパーを設置すると搬出されます
+          <ul>
+            <li>搬出間隔: <strong>8 tick</strong></li>
+            <li><strong>レッドストーン信号</strong>でドロワーへの搬出を停止できます</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h2 id="commands">コマンド</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>コマンド</th>
+              <th>権限</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>/drawer give &lt;player&gt; &lt;type&gt; [amount]</code></td><td><code>paperdrawers.give</code></td></tr>
+            <tr><td><code>/drawer key [amount]</code></td><td><code>paperdrawers.give</code></td></tr>
+            <tr><td><code>/drawer reload</code></td><td><code>paperdrawers.admin</code></td></tr>
+            <tr><td><code>/drawer info</code></td><td><code>paperdrawers.use</code></td></tr>
+            <tr><td><code>/drawer debug</code></td><td><code>paperdrawers.admin</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128196; タイプ指定</div>
+        <code>&lt;type&gt;</code> には以下が使用できます: <code>tier1</code>〜<code>tier7</code>, <code>basic</code> / <code>copper</code> / <code>iron</code> / <code>gold</code> / <code>diamond</code> / <code>netherite</code> / <code>creative</code>, <code>1</code>〜<code>7</code>, <code>void</code>
+      </div>
+
+      <h2 id="permissions">権限</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>権限ノード</th>
+              <th>説明</th>
+              <th>デフォルト</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>paperdrawers.use</code></td><td>ドロワーの使用</td><td>全プレイヤー</td></tr>
+            <tr><td><code>paperdrawers.give</code></td><td>アイテム付与コマンド</td><td>OP</td></tr>
+            <tr><td><code>paperdrawers.admin</code></td><td>管理コマンド</td><td>OP</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="config">設定ファイル</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>セクション</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>drawer-capacity</code></td><td>各ティアの容量設定</td></tr>
+            <tr><td><code>display</code></td><td>表示設定・描画距離・フォーマット</td></tr>
+            <tr><td><code>bedrock</code></td><td>統合版（Bedrock Edition）互換設定</td></tr>
+            <tr><td><code>performance</code></td><td>キャッシュ・非同期保存の設定</td></tr>
+            <tr><td><code>hopper</code></td><td>ホッパー連携の設定</td></tr>
+            <tr><td><code>messages</code></td><td>ゲーム内メッセージ（日本語対応）</td></tr>
+            <tr><td><code>recipes</code></td><td>クラフトレシピの有効/無効切り替え</td></tr>
+            <tr><td><code>drawer-display</code></td><td>アイテム名・説明文の表示設定</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <footer class="site-footer">
+        <p>Server Plugin Wiki &copy; 2026 &mdash; All Rights Reserved</p>
+      </footer>
+    </main>
+  </div>
+  <button class="back-to-top">&uarr;</button>
+  <script src="js/main.js"></script>
+</body>
+</html>

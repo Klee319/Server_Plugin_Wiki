@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="header-brand">
+        <div class="logo-icon">&#9935;</div>
+        <div><h1>Server Wiki</h1><span class="subtitle">Minecraft Server Plugin Documentation</span></div>
+      </a>
+      <div class="header-search">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" class="search-input" placeholder="プラグインを検索...">
+        <div class="search-results"></div>
+      </div>
+      <button class="mobile-menu-btn">&#9776;</button>
+    </div>
+  </header>
+  <div class="sidebar-overlay"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">ナビゲーション</div>
+        <div class="sidebar-nav">
+          <a href="index.html" class="active"><span class="nav-icon">&#127968;</span>ホーム</a>
+          <a href="ars-noveau.html"><span class="nav-icon">&#10024;</span>Ars Noveau</a>
+          <a href="diamond-compressor.html"><span class="nav-icon">&#128142;</span>Diamond Compressor</a>
+          <a href="storage-drawers.html"><span class="nav-icon">&#128452;&#65039;</span>Storage Drawers</a>
+          <a href="mypet.html"><span class="nav-icon">&#128062;</span>MyPet</a>
+          <a href="levelmobs.html"><span class="nav-icon">&#9876;&#65039;</span>LevelledMobs</a>
+        </div>
+      </div>
+    </nav>
+    <main class="main-content">
+      <div class="hero animate-in">
+        <h1>Server Plugin Wiki</h1>
+        <p>当サーバーで稼働中のプラグインの完全なドキュメント。<br>各プラグインの使い方、設定値、レシピ、コマンドを網羅しています。</p>
+      </div>
+
+      <div class="stat-grid animate-in animate-delay-1">
+        <div class="stat-item"><div class="stat-value">5</div><div class="stat-label">プラグイン</div></div>
+        <div class="stat-item"><div class="stat-value">60+</div><div class="stat-label">スペル</div></div>
+        <div class="stat-item"><div class="stat-value">100+</div><div class="stat-label">エンチャント上限</div></div>
+        <div class="stat-item"><div class="stat-value">50+</div><div class="stat-label">ペット種類</div></div>
+      </div>
+
+      <h2>プラグイン一覧</h2>
+      <div class="plugin-grid">
+        <a href="ars-noveau.html" class="plugin-card card-emerald animate-in animate-delay-1">
+          <span class="card-icon">&#10024;</span>
+          <h3>Ars Noveau</h3>
+          <p>Ars Nouveau MODの魔法システムを再現。60以上のスペル、9種の防具セット、15種のスレッド強化。</p>
+          <div class="card-tags">
+            <span class="tag tag-emerald">魔法</span>
+            <span class="tag tag-diamond">スペル</span>
+            <span class="tag tag-amethyst">防具</span>
+            <span class="tag tag-gold">儀式</span>
+          </div>
+        </a>
+        <a href="diamond-compressor.html" class="plugin-card card-diamond animate-in animate-delay-2">
+          <span class="card-icon">&#128142;</span>
+          <h3>Diamond Compressor</h3>
+          <p>ダイヤモンドを圧縮してエンチャントを限界突破。バニラの最大レベルを超える強化が可能。</p>
+          <div class="card-tags">
+            <span class="tag tag-diamond">圧縮</span>
+            <span class="tag tag-lapis">エンチャント</span>
+            <span class="tag tag-amethyst">強化</span>
+          </div>
+        </a>
+        <a href="storage-drawers.html" class="plugin-card card-gold animate-in animate-delay-3">
+          <span class="card-icon">&#128452;&#65039;</span>
+          <h3>Storage Drawers</h3>
+          <p>大量のアイテムを効率的に管理。7段階のティアと最大131,072アイテムの収納力。</p>
+          <div class="card-tags">
+            <span class="tag tag-gold">ストレージ</span>
+            <span class="tag tag-emerald">収納</span>
+            <span class="tag tag-diamond">ホッパー</span>
+          </div>
+        </a>
+        <a href="mypet.html" class="plugin-card card-amethyst animate-in animate-delay-4">
+          <span class="card-icon">&#128062;</span>
+          <h3>MyPet</h3>
+          <p>50以上のモブをペットに。レアリティ、性格、進化、装備、図鑑コンプリートを目指そう。</p>
+          <div class="card-tags">
+            <span class="tag tag-amethyst">ペット</span>
+            <span class="tag tag-emerald">テイム</span>
+            <span class="tag tag-gold">進化</span>
+            <span class="tag tag-redstone">レアリティ</span>
+          </div>
+        </a>
+        <a href="levelmobs.html" class="plugin-card card-redstone animate-in animate-delay-5">
+          <span class="card-icon">&#9876;&#65039;</span>
+          <h3>LevelledMobs</h3>
+          <p>距離・高度・プレイヤー数に応じたモブレベリング。カスタムドロップと難易度調整。</p>
+          <div class="card-tags">
+            <span class="tag tag-redstone">モブ</span>
+            <span class="tag tag-gold">レベル</span>
+            <span class="tag tag-emerald">ドロップ</span>
+          </div>
+        </a>
+      </div>
+
+      <h2>サーバー情報</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>項目</th><th>詳細</th></tr></thead>
+          <tbody>
+            <tr><td>対応バージョン</td><td>Minecraft 1.21 / Paper</td></tr>
+            <tr><td>統合版対応</td><td>Geyser + Floodgate によるBedrock Edition互換</td></tr>
+            <tr><td>プラグイン数</td><td>5 (Ars Noveau, Diamond Compressor, Storage Drawers, MyPet, LevelledMobs)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <footer class="site-footer">
+        <p>Server Plugin Wiki &copy; 2026 &mdash; All Rights Reserved</p>
+      </footer>
+    </main>
+  </div>
+  <button class="back-to-top">&uarr;</button>
+  <script src="js/main.js"></script>
+</body>
+</html>

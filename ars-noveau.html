@@ -1,0 +1,563 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ars Noveau - Server Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head><body>
+<header class="site-header"><div class="header-inner">
+<a href="index.html" class="header-brand"><div class="logo-icon">⛏</div><div><h1>Server Wiki</h1><span class="subtitle">Minecraft Server Plugin Documentation</span></div></a>
+<div class="header-search"><span class="search-icon">🔍</span><input type="text" class="search-input" placeholder="プラグインを検索..."><div class="search-results"></div></div>
+<button class="mobile-menu-btn">☰</button>
+</div></header>
+<div class="sidebar-overlay"></div>
+<div class="page-wrapper">
+<nav class="sidebar">
+  <div class="sidebar-section"><div class="sidebar-section-title">プラグイン</div>
+  <div class="sidebar-nav">
+    <a href="index.html"><span class="nav-icon">🏠</span>ホーム</a>
+    <a href="ars-noveau.html" class="active"><span class="nav-icon">✨</span>Ars Noveau</a>
+    <a href="diamond-compressor.html"><span class="nav-icon">💎</span>Diamond Compressor</a>
+    <a href="storage-drawers.html"><span class="nav-icon">🗄️</span>Storage Drawers</a>
+    <a href="mypet.html"><span class="nav-icon">🐾</span>MyPet</a>
+    <a href="levelmobs.html"><span class="nav-icon">⚔️</span>LevelledMobs</a>
+  </div></div>
+  <div class="sidebar-toc">
+    <div class="sidebar-section-title">目次</div>
+    <div class="sidebar-nav">
+      <a href="#intro">はじめに</a><a href="#commands">コマンド</a><a href="#spell-system">スペルシステム</a>
+      <a href="#mana-system">マナシステム</a><a href="#custom-items">カスタムアイテム</a><a href="#custom-blocks">カスタムブロック</a>
+      <a href="#armor-system">防具システム</a><a href="#thread-system">スレッドシステム</a><a href="#source-network">Sourceネットワーク</a>
+      <a href="#ritual-system">儀式システム</a><a href="#enchantments">エンチャント</a><a href="#config">設定ファイル</a><a href="#geyser">Geyser互換性</a>
+    </div>
+  </div>
+</nav>
+<main class="main-content">
+  <div class="breadcrumb"><a href="index.html">ホーム</a><span class="separator">/</span><span>Ars Noveau</span></div>
+  <div class="page-header"><h1>✨ Ars Noveau</h1><p class="page-description">Ars Nouveau MODの魔法システムをPaperプラグインとして再実装。バニラ+Geyser互換。</p></div>
+
+  <!-- はじめに -->
+  <section id="intro" class="content-section">
+    <h2>はじめに</h2>
+    <p><strong>ArsPaper</strong>はMinecraft MOD「Ars Nouveau」の魔法システムをPaperサーバー向けプラグインとして再実装したものです。バニラクライアントおよびGeyser（統合版）との互換性を保ちながら、本格的な魔法体験を提供します。</p>
+
+    <h3>始め方（6ステップ）</h3>
+    <ol>
+      <li><strong>作業台で見習いの魔法書を作成</strong> — 鉄ツール5種（剣・ツルハシ・斧・シャベル・クワ）+ 本で作成</li>
+      <li><strong>台座と刻印台を作成</strong> — 作業台レシピで台座（Pedestal）と刻印台（Scribing Table）をクラフト</li>
+      <li><strong>刻印台でグリフ解放</strong> — 経験値と素材を消費してスペルに使うグリフをアンロック</li>
+      <li><strong>スペルブックでスニーク+左クリック</strong> — スペル作成GUIを開く</li>
+      <li><strong>形態→効果→増強でスペルを組む</strong> — 形態で発動方法を決め、効果を設定し、増強で強化</li>
+      <li><strong>右クリックでスペル発動</strong> — 組んだスペルを使って魔法を放つ</li>
+    </ol>
+
+    <div class="callout callout-tip">
+      <div class="callout-title">進行の流れ</div>
+      <p>見習いの魔法書 → グリフ解放 → ソースジェム精製 → 防具作成 → 魔術師の魔術書 → 大魔導士の魔導書</p>
+    </div>
+  </section>
+
+  <!-- コマンド -->
+  <section id="commands" class="content-section">
+    <h2>コマンド</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>コマンド</th><th>権限</th><th>説明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/ars give &lt;itemId&gt;</code></td><td>admin</td><td>指定アイテムを付与</td></tr>
+          <tr><td><code>/ars mana</code></td><td>-</td><td>現在のマナ情報を表示</td></tr>
+          <tr><td><code>/ars spell list</code></td><td>-</td><td>登録済みスペル一覧を表示</td></tr>
+          <tr><td><code>/ars spell set &lt;slot&gt; &lt;名前&gt;:&lt;形態&gt; &lt;効果...&gt;</code></td><td>-</td><td>コマンドからスペルを設定</td></tr>
+          <tr><td><code>/ars recipes</code></td><td>-</td><td>レシピ一覧を表示</td></tr>
+          <tr><td><code>/ars backpack</code></td><td>-</td><td>バックパックを開く</td></tr>
+          <tr><td><code>/ars reload</code></td><td>admin</td><td>設定ファイルを再読み込み</td></tr>
+          <tr><td><code>/ars cleanup</code></td><td>admin</td><td>不要データのクリーンアップ</td></tr>
+          <tr><td><code>/ars debug mana</code></td><td>admin</td><td>マナシステムのデバッグ情報表示</td></tr>
+          <tr><td><code>/ars glyph unlockall</code></td><td>admin</td><td>全グリフを解放</td></tr>
+          <tr><td><code>/ars glyph lockall</code></td><td>admin</td><td>全グリフをロック</td></tr>
+          <tr><td><code>/ars pvp &lt;on/off&gt;</code></td><td>admin</td><td>PvP魔法の有効/無効切替</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- スペルシステム -->
+  <section id="spell-system" class="content-section">
+    <h2>スペルシステム</h2>
+
+    <h3>形態（Form）</h3>
+    <p>スペルの発動方法を決定します。スペルの先頭に1つ配置します。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>形態</th><th>Tier</th><th>マナコスト</th><th>説明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>投射（projectile）</td><td>Tier 1</td><td>10</td><td>弾を発射して着弾点に効果</td></tr>
+          <tr><td>接触（touch）</td><td>Tier 1</td><td>5</td><td>近接距離の対象に効果</td></tr>
+          <tr><td>自己（self）</td><td>Tier 1</td><td>10</td><td>自分自身に効果</td></tr>
+          <tr><td>足元（underfoot）</td><td>Tier 1</td><td>5</td><td>足元のブロックに効果</td></tr>
+          <tr><td>軌道（orbit）</td><td>Tier 3</td><td>50</td><td>周囲を回転しながら効果</td></tr>
+          <tr><td>照射（beam）</td><td>Tier 3</td><td>80</td><td>直線レーザー（即着弾）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tier 1 効果（見習い）</h3>
+    <p>見習いの魔法書で使用可能な30種類の効果グリフです。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>効果</th><th>ID</th><th>マナコスト</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>破壊</td><td>break</td><td>10</td></tr>
+          <tr><td>害悪</td><td>harm</td><td>15</td></tr>
+          <tr><td>着火</td><td>ignite</td><td>15</td></tr>
+          <tr><td>凍結</td><td>freeze</td><td>15</td></tr>
+          <tr><td>吹飛</td><td>knockback</td><td>15</td></tr>
+          <tr><td>引寄</td><td>pull</td><td>15</td></tr>
+          <tr><td>重力</td><td>gravity</td><td>15</td></tr>
+          <tr><td>光</td><td>light</td><td>25</td></tr>
+          <tr><td>収穫</td><td>harvest</td><td>10</td></tr>
+          <tr><td>刈取</td><td>cut</td><td>0</td></tr>
+          <tr><td>操作</td><td>interact</td><td>10</td></tr>
+          <tr><td>拾得</td><td>pickup</td><td>10</td></tr>
+          <tr><td>回転</td><td>rotate</td><td>10</td></tr>
+          <tr><td>伐採</td><td>fell</td><td>150</td></tr>
+          <tr><td>仮想ブロック</td><td>phantom_block</td><td>5</td></tr>
+          <tr><td>ブロック設置</td><td>place_block</td><td>10</td></tr>
+          <tr><td>打上</td><td>launch</td><td>30</td></tr>
+          <tr><td>跳躍</td><td>leap</td><td>25</td></tr>
+          <tr><td>跳弾</td><td>bounce</td><td>50</td></tr>
+          <tr><td>拘束</td><td>snare</td><td>100</td></tr>
+          <tr><td>蒸発</td><td>evaporate</td><td>50</td></tr>
+          <tr><td>解除</td><td>dispel</td><td>30</td></tr>
+          <tr><td>ルーン</td><td>rune</td><td>30</td></tr>
+          <tr><td>馬召喚</td><td>summon_steed</td><td>100</td></tr>
+          <tr><td>狼召喚</td><td>summon_wolves</td><td>100</td></tr>
+          <tr><td>染色</td><td>wololo</td><td>30</td></tr>
+          <tr><td>泡</td><td>bubble</td><td>20</td></tr>
+          <tr><td>演出</td><td>prestidigitation</td><td>0</td></tr>
+          <tr><td>精錬</td><td>smelt</td><td>30</td></tr>
+          <tr><td>粉砕</td><td>crush</td><td>30</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tier 2 効果（魔術師）</h3>
+    <p>魔術師の魔術書で使用可能になる19種類の上級効果です。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>効果</th><th>ID</th><th>マナコスト</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>回復</td><td>heal</td><td>50</td></tr>
+          <tr><td>成長</td><td>grow</td><td>30</td></tr>
+          <tr><td>爆発</td><td>explosion</td><td>100</td></tr>
+          <tr><td>交換</td><td>exchange</td><td>80</td></tr>
+          <tr><td>砕波</td><td>crush_wave</td><td>25</td></tr>
+          <tr><td>灼熱</td><td>scorch</td><td>25</td></tr>
+          <tr><td>寒波</td><td>cold_snap</td><td>25</td></tr>
+          <tr><td>風刃</td><td>windshear</td><td>25</td></tr>
+          <tr><td>水生成</td><td>conjure_water</td><td>25</td></tr>
+          <tr><td>低速落下</td><td>slowfall</td><td>30</td></tr>
+          <tr><td>透明</td><td>invisibility</td><td>50</td></tr>
+          <tr><td>注入</td><td>infuse</td><td>25</td></tr>
+          <tr><td>加工</td><td>craft</td><td>10</td></tr>
+          <tr><td>活性</td><td>animate</td><td>150</td></tr>
+          <tr><td>花火</td><td>firework</td><td>50</td></tr>
+          <tr><td>命名</td><td>name</td><td>20</td></tr>
+          <tr><td>突風</td><td>wind_burst</td><td>35</td></tr>
+          <tr><td>加速</td><td>speed_boost</td><td>25</td></tr>
+          <tr><td>浮遊</td><td>levitate</td><td>35</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tier 3 効果（大魔導士）</h3>
+    <p>大魔導士の魔導書で使用可能になる13種類の最上級効果です。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>効果</th><th>ID</th><th>マナコスト</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>瞬移</td><td>blink</td><td>50</td></tr>
+          <tr><td>落雷</td><td>lightning</td><td>100</td></tr>
+          <tr><td>衰弱</td><td>wither</td><td>80</td></tr>
+          <tr><td>呪い</td><td>hex</td><td>100</td></tr>
+          <tr><td>滑空</td><td>glide</td><td>50</td></tr>
+          <tr><td>障壁</td><td>shield</td><td>150</td></tr>
+          <tr><td>不死召喚</td><td>summon_undead</td><td>120</td></tr>
+          <tr><td>妖精召喚</td><td>summon_vex</td><td>150</td></tr>
+          <tr><td>囮召喚</td><td>summon_decoy</td><td>200</td></tr>
+          <tr><td>透過</td><td>intangible</td><td>30</td></tr>
+          <tr><td>巻戻</td><td>rewind</td><td>120</td></tr>
+          <tr><td>牙</td><td>fangs</td><td>35</td></tr>
+          <tr><td>上級破壊</td><td>advanced_break</td><td>100</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>増強（Augment）</h3>
+    <p>効果を強化・変化させるグリフです。効果の後に配置します。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>カテゴリ</th><th>増強</th><th>Tier</th><th>マナコスト</th><th>説明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>汎用</td><td>遅延（delay）</td><td>Tier 1</td><td>5</td><td>効果の発動を遅延させる</td></tr>
+          <tr><td>汎用</td><td>連射（rapid_fire）</td><td>Tier 2</td><td>20</td><td>連続して発動する</td></tr>
+          <tr><td>広汎</td><td>増幅（amplify）</td><td>Tier 1</td><td>20</td><td>効果の威力を増加</td></tr>
+          <tr><td>広汎</td><td>減少（dampen）</td><td>Tier 1</td><td>0</td><td>効果の威力を減少</td></tr>
+          <tr><td>広汎</td><td>延長（extend_time）</td><td>Tier 1</td><td>10</td><td>効果時間を延長</td></tr>
+          <tr><td>広汎</td><td>短縮（duration_down）</td><td>Tier 1</td><td>0</td><td>効果時間を短縮</td></tr>
+          <tr><td>広汎</td><td>幅（aoe）</td><td>Tier 1</td><td>15</td><td>効果範囲を拡大</td></tr>
+          <tr><td>広汎</td><td>上下（aoe_height）</td><td>Tier 1</td><td>15</td><td>効果範囲の高さを拡大</td></tr>
+          <tr><td>広汎</td><td>垂直（aoe_vertical）</td><td>Tier 1</td><td>15</td><td>効果範囲を垂直方向に拡大</td></tr>
+          <tr><td>広汎</td><td>半径（aoe_radius）</td><td>Tier 2</td><td>20</td><td>効果範囲の半径を拡大</td></tr>
+          <tr><td>広汎</td><td>無作為（randomize）</td><td>Tier 1</td><td>5</td><td>効果をランダム化</td></tr>
+          <tr><td>形態限定</td><td>加速（accelerate）</td><td>Tier 2</td><td>10</td><td>弾速を上昇</td></tr>
+          <tr><td>形態限定</td><td>減速（decelerate）</td><td>Tier 2</td><td>0</td><td>弾速を低下</td></tr>
+          <tr><td>形態限定</td><td>貫通（pierce）</td><td>Tier 2</td><td>10</td><td>対象を貫通して飛行</td></tr>
+          <tr><td>形態限定</td><td>延伸（extend_reach）</td><td>Tier 2</td><td>15</td><td>射程距離を延長</td></tr>
+          <tr><td>形態限定</td><td>分裂（split）</td><td>Tier 2</td><td>20</td><td>弾が分裂する</td></tr>
+          <tr><td>形態限定</td><td>軌跡（trace）</td><td>Tier 3</td><td>25</td><td>対象を追尾する</td></tr>
+          <tr><td>形態限定</td><td>伝播（propagate）</td><td>Tier 2</td><td>20</td><td>効果が周囲に伝播</td></tr>
+          <tr><td>特殊</td><td>抽出（extract）</td><td>Tier 2</td><td>30</td><td>対象からアイテムを抽出</td></tr>
+          <tr><td>特殊</td><td>幸運（fortune）</td><td>Tier 2</td><td>25</td><td>ドロップ数を増加</td></tr>
+          <tr><td>特殊</td><td>残留（linger）</td><td>Tier 3</td><td>80</td><td>効果が残留する</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>スペル作成の手順</h3>
+    <ol>
+      <li>スペルブックを持って<strong>スニーク+左クリック</strong>でスペル作成GUIを開く</li>
+      <li>最大<strong>9グリフ</strong>までスペルに組み込み可能</li>
+      <li>歯車アイコンからスペル名・アイコンなどの設定を変更</li>
+    </ol>
+
+    <div class="callout callout-tip">
+      <div class="callout-title">スロット切替</div>
+      <p><strong>スニーク+右クリック</strong>で次のスロットへ、<strong>スニーク+Q</strong>で前のスロットへ切り替えます。</p>
+    </div>
+  </section>
+
+  <!-- マナシステム -->
+  <section id="mana-system" class="content-section">
+    <h2>マナシステム</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>項目</th><th>値</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>基礎マナ</td><td>100</td></tr>
+          <tr><td>基礎回復速度</td><td>5/秒</td></tr>
+          <tr><td>グリフ解放ボーナス</td><td>+5マナ / グリフ</td></tr>
+          <tr><td>データ管理</td><td>PDC（PersistentDataContainer）ベース</td></tr>
+          <tr><td>表示</td><td>BossBar にマナゲージを表示</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-tip">
+      <div class="callout-title">マナを増やすには</div>
+      <p>防具の装備、スレッドの装着、マナ系エンチャントの付与でマナの最大値や回復速度を強化できます。</p>
+    </div>
+  </section>
+
+  <!-- カスタムアイテム -->
+  <section id="custom-items" class="content-section">
+    <h2>カスタムアイテム</h2>
+
+    <h3>スペルブック</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>名前</th><th>スロット数</th><th>使用可能Tier</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>spell_book_novice</code></td><td>見習いの魔法書</td><td>3スロット</td><td>Tier 1</td></tr>
+          <tr><td><code>spell_book_apprentice</code></td><td>✦ 魔術師の魔術書 ✦</td><td>6スロット</td><td>Tier 2</td></tr>
+          <tr><td><code>spell_book_archmage</code></td><td>✧✦ 大魔導士の魔導書 ✦✧</td><td>10スロット</td><td>Tier 3</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>見習いの魔法書は<strong>作業台</strong>でクラフト可能です。上位の魔術書・魔導書は<strong>儀式</strong>によるアップグレードで入手します。</p>
+    <div class="callout callout-tip">
+      <div class="callout-title">所有者システム</div>
+      <p>スペルブックは初回使用者が所有者として記録されます。所有者以外は使用できません。</p>
+    </div>
+
+    <h3>中間素材</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>名前</th><th>ベースアイテム</th><th>入手方法</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>source_gem</code></td><td>ソースジェム</td><td>PRISMARINE_SHARD</td><td>儀式（アメジスト+ラピス）</td></tr>
+          <tr><td><code>source_gem_block</code></td><td>ソースジェムブロック</td><td>PRISMARINE</td><td>作業台（gem×9）</td></tr>
+          <tr><td><code>magebloom_fiber</code></td><td>マジックファイバー</td><td>STRING</td><td>儀式（種+gem）</td></tr>
+          <tr><td><code>sourcestone</code></td><td>ソースストーン</td><td>STONE</td><td>作業台（ソースベリー+焼き石）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>消耗品</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>名前</th><th>効果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>source_berry</code></td><td>ソースベリー</td><td>マナ25即時回復。ソースジャーに右クリックでSource+100</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- カスタムブロック -->
+  <section id="custom-blocks" class="content-section">
+    <h2>カスタムブロック</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>ベースブロック</th><th>説明</th><th>入手方法</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>scribing_table</code></td><td>LECTERN</td><td>グリフ解放台</td><td>作業台</td></tr>
+          <tr><td><code>source_jar</code></td><td>DECORATED_POT</td><td>Source貯蔵（最大10,000）</td><td>作業台</td></tr>
+          <tr><td><code>creative_source_jar</code></td><td>DECORATED_POT</td><td>無限Source（クリエイティブ専用）</td><td>give</td></tr>
+          <tr><td><code>volcanic_sourcelink</code></td><td>FURNACE</td><td>燃料消費でSource生成</td><td>儀式</td></tr>
+          <tr><td><code>mycelial_sourcelink</code></td><td>SMOKER</td><td>食料消費でSource生成</td><td>儀式</td></tr>
+          <tr><td><code>ritual_core</code></td><td>LODESTONE</td><td>儀式の中心ブロック</td><td>作業台</td></tr>
+          <tr><td><code>pedestal</code></td><td>BREWING_STAND</td><td>儀式の素材台座</td><td>作業台</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-tip">
+      <div class="callout-title">ブロック保護</div>
+      <p>全カスタムブロックはピストン・爆発・投射物による破壊から保護されています。</p>
+    </div>
+  </section>
+
+  <!-- 防具システム -->
+  <section id="armor-system" class="content-section">
+    <h2>防具システム</h2>
+    <p>3タイプ×3ティア＝計9セットの防具が存在します。すべて<strong>儀式</strong>で作成します。</p>
+
+    <h3>守護メイジ（Guardian）</h3>
+    <p>高い防御力を持つタンク型の防具セットです。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>ティア</th><th>防御合計</th><th>マナボーナス</th><th>リジェン</th><th>スレッドスロット</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Novice</td><td>8</td><td>+5</td><td>+1</td><td>1</td></tr>
+          <tr><td>Apprentice</td><td>18</td><td>+15</td><td>+3</td><td>2</td></tr>
+          <tr><td>Archmage</td><td>23</td><td>+25</td><td>+5</td><td>3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>魔導メイジ（Arcane）</h3>
+    <p>マナに特化したキャスター型の防具セットです。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>ティア</th><th>防御合計</th><th>マナボーナス</th><th>リジェン</th><th>スレッドスロット</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Novice</td><td>6</td><td>+10</td><td>+2</td><td>1</td></tr>
+          <tr><td>Apprentice</td><td>12</td><td>+30</td><td>+5</td><td>2</td></tr>
+          <tr><td>Archmage</td><td>17</td><td>+50</td><td>+8</td><td>3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>魔織メイジ（Weaver）</h3>
+    <p>スレッドスロットが多いカスタマイズ型の防具セットです。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>ティア</th><th>防御合計</th><th>マナボーナス</th><th>リジェン</th><th>スレッドスロット</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Novice</td><td>5</td><td>+5</td><td>+1</td><td>3</td></tr>
+          <tr><td>Apprentice</td><td>7</td><td>+15</td><td>+3</td><td>4</td></tr>
+          <tr><td>Archmage</td><td>13</td><td>+30</td><td>+5</td><td>5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- スレッドシステム -->
+  <section id="thread-system" class="content-section">
+    <h2>スレッドシステム</h2>
+    <p>防具にスレッドを装着して追加効果を得るシステムです。</p>
+    <ul>
+      <li><strong>スニーク+右クリック</strong>でスレッドGUIを開く</li>
+      <li>空きスロットをクリックしてスレッドを挿入</li>
+      <li>装着済みスレッドをクリックで取り外し</li>
+    </ul>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>スレッド</th><th>効果</th><th>重複</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>マナ回復速度上昇</td><td>リジェン+2/tick</td><td>可（最大8）</td></tr>
+          <tr><td>最大マナ上昇</td><td>マナ+20</td><td>可（最大8）</td></tr>
+          <tr><td>迅速</td><td>移動速度上昇</td><td>不可</td></tr>
+          <tr><td>跳躍</td><td>ジャンプ力上昇</td><td>不可</td></tr>
+          <tr><td>暗視</td><td>暗視</td><td>不可</td></tr>
+          <tr><td>耐火</td><td>火炎耐性</td><td>不可</td></tr>
+          <tr><td>水中移動</td><td>イルカの好意</td><td>不可</td></tr>
+          <tr><td>コンジット</td><td>コンジットパワー</td><td>不可</td></tr>
+          <tr><td>英雄</td><td>村の英雄</td><td>不可</td></tr>
+          <tr><td>体力増強</td><td>体力増強</td><td>可（最大4）</td></tr>
+          <tr><td>被弾マナ回復</td><td>被弾時マナ+8</td><td>可（最大8）</td></tr>
+          <tr><td>攻撃マナ回復</td><td>与ダメ時マナ+4</td><td>可（最大8）</td></tr>
+          <tr><td>詠唱効率</td><td>マナコスト-12%</td><td>可（最大3）</td></tr>
+          <tr><td>飛行</td><td>エリトラ滑空（常時）</td><td>不可</td></tr>
+          <tr><td>収納</td><td>27スロットバックパック</td><td>可（最大2）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Sourceネットワーク -->
+  <section id="source-network" class="content-section">
+    <h2>Sourceネットワーク</h2>
+    <p>Sourceはスペル発動や儀式に必要なエネルギーです。ネットワークを構築して管理します。</p>
+
+    <h3>ソースジャー</h3>
+    <p>Sourceを貯蔵するブロックです。最大<strong>10,000 Source</strong>を保持できます。ソースベリーを右クリックすると<strong>+100 Source</strong>が補充されます。</p>
+
+    <h3>ソースリンク</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>種類</th><th>変換元</th><th>説明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ヴォルケーニック ソースリンク</td><td>燃料</td><td>燃料を消費してSourceを生成</td></tr>
+          <tr><td>マイセリアル ソースリンク</td><td>食料</td><td>食料を消費してSourceを生成</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>ドミニオンワンド</h3>
+    <p>ソースブロック間の接続を管理するツールです。最大<strong>30ブロック</strong>の距離まで接続可能です。</p>
+  </section>
+
+  <!-- 儀式システム -->
+  <section id="ritual-system" class="content-section">
+    <h2>儀式システム</h2>
+    <h3>手順</h3>
+    <ol>
+      <li><strong>儀式コアを設置</strong></li>
+      <li>周囲<strong>3ブロック以内</strong>に台座を配置</li>
+      <li>レシピ通りにアイテムを台座に設置</li>
+      <li>ソースジャーを近くに配置（Sourceが必要）</li>
+      <li>儀式コアを<strong>右クリック</strong>で開始（3秒後に完了）</li>
+    </ol>
+
+    <h3>ワールドエフェクト儀式</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>儀式名</th><th>効果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>豊穣</td><td>周囲の作物を成長促進</td></tr>
+          <tr><td>天候操作</td><td>天候を切り替え</td></tr>
+          <tr><td>飛行</td><td>300秒間の飛行能力</td></tr>
+          <tr><td>月落とし</td><td>時刻を夜に変更</td></tr>
+          <tr><td>日の出</td><td>時刻を朝に変更</td></tr>
+          <tr><td>修復</td><td>コアに置いた装備の耐久回復</td></tr>
+          <tr><td>帰還設定・帰還</td><td>テレポートポイント設定・テレポート</td></tr>
+          <tr><td>封じ込め</td><td>モンスター侵入防止エリア</td></tr>
+          <tr><td>動物召喚</td><td>動物を5体召喚</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- エンチャント -->
+  <section id="enchantments" class="content-section">
+    <h2>エンチャント</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>エンチャント</th><th>対象</th><th>最大レベル</th><th>効果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>マナ加速</td><td>メイジアーマー</td><td>3</td><td>リジェン +1 / +2 / +3</td></tr>
+          <tr><td>マナ上昇</td><td>メイジアーマー</td><td>3</td><td>マナ +15 / +30 / +50</td></tr>
+          <tr><td>共有</td><td>スペルブック</td><td>1</td><td>他プレイヤーが使用可能になる</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 設定ファイル -->
+  <section id="config" class="content-section">
+    <h2>設定ファイル</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>ファイル</th><th>内容</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>config.yml</code></td><td>マナ基礎値、Geyser互換設定</td></tr>
+          <tr><td><code>glyphs.yml</code></td><td>グリフのティア・マナコスト・解放コスト</td></tr>
+          <tr><td><code>items.yml</code></td><td>アイテムレシピ（作業台+儀式）</td></tr>
+          <tr><td><code>materials.yml</code></td><td>中間素材定義</td></tr>
+          <tr><td><code>armors.yml</code></td><td>防具セット定義</td></tr>
+          <tr><td><code>threads.yml</code></td><td>スレッド定義</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Geyser互換性 -->
+  <section id="geyser" class="content-section">
+    <h2>Geyser互換性</h2>
+    <p>統合版（Bedrock）プレイヤーとの互換性情報です。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>機能</th><th>Java版</th><th>統合版（Geyser）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>スペル発動</td><td>右クリック</td><td>右クリック</td></tr>
+          <tr><td>GUI操作</td><td>ボタン式</td><td>ボタン式</td></tr>
+          <tr><td>スロット切替</td><td>スニーク+右クリック</td><td>スニーク+右クリック</td></tr>
+          <tr><td>スレッドGUI</td><td>スニーク+右クリック</td><td>スニーク+右クリック</td></tr>
+          <tr><td>スペル作成GUI</td><td>スニーク+左クリック</td><td>スニーク+左クリック※</td></tr>
+          <tr><td>アイテム表示</td><td>CustomModelData対応</td><td>disable推奨</td></tr>
+          <tr><td>パーティクル</td><td>全対応</td><td>一部簡略化</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-tip">
+      <div class="callout-title">統合版での注意点</div>
+      <p>スペル作成GUIはスニーク+左クリックで開きますが、統合版では一部操作に制限がある場合があります。アイテム表示のCustomModelDataは統合版では正しく表示されないため、disable設定を推奨します。</p>
+    </div>
+  </section>
+
+  <footer class="site-footer"><p>Server Plugin Wiki &copy; 2026</p></footer>
+</main></div>
+<button class="back-to-top">↑</button>
+<script src="js/main.js"></script>
+</body></html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyPet - Server Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="header-brand">
+        <div class="logo-icon">&#9935;</div>
+        <div><h1>Server Wiki</h1><span class="subtitle">Minecraft Server Plugin Documentation</span></div>
+      </a>
+      <div class="header-search">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" class="search-input" placeholder="プラグインを検索...">
+        <div class="search-results"></div>
+      </div>
+      <button class="mobile-menu-btn">&#9776;</button>
+    </div>
+  </header>
+  <div class="sidebar-overlay"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">ナビゲーション</div>
+        <div class="sidebar-nav">
+          <a href="index.html"><span class="nav-icon">&#127968;</span>ホーム</a>
+          <a href="ars-noveau.html"><span class="nav-icon">&#10024;</span>Ars Noveau</a>
+          <a href="diamond-compressor.html"><span class="nav-icon">&#128142;</span>Diamond Compressor</a>
+          <a href="storage-drawers.html"><span class="nav-icon">&#128452;&#65039;</span>Storage Drawers</a>
+          <a href="mypet.html" class="active"><span class="nav-icon">&#128062;</span>MyPet</a>
+          <a href="levelmobs.html"><span class="nav-icon">&#9876;&#65039;</span>LevelledMobs</a>
+        </div>
+      </div>
+      <div class="sidebar-section sidebar-toc">
+        <div class="sidebar-section-title">目次</div>
+        <div class="sidebar-nav">
+          <a href="#intro">はじめに</a>
+          <a href="#basics">MyPet基本機能</a>
+          <a href="#taming">テイム</a>
+          <a href="#rarity">レアリティ</a>
+          <a href="#personality">性格</a>
+          <a href="#bond">親密度</a>
+          <a href="#stats">ステータス</a>
+          <a href="#skilltree">スキルツリー</a>
+          <a href="#evolution">進化</a>
+          <a href="#equipment">装備</a>
+          <a href="#petdex">図鑑</a>
+          <a href="#commands">コマンド</a>
+          <a href="#reroll">リロール</a>
+          <a href="#permissions">権限</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+    </nav>
+    <main class="main-content">
+      <div class="breadcrumb">
+        <a href="index.html">ホーム</a>
+        <span class="separator">/</span>
+        <span>MyPet</span>
+      </div>
+
+      <div class="page-header">
+        <h1>&#128062; MyPet</h1>
+        <p class="page-description">MyPetAddon によるペットシステム。レアリティ・性格・親密度・進化・装備・図鑑を追加し、Mobをあなたの相棒にできます。</p>
+      </div>
+
+      <!-- ========== はじめに ========== -->
+      <h2 id="intro">はじめに</h2>
+      <p><strong>MyPetAddon</strong> は MyPet プラグインを拡張し、<strong>レアリティ</strong>・<strong>性格</strong>・<strong>親密度</strong>・<strong>進化</strong>・<strong>装備</strong>・<strong>図鑑</strong>などの要素を追加するアドオンです。</p>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128712; 動作要件</div>
+        <ul>
+          <li>Paper 1.21.4 以降</li>
+          <li>MyPet 3.14 以降</li>
+        </ul>
+      </div>
+
+      <!-- ========== MyPet基本機能 ========== -->
+      <h2 id="basics">MyPet基本機能</h2>
+
+      <h3>基本操作</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><code>/petcall</code></td><td>ペットを召喚する</td></tr>
+            <tr><td><code>/petsendaway</code></td><td>ペットをしまう</td></tr>
+            <tr><td><code>/petswitch</code></td><td>アクティブペットを切り替える</td></tr>
+            <tr><td><code>/petstore</code></td><td>ペットを預ける</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>情報確認</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><code>/mypet</code></td><td>ペット情報のメインメニュー</td></tr>
+            <tr><td><code>/petskill</code></td><td>習得済みスキル一覧</td></tr>
+            <tr><td><code>/petinfo</code></td><td>ペットの詳細情報</td></tr>
+            <tr><td><code>/pettype</code></td><td>Mob種別ごとの食べ物・スキル情報</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>名前・解放</h3>
+      <ul>
+        <li><code>/petname &lt;名前&gt;</code> &mdash; ペットの名前を変更する</li>
+        <li><code>/petrelease &lt;名前&gt;</code> &mdash; ペットを解放する（<strong>取り消し不可</strong>）</li>
+      </ul>
+
+      <h3>レベル・経験値</h3>
+      <p>ペットは<strong>敵を倒して経験値（EXP）を獲得</strong>し、レベルアップするとスキルが解放されます。</p>
+
+      <h3>空腹</h3>
+      <p>ペットには種類ごとに決まった食べ物が必要です。<code>/pettype</code> で確認できます。</p>
+
+      <h3>死亡</h3>
+      <p>ペットが死亡しても <code>/petcall</code> で再召喚できます。ただし<strong>親密度EXPが -20</strong> されます。</p>
+
+      <h3>行動モード</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>モード</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><strong>friendly</strong></td><td>一切攻撃しない</td></tr>
+            <tr><td><strong>farm</strong></td><td>モンスターのみ攻撃</td></tr>
+            <tr><td><strong>duel</strong></td><td>プレイヤーが攻撃した対象のみ攻撃</td></tr>
+            <tr><td><strong>aggro</strong></td><td>全ての敵対Mobを攻撃</td></tr>
+            <tr><td><strong>raid</strong></td><td>全対象を攻撃</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>騎乗</h3>
+      <p><strong>Shift + 右クリック</strong>でペットに騎乗できます。<strong>Control</strong>スキルを習得すると操作が可能になります。</p>
+
+      <h3>インベントリ</h3>
+      <p><strong>Backpack</strong>スキルを習得すると、ペットにアイテムを収納できます。<strong>右クリック</strong>または<strong>Shift + 右クリック</strong>でアクセスします。</p>
+
+      <h3>スキル詳細</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>スキル</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Damage</strong></td><td>攻撃力を強化</td></tr>
+            <tr><td><strong>Life</strong></td><td>最大HPを増加</td></tr>
+            <tr><td><strong>Ride</strong></td><td>ペットに騎乗可能</td></tr>
+            <tr><td><strong>Control</strong></td><td>騎乗中の操作を可能にする</td></tr>
+            <tr><td><strong>Sprint</strong></td><td>騎乗中のダッシュ</td></tr>
+            <tr><td><strong>Ranged</strong></td><td>遠距離攻撃</td></tr>
+            <tr><td><strong>Beacon</strong></td><td>周囲にバフ効果を付与</td></tr>
+            <tr><td><strong>Heal</strong></td><td>オーナーを回復</td></tr>
+            <tr><td><strong>Thorns</strong></td><td>反射ダメージ</td></tr>
+            <tr><td><strong>Knockback</strong></td><td>ノックバック付与</td></tr>
+            <tr><td><strong>Fire</strong></td><td>炎上付与</td></tr>
+            <tr><td><strong>Poison</strong></td><td>毒付与</td></tr>
+            <tr><td><strong>Slow</strong></td><td>鈍化付与</td></tr>
+            <tr><td><strong>Wither</strong></td><td>ウィザー効果付与</td></tr>
+            <tr><td><strong>Lightning</strong></td><td>雷撃</td></tr>
+            <tr><td><strong>Backpack</strong></td><td>ペットにインベントリを追加</td></tr>
+            <tr><td><strong>Pickup</strong></td><td>アイテムを自動回収</td></tr>
+            <tr><td><strong>Behavior</strong></td><td>行動モードの変更</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Beaconバフ</h3>
+      <p>Beaconスキルで付与できるバフ効果:</p>
+      <ul>
+        <li>Regeneration（再生）</li>
+        <li>Strength（攻撃力上昇）</li>
+        <li>Resistance（耐性）</li>
+        <li>Speed（移動速度上昇）</li>
+        <li>Water Breathing（水中呼吸）</li>
+      </ul>
+
+      <!-- ========== テイム ========== -->
+      <h2 id="taming">テイム</h2>
+
+      <h3>動物のテイム</h3>
+      <ol>
+        <li><strong>金のリンゴ</strong>（成功率 100%）を手に持つ</li>
+        <li>対象の動物を<strong>右クリック</strong></li>
+        <li>30秒以内に <code>/pettame &lt;名前&gt;</code> を実行</li>
+      </ol>
+
+      <h3>モンスターのテイム</h3>
+      <ol>
+        <li><strong>ネザースター</strong>を手に持ち、対象を<strong>右クリック</strong>（マーキング）</li>
+        <li>マーキングしたモンスターを<strong>倒す</strong></li>
+        <li>30秒以内に <code>/pettame &lt;名前&gt;</code> を実行</li>
+      </ol>
+
+      <div class="callout callout-danger">
+        <div class="callout-title">&#9888;&#65039; テイム不可</div>
+        <ul>
+          <li>エンダードラゴン</li>
+          <li>村人</li>
+          <li>行商人</li>
+        </ul>
+      </div>
+
+      <div class="callout callout-info">
+        <div class="callout-title">&#128712; サイズ変更</div>
+        <ul>
+          <li>ウィザー: 70% に縮小</li>
+          <li>エルダーガーディアン: 70% に縮小</li>
+        </ul>
+      </div>
+
+      <!-- ========== レアリティ ========== -->
+      <h2 id="rarity">レアリティ</h2>
+
+      <h3>レアリティ一覧</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>レアリティ</th><th>色</th><th>ステータス倍率</th><th>装備スロット</th><th>進化可能</th></tr></thead>
+          <tbody>
+            <tr><td>コモン</td><td>白</td><td>&times;1.00</td><td>1</td><td>不可</td></tr>
+            <tr><td>アンコモン</td><td>緑</td><td>&times;1.15</td><td>2</td><td>不可</td></tr>
+            <tr><td>レア</td><td>青</td><td>&times;1.35</td><td>3</td><td>不可</td></tr>
+            <tr><td>エピック</td><td>紫</td><td>&times;1.60</td><td>4</td><td>可能</td></tr>
+            <tr><td>レジェンダリー</td><td>金</td><td>&times;2.00</td><td>5</td><td>可能</td></tr>
+            <tr><td>ミシック</td><td>ピンク</td><td>&times;2.50</td><td>6</td><td>可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>LevelledMobs連携時の確率</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Mobレベル</th><th>コモン</th><th>アンコモン</th><th>レア</th><th>エピック</th><th>レジェンダリー</th><th>ミシック</th></tr></thead>
+          <tbody>
+            <tr><td>Lv 1-10</td><td>60%</td><td>25%</td><td>10%</td><td>4%</td><td>1%</td><td>0%</td></tr>
+            <tr><td>Lv 11-25</td><td>35%</td><td>30%</td><td>20%</td><td>10%</td><td>4%</td><td>1%</td></tr>
+            <tr><td>Lv 26-50</td><td>15%</td><td>25%</td><td>25%</td><td>20%</td><td>10%</td><td>5%</td></tr>
+            <tr><td>Lv 51+</td><td>5%</td><td>10%</td><td>20%</td><td>30%</td><td>20%</td><td>15%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>固定確率（LevelledMobs非使用時）</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>コモン</th><th>アンコモン</th><th>レア</th><th>エピック</th><th>レジェンダリー</th><th>ミシック</th></tr></thead>
+          <tbody>
+            <tr><td>40%</td><td>25%</td><td>18%</td><td>10%</td><td>5%</td><td>2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>環境ボーナス</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>条件</th><th>ボーナス</th></tr></thead>
+          <tbody>
+            <tr><td>満月</td><td>+5%</td></tr>
+            <tr><td>雷雨</td><td>+8%</td></tr>
+            <tr><td>ディープダーク</td><td>+12%</td></tr>
+            <tr><td>ネザー</td><td>+7%</td></tr>
+            <tr><td>エンド</td><td>+10%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128712; ボーナス上限</div>
+        環境ボーナスの合計は<strong>最大20%</strong>に制限されます。
+      </div>
+
+      <!-- ========== 性格 ========== -->
+      <h2 id="personality">性格</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>性格</th><th>名前</th><th>効果</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Brave</strong></td><td>勇敢</td><td>ダメージ+10%, HP-5%</td></tr>
+            <tr><td><strong>Sturdy</strong></td><td>頑強</td><td>HP+15%, ダメージ-5%, ノックバック耐性+30%</td></tr>
+            <tr><td><strong>Agile</strong></td><td>俊敏</td><td>速度+15%, HP-10%, 回避率8%</td></tr>
+            <tr><td><strong>Loyal</strong></td><td>忠誠</td><td>HP+5%, 親密度EXP+25%</td></tr>
+            <tr><td><strong>Fierce</strong></td><td>獰猛</td><td>ダメージ+20%, HP-10%, 速度-5%, クリティカル率10%</td></tr>
+            <tr><td><strong>Cautious</strong></td><td>慎重</td><td>HP+10%, 速度+5%, ダメージ-10%</td></tr>
+            <tr><td><strong>Lucky</strong></td><td>幸運</td><td>ドロップ+15%</td></tr>
+            <tr><td><strong>Genius</strong></td><td>天才</td><td>ダメージ+5%, スキルEXP+30%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ========== 親密度 ========== -->
+      <h2 id="bond">親密度</h2>
+
+      <h3>親密度レベル</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>レベル</th><th>必要EXP</th><th>HP</th><th>ダメージ</th><th>速度</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Stranger</strong>（他人）</td><td>0</td><td>なし</td><td>なし</td><td>なし</td></tr>
+            <tr><td><strong>Acquaintance</strong>（知人）</td><td>100</td><td>+5%</td><td>+3%</td><td>+2%</td></tr>
+            <tr><td><strong>Companion</strong>（仲間）</td><td>300</td><td>+10%</td><td>+7%</td><td>+5%</td></tr>
+            <tr><td><strong>Trusted</strong>（信頼）</td><td>600</td><td>+18%</td><td>+12%</td><td>+8%</td></tr>
+            <tr><td><strong>Soulbound</strong>（魂の絆）</td><td>1000</td><td>+28%</td><td>+20%</td><td>+12%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>EXP獲得方法</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>行動</th><th>獲得EXP</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>敵を倒す</td><td>+5</td><td>5秒クールダウン</td></tr>
+            <tr><td>餌やり</td><td>+3</td><td>10秒クールダウン</td></tr>
+            <tr><td>ログイン</td><td>+2</td><td>&mdash;</td></tr>
+            <tr><td>騎乗</td><td>+1/分</td><td>&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>EXP減少</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>原因</th><th>減少量</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>オフライン</td><td>-2/日</td><td>最大 -50</td></tr>
+            <tr><td>死亡</td><td>-20</td><td>&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ========== ステータス ========== -->
+      <h2 id="stats">ステータス</h2>
+
+      <h3>計算式</h3>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128202; ステータス計算式</div>
+        <code>((基礎値 + 強化値) &times; レアリティ倍率 &times; 性格補正) &times; (1 + 親密度%) + 装備ボーナス</code>
+      </div>
+
+      <h3>Mobティア</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>ティア</th><th>代表Mob</th><th>HP</th><th>ダメージ</th><th>速度</th></tr></thead>
+          <tbody>
+            <tr><td><strong>T1</strong>（最弱）</td><td>ニワトリ, ウサギ</td><td>10-20</td><td>1-3</td><td>0.20-0.30</td></tr>
+            <tr><td><strong>T2</strong>（一般）</td><td>ブタ, ウシ</td><td>20-40</td><td>2-5</td><td>0.22-0.32</td></tr>
+            <tr><td><strong>T3</strong>（標準）</td><td>ゾンビ, スケルトン</td><td>30-60</td><td>4-8</td><td>0.25-0.35</td></tr>
+            <tr><td><strong>T4</strong>（強敵）</td><td>ブレイズ, エヴォーカー</td><td>50-100</td><td>6-14</td><td>0.25-0.38</td></tr>
+            <tr><td><strong>T5</strong>（ボス級）</td><td>ウォーデン, ウィザー</td><td>100-200</td><td>12-25</td><td>0.28-0.40</td></tr>
+            <tr><td><strong>特殊</strong></td><td>ウィザー</td><td>150-300</td><td>15-30</td><td>0.30-0.42</td></tr>
+            <tr><td><strong>特殊</strong></td><td>ウォーデン</td><td>200-400</td><td>20-40</td><td>0.30-0.45</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ========== スキルツリー ========== -->
+      <h2 id="skilltree">スキルツリー</h2>
+
+      <h3>汎用スキルツリー（9種）</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>スキルツリー</th><th>特化</th></tr></thead>
+          <tbody>
+            <tr><td><strong>コンバット</strong></td><td>近接特化</td></tr>
+            <tr><td><strong>ファーム</strong></td><td>収集</td></tr>
+            <tr><td><strong>PvP</strong></td><td>対プレイヤー</td></tr>
+            <tr><td><strong>ライド</strong></td><td>騎乗</td></tr>
+            <tr><td><strong>ユーティリティ</strong></td><td>運搬</td></tr>
+            <tr><td><strong>タンク</strong></td><td>防御</td></tr>
+            <tr><td><strong>アサシン</strong></td><td>瞬殺</td></tr>
+            <tr><td><strong>レンジャー</strong></td><td>遠距離</td></tr>
+            <tr><td><strong>サポート</strong></td><td>パーティ支援</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>モブ固有スキルツリー（7種）</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>スキルツリー</th><th>対応Mob</th></tr></thead>
+          <tbody>
+            <tr><td><strong>アンデッドマイト</strong></td><td>ゾンビ系</td></tr>
+            <tr><td><strong>ボーンショット</strong></td><td>スケルトン系</td></tr>
+            <tr><td><strong>ヴェノムストライク</strong></td><td>クモ系</td></tr>
+            <tr><td><strong>ネザーフレイム</strong></td><td>ブレイズ系</td></tr>
+            <tr><td><strong>ヴォイドウォーカー</strong></td><td>エンダーマン系</td></tr>
+            <tr><td><strong>パックハンター</strong></td><td>オオカミ系</td></tr>
+            <tr><td><strong>タイダルガード</strong></td><td>ガーディアン系</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>割り当てルール</h3>
+      <ul>
+        <li><strong>テイム時:</strong> 重み付き抽選（モブ固有ツリーの当選確率 40-55%）</li>
+        <li><strong>進化時:</strong> 固定のスキルツリーが割り当てられる</li>
+        <li><strong>リロール:</strong> エコーシャードを使用して再抽選可能</li>
+      </ul>
+
+      <!-- ========== 進化 ========== -->
+      <h2 id="evolution">進化</h2>
+
+      <h3>ゾンビ系</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>進化前</th><th>進化後</th><th>必要Lv</th><th>親密度</th><th>バイオーム</th><th>素材</th></tr></thead>
+          <tbody>
+            <tr><td>ゾンビ</td><td>ハスク</td><td>20</td><td>3</td><td>砂漠</td><td>金リンゴ &times;1</td></tr>
+            <tr><td>ゾンビ</td><td>ドラウンド</td><td>20</td><td>3</td><td>海洋</td><td>海の心 &times;1</td></tr>
+            <tr><td>ゾンビ</td><td>村人ゾンビ</td><td>25</td><td>4</td><td>&mdash;</td><td>エメラルド &times;10</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>スケルトン系</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>進化前</th><th>進化後</th><th>必要Lv</th><th>親密度</th><th>バイオーム</th><th>素材</th></tr></thead>
+          <tbody>
+            <tr><td>スケルトン</td><td>ウィザースケルトン</td><td>30</td><td>4</td><td>ネザー</td><td>ウィザスケ頭 &times;1</td></tr>
+            <tr><td>スケルトン</td><td>ボグド</td><td>20</td><td>3</td><td>湿地</td><td>毒じゃがいも &times;5</td></tr>
+            <tr><td>スケルトン</td><td>ストレイ</td><td>20</td><td>3</td><td>雪原</td><td>氷塊 &times;3</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>その他の進化</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>進化前</th><th>進化後</th><th>必要Lv</th><th>親密度</th><th>バイオーム</th><th>素材</th></tr></thead>
+          <tbody>
+            <tr><td>シルバーフィッシュ</td><td>エンダーマイト</td><td>25</td><td>3</td><td>&mdash;</td><td>エンダーパール &times;5</td></tr>
+            <tr><td>ウマ</td><td>ゾンビホース</td><td>25</td><td>3</td><td>&mdash;</td><td>腐肉 &times;32</td></tr>
+            <tr><td>ウマ</td><td>スケルトンホース</td><td>25</td><td>3</td><td>&mdash;</td><td>骨 &times;16</td></tr>
+            <tr><td>ピリジャー</td><td>ヴィンディケーター</td><td>25</td><td>3</td><td>&mdash;</td><td>鉄の斧 &times;1</td></tr>
+            <tr><td>ヴィンディケーター</td><td>エヴォーカー</td><td>35</td><td>4</td><td>&mdash;</td><td>不死のトーテム &times;1</td></tr>
+            <tr><td>ホグリン</td><td>ゾグリン</td><td>25</td><td>3</td><td>ネザー</td><td>真紅のキノコ &times;10</td></tr>
+            <tr><td>ピグリン</td><td>ゾンビ化ピグリン</td><td>20</td><td>3</td><td>&mdash;</td><td>金インゴット &times;16</td></tr>
+            <tr><td>ピグリン</td><td>ピグリンブルート</td><td>30</td><td>4</td><td>ネザー</td><td>金ブロック &times;3</td></tr>
+            <tr><td>スライム</td><td>マグマキューブ</td><td>20</td><td>3</td><td>ネザー</td><td>マグマクリーム &times;10</td></tr>
+            <tr><td>クモ</td><td>洞窟グモ</td><td>15</td><td>2</td><td>&mdash;</td><td>発酵したクモの目 &times;3</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ========== 装備 ========== -->
+      <h2 id="equipment">装備</h2>
+      <p>ペットには<strong>6つの装備スロット</strong>があります。<code>/petequip</code> でGUIを開いて装備を管理できます。</p>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>スロット</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><strong>HEAD</strong></td><td>頭装備</td></tr>
+            <tr><td><strong>CHEST</strong></td><td>胸装備</td></tr>
+            <tr><td><strong>LEGS</strong></td><td>脚装備</td></tr>
+            <tr><td><strong>FEET</strong></td><td>足装備</td></tr>
+            <tr><td><strong>WEAPON</strong></td><td>武器</td></tr>
+            <tr><td><strong>ACCESSORY</strong></td><td>アクセサリー</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info">
+        <div class="callout-title">&#128712; PDCタグ</div>
+        装備アイテムにはPDC（PersistentDataContainer）タグでステータスボーナスが付与されます。
+      </div>
+
+      <!-- ========== 図鑑 ========== -->
+      <h2 id="petdex">図鑑</h2>
+      <p><code>/petdex</code> でペット図鑑を開けます。テイムしたペットが記録され、達成率に応じて報酬が獲得できます。</p>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>達成率</th><th>報酬</th></tr></thead>
+          <tbody>
+            <tr><td><strong>25%</strong></td><td>ダイヤモンド &times;5</td></tr>
+            <tr><td><strong>50%</strong></td><td>エメラルド &times;10 + 金のリンゴ &times;3</td></tr>
+            <tr><td><strong>75%</strong></td><td>ネザースター + エンチャントされた金のリンゴ</td></tr>
+            <tr><td><strong>100%</strong></td><td>ネザースター &times;3 + エリトラ + 不死のトーテム</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ========== コマンド ========== -->
+      <h2 id="commands">コマンド</h2>
+
+      <h3>MyPet基本コマンド</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><code>/petcall</code></td><td>ペットを召喚</td></tr>
+            <tr><td><code>/petsendaway</code></td><td>ペットをしまう</td></tr>
+            <tr><td><code>/petswitch</code></td><td>ペットを切り替え</td></tr>
+            <tr><td><code>/petstore</code></td><td>ペットを預ける</td></tr>
+            <tr><td><code>/mypet</code></td><td>メインメニュー</td></tr>
+            <tr><td><code>/petskill</code></td><td>スキル一覧</td></tr>
+            <tr><td><code>/petinfo</code></td><td>ペット情報</td></tr>
+            <tr><td><code>/pettype</code></td><td>Mob種別情報</td></tr>
+            <tr><td><code>/petname &lt;名前&gt;</code></td><td>名前変更</td></tr>
+            <tr><td><code>/petbehavior</code></td><td>行動モード変更</td></tr>
+            <tr><td><code>/petchooseskilltree</code></td><td>スキルツリー選択</td></tr>
+            <tr><td><code>/petrelease &lt;名前&gt;</code></td><td>ペット解放（取消不可）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>MyPetAddonコマンド</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>コマンド</th><th>エイリアス</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><code>/pettame &lt;名前&gt;</code></td><td>tame</td><td>Mobをテイム</td></tr>
+            <tr><td><code>/petstatus</code></td><td>status</td><td>拡張ステータス表示</td></tr>
+            <tr><td><code>/petevolve</code></td><td>evolve</td><td>ペットを進化</td></tr>
+            <tr><td><code>/petequip</code></td><td>equip</td><td>装備GUI</td></tr>
+            <tr><td><code>/petdex</code></td><td>encyclopedia</td><td>ペット図鑑</td></tr>
+            <tr><td><code>/petadmin reload</code></td><td>&mdash;</td><td>設定リロード</td></tr>
+            <tr><td><code>/petadmin setrarity &lt;レアリティ&gt;</code></td><td>&mdash;</td><td>レアリティ変更</td></tr>
+            <tr><td><code>/petadmin setbond &lt;値&gt;</code></td><td>&mdash;</td><td>親密度設定</td></tr>
+            <tr><td><code>/petadmin migrate</code></td><td>&mdash;</td><td>データ移行</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ========== リロール ========== -->
+      <h2 id="reroll">リロール</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>アイテム</th><th>効果</th><th>成功率</th><th>消費</th></tr></thead>
+          <tbody>
+            <tr><td><strong>アメジストの欠片</strong></td><td>基礎ステータス再抽選</td><td>100%</td><td>消費あり</td></tr>
+            <tr><td><strong>ネザースター</strong></td><td>レアリティアップグレード</td><td>50%</td><td>消費あり</td></tr>
+            <tr><td><strong>エコーシャード</strong></td><td>スキルツリー再抽選</td><td>100%</td><td>消費あり</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ========== 権限 ========== -->
+      <h2 id="permissions">権限</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>権限ノード</th><th>説明</th><th>デフォルト</th></tr></thead>
+          <tbody>
+            <tr><td><code>mypetaddon.*</code></td><td>全権限</td><td>OP</td></tr>
+            <tr><td><code>mypetaddon.tame</code></td><td>テイム</td><td>全プレイヤー</td></tr>
+            <tr><td><code>mypetaddon.status</code></td><td>ステータス表示</td><td>全プレイヤー</td></tr>
+            <tr><td><code>mypetaddon.evolve</code></td><td>進化</td><td>全プレイヤー</td></tr>
+            <tr><td><code>mypetaddon.equip</code></td><td>装備</td><td>全プレイヤー</td></tr>
+            <tr><td><code>mypetaddon.encyclopedia</code></td><td>図鑑</td><td>全プレイヤー</td></tr>
+            <tr><td><code>mypetaddon.admin</code></td><td>管理者コマンド</td><td>OP</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ========== FAQ ========== -->
+      <h2 id="faq">FAQ</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. テイムの手順は？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>動物の場合: 金のリンゴを手に持って右クリック → 30秒以内に <code>/pettame &lt;名前&gt;</code><br>
+          モンスターの場合: ネザースターで右クリック（マーキング）→ 倒す → 30秒以内に <code>/pettame &lt;名前&gt;</code></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. レアリティは変更できる？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>ネザースターを使用するとレアリティが1段階上がります（成功率50%）。失敗してもネザースターは消費されます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. 性格は変更できる？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p><strong>性格は変更できません。</strong>テイム時にランダムで決定され、以降固定です。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. 進化すると何が変わる？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Mob種別が変化し、基礎ステータスやスキルツリーが進化先のものに更新されます。レアリティ・親密度・レベルは引き継がれます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. 進化に失敗することはある？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>条件（レベル・親密度・バイオーム・素材）を全て満たしていれば<strong>100%成功</strong>します。条件を満たしていない場合はコマンド実行時にエラーが表示されます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. ペットが死んだらどうなる？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p><code>/petcall</code> で再召喚できます。ただし親密度EXPが<strong>-20</strong>されます。ペット自体は失われません。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. 複数のペットを持てる？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>はい。<code>/petswitch</code> でアクティブペットを切り替えられます。同時に召喚できるのは1体のみです。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. 行動モードを変えるには？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p><code>/petbehavior</code> コマンドで friendly / farm / duel / aggro / raid の中から選択できます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. ペットに騎乗するには？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Rideスキルを習得した状態で<strong>Shift + 右クリック</strong>で騎乗できます。Controlスキルがあれば操作も可能です。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. ペットのインベントリはどう使う？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Backpackスキルを習得後、ペットを<strong>右クリック</strong>または<strong>Shift + 右クリック</strong>でインベントリGUIが開きます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. /petname と /pettame の違いは？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p><code>/pettame</code> はMobをテイムするコマンド、<code>/petname</code> は既にテイム済みのペットの名前を変更するコマンドです。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. ペットの食べ物はどこで確認できる？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p><code>/pettype</code> コマンドで各Mob種別ごとの食べ物が確認できます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. 装備はどうやって入手する？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>通常の防具や武器にPDCタグが付与されたアイテムがペット装備として使用できます。モンスタードロップやクラフトで入手可能です。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. LevelledMobsがないと使えない？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>LevelledMobsは必須ではありません。未導入の場合は固定確率テーブル（コモン40%〜ミシック2%）が使用されます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. 図鑑報酬は何度でも受け取れる？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>各達成率の報酬は<strong>1回のみ</strong>受け取れます。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Q. 覚醒とは？</span><span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>親密度がSoulbound（最大レベル）に到達し、特定の条件を満たすことで発動する特別な強化状態です。詳細は今後のアップデートで拡張予定です。</p>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <p>Server Plugin Wiki &copy; 2026 &mdash; All Rights Reserved</p>
+      </footer>
+    </main>
+  </div>
+  <button class="back-to-top">&uarr;</button>
+  <script src="js/main.js"></script>
+</body>
+</html>
