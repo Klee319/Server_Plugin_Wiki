@@ -1,11 +1,16 @@
-<!DOCTYPE html><html lang="ja"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Storage Drawers - Server Wiki</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:'#1a40b5',900:'#0e266a'}},fontFamily:{sans:['Inter','Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','sans-serif']}}}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storage Drawers - Server Wiki</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+  tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:'#1a40b5',900:'#0e266a'}},fontFamily:{sans:['Inter','Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','sans-serif']}}}}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50 min-h-screen text-slate-900">
 
@@ -40,22 +45,19 @@
       <a href="storage-drawers.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-primary-50 text-primary-700 font-medium">Storage Drawers</a>
       <a href="mypet.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">MyPet</a>
       <a href="levelmobs.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">LevelledMobs</a>
+
+      <p class="px-3 pt-4 pb-2 text-xs font-medium text-slate-400 uppercase tracking-wide">目次</p>
+      <a href="#overview" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">概要</a>
+      <a href="#drawer-list" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">ドロワー一覧</a>
+      <a href="#recipes" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">クラフトレシピ</a>
+      <a href="#usage" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">使い方</a>
+      <a href="#void-drawer" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">ボイドドロワー</a>
+      <a href="#drawer-key" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">ドロワーキー</a>
+      <a href="#hopper" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">ホッパー連携</a>
+      <a href="#commands" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">コマンド</a>
+      <a href="#permissions" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">権限</a>
+      <a href="#config" class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg text-slate-500 hover:text-slate-700 hover:bg-gray-50">設定ファイル</a>
     </nav>
-    <div id="toc" class="px-4 pb-4">
-      <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">目次</p>
-      <div class="space-y-0.5">
-        <a href="#overview" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">概要</a>
-        <a href="#drawer-list" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">ドロワー一覧</a>
-        <a href="#recipes" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">クラフトレシピ</a>
-        <a href="#usage" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">使い方</a>
-        <a href="#void-drawer" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">ボイドドロワー</a>
-        <a href="#drawer-key" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">ドロワーキー</a>
-        <a href="#hopper" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">ホッパー連携</a>
-        <a href="#commands" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">コマンド</a>
-        <a href="#permissions" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">権限</a>
-        <a href="#config" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50 hover:text-slate-900">設定ファイル</a>
-      </div>
-    </div>
   </aside>
 
   <!-- Main -->
@@ -63,355 +65,541 @@
     <div class="max-w-5xl mx-auto px-6 lg:px-12 py-10">
 
       <!-- Breadcrumb -->
-      <div class="flex items-center gap-2 text-sm text-slate-400 mb-6">
-        <a href="index.html" class="hover:text-primary-500 transition-colors">ホーム</a>
-        <span>/</span>
-        <span class="text-slate-900">Storage Drawers</span>
-      </div>
+      <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+        <a href="index.html" class="hover:text-slate-600 transition-colors">ホーム</a>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-slate-600">Storage Drawers</span>
+      </nav>
 
-      <!-- Page Header -->
+      <!-- Title -->
       <div class="mb-10">
-        <h1 class="text-3xl font-bold text-slate-900 mb-3">Storage Drawers</h1>
-        <p class="text-slate-500 leading-relaxed max-w-3xl">バレルベースのストレージドロワープラグイン。大量のアイテムを効率的に管理できます。</p>
+        <h1 class="text-3xl font-bold text-slate-900 mb-3">Storage Drawers (PaperDrawers)</h1>
+        <p class="text-body leading-relaxed max-w-2xl">Storage Drawers 風のアイテム大量収納ブロックを Paper サーバーに追加するプラグイン。バレルブロックをベースに、1種類のアイテムを大量に格納できるドロワーを提供します。</p>
       </div>
 
       <!-- 概要 -->
-      <h2 id="overview" class="text-xl font-semibold text-slate-900 mt-12 mb-4">概要</h2>
-      <p class="text-slate-600 leading-relaxed mb-3">Minecraft 1.21 / Paper 対応のストレージドロワープラグインです。Bedrock Edition にも Floodgate 経由で互換性があります。</p>
-      <p class="text-slate-600 leading-relaxed mb-8">バレルベースのストレージドロワーで、<strong class="text-slate-900">破壊しても中身が保持</strong>されます（シュルカーボックスと同様の挙動）。7段階のティアにより、最大131,072アイテムまで収納可能です。</p>
+      <section id="overview" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">概要</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">項目</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">詳細</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 font-medium text-slate-900">対応バージョン</td><td class="px-6 py-3 text-body">Minecraft 1.21 / Paper</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">統合版対応</td><td class="px-6 py-3 text-body">Floodgate 連携による Bedrock Edition 互換あり</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">ベースブロック</td><td class="px-6 py-3 text-body">バレルブロック</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">特徴</td><td class="px-6 py-3 text-body">1種類のアイテムを大量に格納可能。破壊しても中身を保持したまま持ち運べる。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ドロワー一覧 -->
-      <h2 id="drawer-list" class="text-xl font-semibold text-slate-900 mt-12 mb-4">ドロワー一覧</h2>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">ティア</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">名前</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">容量 (スタック数)</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">容量 (アイテム数)</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Tier 1</td><td class="px-6 py-3 text-slate-600">基本のドロワー</td><td class="px-6 py-3 text-slate-600">32 stacks</td><td class="px-6 py-3 text-slate-600">2,048</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Tier 2</td><td class="px-6 py-3 text-slate-600">銅のドロワー</td><td class="px-6 py-3 text-slate-600">64 stacks</td><td class="px-6 py-3 text-slate-600">4,096</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Tier 3</td><td class="px-6 py-3 text-slate-600">鉄のドロワー</td><td class="px-6 py-3 text-slate-600">128 stacks</td><td class="px-6 py-3 text-slate-600">8,192</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Tier 4</td><td class="px-6 py-3 text-slate-600">金のドロワー</td><td class="px-6 py-3 text-slate-600">256 stacks</td><td class="px-6 py-3 text-slate-600">16,384</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Tier 5</td><td class="px-6 py-3 text-slate-600">ダイヤのドロワー</td><td class="px-6 py-3 text-slate-600">512 stacks</td><td class="px-6 py-3 text-slate-600">32,768</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Tier 6</td><td class="px-6 py-3 text-slate-600">ネザライトのドロワー</td><td class="px-6 py-3 text-slate-600">1,024 stacks</td><td class="px-6 py-3 text-slate-600">65,536</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Tier 7</td><td class="px-6 py-3 text-slate-600">クリエイティブドロワー</td><td class="px-6 py-3 text-slate-600">2,048 stacks</td><td class="px-6 py-3 text-slate-600">131,072</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">-</td><td class="px-6 py-3 text-slate-600">ボイドドロワー</td><td class="px-6 py-3 text-slate-600">&#8734;（消滅）</td><td class="px-6 py-3 text-slate-600">-</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="bg-primary-50 border border-primary-200 rounded-xl px-5 py-4 mb-8">
-        <p class="text-sm font-medium text-primary-700 mb-1">Tier 7 について</p>
-        <p class="text-sm text-slate-600">Tier 7（クリエイティブドロワー）はデフォルトでは無効です。サーバー設定で有効化する必要があります。</p>
-      </div>
+      <section id="drawer-list" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">ドロワー一覧</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">Tier</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">名前</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-right">容量 (スタック)</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-right">容量 (アイテム)</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">備考</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 font-medium text-slate-900">1</td><td class="px-6 py-3 text-body">基本のドロワー</td><td class="px-6 py-3 text-right text-body">32</td><td class="px-6 py-3 text-right text-body">2,048</td><td class="px-6 py-3 text-body">最初のドロワー</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">2</td><td class="px-6 py-3 text-body">銅のドロワー</td><td class="px-6 py-3 text-right text-body">64</td><td class="px-6 py-3 text-right text-body">4,096</td><td class="px-6 py-3 text-body"></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">3</td><td class="px-6 py-3 text-body">鉄のドロワー</td><td class="px-6 py-3 text-right text-body">128</td><td class="px-6 py-3 text-right text-body">8,192</td><td class="px-6 py-3 text-body"></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">4</td><td class="px-6 py-3 text-body">金のドロワー</td><td class="px-6 py-3 text-right text-body">256</td><td class="px-6 py-3 text-right text-body">16,384</td><td class="px-6 py-3 text-body"></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">5</td><td class="px-6 py-3 text-body">ダイヤのドロワー</td><td class="px-6 py-3 text-right text-body">512</td><td class="px-6 py-3 text-right text-body">32,768</td><td class="px-6 py-3 text-body"></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">6</td><td class="px-6 py-3 text-body">ネザライトのドロワー</td><td class="px-6 py-3 text-right text-body">1,024</td><td class="px-6 py-3 text-right text-body">65,536</td><td class="px-6 py-3 text-body"></td></tr>
+              <tr class="bg-slate-50/50"><td class="px-6 py-3 font-medium text-slate-900">7</td><td class="px-6 py-3 text-body">クリエイティブドロワー</td><td class="px-6 py-3 text-right text-body">2,048</td><td class="px-6 py-3 text-right text-body">131,072</td><td class="px-6 py-3 text-body">デフォルト無効</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">-</td><td class="px-6 py-3 text-body">ボイドドロワー</td><td class="px-6 py-3 text-right text-body">&#8734; (消滅)</td><td class="px-6 py-3 text-right text-body">-</td><td class="px-6 py-3 text-body">ゴミ箱</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          容量は <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono">config.yml</code> でカスタマイズ可能です。
+        </div>
+      </section>
 
       <!-- クラフトレシピ -->
-      <h2 id="recipes" class="text-xl font-semibold text-slate-900 mt-12 mb-4">クラフトレシピ</h2>
+      <section id="recipes" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">クラフトレシピ</h2>
 
-      <!-- Tier 1 -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">Tier 1 - 基本のドロワー</h3>
-      <p class="text-sm text-slate-600 mb-3">板材 8 + チェスト 1（3x3 クラフト）</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">板材</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">板材</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">板材</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">板材</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">チェスト</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">板材</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">板材</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">板材</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">板材</div>
+        <!-- Tier 1 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">Tier 1 — 基本のドロワー</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">板材</div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">板材</div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">板材</div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">板材</div>
+                <div class="w-12 h-12 bg-orange-100 border border-orange-300 rounded flex items-center justify-center text-xs font-medium text-orange-800">チェスト</div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">板材</div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">板材</div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">板材</div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">板材</div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-amber-100 border border-amber-200 rounded mr-1.5"></span><strong>板材</strong> = オークの板材</p>
+              <p><span class="inline-block w-3 h-3 bg-orange-100 border border-orange-300 rounded mr-1.5"></span><strong>チェスト</strong> = チェスト</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-6 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">基本のドロワー x1</strong></p>
 
-      <!-- Tier 2 -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">Tier 2 - 銅のドロワー</h3>
-      <p class="text-sm text-slate-600 mb-3">銅インゴット 4 + Tier 1（十字配置）</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-orange-50 border border-orange-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">銅</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-orange-50 border border-orange-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">銅</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">Tier 1</div>
-          <div class="w-14 h-14 bg-orange-50 border border-orange-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">銅</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-orange-50 border border-orange-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">銅</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
+        <!-- Tier 2 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">Tier 2 — 銅のドロワー</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-orange-100 border border-orange-300 rounded flex items-center justify-center text-xs font-medium text-orange-800">銅</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-orange-100 border border-orange-300 rounded flex items-center justify-center text-xs font-medium text-orange-800">銅</div>
+                <div class="w-12 h-12 bg-primary-100 border border-primary-300 rounded flex items-center justify-center text-xs font-medium text-primary-800">T1</div>
+                <div class="w-12 h-12 bg-orange-100 border border-orange-300 rounded flex items-center justify-center text-xs font-medium text-orange-800">銅</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-orange-100 border border-orange-300 rounded flex items-center justify-center text-xs font-medium text-orange-800">銅</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-orange-100 border border-orange-300 rounded mr-1.5"></span><strong>銅</strong> = 銅インゴット</p>
+              <p><span class="inline-block w-3 h-3 bg-primary-100 border border-primary-300 rounded mr-1.5"></span><strong>T1</strong> = Tier 1 ドロワー</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-6 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">銅のドロワー x1</strong></p>
 
-      <!-- Tier 3 -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">Tier 3 - 鉄のドロワー</h3>
-      <p class="text-sm text-slate-600 mb-3">鉄インゴット 4 + Tier 2（十字配置）</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-slate-100 border border-slate-300 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">鉄</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-slate-100 border border-slate-300 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">鉄</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">Tier 2</div>
-          <div class="w-14 h-14 bg-slate-100 border border-slate-300 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">鉄</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-slate-100 border border-slate-300 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">鉄</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
+        <!-- Tier 3 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">Tier 3 — 鉄のドロワー</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-gray-200 border border-gray-300 rounded flex items-center justify-center text-xs font-medium text-gray-700">鉄</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-gray-200 border border-gray-300 rounded flex items-center justify-center text-xs font-medium text-gray-700">鉄</div>
+                <div class="w-12 h-12 bg-primary-100 border border-primary-300 rounded flex items-center justify-center text-xs font-medium text-primary-800">T2</div>
+                <div class="w-12 h-12 bg-gray-200 border border-gray-300 rounded flex items-center justify-center text-xs font-medium text-gray-700">鉄</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-gray-200 border border-gray-300 rounded flex items-center justify-center text-xs font-medium text-gray-700">鉄</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-gray-200 border border-gray-300 rounded mr-1.5"></span><strong>鉄</strong> = 鉄インゴット</p>
+              <p><span class="inline-block w-3 h-3 bg-primary-100 border border-primary-300 rounded mr-1.5"></span><strong>T2</strong> = Tier 2 ドロワー</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-6 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">鉄のドロワー x1</strong></p>
 
-      <!-- Tier 4 -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">Tier 4 - 金のドロワー</h3>
-      <p class="text-sm text-slate-600 mb-3">金インゴット 4 + Tier 3（十字配置）</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">金</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">金</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">Tier 3</div>
-          <div class="w-14 h-14 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">金</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">金</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
+        <!-- Tier 4 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">Tier 4 — 金のドロワー</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-yellow-100 border border-yellow-300 rounded flex items-center justify-center text-xs font-medium text-yellow-800">金</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-yellow-100 border border-yellow-300 rounded flex items-center justify-center text-xs font-medium text-yellow-800">金</div>
+                <div class="w-12 h-12 bg-primary-100 border border-primary-300 rounded flex items-center justify-center text-xs font-medium text-primary-800">T3</div>
+                <div class="w-12 h-12 bg-yellow-100 border border-yellow-300 rounded flex items-center justify-center text-xs font-medium text-yellow-800">金</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-yellow-100 border border-yellow-300 rounded flex items-center justify-center text-xs font-medium text-yellow-800">金</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-yellow-100 border border-yellow-300 rounded mr-1.5"></span><strong>金</strong> = 金インゴット</p>
+              <p><span class="inline-block w-3 h-3 bg-primary-100 border border-primary-300 rounded mr-1.5"></span><strong>T3</strong> = Tier 3 ドロワー</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-6 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">金のドロワー x1</strong></p>
 
-      <!-- Tier 5 -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">Tier 5 - ダイヤのドロワー</h3>
-      <p class="text-sm text-slate-600 mb-3">ダイヤモンド 4 + Tier 4（十字配置）</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-cyan-50 border border-cyan-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">ダイヤ</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-cyan-50 border border-cyan-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">ダイヤ</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">Tier 4</div>
-          <div class="w-14 h-14 bg-cyan-50 border border-cyan-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">ダイヤ</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-cyan-50 border border-cyan-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">ダイヤ</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
+        <!-- Tier 5 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">Tier 5 — ダイヤのドロワー</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-800">ダイヤ</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-800">ダイヤ</div>
+                <div class="w-12 h-12 bg-primary-100 border border-primary-300 rounded flex items-center justify-center text-xs font-medium text-primary-800">T4</div>
+                <div class="w-12 h-12 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-800">ダイヤ</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-800">ダイヤ</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-cyan-100 border border-cyan-300 rounded mr-1.5"></span><strong>ダイヤ</strong> = ダイヤモンド</p>
+              <p><span class="inline-block w-3 h-3 bg-primary-100 border border-primary-300 rounded mr-1.5"></span><strong>T4</strong> = Tier 4 ドロワー</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-6 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">ダイヤのドロワー x1</strong></p>
 
-      <!-- Tier 6 -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">Tier 6 - ネザライトのドロワー</h3>
-      <p class="text-sm text-slate-600 mb-3">ネザライトインゴット 4 + Tier 5（十字配置）</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-stone-100 border border-stone-300 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">ネザライト</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-stone-100 border border-stone-300 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">ネザライト</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">Tier 5</div>
-          <div class="w-14 h-14 bg-stone-100 border border-stone-300 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">ネザライト</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-stone-100 border border-stone-300 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">ネザライト</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
+        <!-- Tier 6 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">Tier 6 — ネザライトのドロワー</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-stone-300 border border-stone-400 rounded flex items-center justify-center text-xs font-medium text-stone-800">ネザ</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-stone-300 border border-stone-400 rounded flex items-center justify-center text-xs font-medium text-stone-800">ネザ</div>
+                <div class="w-12 h-12 bg-primary-100 border border-primary-300 rounded flex items-center justify-center text-xs font-medium text-primary-800">T5</div>
+                <div class="w-12 h-12 bg-stone-300 border border-stone-400 rounded flex items-center justify-center text-xs font-medium text-stone-800">ネザ</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-stone-300 border border-stone-400 rounded flex items-center justify-center text-xs font-medium text-stone-800">ネザ</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-stone-300 border border-stone-400 rounded mr-1.5"></span><strong>ネザ</strong> = ネザライトインゴット</p>
+              <p><span class="inline-block w-3 h-3 bg-primary-100 border border-primary-300 rounded mr-1.5"></span><strong>T5</strong> = Tier 5 ドロワー</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-6 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">ネザライトのドロワー x1</strong></p>
 
-      <!-- Tier 7 -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">Tier 7 - クリエイティブドロワー</h3>
-      <p class="text-sm text-slate-600 mb-3">ネザースター 8 + Tier 6（デフォルトでは無効）</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-purple-50 border border-purple-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">星</div>
-          <div class="w-14 h-14 bg-purple-50 border border-purple-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">星</div>
-          <div class="w-14 h-14 bg-purple-50 border border-purple-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">星</div>
-          <div class="w-14 h-14 bg-purple-50 border border-purple-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">星</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">Tier 6</div>
-          <div class="w-14 h-14 bg-purple-50 border border-purple-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">星</div>
-          <div class="w-14 h-14 bg-purple-50 border border-purple-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">星</div>
-          <div class="w-14 h-14 bg-purple-50 border border-purple-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">星</div>
-          <div class="w-14 h-14 bg-purple-50 border border-purple-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">星</div>
+        <!-- Tier 7 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">Tier 7 — クリエイティブドロワー</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-purple-100 border border-purple-300 rounded flex items-center justify-center text-xs font-medium text-purple-800">星</div>
+                <div class="w-12 h-12 bg-purple-100 border border-purple-300 rounded flex items-center justify-center text-xs font-medium text-purple-800">星</div>
+                <div class="w-12 h-12 bg-purple-100 border border-purple-300 rounded flex items-center justify-center text-xs font-medium text-purple-800">星</div>
+                <div class="w-12 h-12 bg-purple-100 border border-purple-300 rounded flex items-center justify-center text-xs font-medium text-purple-800">星</div>
+                <div class="w-12 h-12 bg-primary-100 border border-primary-300 rounded flex items-center justify-center text-xs font-medium text-primary-800">T6</div>
+                <div class="w-12 h-12 bg-purple-100 border border-purple-300 rounded flex items-center justify-center text-xs font-medium text-purple-800">星</div>
+                <div class="w-12 h-12 bg-purple-100 border border-purple-300 rounded flex items-center justify-center text-xs font-medium text-purple-800">星</div>
+                <div class="w-12 h-12 bg-purple-100 border border-purple-300 rounded flex items-center justify-center text-xs font-medium text-purple-800">星</div>
+                <div class="w-12 h-12 bg-purple-100 border border-purple-300 rounded flex items-center justify-center text-xs font-medium text-purple-800">星</div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-purple-100 border border-purple-300 rounded mr-1.5"></span><strong>星</strong> = ネザースター</p>
+              <p><span class="inline-block w-3 h-3 bg-primary-100 border border-primary-300 rounded mr-1.5"></span><strong>T6</strong> = Tier 6 ドロワー</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-6 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">クリエイティブドロワー x1</strong></p>
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs font-mono">config.yml</code> で <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs font-mono">tier-7.enabled: true</code> にすると有効化されます。デフォルトでは無効です。
+        </div>
 
-      <!-- ボイドドロワーレシピ -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">ボイドドロワー</h3>
-      <p class="text-sm text-slate-600 mb-3">黒曜石 4 + エンダーパール 4 + チェスト 1</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-violet-50 border border-violet-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">黒曜石</div>
-          <div class="w-14 h-14 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">パール</div>
-          <div class="w-14 h-14 bg-violet-50 border border-violet-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">黒曜石</div>
-          <div class="w-14 h-14 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">パール</div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">チェスト</div>
-          <div class="w-14 h-14 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">パール</div>
-          <div class="w-14 h-14 bg-violet-50 border border-violet-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">黒曜石</div>
-          <div class="w-14 h-14 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">パール</div>
-          <div class="w-14 h-14 bg-violet-50 border border-violet-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">黒曜石</div>
+        <!-- ボイドドロワー レシピ -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ボイドドロワー</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-violet-200 border border-violet-300 rounded flex items-center justify-center text-xs font-medium text-violet-800">黒曜</div>
+                <div class="w-12 h-12 bg-emerald-100 border border-emerald-300 rounded flex items-center justify-center text-xs font-medium text-emerald-800">EP</div>
+                <div class="w-12 h-12 bg-violet-200 border border-violet-300 rounded flex items-center justify-center text-xs font-medium text-violet-800">黒曜</div>
+                <div class="w-12 h-12 bg-emerald-100 border border-emerald-300 rounded flex items-center justify-center text-xs font-medium text-emerald-800">EP</div>
+                <div class="w-12 h-12 bg-orange-100 border border-orange-300 rounded flex items-center justify-center text-xs font-medium text-orange-800">チェスト</div>
+                <div class="w-12 h-12 bg-emerald-100 border border-emerald-300 rounded flex items-center justify-center text-xs font-medium text-emerald-800">EP</div>
+                <div class="w-12 h-12 bg-violet-200 border border-violet-300 rounded flex items-center justify-center text-xs font-medium text-violet-800">黒曜</div>
+                <div class="w-12 h-12 bg-emerald-100 border border-emerald-300 rounded flex items-center justify-center text-xs font-medium text-emerald-800">EP</div>
+                <div class="w-12 h-12 bg-violet-200 border border-violet-300 rounded flex items-center justify-center text-xs font-medium text-violet-800">黒曜</div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-violet-200 border border-violet-300 rounded mr-1.5"></span><strong>黒曜</strong> = 黒曜石</p>
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-emerald-100 border border-emerald-300 rounded mr-1.5"></span><strong>EP</strong> = エンダーパール</p>
+              <p><span class="inline-block w-3 h-3 bg-orange-100 border border-orange-300 rounded mr-1.5"></span><strong>チェスト</strong> = チェスト</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-6 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">ボイドドロワー x1</strong></p>
 
-      <!-- ドロワーキーレシピ -->
-      <h3 class="text-base font-semibold text-slate-900 mt-8 mb-3">ドロワーキー</h3>
-      <p class="text-sm text-slate-600 mb-3">金塊 1 + 棒 2 &#8594; 3個</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-2 inline-block">
-        <div class="grid grid-cols-3 gap-1.5 w-fit">
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">金塊</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">棒</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
-          <div class="w-14 h-14 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-xs font-medium text-slate-700">棒</div>
-          <div class="w-14 h-14 bg-slate-50 border border-slate-200 rounded-lg"></div>
+        <!-- ドロワーキー レシピ -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ドロワーキー (3個)</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+          <div class="flex flex-wrap items-start gap-8">
+            <div>
+              <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-yellow-100 border border-yellow-300 rounded flex items-center justify-center text-xs font-medium text-yellow-800">金塊</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">棒</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+                <div class="w-12 h-12 bg-amber-100 border border-amber-200 rounded flex items-center justify-center text-xs font-medium text-amber-800">棒</div>
+                <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs font-medium text-slate-400"></div>
+              </div>
+            </div>
+            <div class="text-sm text-body">
+              <p class="mb-1"><span class="inline-block w-3 h-3 bg-yellow-100 border border-yellow-300 rounded mr-1.5"></span><strong>金塊</strong> = 金塊</p>
+              <p><span class="inline-block w-3 h-3 bg-amber-100 border border-amber-200 rounded mr-1.5"></span><strong>棒</strong> = 棒 (スティック)</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <p class="text-sm text-slate-500 mb-8 flex items-center gap-2"><span class="text-slate-400">&#10132;</span> <strong class="text-slate-900">ドロワーキー x3</strong></p>
+      </section>
 
       <!-- 使い方 -->
-      <h2 id="usage" class="text-xl font-semibold text-slate-900 mt-12 mb-4">使い方</h2>
+      <section id="usage" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">使い方</h2>
 
-      <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">格納（右クリック）</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">操作</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">効果</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 font-medium text-slate-900">右クリック</td><td class="px-6 py-3 text-slate-600">手持ちアイテムを1個格納</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Shift + 右クリック</td><td class="px-6 py-3 text-slate-600">手持ちスタック全体を格納</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">ダブル右クリック（150ms以内）</td><td class="px-6 py-3 text-slate-600">インベントリ内の同種アイテムを全部格納</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">素手で右クリック</td><td class="px-6 py-3 text-slate-600">インベントリを検索して1個格納</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">素手で Shift + 右クリック</td><td class="px-6 py-3 text-slate-600">インベントリを検索してスタック格納</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">アイテムの格納 (右クリック)</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">操作</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">動作</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 font-medium text-slate-900">右クリック</td><td class="px-6 py-3 text-body">アイテムを <strong>1個</strong> 格納</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">Shift + 右クリック</td><td class="px-6 py-3 text-body">手持ちの <strong>スタック全体</strong> を格納</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">ダブル右クリック (150ms以内)</td><td class="px-6 py-3 text-body">インベントリ内の <strong>同種アイテムを全て</strong> 一括格納</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">素手で右クリック</td><td class="px-6 py-3 text-body">インベントリから同種アイテムを検索して <strong>1個</strong> 格納</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">素手 + Shift + 右クリック</td><td class="px-6 py-3 text-body">インベントリから同種アイテムを検索して <strong>1スタック</strong> 格納</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">取り出し（左クリック）</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">操作</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">効果</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 font-medium text-slate-900">左クリック（中央）</td><td class="px-6 py-3 text-slate-600">1個取り出し</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">Shift + 左クリック（中央）</td><td class="px-6 py-3 text-slate-600">1スタック取り出し</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">左クリック（端）</td><td class="px-6 py-3 text-slate-600">通常破壊（ドロワーを壊す）</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">アイテムの取り出し (左クリック)</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">操作</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">動作</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 font-medium text-slate-900">左クリック (正面中央)</td><td class="px-6 py-3 text-body">アイテムを <strong>1個</strong> 取り出し</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">Shift + 左クリック (正面中央)</td><td class="px-6 py-3 text-body">アイテムを <strong>1スタック</strong> 取り出し</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">左クリック (正面の端)</td><td class="px-6 py-3 text-body">通常のブロック破壊</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          正面の外周 15% はエッジ判定となり、ブロック破壊が優先されます。
+        </div>
 
-      <h3 class="text-base font-semibold text-slate-900 mt-6 mb-3">破壊</h3>
-      <p class="text-slate-600 leading-relaxed mb-8">シュルカーボックスのように<strong class="text-slate-900">中身を保持したままドロップ</strong>します。安心してドロワーを移動できます。</p>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ドロワーの破壊</h3>
+        <p class="text-body leading-relaxed mb-6">破壊するとシュルカーボックスのように <strong>中身を保持したまま</strong> アイテムとしてドロップします。アイテムのツールチップに格納内容が表示されます。</p>
+      </section>
 
       <!-- ボイドドロワー -->
-      <h2 id="void-drawer" class="text-xl font-semibold text-slate-900 mt-12 mb-4">ボイドドロワー</h2>
-      <div class="bg-red-50 border border-red-200 rounded-xl px-5 py-4 mb-8">
-        <p class="text-sm font-medium text-red-700 mb-1">警告: アイテム消滅</p>
-        <p class="text-sm text-slate-600">ボイドドロワーに格納された<strong class="text-slate-900">全てのアイテムは即座に消滅</strong>します。ホッパーからの搬入も同様に消滅します。<strong class="text-slate-900">一度消滅したアイテムは復元できません。</strong>使用には十分注意してください。</p>
-      </div>
+      <section id="void-drawer" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">ボイドドロワー</h2>
+        <p class="text-body leading-relaxed mb-4">投入したアイテムを <strong>全て消滅</strong> させるゴミ箱ドロワーです。</p>
+        <ul class="list-disc list-inside text-body space-y-2 mb-6">
+          <li>右クリックでアイテムを消滅（通常: 1個 / Shift: スタック全体）</li>
+          <li>左クリック（取り出し）は無効</li>
+          <li>ホッパーから搬入されたアイテムも消滅</li>
+        </ul>
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <strong>アイテムは復元できません。</strong> 投入前に内容をよく確認してください。
+        </div>
+      </section>
 
       <!-- ドロワーキー -->
-      <h2 id="drawer-key" class="text-xl font-semibold text-slate-900 mt-12 mb-4">ドロワーキー</h2>
-      <ul class="text-slate-600 leading-relaxed space-y-2 mb-4">
-        <li><strong class="text-slate-900">アイテムが入っている状態で右クリック</strong> &#8594; ドロワーをロック（アイテムタイプを固定）</li>
-        <li><strong class="text-slate-900">ロック済みのドロワーに右クリック</strong> &#8594; ロック解除</li>
-        <li><strong class="text-slate-900">空のスロット</strong> &#8594; ロック不可（アイテムが入っている必要があります）</li>
-      </ul>
-      <div class="bg-primary-50 border border-primary-200 rounded-xl px-5 py-4 mb-8">
-        <p class="text-sm font-medium text-primary-700 mb-1">ロックの活用</p>
-        <p class="text-sm text-slate-600">ロックすると、ドロワーが空になってもアイテムタイプが維持されます。自動仕分け装置に便利です。</p>
-      </div>
+      <section id="drawer-key" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">ドロワーキー</h2>
+        <p class="text-body leading-relaxed mb-4">ドロワーのスロットを特定のアイテムに <strong>ロック</strong> するためのアイテムです。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">操作</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">動作</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 font-medium text-slate-900">ドロワーキーで右クリック (アイテムあり)</td><td class="px-6 py-3 text-body">そのアイテムタイプに <strong>ロック</strong></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">ドロワーキーで右クリック (ロック済み)</td><td class="px-6 py-3 text-body"><strong>ロック解除</strong></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">ドロワーキーで右クリック (空スロット)</td><td class="px-6 py-3 text-body">ロック不可</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          ロックされたスロットは、中身が空になってもアイテムタイプを記憶し、同じアイテムのみ受け入れます。
+        </div>
+      </section>
 
       <!-- ホッパー連携 -->
-      <h2 id="hopper" class="text-xl font-semibold text-slate-900 mt-12 mb-4">ホッパー連携</h2>
-      <ul class="text-slate-600 leading-relaxed space-y-2 mb-8">
-        <li><strong class="text-slate-900">ホッパー &#8594; ドロワー</strong>: ホッパーからドロワーへアイテムを搬入できます</li>
-        <li><strong class="text-slate-900">ドロワー &#8594; ホッパー</strong>: ドロワーの真下にホッパーを設置すると搬出されます
-          <ul class="mt-2 ml-4 space-y-1">
-            <li>搬出間隔: <strong class="text-slate-900">8 tick</strong></li>
-            <li><strong class="text-slate-900">レッドストーン信号</strong>でドロワーへの搬出を停止できます</li>
-          </ul>
-        </li>
-      </ul>
+      <section id="hopper" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">ホッパー連携</h2>
+        <p class="text-body leading-relaxed mb-6">ドロワーはバニラのホッパーと連携します。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ホッパー → ドロワー (搬入)</h3>
+        <p class="text-body leading-relaxed mb-4">ホッパーの出力先にドロワーがある場合、ホッパー内のアイテムがドロワーに自動搬入されます。</p>
+        <ul class="list-disc list-inside text-body space-y-2 mb-6">
+          <li>ドロワーのスロットが受け入れ可能なアイテムのみ搬入</li>
+          <li>ボイドドロワーに搬入されたアイテムは消滅</li>
+        </ul>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ドロワー → ホッパー (吸出し)</h3>
+        <p class="text-body leading-relaxed mb-4">ドロワーの <strong>真下</strong> にホッパーがある場合、ドロワーからアイテムが自動的に吸い出されます。</p>
+        <ul class="list-disc list-inside text-body space-y-2 mb-6">
+          <li>バニラホッパーと同じ速度 (8tick間隔)</li>
+          <li>レッドストーン信号で動力を受けたホッパーは停止（バニラ準拠）</li>
+          <li>ボイドドロワーからは吸出し不可（中身が存在しないため）</li>
+        </ul>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono">config.yml</code> の <code class="bg-blue-100 px-1.5 py-0.5 rounded text-xs font-mono">hopper.enabled</code> で有効/無効を切り替えられます。
+        </div>
+      </section>
 
       <!-- コマンド -->
-      <h2 id="commands" class="text-xl font-semibold text-slate-900 mt-12 mb-4">コマンド</h2>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">コマンド</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">権限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">/drawer give &lt;player&gt; &lt;type&gt; [amount]</code></td><td class="px-6 py-3 text-slate-600"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">paperdrawers.give</code></td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">/drawer key [amount]</code></td><td class="px-6 py-3 text-slate-600"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">paperdrawers.give</code></td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">/drawer reload</code></td><td class="px-6 py-3 text-slate-600"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">paperdrawers.admin</code></td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">/drawer info</code></td><td class="px-6 py-3 text-slate-600"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">paperdrawers.use</code></td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">/drawer debug</code></td><td class="px-6 py-3 text-slate-600"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">paperdrawers.admin</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="bg-primary-50 border border-primary-200 rounded-xl px-5 py-4 mb-8">
-        <p class="text-sm font-medium text-primary-700 mb-1">タイプ指定</p>
-        <p class="text-sm text-slate-600"><code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">&lt;type&gt;</code> には以下が使用できます: <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">tier1</code>～<code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">tier7</code>, <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">basic</code> / <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">copper</code> / <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">iron</code> / <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">gold</code> / <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">diamond</code> / <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">netherite</code> / <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">creative</code>, <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">1</code>～<code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">7</code>, <code class="bg-white/60 px-1.5 py-0.5 rounded text-xs">void</code></p>
-      </div>
+      <section id="commands" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">コマンド</h2>
+        <p class="text-body leading-relaxed mb-4">ベースコマンド: <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">/drawer</code> (エイリアス: <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">/drawers</code>, <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">/pd</code>)</p>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">コマンド</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">説明</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">権限</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">/drawer give &lt;player&gt; &lt;type&gt; [amount]</code></td>
+                <td class="px-6 py-3 text-body">ドロワーアイテムを付与</td>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">paperdrawers.give</code></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">/drawer key [amount]</code></td>
+                <td class="px-6 py-3 text-body">ドロワーキーを自分に付与</td>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">paperdrawers.give</code></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">/drawer reload</code></td>
+                <td class="px-6 py-3 text-body">設定をリロード</td>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">paperdrawers.admin</code></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">/drawer info</code></td>
+                <td class="px-6 py-3 text-body">プラグイン情報を表示</td>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">paperdrawers.use</code></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">/drawer debug</code></td>
+                <td class="px-6 py-3 text-body">デバッグモード切り替え</td>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">paperdrawers.admin</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">タイプ指定</h3>
+        <p class="text-body leading-relaxed mb-4"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">&lt;type&gt;</code> には以下のいずれかを指定できます。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">指定方法</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">例</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 font-medium text-slate-900">Tier番号</td><td class="px-6 py-3 text-body"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">tier1</code> ~ <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">tier7</code></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">素材名</td><td class="px-6 py-3 text-body"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">basic</code>, <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">copper</code>, <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">iron</code>, <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">gold</code>, <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">diamond</code>, <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">netherite</code>, <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">creative</code></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">数字</td><td class="px-6 py-3 text-body"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">1</code> ~ <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">7</code></td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">特殊</td><td class="px-6 py-3 text-body"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">void</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">使用例</h3>
+        <pre class="bg-slate-800 text-slate-100 rounded-lg p-4 text-sm overflow-x-auto mb-6"><code># プレイヤーにダイヤのドロワーを1個付与
+/drawer give Steve diamond
+
+# プレイヤーにボイドドロワーを3個付与
+/drawer give Steve void 3
+
+# 自分にドロワーキーを5個付与
+/drawer key 5
+
+# 設定をリロード
+/drawer reload</code></pre>
+      </section>
 
       <!-- 権限 -->
-      <h2 id="permissions" class="text-xl font-semibold text-slate-900 mt-12 mb-4">権限</h2>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-8">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">権限ノード</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">説明</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">デフォルト</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">paperdrawers.use</code></td><td class="px-6 py-3 text-slate-600">ドロワーの使用</td><td class="px-6 py-3 text-slate-600">全プレイヤー</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">paperdrawers.give</code></td><td class="px-6 py-3 text-slate-600">アイテム付与コマンド</td><td class="px-6 py-3 text-slate-600">OP</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">paperdrawers.admin</code></td><td class="px-6 py-3 text-slate-600">管理コマンド</td><td class="px-6 py-3 text-slate-600">OP</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <section id="permissions" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">権限</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">権限ノード</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">説明</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">デフォルト</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">paperdrawers.use</code></td>
+                <td class="px-6 py-3 text-body">ドロワーの使用と基本コマンド</td>
+                <td class="px-6 py-3 text-body">全プレイヤー</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">paperdrawers.give</code></td>
+                <td class="px-6 py-3 text-body">ドロワーアイテムの付与</td>
+                <td class="px-6 py-3 text-body">OP</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">paperdrawers.admin</code></td>
+                <td class="px-6 py-3 text-body">管理コマンド (reload, debug)</td>
+                <td class="px-6 py-3 text-body">OP</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- 設定ファイル -->
-      <h2 id="config" class="text-xl font-semibold text-slate-900 mt-12 mb-4">設定ファイル</h2>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-12">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">セクション</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">説明</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">drawer-capacity</code></td><td class="px-6 py-3 text-slate-600">各ティアの容量設定</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">display</code></td><td class="px-6 py-3 text-slate-600">表示設定・描画距離・フォーマット</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">bedrock</code></td><td class="px-6 py-3 text-slate-600">統合版（Bedrock Edition）互換設定</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">performance</code></td><td class="px-6 py-3 text-slate-600">キャッシュ・非同期保存の設定</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">hopper</code></td><td class="px-6 py-3 text-slate-600">ホッパー連携の設定</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">messages</code></td><td class="px-6 py-3 text-slate-600">ゲーム内メッセージ（日本語対応）</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">recipes</code></td><td class="px-6 py-3 text-slate-600">クラフトレシピの有効/無効切り替え</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs">drawer-display</code></td><td class="px-6 py-3 text-slate-600">アイテム名・説明文の表示設定</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <section id="config" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">設定ファイル</h2>
+        <p class="text-body leading-relaxed mb-4">
+          <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">plugins/PaperDrawers/config.yml</code> で以下をカスタマイズ可能です。
+        </p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">セクション</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">内容</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 font-medium text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">drawer-capacity</code></td><td class="px-6 py-3 text-body">各Tierの容量（スタック単位）</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">display</code></td><td class="px-6 py-3 text-body">アイテム表示の有効化・距離・フォーマット</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">bedrock</code></td><td class="px-6 py-3 text-body">統合版互換設定</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">performance</code></td><td class="px-6 py-3 text-body">キャッシュ・非同期保存</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">hopper</code></td><td class="px-6 py-3 text-body">ホッパー連携の有効化・速度</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">messages</code></td><td class="px-6 py-3 text-body">ゲーム内メッセージ（日本語対応）</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">recipes</code></td><td class="px-6 py-3 text-body">クラフトレシピ（有効/無効・素材変更）</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900"><code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">drawer-display</code></td><td class="px-6 py-3 text-body">アイテム名・説明文のカスタマイズ</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- Footer -->
       <footer class="pt-8 border-t border-slate-200 text-center text-sm text-slate-400">

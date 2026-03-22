@@ -57,6 +57,7 @@ tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:
         <a href="#source-network" class="block px-3 py-1.5 text-sm text-slate-600 rounded-lg hover:bg-gray-50">Sourceネットワーク</a>
         <a href="#ritual-system" class="block px-3 py-1.5 text-sm text-slate-600 rounded-lg hover:bg-gray-50">儀式システム</a>
         <a href="#enchantments" class="block px-3 py-1.5 text-sm text-slate-600 rounded-lg hover:bg-gray-50">エンチャント</a>
+        <a href="#loot-chests" class="block px-3 py-1.5 text-sm text-slate-600 rounded-lg hover:bg-gray-50">ルートチェスト</a>
         <a href="#config" class="block px-3 py-1.5 text-sm text-slate-600 rounded-lg hover:bg-gray-50">設定ファイル</a>
         <a href="#geyser" class="block px-3 py-1.5 text-sm text-slate-600 rounded-lg hover:bg-gray-50">Geyser互換性</a>
       </div>
@@ -76,35 +77,56 @@ tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:
 
       <!-- Page title -->
       <h1 class="text-3xl font-bold text-slate-900 mb-3">Ars Noveau</h1>
-      <p class="text-body leading-relaxed mb-10">Ars Nouveau MODの魔法システムをPaperプラグインとして再実装。バニラ+Geyser互換。</p>
+      <p class="text-body leading-relaxed mb-10">Ars Nouveau MODの魔法システムをバニラ+Geyser互換で再現するPaperプラグイン。</p>
 
-      <!-- はじめに -->
-      <section id="intro">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">はじめに</h2>
+      <!-- ===== はじめに ===== -->
+      <section id="intro" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">はじめに</h2>
         <p class="text-body leading-relaxed mb-4"><strong>ArsPaper</strong>はMinecraft MOD「Ars Nouveau」の魔法システムをPaperサーバー向けプラグインとして再実装したものです。バニラクライアントおよびGeyser（統合版）との互換性を保ちながら、本格的な魔法体験を提供します。</p>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">始め方（6ステップ）</h3>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">始め方（6ステップ）</h3>
         <ol class="list-decimal list-inside space-y-2 text-body leading-relaxed mb-6">
-          <li><strong>作業台で見習いの魔法書を作成</strong> -- 鉄ツール5種（剣・ツルハシ・斧・シャベル・クワ）+ 本で作成</li>
+          <li><strong>作業台で見習いの魔法書を作成</strong> -- 鉄の剣・鉄のツルハシ・本・鉄の斧・鉄のシャベルでクラフト</li>
           <li><strong>台座と刻印台を作成</strong> -- 作業台レシピで台座（Pedestal）と刻印台（Scribing Table）をクラフト</li>
-          <li><strong>刻印台でグリフ解放</strong> -- 経験値と素材を消費してスペルに使うグリフをアンロック</li>
+          <li><strong>刻印台でグリフ解放</strong> -- 刻印台を設置して右クリック。経験値レベル＋素材を消費してグリフをアンロック</li>
           <li><strong>スペルブックでスニーク+左クリック</strong> -- スペル作成GUIを開く</li>
           <li><strong>形態→効果→増強でスペルを組む</strong> -- 形態で発動方法を決め、効果を設定し、増強で強化</li>
           <li><strong>右クリックでスペル発動</strong> -- 組んだスペルを使って魔法を放つ</li>
         </ol>
 
-        <div class="flex items-start gap-3 p-4 bg-primary-50 border border-primary-200 rounded-lg text-sm mb-4">
-          <div>
-            <div class="font-medium text-primary-700 mb-1">進行の流れ</div>
-            <p class="text-primary-700">見習いの魔法書 → グリフ解放 → ソースジェム精製 → 防具作成 → 魔術師の魔術書 → 大魔導士の魔導書</p>
-          </div>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <div class="font-medium text-blue-800 mb-1">進行の流れ</div>
+          <pre class="whitespace-pre-wrap text-blue-800">見習いの魔法書(作業台) → グリフ解放(刻印台) → スペル作成
+  ↓
+ソースジェム精製(儀式) → ソースストーン(作業台) → 防具・装備作成(儀式)
+  ↓
+魔術師の魔術書(儀式アップグレード) → 上位グリフ解放 → 大魔導士の魔導書(儀式)</pre>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">マナの増やし方</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-left">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">手段</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">増加量</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">備考</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">グリフ解放</td><td class="px-4 py-3 text-body">+5/グリフ</td><td class="px-4 py-3 text-body">全グリフ解放で大幅増加</td></tr>
+              <tr><td class="px-4 py-3 text-body">防具装備</td><td class="px-4 py-3 text-body">+5〜+50/部位</td><td class="px-4 py-3 text-body">防具タイプとティアで変動</td></tr>
+              <tr><td class="px-4 py-3 text-body">最大マナ上昇スレッド</td><td class="px-4 py-3 text-body">+20/個</td><td class="px-4 py-3 text-body">1防具に最大2個</td></tr>
+              <tr><td class="px-4 py-3 text-body">マナ上昇エンチャント</td><td class="px-4 py-3 text-body">+15/+30/+50</td><td class="px-4 py-3 text-body">Lv1〜3</td></tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
-      <!-- コマンド -->
-      <section id="commands">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">コマンド</h2>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+      <!-- ===== コマンド ===== -->
+      <section id="commands" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">コマンド</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
           <table class="w-full text-left">
             <thead class="border-b border-slate-200 bg-gray-50">
               <tr>
@@ -114,542 +136,845 @@ tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars give &lt;itemId&gt;</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">指定アイテムを付与</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars mana</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">現在のマナ情報を表示</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars spell list</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">登録済みスペル一覧を表示</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars spell set &lt;slot&gt; &lt;名前&gt;:&lt;形態&gt; &lt;効果...&gt;</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">コマンドからスペルを設定</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars recipes</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">レシピ一覧を表示</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars backpack</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">バックパックを開く</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars reload</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">設定ファイルを再読み込み</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars cleanup</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">不要データのクリーンアップ</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars debug mana</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">マナシステムのデバッグ情報表示</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars glyph unlockall</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">全グリフを解放</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars glyph lockall</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">全グリフをロック</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars pvp &lt;on/off&gt;</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">PvP魔法の有効/無効切替</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars mana</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">現在のマナ/最大マナを表示</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars spell list</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">利用可能なグリフ一覧を表示</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars spell set &lt;slot&gt; &lt;名前&gt;:&lt;形態&gt; &lt;効果...&gt;</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">コマンドでスペルをスロットに設定</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars spell bind &lt;slot&gt;</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">メインハンドのスペルブックのスロットをオフハンドのアイテムにバインド</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars spell unbind</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">メインハンドのアイテムのスペルバインドを解除</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars recipes</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">レシピブラウザGUIを開く（全レシピを閲覧可能）</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars backpack</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">装備中の防具のバックパックGUIを開く</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars ranking glyphs</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">オンラインプレイヤーのグリフ解放数ランキング（TOP10）</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars ranking mana</code></td><td class="px-4 py-3 text-body">-</td><td class="px-4 py-3 text-body">オンラインプレイヤーの累計マナ消費量ランキング（TOP10）</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars give &lt;itemId&gt;</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">カスタムアイテムを取得</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars give enchant_book:&lt;id&gt;:&lt;lv&gt;</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">エンチャント本を取得（例: enchant_book:mana_regen:3）</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars reload</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">全設定ファイルを再読込</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars cleanup</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">残留ArmorStandを除去</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars debug mana</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">マナ無限モードトグル</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars glyph unlockall</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">全グリフ解放</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars glyph lockall</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">全グリフロック</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars pvp &lt;on/off&gt;</code></td><td class="px-4 py-3 text-body">admin</td><td class="px-4 py-3 text-body">スペルPvPの有効/無効切替</td></tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <!-- スペルシステム -->
-      <section id="spell-system">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">スペルシステム</h2>
+      <!-- ===== スペルシステム ===== -->
+      <section id="spell-system" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">スペルシステム</h2>
+        <p class="text-body leading-relaxed mb-4">スペルは <strong>形態(Form)</strong> + <strong>効果(Effect)</strong> + <strong>増強(Augment)</strong> の組み合わせで構成されます。</p>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">形態（Form）</h3>
-        <p class="text-body leading-relaxed mb-4">スペルの発動方法を決定します。スペルの先頭に1つ配置します。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">形態</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Tier</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナコスト</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">投射（projectile）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">弾を発射して着弾点に効果</td></tr>
-              <tr><td class="px-4 py-3 text-body">接触（touch）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">近接距離の対象に効果</td></tr>
-              <tr><td class="px-4 py-3 text-body">自己（self）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">自分自身に効果</td></tr>
-              <tr><td class="px-4 py-3 text-body">足元（underfoot）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">足元のブロックに効果</td></tr>
-              <tr><td class="px-4 py-3 text-body">軌道（orbit）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 3</span></td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">周囲を回転しながら効果</td></tr>
-              <tr><td class="px-4 py-3 text-body">照射（beam）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 3</span></td><td class="px-4 py-3 text-body">80</td><td class="px-4 py-3 text-body">直線レーザー（即着弾）</td></tr>
-            </tbody>
-          </table>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">基本ルール</h3>
+        <ul class="list-disc list-inside space-y-1 text-body leading-relaxed mb-6">
+          <li>スペルの先頭は必ず <strong>形態</strong> 1つ</li>
+          <li>形態の後に <strong>効果</strong> を配置（複数可）</li>
+          <li>各効果の後に <strong>増強</strong> を配置すると、直前の効果を強化</li>
+          <li>スペルブックのティアに応じて使えるグリフのティアが制限される</li>
+          <li>グリフ数の上限: 見習い3個、魔術師6個、大魔導士10個（ワンドは1スロット）</li>
+        </ul>
+
+        <!-- 形態 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">形態（Form）</h3>
+        <p class="text-body leading-relaxed mb-4">スペルの発動方法を決定する。スペルの先頭に1つ配置。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">形態</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Tier</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナ</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">解放素材</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">投射(projectile)</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">Lv5, 矢×2</td><td class="px-4 py-3 text-body">雪玉を発射し着弾点に効果を適用。加速/貫通/分裂/軌跡で強化可能</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">接触(touch)</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">Lv5, 鉄の剣×1</td><td class="px-4 py-3 text-body">近接距離の対象に効果を適用</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">自己(self)</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">Lv5, ラピスラズリ×1</td><td class="px-4 py-3 text-body">自分自身に効果を適用</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">足元(underfoot)</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">Lv5, 鉄のブーツ×1</td><td class="px-4 py-3 text-body">足元のブロックに効果を適用</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">軌道(orbit)</td><td class="px-4 py-3 text-body"><span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-medium">Tier 3</span></td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">Lv30, ネザースター×1, エコーの欠片×2, ソースジェム×2</td><td class="px-4 py-3 text-body">自分の周囲を回転する3つのオーブを生成。接触した敵に効果。分裂でオーブ数増加（最大5）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">照射(beam)</td><td class="px-4 py-3 text-body"><span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-medium">Tier 3</span></td><td class="px-4 py-3 text-body">80</td><td class="px-4 py-3 text-body">Lv30, ビーコン×1, ネザースター×1, ソースジェム×4</td><td class="px-4 py-3 text-body">直線レーザーを即座に発射。全貫通。分裂でビーム数増加、半径増加でビーム拡大</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">Tier 1 効果（見習い）</h3>
-        <p class="text-body leading-relaxed mb-4">見習いの魔法書で使用可能な30種類の効果グリフです。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ID</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナコスト</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">破壊</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">break</code></td><td class="px-4 py-3 text-body">10</td></tr>
-              <tr><td class="px-4 py-3 text-body">害悪</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">harm</code></td><td class="px-4 py-3 text-body">15</td></tr>
-              <tr><td class="px-4 py-3 text-body">着火</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">ignite</code></td><td class="px-4 py-3 text-body">15</td></tr>
-              <tr><td class="px-4 py-3 text-body">凍結</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">freeze</code></td><td class="px-4 py-3 text-body">15</td></tr>
-              <tr><td class="px-4 py-3 text-body">吹飛</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">knockback</code></td><td class="px-4 py-3 text-body">15</td></tr>
-              <tr><td class="px-4 py-3 text-body">引寄</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">pull</code></td><td class="px-4 py-3 text-body">15</td></tr>
-              <tr><td class="px-4 py-3 text-body">重力</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">gravity</code></td><td class="px-4 py-3 text-body">15</td></tr>
-              <tr><td class="px-4 py-3 text-body">光</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">light</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">収穫</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">harvest</code></td><td class="px-4 py-3 text-body">10</td></tr>
-              <tr><td class="px-4 py-3 text-body">刈取</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">cut</code></td><td class="px-4 py-3 text-body">0</td></tr>
-              <tr><td class="px-4 py-3 text-body">操作</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">interact</code></td><td class="px-4 py-3 text-body">10</td></tr>
-              <tr><td class="px-4 py-3 text-body">拾得</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">pickup</code></td><td class="px-4 py-3 text-body">10</td></tr>
-              <tr><td class="px-4 py-3 text-body">回転</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">rotate</code></td><td class="px-4 py-3 text-body">10</td></tr>
-              <tr><td class="px-4 py-3 text-body">伐採</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">fell</code></td><td class="px-4 py-3 text-body">150</td></tr>
-              <tr><td class="px-4 py-3 text-body">仮想ブロック</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">phantom_block</code></td><td class="px-4 py-3 text-body">5</td></tr>
-              <tr><td class="px-4 py-3 text-body">ブロック設置</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">place_block</code></td><td class="px-4 py-3 text-body">10</td></tr>
-              <tr><td class="px-4 py-3 text-body">打上</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">launch</code></td><td class="px-4 py-3 text-body">30</td></tr>
-              <tr><td class="px-4 py-3 text-body">跳躍</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">leap</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">跳弾</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">bounce</code></td><td class="px-4 py-3 text-body">50</td></tr>
-              <tr><td class="px-4 py-3 text-body">拘束</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">snare</code></td><td class="px-4 py-3 text-body">100</td></tr>
-              <tr><td class="px-4 py-3 text-body">蒸発</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">evaporate</code></td><td class="px-4 py-3 text-body">50</td></tr>
-              <tr><td class="px-4 py-3 text-body">解除</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">dispel</code></td><td class="px-4 py-3 text-body">30</td></tr>
-              <tr><td class="px-4 py-3 text-body">ルーン</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">rune</code></td><td class="px-4 py-3 text-body">30</td></tr>
-              <tr><td class="px-4 py-3 text-body">馬召喚</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">summon_steed</code></td><td class="px-4 py-3 text-body">100</td></tr>
-              <tr><td class="px-4 py-3 text-body">狼召喚</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">summon_wolves</code></td><td class="px-4 py-3 text-body">100</td></tr>
-              <tr><td class="px-4 py-3 text-body">染色</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">wololo</code></td><td class="px-4 py-3 text-body">30</td></tr>
-              <tr><td class="px-4 py-3 text-body">泡</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">bubble</code></td><td class="px-4 py-3 text-body">20</td></tr>
-              <tr><td class="px-4 py-3 text-body">演出</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">prestidigitation</code></td><td class="px-4 py-3 text-body">0</td></tr>
-              <tr><td class="px-4 py-3 text-body">精錬</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">smelt</code></td><td class="px-4 py-3 text-body">30</td></tr>
-              <tr><td class="px-4 py-3 text-body">粉砕</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">crush</code></td><td class="px-4 py-3 text-body">30</td></tr>
-            </tbody>
-          </table>
+        <!-- 効果 - タブ -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">効果（Effect）</h3>
+        <div data-tab-group>
+          <div class="flex border-b border-slate-200 mb-4">
+            <button data-tab-btn="tier1" class="px-4 py-2 text-sm font-medium border-b-2 text-primary-500 border-primary-500">Tier 1（見習い）</button>
+            <button data-tab-btn="tier2" class="px-4 py-2 text-sm font-medium border-b-2 text-slate-500 border-transparent">Tier 2（魔術師）</button>
+            <button data-tab-btn="tier3" class="px-4 py-2 text-sm font-medium border-b-2 text-slate-500 border-transparent">Tier 3（大魔導士）</button>
+          </div>
+
+          <!-- Tier 1 -->
+          <div data-tab-panel="tier1">
+            <p class="text-body leading-relaxed mb-4">見習いの魔法書で使用可能な効果グリフです。</p>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                  <thead class="border-b border-slate-200 bg-gray-50">
+                    <tr>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナ</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">対応増強</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100">
+                    <tr><td class="px-4 py-3 text-body font-medium">破壊(break)</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">ブロックを破壊。減少でユーティリティモード（道作り/樹皮剥ぎ/さび落とし等）</td><td class="px-4 py-3 text-body text-xs">減少, 範囲, 抽出, 幸運</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">害悪(harm)</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">基礎3ダメージ。増幅+1あたり+2。延長でDOT（毒）に変化</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">着火(ignite)</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">対象を4秒間着火。増幅で持続延長</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">凍結(freeze)</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">対象を凍結（移動速度低下+ダメージ）</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">吹飛(knockback)</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">対象を吹き飛ばす。増幅で威力増加</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">引寄(pull)</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">対象をキャスター方向に引き寄せる</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">重力(gravity)</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">対象に浮遊/落下効果を付与</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">光(light)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">ブロックに松明を設置、エンティティに暗視を付与</td><td class="px-4 py-3 text-body text-xs">範囲, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">収穫(harvest)</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">成熟した作物を収穫して再植え。耕地化にも対応</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 幸運, 抽出</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">刈取(cut)</td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">草・つる・花等を刈り取る</td><td class="px-4 py-3 text-body text-xs">範囲</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">操作(interact)</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">遠隔で右クリック操作（ドア開閉、レバー操作等）</td><td class="px-4 py-3 text-body text-xs">範囲, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">拾得(pickup)</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">周囲のアイテムをキャスターのインベントリに回収</td><td class="px-4 py-3 text-body text-xs">半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">回転(rotate)</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">ブロックの向きを変更/エンティティを回転</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">伐採(fell)</td><td class="px-4 py-3 text-body">150</td><td class="px-4 py-3 text-body">木を一括伐採（原木→ドロップ+連鎖破壊）</td><td class="px-4 py-3 text-body text-xs">半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">仮想ブロック(phantom_block)</td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">一時的なガラスブロックを設置（5秒後消滅）</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 範囲, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">ブロック設置(place_block)</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">オフハンドのブロックを設置</td><td class="px-4 py-3 text-body text-xs">範囲</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">打上(launch)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">対象を上方に打ち上げ（ブロックはFallingBlock化）</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">跳躍(leap)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">キャスターを視線方向に射出</td><td class="px-4 py-3 text-body text-xs">増幅, 減少</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">跳弾(bounce)</td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">着地時に跳ね返る効果を付与</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">拘束(snare)</td><td class="px-4 py-3 text-body">100</td><td class="px-4 py-3 text-body">移動速度大幅低下</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">蒸発(evaporate)</td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">水源・水流を除去</td><td class="px-4 py-3 text-body text-xs">半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">解除(dispel)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">ポーション効果を解除</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">ルーン(rune)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">踏むと発動するトラップ。後続の効果を引き渡す</td><td class="px-4 py-3 text-body text-xs">延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">馬召喚(summon_steed)</td><td class="px-4 py-3 text-body">100</td><td class="px-4 py-3 text-body">一時的な馬を召喚</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">狼召喚(summon_wolves)</td><td class="px-4 py-3 text-body">100</td><td class="px-4 py-3 text-body">一時的なオオカミを召喚</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">染色(wololo)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">対象の色を変更</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 無作為</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">泡(bubble)</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">水中呼吸効果を付与</td><td class="px-4 py-3 text-body text-xs">半径, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">演出(prestidigitation)</td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">パーティクル演出（コスト無し）</td><td class="px-4 py-3 text-body text-xs">無作為</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">精錬(smelt)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">ドロップアイテムをかまどで精錬した結果に変換</td><td class="px-4 py-3 text-body text-xs">半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">粉砕(crush)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">ブロックを粉砕変換（石→砂利→砂等）</td><td class="px-4 py-3 text-body text-xs">範囲, 幸運</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tier 2 -->
+          <div data-tab-panel="tier2" class="hidden">
+            <p class="text-body leading-relaxed mb-4">魔術師の魔術書で使用可能になる効果グリフです。</p>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                  <thead class="border-b border-slate-200 bg-gray-50">
+                    <tr>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナ</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">対応増強</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100">
+                    <tr><td class="px-4 py-3 text-body font-medium">回復(heal)</td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">HP回復（アンデッドにはダメージ）</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">成長(grow)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">作物/アメジスト芽/サトウキビの成長促進、子供モブの成体化</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">爆発(explosion)</td><td class="px-4 py-3 text-body">100</td><td class="px-4 py-3 text-body">爆発（ブロック破壊あり、パーティクル付き）</td><td class="px-4 py-3 text-body text-xs">半径, 抽出</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">交換(exchange)</td><td class="px-4 py-3 text-body">80</td><td class="px-4 py-3 text-body">ブロックを同ティアの別素材に変換/エンティティと位置交換</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 範囲</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">砕波(crush_wave)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">水中の敵に2倍ダメージ</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">灼熱(scorch)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">炎上中の敵に1.5倍ダメージ</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">寒波(cold_snap)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">凍結ダメージ（凍結状態の敵に追加効果）</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">風刃(windshear)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">風ダメージ（高度比例ボーナスダメージ）</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">水生成(conjure_water)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">一時的な水源を設置</td><td class="px-4 py-3 text-body text-xs">範囲, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">低速落下(slowfall)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">低速落下効果を付与</td><td class="px-4 py-3 text-body text-xs">半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">透明(invisibility)</td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">透明化</td><td class="px-4 py-3 text-body text-xs">延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">注入(infuse)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">手持ちポーションの効果を対象に直接適用</td><td class="px-4 py-3 text-body text-xs">(なし)</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">加工(craft)</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">クラフトテーブルGUIを開く</td><td class="px-4 py-3 text-body text-xs">半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">活性(animate)</td><td class="px-4 py-3 text-body">150</td><td class="px-4 py-3 text-body">一時的なアイアンゴーレムを召喚</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">花火(firework)</td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">花火を打ち上げ（ダメージ付き）</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 無作為</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">命名(name)</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">対象にキャスター名を付与</td><td class="px-4 py-3 text-body text-xs">(なし)</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">突風(wind_burst)</td><td class="px-4 py-3 text-body">35</td><td class="px-4 py-3 text-body">周囲の全エンティティを吹き飛ばす</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">加速(speed_boost)</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">移動速度上昇を付与</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 無作為, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">浮遊(levitate)</td><td class="px-4 py-3 text-body">35</td><td class="px-4 py-3 text-body">浮遊効果を付与</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tier 3 -->
+          <div data-tab-panel="tier3" class="hidden">
+            <p class="text-body leading-relaxed mb-4">大魔導士の魔導書で使用可能になる最上級効果グリフです。</p>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                  <thead class="border-b border-slate-200 bg-gray-50">
+                    <tr>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナ</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
+                      <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">対応増強</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100">
+                    <tr><td class="px-4 py-3 text-body font-medium">瞬移(blink)</td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">視線方向に最大15ブロックテレポート（壁貫通）</td><td class="px-4 py-3 text-body text-xs">延伸</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">落雷(lightning)</td><td class="px-4 py-3 text-body">100</td><td class="px-4 py-3 text-body">落雷攻撃</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">衰弱(wither)</td><td class="px-4 py-3 text-body">80</td><td class="px-4 py-3 text-body">ウィザー効果を付与</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">呪い(hex)</td><td class="px-4 py-3 text-body">100</td><td class="px-4 py-3 text-body">鈍足+弱体化+暗闘を同時付与</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">滑空(glide)</td><td class="px-4 py-3 text-body">50</td><td class="px-4 py-3 text-body">エリトラなしで滑空（空中ジャンプで開始）</td><td class="px-4 py-3 text-body text-xs">延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">障壁(shield)</td><td class="px-4 py-3 text-body">150</td><td class="px-4 py-3 text-body">耐性+吸収ハートのバリア</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 延長, 短縮, 残留</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">不死召喚(summon_undead)</td><td class="px-4 py-3 text-body">120</td><td class="px-4 py-3 text-body">ゾンビ召喚（増幅1+でスケルトンに変化）。AOEで召喚数増加（最大4体）</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">妖精召喚(summon_vex)</td><td class="px-4 py-3 text-body">150</td><td class="px-4 py-3 text-body">ヴェックスを召喚</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">囮召喚(summon_decoy)</td><td class="px-4 py-3 text-body">200</td><td class="px-4 py-3 text-body">キャスターの装備をコピーした囮ゾンビを召喚</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">透過(intangible)</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">ブロックを一時的に通過可能にする</td><td class="px-4 py-3 text-body text-xs">範囲, 延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">巻戻(rewind)</td><td class="px-4 py-3 text-body">120</td><td class="px-4 py-3 text-body">数秒前の位置に戻る</td><td class="px-4 py-3 text-body text-xs">延長, 短縮</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">牙(fangs)</td><td class="px-4 py-3 text-body">35</td><td class="px-4 py-3 text-body">エヴォーカーの牙を召喚</td><td class="px-4 py-3 text-body text-xs">増幅, 減少, 半径</td></tr>
+                    <tr><td class="px-4 py-3 text-body font-medium">上級破壊(advanced_break)</td><td class="px-4 py-3 text-body">100</td><td class="px-4 py-3 text-body">ダイヤツルハシ+幸運3を内蔵した強化破壊。抽出でシルクタッチに切替可能</td><td class="px-4 py-3 text-body text-xs">範囲, 抽出, 幸運</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">Tier 2 効果（魔術師）</h3>
-        <p class="text-body leading-relaxed mb-4">魔術師の魔術書で使用可能になる19種類の上級効果です。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ID</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナコスト</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">回復</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">heal</code></td><td class="px-4 py-3 text-body">50</td></tr>
-              <tr><td class="px-4 py-3 text-body">成長</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">grow</code></td><td class="px-4 py-3 text-body">30</td></tr>
-              <tr><td class="px-4 py-3 text-body">爆発</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">explosion</code></td><td class="px-4 py-3 text-body">100</td></tr>
-              <tr><td class="px-4 py-3 text-body">交換</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">exchange</code></td><td class="px-4 py-3 text-body">80</td></tr>
-              <tr><td class="px-4 py-3 text-body">砕波</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">crush_wave</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">灼熱</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">scorch</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">寒波</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">cold_snap</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">風刃</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">windshear</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">水生成</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">conjure_water</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">低速落下</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">slowfall</code></td><td class="px-4 py-3 text-body">30</td></tr>
-              <tr><td class="px-4 py-3 text-body">透明</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">invisibility</code></td><td class="px-4 py-3 text-body">50</td></tr>
-              <tr><td class="px-4 py-3 text-body">注入</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">infuse</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">加工</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">craft</code></td><td class="px-4 py-3 text-body">10</td></tr>
-              <tr><td class="px-4 py-3 text-body">活性</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">animate</code></td><td class="px-4 py-3 text-body">150</td></tr>
-              <tr><td class="px-4 py-3 text-body">花火</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">firework</code></td><td class="px-4 py-3 text-body">50</td></tr>
-              <tr><td class="px-4 py-3 text-body">命名</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">name</code></td><td class="px-4 py-3 text-body">20</td></tr>
-              <tr><td class="px-4 py-3 text-body">突風</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">wind_burst</code></td><td class="px-4 py-3 text-body">35</td></tr>
-              <tr><td class="px-4 py-3 text-body">加速</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">speed_boost</code></td><td class="px-4 py-3 text-body">25</td></tr>
-              <tr><td class="px-4 py-3 text-body">浮遊</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">levitate</code></td><td class="px-4 py-3 text-body">35</td></tr>
-            </tbody>
-          </table>
+        <!-- 増強 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">増強（Augment）</h3>
+        <p class="text-body leading-relaxed mb-4">効果の性能を変化させる。効果の後に配置すると直前の効果を強化する。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">カテゴリ</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">増強</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Tier</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナ</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body">汎用</td><td class="px-4 py-3 text-body font-medium">遅延(delay)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">後続効果を20tick遅延して発動（複数積み可）</td></tr>
+                <tr><td class="px-4 py-3 text-body">汎用</td><td class="px-4 py-3 text-body font-medium">連射(rapid_fire)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">CT-100ms/段（デフォルト500ms→最低100ms）。照射は2段内蔵</td></tr>
+                <tr><td class="px-4 py-3 text-body">強度</td><td class="px-4 py-3 text-body font-medium">増幅(amplify)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">効果の強度・ダメージを上昇</td></tr>
+                <tr><td class="px-4 py-3 text-body">強度</td><td class="px-4 py-3 text-body font-medium">減少(dampen)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">効果の強度を低下（2個で-1レベル）。破壊に付けるとユーティリティモード</td></tr>
+                <tr><td class="px-4 py-3 text-body">持続</td><td class="px-4 py-3 text-body font-medium">延長(extend_time)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">持続時間を延長</td></tr>
+                <tr><td class="px-4 py-3 text-body">持続</td><td class="px-4 py-3 text-body font-medium">短縮(duration_down)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">持続時間を短縮（2個で-1レベル）</td></tr>
+                <tr><td class="px-4 py-3 text-body">範囲(方向)</td><td class="px-4 py-3 text-body font-medium">幅(aoe)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">ヒット面の左右（XZ軸）に範囲拡大</td></tr>
+                <tr><td class="px-4 py-3 text-body">範囲(方向)</td><td class="px-4 py-3 text-body font-medium">上下(aoe_height)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">ヒット面の上下（Y軸）に範囲拡大</td></tr>
+                <tr><td class="px-4 py-3 text-body">範囲(方向)</td><td class="px-4 py-3 text-body font-medium">垂直(aoe_vertical)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">ヒット面の法線方向に範囲延長</td></tr>
+                <tr><td class="px-4 py-3 text-body">範囲(半径)</td><td class="px-4 py-3 text-body font-medium">半径(aoe_radius)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">爆発威力/召喚数/拾得範囲等を半径ベースで拡大</td></tr>
+                <tr><td class="px-4 py-3 text-body">移動</td><td class="px-4 py-3 text-body font-medium">加速(accelerate)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">弾速UP/射程+10m/軌道回転速度UP</td></tr>
+                <tr><td class="px-4 py-3 text-body">移動</td><td class="px-4 py-3 text-body font-medium">減速(decelerate)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">弾速DOWN/射程DOWN/軌道回転速度DOWN</td></tr>
+                <tr><td class="px-4 py-3 text-body">形態</td><td class="px-4 py-3 text-body font-medium">貫通(pierce)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">弾がエンティティを貫通</td></tr>
+                <tr><td class="px-4 py-3 text-body">形態</td><td class="px-4 py-3 text-body font-medium">延伸(extend_reach)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">射程/テレポート距離を+15m延長</td></tr>
+                <tr><td class="px-4 py-3 text-body">形態</td><td class="px-4 py-3 text-body font-medium">分裂(split)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">弾を複数に分裂/軌道オーブ数増加</td></tr>
+                <tr><td class="px-4 py-3 text-body">形態</td><td class="px-4 py-3 text-body font-medium">軌跡(trace)</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">弾/ビームの飛行経路上のブロックにも効果を適用</td></tr>
+                <tr><td class="px-4 py-3 text-body">形態</td><td class="px-4 py-3 text-body font-medium">伝播(propagate)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">ブロック着弾時に周辺エンティティにも効果を伝播</td></tr>
+                <tr><td class="px-4 py-3 text-body">特殊</td><td class="px-4 py-3 text-body font-medium">抽出(extract)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">シルクタッチ効果（幸運と排他）</td></tr>
+                <tr><td class="px-4 py-3 text-body">特殊</td><td class="px-4 py-3 text-body font-medium">幸運(fortune)</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">ドロップ量増加（抽出と排他）</td></tr>
+                <tr><td class="px-4 py-3 text-body">特殊</td><td class="px-4 py-3 text-body font-medium">無作為(randomize)</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">効果にランダム性を付与</td></tr>
+                <tr><td class="px-4 py-3 text-body">特殊</td><td class="px-4 py-3 text-body font-medium">残留(linger)</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">80</td><td class="px-4 py-3 text-body">着弾点に持続エリアを生成し、後続効果を定期的に再適用</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">Tier 3 効果（大魔導士）</h3>
-        <p class="text-body leading-relaxed mb-4">大魔導士の魔導書で使用可能になる13種類の最上級効果です。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ID</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナコスト</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">瞬移</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">blink</code></td><td class="px-4 py-3 text-body">50</td></tr>
-              <tr><td class="px-4 py-3 text-body">落雷</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">lightning</code></td><td class="px-4 py-3 text-body">100</td></tr>
-              <tr><td class="px-4 py-3 text-body">衰弱</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">wither</code></td><td class="px-4 py-3 text-body">80</td></tr>
-              <tr><td class="px-4 py-3 text-body">呪い</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">hex</code></td><td class="px-4 py-3 text-body">100</td></tr>
-              <tr><td class="px-4 py-3 text-body">滑空</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">glide</code></td><td class="px-4 py-3 text-body">50</td></tr>
-              <tr><td class="px-4 py-3 text-body">障壁</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">shield</code></td><td class="px-4 py-3 text-body">150</td></tr>
-              <tr><td class="px-4 py-3 text-body">不死召喚</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">summon_undead</code></td><td class="px-4 py-3 text-body">120</td></tr>
-              <tr><td class="px-4 py-3 text-body">妖精召喚</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">summon_vex</code></td><td class="px-4 py-3 text-body">150</td></tr>
-              <tr><td class="px-4 py-3 text-body">囮召喚</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">summon_decoy</code></td><td class="px-4 py-3 text-body">200</td></tr>
-              <tr><td class="px-4 py-3 text-body">透過</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">intangible</code></td><td class="px-4 py-3 text-body">30</td></tr>
-              <tr><td class="px-4 py-3 text-body">巻戻</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">rewind</code></td><td class="px-4 py-3 text-body">120</td></tr>
-              <tr><td class="px-4 py-3 text-body">牙</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">fangs</code></td><td class="px-4 py-3 text-body">35</td></tr>
-              <tr><td class="px-4 py-3 text-body">上級破壊</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">advanced_break</code></td><td class="px-4 py-3 text-body">100</td></tr>
-            </tbody>
-          </table>
+        <!-- 破壊のユーティリティモード -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">破壊のユーティリティモード</h3>
+        <p class="text-body leading-relaxed mb-4">破壊(break)に<strong>減少(dampen)</strong>を付けると、ブロックを壊す代わりにユーティリティ操作を行います。範囲(aoe)増強と組み合わせれば一括操作可能。ブロック状態（階段の向き、ハーフブロックの上下等）は保持されます。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">対象ブロック</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">変換先</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body">草ブロック/土/ポドゾル/菌糸/粗い土</td><td class="px-4 py-3 text-body">土の道</td><td class="px-4 py-3 text-body">道を作る</td></tr>
+                <tr><td class="px-4 py-3 text-body">各種原木</td><td class="px-4 py-3 text-body">樹皮を剥いだ原木</td><td class="px-4 py-3 text-body">樹皮を剥ぐ</td></tr>
+                <tr><td class="px-4 py-3 text-body">ワックスがけの銅ブロック</td><td class="px-4 py-3 text-body">非ワックス版</td><td class="px-4 py-3 text-body">さび止めを落とす</td></tr>
+                <tr><td class="px-4 py-3 text-body">酸化/風化/錆びた銅</td><td class="px-4 py-3 text-body">1段階戻す</td><td class="px-4 py-3 text-body">さびを落とす</td></tr>
+                <tr><td class="px-4 py-3 text-body">苔むした石レンガ/丸石</td><td class="px-4 py-3 text-body">通常版</td><td class="px-4 py-3 text-body">苔を落とす</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">増強（Augment）</h3>
-        <p class="text-body leading-relaxed mb-4">効果を強化・変化させるグリフです。効果の後に配置します。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">カテゴリ</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">増強</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Tier</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナコスト</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">汎用</td><td class="px-4 py-3 text-body">遅延（delay）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">効果の発動を遅延させる</td></tr>
-              <tr><td class="px-4 py-3 text-body">汎用</td><td class="px-4 py-3 text-body">連射（rapid_fire）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">連続して発動する</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">増幅（amplify）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">効果の威力を増加</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">減少（dampen）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">効果の威力を減少</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">延長（extend_time）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">効果時間を延長</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">短縮（duration_down）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">効果時間を短縮</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">幅（aoe）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">効果範囲を拡大</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">上下（aoe_height）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">効果範囲の高さを拡大</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">垂直（aoe_vertical）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">効果範囲を垂直方向に拡大</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">半径（aoe_radius）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">効果範囲の半径を拡大</td></tr>
-              <tr><td class="px-4 py-3 text-body">広汎</td><td class="px-4 py-3 text-body">無作為（randomize）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">効果をランダム化</td></tr>
-              <tr><td class="px-4 py-3 text-body">形態限定</td><td class="px-4 py-3 text-body">加速（accelerate）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">弾速を上昇</td></tr>
-              <tr><td class="px-4 py-3 text-body">形態限定</td><td class="px-4 py-3 text-body">減速（decelerate）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">0</td><td class="px-4 py-3 text-body">弾速を低下</td></tr>
-              <tr><td class="px-4 py-3 text-body">形態限定</td><td class="px-4 py-3 text-body">貫通（pierce）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">対象を貫通して飛行</td></tr>
-              <tr><td class="px-4 py-3 text-body">形態限定</td><td class="px-4 py-3 text-body">延伸（extend_reach）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">15</td><td class="px-4 py-3 text-body">射程距離を延長</td></tr>
-              <tr><td class="px-4 py-3 text-body">形態限定</td><td class="px-4 py-3 text-body">分裂（split）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">弾が分裂する</td></tr>
-              <tr><td class="px-4 py-3 text-body">形態限定</td><td class="px-4 py-3 text-body">軌跡（trace）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 3</span></td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">対象を追尾する</td></tr>
-              <tr><td class="px-4 py-3 text-body">形態限定</td><td class="px-4 py-3 text-body">伝播（propagate）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">20</td><td class="px-4 py-3 text-body">効果が周囲に伝播</td></tr>
-              <tr><td class="px-4 py-3 text-body">特殊</td><td class="px-4 py-3 text-body">抽出（extract）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">30</td><td class="px-4 py-3 text-body">対象からアイテムを抽出</td></tr>
-              <tr><td class="px-4 py-3 text-body">特殊</td><td class="px-4 py-3 text-body">幸運（fortune）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td><td class="px-4 py-3 text-body">25</td><td class="px-4 py-3 text-body">ドロップ数を増加</td></tr>
-              <tr><td class="px-4 py-3 text-body">特殊</td><td class="px-4 py-3 text-body">残留（linger）</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 3</span></td><td class="px-4 py-3 text-body">80</td><td class="px-4 py-3 text-body">効果が残留する</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">スペル作成の手順</h3>
-        <ol class="list-decimal list-inside space-y-2 text-body leading-relaxed mb-4">
-          <li>スペルブックを持って<strong>スニーク+左クリック</strong>でスペル作成GUIを開く</li>
-          <li>最大<strong>9グリフ</strong>までスペルに組み込み可能</li>
-          <li>歯車アイコンからスペル名・アイコンなどの設定を変更</li>
+        <!-- スペル作成 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">スペル作成</h3>
+        <ol class="list-decimal list-inside space-y-2 text-body leading-relaxed mb-6">
+          <li>スペルブックを手に持ち <strong>スニーク+左クリック</strong> でGUIを開く</li>
+          <li>上段にスペル構成を配置（グリフ数はスペルブックのティアで制限）</li>
+          <li>形態→効果→増強の順に左クリックで追加</li>
+          <li>右クリックで末尾から削除</li>
+          <li>歯車アイコンからスペル設定（名前変更・アイテムバインド）</li>
         </ol>
 
-        <div class="flex items-start gap-3 p-4 bg-primary-50 border border-primary-200 rounded-lg text-sm mb-4">
-          <div>
-            <div class="font-medium text-primary-700 mb-1">スロット切替</div>
-            <p class="text-primary-700"><strong>スニーク+右クリック</strong>で次のスロットへ、<strong>スニーク+Q</strong>で前のスロットへ切り替えます。</p>
+        <!-- スペルバインド -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">スペルバインド</h3>
+        <p class="text-body leading-relaxed mb-4">スペル設定GUIからアイテムバインドを選択。オフハンドまたはホットバー右側のアイテムにスペルを紐付け、そのアイテムを右クリックでスペル発動可能。バインドされたアイテムにはエンチャントグローが付きます。</p>
+
+        <!-- スロット切替 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">スロット切替</h3>
+        <ul class="list-disc list-inside space-y-1 text-body leading-relaxed mb-6">
+          <li><strong>スニーク+右クリック</strong>: 次のスロットへ</li>
+          <li><strong>スニーク+ドロップキー(Q)</strong>: 前のスロットへ</li>
+        </ul>
+
+        <!-- スペルの例 -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">スペルの例</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スペル構成</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">投射 → 害悪 → 増幅</code></td><td class="px-4 py-3 text-body">強化ダメージ弾</td></tr>
+                <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">投射 → 害悪 → 残留</code></td><td class="px-4 py-3 text-body">着弾点にダメージゾーン生成</td></tr>
+                <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">投射 → 貫通 → 破壊 → 範囲</code></td><td class="px-4 py-3 text-body">貫通する範囲ブロック破壊弾</td></tr>
+                <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">自己 → 障壁 → 延長</code></td><td class="px-4 py-3 text-body">長時間バリア</td></tr>
+                <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">足元 → 破壊 → 減少 → 範囲</code></td><td class="px-4 py-3 text-body">足元を範囲整地</td></tr>
+                <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">照射 → 害悪 → 増幅 → 増幅</code></td><td class="px-4 py-3 text-body">高火力レーザー</td></tr>
+                <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">軌道 → 害悪 → 分裂</code></td><td class="px-4 py-3 text-body">4つのダメージオーブ</td></tr>
+                <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">投射 → ルーン → 害悪 → 増幅</code></td><td class="px-4 py-3 text-body">踏むと爆発するトラップ</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <!-- マナシステム -->
-      <section id="mana-system">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">マナシステム</h2>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
+      <!-- ===== マナシステム ===== -->
+      <section id="mana-system" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">マナシステム</h2>
+        <p class="text-body leading-relaxed mb-4">マナはスペル発動に必要なエネルギーです。画面上部のBossBarに常時表示されます。</p>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
           <table class="w-full text-left">
             <thead class="border-b border-slate-200 bg-gray-50">
               <tr>
                 <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">項目</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">値</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">デフォルト値</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">基礎マナ</td><td class="px-4 py-3 text-body">100</td></tr>
+              <tr><td class="px-4 py-3 text-body">基礎マナ上限</td><td class="px-4 py-3 text-body">100</td></tr>
               <tr><td class="px-4 py-3 text-body">基礎回復速度</td><td class="px-4 py-3 text-body">5/秒</td></tr>
-              <tr><td class="px-4 py-3 text-body">グリフ解放ボーナス</td><td class="px-4 py-3 text-body">+5マナ / グリフ</td></tr>
-              <tr><td class="px-4 py-3 text-body">データ管理</td><td class="px-4 py-3 text-body">PDC（PersistentDataContainer）ベース</td></tr>
-              <tr><td class="px-4 py-3 text-body">表示</td><td class="px-4 py-3 text-body">BossBar にマナゲージを表示</td></tr>
+              <tr><td class="px-4 py-3 text-body">回復間隔</td><td class="px-4 py-3 text-body">1秒（20tick）</td></tr>
+              <tr><td class="px-4 py-3 text-body">グリフ解放ボーナス</td><td class="px-4 py-3 text-body">+5マナ/グリフ</td></tr>
+              <tr><td class="px-4 py-3 text-body">スペル最低コスト</td><td class="px-4 py-3 text-body">1マナ（コスト軽減でも0にならない）</td></tr>
+              <tr><td class="px-4 py-3 text-body">クールダウン</td><td class="px-4 py-3 text-body">500ms（連射増強で最低100msまで短縮）</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="flex items-start gap-3 p-4 bg-primary-50 border border-primary-200 rounded-lg text-sm mb-4">
-          <div>
-            <div class="font-medium text-primary-700 mb-1">マナを増やすには</div>
-            <p class="text-primary-700">防具の装備、スレッドの装着、マナ系エンチャントの付与でマナの最大値や回復速度を強化できます。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">マナ増加手段</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-left">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">手段</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">増加量</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">詳細</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">グリフ解放</td><td class="px-4 py-3 text-body">+5/グリフ</td><td class="px-4 py-3 text-body">刻印台で解放するたびに最大マナ上昇</td></tr>
+              <tr><td class="px-4 py-3 text-body">防具（守護）</td><td class="px-4 py-3 text-body">+5/+15/+25 部位あたり</td><td class="px-4 py-3 text-body">各ティアで異なる</td></tr>
+              <tr><td class="px-4 py-3 text-body">防具（魔導）</td><td class="px-4 py-3 text-body">+10/+30/+50 部位あたり</td><td class="px-4 py-3 text-body">マナ特化</td></tr>
+              <tr><td class="px-4 py-3 text-body">防具（魔織）</td><td class="px-4 py-3 text-body">+5/+15/+30 部位あたり</td><td class="px-4 py-3 text-body">スレッドスロット多め</td></tr>
+              <tr><td class="px-4 py-3 text-body">スレッド（最大マナ上昇）</td><td class="px-4 py-3 text-body">+20/個</td><td class="px-4 py-3 text-body">最大2個/防具</td></tr>
+              <tr><td class="px-4 py-3 text-body">エンチャント（マナ上昇）</td><td class="px-4 py-3 text-body">+15/+30/+50</td><td class="px-4 py-3 text-body">Lv1/2/3</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">マナ回復増加手段</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-left">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">手段</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">増加量</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">防具のリジェンボーナス</td><td class="px-4 py-3 text-body">+1〜+8/秒（防具タイプ・ティア別）</td></tr>
+              <tr><td class="px-4 py-3 text-body">スレッド（マナ回復速度上昇）</td><td class="px-4 py-3 text-body">+2/個（最大2個/防具）</td></tr>
+              <tr><td class="px-4 py-3 text-body">エンチャント（マナ加速）</td><td class="px-4 py-3 text-body">+1/+2/+3（Lv1/2/3）</td></tr>
+              <tr><td class="px-4 py-3 text-body">ソースベリー</td><td class="px-4 py-3 text-body">即時25マナ回復（アイテム消費）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== カスタムアイテム ===== -->
+      <section id="custom-items" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">カスタムアイテム</h2>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">スペルブック</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">名前</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スロット数</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Tier上限</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">作成方法</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">見習いの魔法書</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">作業台（鉄の剣+鉄のツルハシ+本+鉄の斧+鉄のシャベル）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">魔術師の魔術書</td><td class="px-4 py-3 text-body">6</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">儀式（見習い+ダイヤブロック+エメラルドブロック+ラピスブロック+レッドストーンブロック+金ブロック+クォーツブロック+ブレイズロッド+ソースジェムブロック, Source 1,000）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">大魔導士の魔導書</td><td class="px-4 py-3 text-body">10</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">儀式（魔術師+ネザースター+ネザライトインゴット×2+エコーの欠片×2+不死のトーテム+ソースジェムブロック, Source 5,000）</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <p>スペルデータはアップグレード時に自動引継ぎされます。所有者システム: 初回使用者が所有者。他プレイヤーは<strong>共有エンチャント</strong>付きで使用可能になります。</p>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">スペルワンド</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">名前</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Tier上限</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">作成方法</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">初級ワンド</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">儀式</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">中級ワンド</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">儀式</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">上級ワンド</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">儀式</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="text-body leading-relaxed mb-6">ワンドは1スロット固定。右クリックで発動、スニーク+右クリックでスペル設定GUI。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">中間素材</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">名前</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ベース素材</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">作成方法</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">ソースジェム</td><td class="px-4 py-3 text-body">プリズマリンの欠片</td><td class="px-4 py-3 text-body">儀式（アメジストの欠片×4+ラピスラズリ×2, Source 200）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">ソースジェムブロック</td><td class="px-4 py-3 text-body">プリズマリン</td><td class="px-4 py-3 text-body">作業台（ソースジェム×9）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">マジックファイバー</td><td class="px-4 py-3 text-body">糸</td><td class="px-4 py-3 text-body">儀式（小麦の種×2+ソースジェム×2, Source 100）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">ソースストーン</td><td class="px-4 py-3 text-body">石</td><td class="px-4 py-3 text-body">作業台（ソースベリー+石）</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">消耗品</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">名前</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ベース素材</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">作成方法</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">ソースベリー</td><td class="px-4 py-3 text-body">グロウベリー</td><td class="px-4 py-3 text-body">マナ25即時回復。ソースジャーに右クリックでSource+100</td><td class="px-4 py-3 text-body">作業台（グロウベリー+アメジストの欠片）</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <!-- カスタムアイテム -->
-      <section id="custom-items">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">カスタムアイテム</h2>
-
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">スペルブック</h3>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ID</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">名前</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スロット数</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">使用可能Tier</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">spell_book_novice</code></td><td class="px-4 py-3 text-body">見習いの魔法書</td><td class="px-4 py-3 text-body">3スロット</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 1</span></td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">spell_book_apprentice</code></td><td class="px-4 py-3 text-body">魔術師の魔術書</td><td class="px-4 py-3 text-body">6スロット</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 2</span></td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">spell_book_archmage</code></td><td class="px-4 py-3 text-body">大魔導士の魔導書</td><td class="px-4 py-3 text-body">10スロット</td><td class="px-4 py-3 text-body"><span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium">Tier 3</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="text-body leading-relaxed mb-4">見習いの魔法書は<strong>作業台</strong>でクラフト可能です。上位の魔術書・魔導書は<strong>儀式</strong>によるアップグレードで入手します。</p>
-        <div class="flex items-start gap-3 p-4 bg-primary-50 border border-primary-200 rounded-lg text-sm mb-6">
-          <div>
-            <div class="font-medium text-primary-700 mb-1">所有者システム</div>
-            <p class="text-primary-700">スペルブックは初回使用者が所有者として記録されます。所有者以外は使用できません。</p>
+      <!-- ===== カスタムブロック ===== -->
+      <section id="custom-blocks" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">カスタムブロック</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">名前</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ベース</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">作成方法</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">刻印台</td><td class="px-4 py-3 text-body">書見台(LECTERN)</td><td class="px-4 py-3 text-body">グリフ解放台。右クリックでGUI</td><td class="px-4 py-3 text-body">作業台（ラピスラズリ×2+ソースジェム+本棚×2）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">ソースジャー</td><td class="px-4 py-3 text-body">飾り壺(DECORATED_POT)</td><td class="px-4 py-3 text-body">Source貯蔵（最大10,000）。右クリックで残量確認</td><td class="px-4 py-3 text-body">作業台（レンガ×8+ソースベリー）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">クリエイティブソースジャー</td><td class="px-4 py-3 text-body">飾り壺(DECORATED_POT)</td><td class="px-4 py-3 text-body">無限Source供給（管理者用）</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars give</code></td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">ヴォルケーニックソースリンク</td><td class="px-4 py-3 text-body">かまど(FURNACE)</td><td class="px-4 py-3 text-body">燃料を消費してSource生成</td><td class="px-4 py-3 text-body">儀式（かまど+ネザーラック×2+マグマブロック×2+ブレイズパウダー×2+ソースジェム, Source 300）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">マイセリアルソースリンク</td><td class="px-4 py-3 text-body">燻製器(SMOKER)</td><td class="px-4 py-3 text-body">食料を消費してSource生成</td><td class="px-4 py-3 text-body">儀式（燻製器+菌糸×2+茶キノコ+赤キノコ+骨粉+ソースジェム×2, Source 300）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">儀式コア</td><td class="px-4 py-3 text-body">エンチャントテーブル(ENCHANTING_TABLE)</td><td class="px-4 py-3 text-body">儀式の中心ブロック</td><td class="px-4 py-3 text-body">作業台（黒曜石×4+ダイヤモンド×4+ロードストーン）</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">台座</td><td class="px-4 py-3 text-body">醸造台(BREWING_STAND)</td><td class="px-4 py-3 text-body">儀式の素材台座。右クリックでアイテム設置/回収</td><td class="px-4 py-3 text-body">作業台（金インゴット+ソースストーン×5）×2個</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
-
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">中間素材</h3>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ID</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">名前</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ベースアイテム</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">入手方法</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">source_gem</code></td><td class="px-4 py-3 text-body">ソースジェム</td><td class="px-4 py-3 text-body">PRISMARINE_SHARD</td><td class="px-4 py-3 text-body">儀式（アメジスト+ラピス）</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">source_gem_block</code></td><td class="px-4 py-3 text-body">ソースジェムブロック</td><td class="px-4 py-3 text-body">PRISMARINE</td><td class="px-4 py-3 text-body">作業台（gem x9）</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">magebloom_fiber</code></td><td class="px-4 py-3 text-body">マジックファイバー</td><td class="px-4 py-3 text-body">STRING</td><td class="px-4 py-3 text-body">儀式（種+gem）</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">sourcestone</code></td><td class="px-4 py-3 text-body">ソースストーン</td><td class="px-4 py-3 text-body">STONE</td><td class="px-4 py-3 text-body">作業台（ソースベリー+焼き石）</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">消耗品</h3>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ID</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">名前</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">source_berry</code></td><td class="px-4 py-3 text-body">ソースベリー</td><td class="px-4 py-3 text-body">マナ25即時回復。ソースジャーに右クリックでSource+100</td></tr>
-            </tbody>
-          </table>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          全カスタムブロックはピストン・爆発・投射物による破壊から保護されます。破壊時はカスタムアイテムとしてドロップします。
         </div>
       </section>
 
-      <!-- カスタムブロック -->
-      <section id="custom-blocks">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">カスタムブロック</h2>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ID</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ベースブロック</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">入手方法</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">scribing_table</code></td><td class="px-4 py-3 text-body">LECTERN</td><td class="px-4 py-3 text-body">グリフ解放台</td><td class="px-4 py-3 text-body">作業台</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">source_jar</code></td><td class="px-4 py-3 text-body">DECORATED_POT</td><td class="px-4 py-3 text-body">Source貯蔵（最大10,000）</td><td class="px-4 py-3 text-body">作業台</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">creative_source_jar</code></td><td class="px-4 py-3 text-body">DECORATED_POT</td><td class="px-4 py-3 text-body">無限Source（クリエイティブ専用）</td><td class="px-4 py-3 text-body">give</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">volcanic_sourcelink</code></td><td class="px-4 py-3 text-body">FURNACE</td><td class="px-4 py-3 text-body">燃料消費でSource生成</td><td class="px-4 py-3 text-body">儀式</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">mycelial_sourcelink</code></td><td class="px-4 py-3 text-body">SMOKER</td><td class="px-4 py-3 text-body">食料消費でSource生成</td><td class="px-4 py-3 text-body">儀式</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">ritual_core</code></td><td class="px-4 py-3 text-body">LODESTONE</td><td class="px-4 py-3 text-body">儀式の中心ブロック</td><td class="px-4 py-3 text-body">作業台</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">pedestal</code></td><td class="px-4 py-3 text-body">BREWING_STAND</td><td class="px-4 py-3 text-body">儀式の素材台座</td><td class="px-4 py-3 text-body">作業台</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex items-start gap-3 p-4 bg-primary-50 border border-primary-200 rounded-lg text-sm mb-4">
-          <div>
-            <div class="font-medium text-primary-700 mb-1">ブロック保護</div>
-            <p class="text-primary-700">全カスタムブロックはピストン・爆発・投射物による破壊から保護されています。</p>
+      <!-- ===== 防具システム ===== -->
+      <section id="armor-system" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">防具システム</h2>
+        <p class="text-body leading-relaxed mb-6">防具は <code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">armors.yml</code> で <strong>3タイプ×3ティア</strong> の合計9セットが定義されています。全て儀式で作成します。</p>
+
+        <!-- 守護メイジ -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">守護メイジ（Guardian）-- 防御特化</h3>
+        <p class="text-body leading-relaxed mb-4">高い防御力と防具強度が特徴。前線でスペルを使うプレイヤー向け。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ティア</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">防御合計</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">強度</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナ(部位)</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">リジェン(部位)</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スロット</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Source</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body">見習い</td><td class="px-4 py-3 text-body">11</td><td class="px-4 py-3 text-body">0.5</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">+1</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">500</td></tr>
+                <tr><td class="px-4 py-3 text-body">魔術師</td><td class="px-4 py-3 text-body">17</td><td class="px-4 py-3 text-body">1.5</td><td class="px-4 py-3 text-body">+15</td><td class="px-4 py-3 text-body">+3</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">2,000</td></tr>
+                <tr><td class="px-4 py-3 text-body">大魔導士</td><td class="px-4 py-3 text-body">23</td><td class="px-4 py-3 text-body">3.0</td><td class="px-4 py-3 text-body">+25</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">5,000</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </section>
-
-      <!-- 防具システム -->
-      <section id="armor-system">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">防具システム</h2>
-        <p class="text-body leading-relaxed mb-6">3タイプ x 3ティア = 計9セットの防具が存在します。すべて<strong>儀式</strong>で作成します。</p>
-
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">守護メイジ（Guardian）</h3>
-        <p class="text-body leading-relaxed mb-4">高い防御力を持つタンク型の防具セットです。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ティア</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">防御合計</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナボーナス</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">リジェン</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スレッドスロット</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">Novice</td><td class="px-4 py-3 text-body">8</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">+1</td><td class="px-4 py-3 text-body">1</td></tr>
-              <tr><td class="px-4 py-3 text-body">Apprentice</td><td class="px-4 py-3 text-body">18</td><td class="px-4 py-3 text-body">+15</td><td class="px-4 py-3 text-body">+3</td><td class="px-4 py-3 text-body">2</td></tr>
-              <tr><td class="px-4 py-3 text-body">Archmage</td><td class="px-4 py-3 text-body">23</td><td class="px-4 py-3 text-body">+25</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">3</td></tr>
-            </tbody>
-          </table>
+        <div class="text-body text-sm space-y-1 mb-6">
+          <p><strong>T1素材</strong>: 革防具+ソースジェム×2+鉄インゴット×4</p>
+          <p><strong>T2素材</strong>: T1防具+ソースジェム×4+ダイヤ×2+鉄ブロック+金ブロック</p>
+          <p><strong>T3素材</strong>: T2防具+ソースジェムブロック×2+ネザライトインゴット×4+ダイヤブロック+エメラルドブロック</p>
         </div>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">魔導メイジ（Arcane）</h3>
-        <p class="text-body leading-relaxed mb-4">マナに特化したキャスター型の防具セットです。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ティア</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">防御合計</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナボーナス</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">リジェン</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スレッドスロット</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">Novice</td><td class="px-4 py-3 text-body">6</td><td class="px-4 py-3 text-body">+10</td><td class="px-4 py-3 text-body">+2</td><td class="px-4 py-3 text-body">1</td></tr>
-              <tr><td class="px-4 py-3 text-body">Apprentice</td><td class="px-4 py-3 text-body">12</td><td class="px-4 py-3 text-body">+30</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">2</td></tr>
-              <tr><td class="px-4 py-3 text-body">Archmage</td><td class="px-4 py-3 text-body">17</td><td class="px-4 py-3 text-body">+50</td><td class="px-4 py-3 text-body">+8</td><td class="px-4 py-3 text-body">3</td></tr>
-            </tbody>
-          </table>
+        <!-- 魔導メイジ -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">魔導メイジ（Arcane）-- マナ特化</h3>
+        <p class="text-body leading-relaxed mb-4">高いマナボーナスとリジェンが特徴。スペル多用のキャスター向け。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ティア</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">防御合計</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">強度</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナ(部位)</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">リジェン(部位)</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スロット</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Source</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body">見習い</td><td class="px-4 py-3 text-body">6</td><td class="px-4 py-3 text-body">0.0</td><td class="px-4 py-3 text-body">+10</td><td class="px-4 py-3 text-body">+2</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">600</td></tr>
+                <tr><td class="px-4 py-3 text-body">魔術師</td><td class="px-4 py-3 text-body">11</td><td class="px-4 py-3 text-body">0.0</td><td class="px-4 py-3 text-body">+30</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">2,500</td></tr>
+                <tr><td class="px-4 py-3 text-body">大魔導士</td><td class="px-4 py-3 text-body">17</td><td class="px-4 py-3 text-body">1.0</td><td class="px-4 py-3 text-body">+50</td><td class="px-4 py-3 text-body">+8</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">6,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="text-body text-sm space-y-1 mb-6">
+          <p><strong>T1素材</strong>: 革防具+ソースジェム×2+アメジストの欠片×4+ラピスラズリ×2</p>
+          <p><strong>T2素材</strong>: T1防具+ソースジェム×4+ブレイズロッド×2+ガストの涙×2</p>
+          <p><strong>T3素材</strong>: T2防具+ソースジェムブロック×2+不死のトーテム+ブリーズロッド+エコーの欠片×2+ダイヤブロック+エメラルドブロック</p>
         </div>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">魔織メイジ（Weaver）</h3>
-        <p class="text-body leading-relaxed mb-4">スレッドスロットが多いカスタマイズ型の防具セットです。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ティア</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">防御合計</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナボーナス</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">リジェン</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スレッドスロット</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">Novice</td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">+1</td><td class="px-4 py-3 text-body">3</td></tr>
-              <tr><td class="px-4 py-3 text-body">Apprentice</td><td class="px-4 py-3 text-body">7</td><td class="px-4 py-3 text-body">+15</td><td class="px-4 py-3 text-body">+3</td><td class="px-4 py-3 text-body">4</td></tr>
-              <tr><td class="px-4 py-3 text-body">Archmage</td><td class="px-4 py-3 text-body">13</td><td class="px-4 py-3 text-body">+30</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">5</td></tr>
-            </tbody>
-          </table>
+        <!-- 魔織メイジ -->
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">魔織メイジ（Weaver）-- スレッド特化</h3>
+        <p class="text-body leading-relaxed mb-4">スレッドスロットが多い。スレッドで柔軟にカスタマイズしたいプレイヤー向け。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ティア</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">防御合計</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">強度</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">マナ(部位)</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">リジェン(部位)</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スロット</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Source</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body">見習い</td><td class="px-4 py-3 text-body">5</td><td class="px-4 py-3 text-body">0.0</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body">+1</td><td class="px-4 py-3 text-body font-bold">3</td><td class="px-4 py-3 text-body">500</td></tr>
+                <tr><td class="px-4 py-3 text-body">魔術師</td><td class="px-4 py-3 text-body">7</td><td class="px-4 py-3 text-body">0.0</td><td class="px-4 py-3 text-body">+15</td><td class="px-4 py-3 text-body">+3</td><td class="px-4 py-3 text-body font-bold">4</td><td class="px-4 py-3 text-body">2,000</td></tr>
+                <tr><td class="px-4 py-3 text-body">大魔導士</td><td class="px-4 py-3 text-body">13</td><td class="px-4 py-3 text-body">0.5</td><td class="px-4 py-3 text-body">+30</td><td class="px-4 py-3 text-body">+5</td><td class="px-4 py-3 text-body font-bold">5</td><td class="px-4 py-3 text-body">5,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="text-body text-sm space-y-1 mb-6">
+          <p><strong>T1素材</strong>: 革防具+マジックファイバー×2+ソースジェム×2+糸×4</p>
+          <p><strong>T2素材</strong>: T1防具+マジックファイバー×4+ソースジェム×2+エンダーアイ×2</p>
+          <p><strong>T3素材</strong>: T2防具+マジックファイバー×4+ソースジェムブロック×2+ダイヤブロック+ネザースター</p>
         </div>
       </section>
 
-      <!-- スレッドシステム -->
-      <section id="thread-system">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">スレッドシステム</h2>
-        <p class="text-body leading-relaxed mb-4">防具にスレッドを装着して追加効果を得るシステムです。</p>
-        <ul class="list-disc list-inside space-y-2 text-body leading-relaxed mb-6">
-          <li><strong>スニーク+右クリック</strong>でスレッドGUIを開く</li>
-          <li>空きスロットをクリックしてスレッドを挿入</li>
-          <li>装着済みスレッドをクリックで取り外し</li>
+      <!-- ===== スレッドシステム ===== -->
+      <section id="thread-system" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">スレッドシステム</h2>
+        <p class="text-body leading-relaxed mb-4">メイジアーマーのスレッドスロットに挿入して追加効果を得る仕組みです。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">操作方法</h3>
+        <ul class="list-disc list-inside space-y-1 text-body leading-relaxed mb-6">
+          <li>防具を手に持ち <strong>スニーク+右クリック</strong> でスレッドGUIを開く</li>
+          <li>空きスロットをクリックでスレッド挿入（カーソル上のアイテムを優先、なければインベントリから自動検索）</li>
+          <li>装着済みスレッドをクリックで取り外し（インベントリに戻る。満杯時は足元にドロップ）</li>
         </ul>
 
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スレッド</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">重複</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">マナ回復速度上昇</td><td class="px-4 py-3 text-body">リジェン+2/tick</td><td class="px-4 py-3 text-body">可（最大8）</td></tr>
-              <tr><td class="px-4 py-3 text-body">最大マナ上昇</td><td class="px-4 py-3 text-body">マナ+20</td><td class="px-4 py-3 text-body">可（最大8）</td></tr>
-              <tr><td class="px-4 py-3 text-body">迅速</td><td class="px-4 py-3 text-body">移動速度上昇</td><td class="px-4 py-3 text-body">不可</td></tr>
-              <tr><td class="px-4 py-3 text-body">跳躍</td><td class="px-4 py-3 text-body">ジャンプ力上昇</td><td class="px-4 py-3 text-body">不可</td></tr>
-              <tr><td class="px-4 py-3 text-body">暗視</td><td class="px-4 py-3 text-body">暗視</td><td class="px-4 py-3 text-body">不可</td></tr>
-              <tr><td class="px-4 py-3 text-body">耐火</td><td class="px-4 py-3 text-body">火炎耐性</td><td class="px-4 py-3 text-body">不可</td></tr>
-              <tr><td class="px-4 py-3 text-body">水中移動</td><td class="px-4 py-3 text-body">イルカの好意</td><td class="px-4 py-3 text-body">不可</td></tr>
-              <tr><td class="px-4 py-3 text-body">コンジット</td><td class="px-4 py-3 text-body">コンジットパワー</td><td class="px-4 py-3 text-body">不可</td></tr>
-              <tr><td class="px-4 py-3 text-body">英雄</td><td class="px-4 py-3 text-body">村の英雄</td><td class="px-4 py-3 text-body">不可</td></tr>
-              <tr><td class="px-4 py-3 text-body">体力増強</td><td class="px-4 py-3 text-body">体力増強</td><td class="px-4 py-3 text-body">可（最大4）</td></tr>
-              <tr><td class="px-4 py-3 text-body">被弾マナ回復</td><td class="px-4 py-3 text-body">被弾時マナ+8</td><td class="px-4 py-3 text-body">可（最大8）</td></tr>
-              <tr><td class="px-4 py-3 text-body">攻撃マナ回復</td><td class="px-4 py-3 text-body">与ダメ時マナ+4</td><td class="px-4 py-3 text-body">可（最大8）</td></tr>
-              <tr><td class="px-4 py-3 text-body">詠唱効率</td><td class="px-4 py-3 text-body">マナコスト-12%</td><td class="px-4 py-3 text-body">可（最大3）</td></tr>
-              <tr><td class="px-4 py-3 text-body">飛行</td><td class="px-4 py-3 text-body">エリトラ滑空（常時）</td><td class="px-4 py-3 text-body">不可</td></tr>
-              <tr><td class="px-4 py-3 text-body">収納</td><td class="px-4 py-3 text-body">27スロットバックパック</td><td class="px-4 py-3 text-body">可（最大2）</td></tr>
-            </tbody>
-          </table>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          全スレッドは儀式で作成。まず <strong>空のスレッド</strong> を作り（儀式コアに糸、台座にマジックファイバー+ソースジェム, Source 100）、さらに儀式で効果付きスレッドに変換します。
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">重複可能スレッド</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スレッド</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">最大数/防具</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">台座素材</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Source</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">マナ回復速度上昇</td><td class="px-4 py-3 text-body">リジェン+2/秒</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">ガストの涙×2, ソースジェム×2, マジックファイバー×2</td><td class="px-4 py-3 text-body">500</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">最大マナ上昇</td><td class="px-4 py-3 text-body">マナ+20</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">ダイヤブロック×2, ソースジェム×2, マジックファイバー×2</td><td class="px-4 py-3 text-body">800</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">体力増強</td><td class="px-4 py-3 text-body">体力上限UP</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">金リンゴ×2, ネザライトインゴット, ソースジェム×2</td><td class="px-4 py-3 text-body">800</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">被弾マナ回復</td><td class="px-4 py-3 text-body">被弾時マナ+8</td><td class="px-4 py-3 text-body">8</td><td class="px-4 py-3 text-body">盾, ソースジェム×2, マジックファイバー</td><td class="px-4 py-3 text-body">600</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">攻撃マナ回復</td><td class="px-4 py-3 text-body">与ダメ時マナ+4</td><td class="px-4 py-3 text-body">8</td><td class="px-4 py-3 text-body">ブレイズロッド×2, ソースジェム×2</td><td class="px-4 py-3 text-body">600</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">詠唱効率</td><td class="px-4 py-3 text-body">マナコスト-8%</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">ネザライトブロック, 金ブロック, エメラルドブロック, ソースジェム×3</td><td class="px-4 py-3 text-body">1,500</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">収納</td><td class="px-4 py-3 text-body">27スロットバックパック</td><td class="px-4 py-3 text-body">2</td><td class="px-4 py-3 text-body">チェスト, エンダーチェスト, ダイヤ, ソースジェム×2</td><td class="px-4 py-3 text-body">500</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">重複不可スレッド</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">スレッド</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">台座素材</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Source</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">迅速</td><td class="px-4 py-3 text-body">移動速度上昇</td><td class="px-4 py-3 text-body">砂糖×2, ウサギの足, ソースジェム×2</td><td class="px-4 py-3 text-body">600</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">跳躍</td><td class="px-4 py-3 text-body">ジャンプ力上昇</td><td class="px-4 py-3 text-body">ウサギの足×2, スライムボール, ソースジェム×2</td><td class="px-4 py-3 text-body">600</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">暗視</td><td class="px-4 py-3 text-body">暗視効果</td><td class="px-4 py-3 text-body">金ニンジン×2, グロウストーンダスト, ソースジェム×2</td><td class="px-4 py-3 text-body">600</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">耐火</td><td class="px-4 py-3 text-body">火炎耐性</td><td class="px-4 py-3 text-body">マグマクリーム×2, ブレイズパウダー, ソースジェム×2</td><td class="px-4 py-3 text-body">800</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">水中移動</td><td class="px-4 py-3 text-body">イルカの好意</td><td class="px-4 py-3 text-body">フグ×2, シーランタン, ソースジェム×2</td><td class="px-4 py-3 text-body">600</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">コンジット</td><td class="px-4 py-3 text-body">コンジットパワー</td><td class="px-4 py-3 text-body">オウムガイの殻×2, 海の心, ソースジェム×2</td><td class="px-4 py-3 text-body">1,000</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">英雄</td><td class="px-4 py-3 text-body">村の英雄（取引割引）</td><td class="px-4 py-3 text-body">エメラルドブロック×3, ソースジェム×2</td><td class="px-4 py-3 text-body">800</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">飛行</td><td class="px-4 py-3 text-body">エリトラ滑空（空中ジャンプで開始、落下ダメージ無効）</td><td class="px-4 py-3 text-body">羽×2, ファントムの皮膜×2, エリトラ, ネザースター, ソースジェム×2</td><td class="px-4 py-3 text-body">3,000</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
-      <!-- Sourceネットワーク -->
-      <section id="source-network">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">Sourceネットワーク</h2>
-        <p class="text-body leading-relaxed mb-4">Sourceはスペル発動や儀式に必要なエネルギーです。ネットワークを構築して管理します。</p>
+      <!-- ===== Sourceネットワーク ===== -->
+      <section id="source-network" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">Sourceネットワーク</h2>
+        <p class="text-body leading-relaxed mb-4">Sourceは儀式やソースリンクの燃料となるエネルギーです。</p>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">ソースジャー</h3>
-        <p class="text-body leading-relaxed mb-4">Sourceを貯蔵するブロックです。最大<strong>10,000 Source</strong>を保持できます。ソースベリーを右クリックすると<strong>+100 Source</strong>が補充されます。</p>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ソースジャー</h3>
+        <ul class="list-disc list-inside space-y-1 text-body leading-relaxed mb-6">
+          <li>最大 <strong>10,000 Source</strong> を貯蔵</li>
+          <li><strong>ソースベリー</strong> を右クリックで +100 Source</li>
+          <li>破壊してもSource量は保持される（再設置で復元）</li>
+        </ul>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">ソースリンク</h3>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">種類</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">変換元</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">説明</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">ヴォルケーニック ソースリンク</td><td class="px-4 py-3 text-body">燃料</td><td class="px-4 py-3 text-body">燃料を消費してSourceを生成</td></tr>
-              <tr><td class="px-4 py-3 text-body">マイセリアル ソースリンク</td><td class="px-4 py-3 text-body">食料</td><td class="px-4 py-3 text-body">食料を消費してSourceを生成</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ソースリンク</h3>
+        <ul class="list-disc list-inside space-y-1 text-body leading-relaxed mb-6">
+          <li><strong>ヴォルケーニック</strong>: かまどの燃料を消費してSource生成 → 隣接するソースジャーに自動供給</li>
+          <li><strong>マイセリアル</strong>: 燻製器の食料を消費してSource生成 → 隣接するソースジャーに自動供給</li>
+        </ul>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">ドミニオンワンド</h3>
-        <p class="text-body leading-relaxed mb-4">ソースブロック間の接続を管理するツールです。最大<strong>30ブロック</strong>の距離まで接続可能です。</p>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ドミニオンワンド</h3>
+        <ul class="list-disc list-inside space-y-1 text-body leading-relaxed mb-6">
+          <li>ソースブロック間の接続を管理（最大30ブロック距離）</li>
+          <li>1つ目のブロックを右クリック → 2つ目のブロックを右クリックで接続</li>
+        </ul>
       </section>
 
-      <!-- 儀式システム -->
-      <section id="ritual-system">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">儀式システム</h2>
+      <!-- ===== 儀式システム ===== -->
+      <section id="ritual-system" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">儀式システム</h2>
+        <p class="text-body leading-relaxed mb-4">儀式コアを中心に台座を配置し、素材とSourceを消費してアイテム作成やワールドエフェクトを発動します。</p>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">手順</h3>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">儀式の手順</h3>
         <ol class="list-decimal list-inside space-y-2 text-body leading-relaxed mb-6">
-          <li><strong>儀式コアを設置</strong></li>
-          <li>周囲<strong>3ブロック以内</strong>に台座を配置</li>
-          <li>レシピ通りにアイテムを台座に設置</li>
-          <li>ソースジャーを近くに配置（Sourceが必要）</li>
-          <li>儀式コアを<strong>右クリック</strong>で開始（3秒後に完了）</li>
+          <li>儀式コアを設置</li>
+          <li>周囲 <strong>3ブロック以内</strong>（上下1ブロック）に台座を配置</li>
+          <li>コアと台座にレシピ通りのアイテムを設置（台座のアイテムは順不同）</li>
+          <li>近くに十分なSourceが入ったソースジャーを配置（<strong>5ブロック以内</strong>）</li>
+          <li>儀式コアを <strong>右クリック</strong> で儀式開始（3秒のアニメーション後に完了）</li>
         </ol>
 
-        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-3">ワールドエフェクト儀式</h3>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">儀式名</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">豊穣</td><td class="px-4 py-3 text-body">周囲の作物を成長促進</td></tr>
-              <tr><td class="px-4 py-3 text-body">天候操作</td><td class="px-4 py-3 text-body">天候を切り替え</td></tr>
-              <tr><td class="px-4 py-3 text-body">飛行</td><td class="px-4 py-3 text-body">300秒間の飛行能力</td></tr>
-              <tr><td class="px-4 py-3 text-body">月落とし</td><td class="px-4 py-3 text-body">時刻を夜に変更</td></tr>
-              <tr><td class="px-4 py-3 text-body">日の出</td><td class="px-4 py-3 text-body">時刻を朝に変更</td></tr>
-              <tr><td class="px-4 py-3 text-body">修復</td><td class="px-4 py-3 text-body">コアに置いた装備の耐久回復</td></tr>
-              <tr><td class="px-4 py-3 text-body">帰還設定・帰還</td><td class="px-4 py-3 text-body">テレポートポイント設定・テレポート</td></tr>
-              <tr><td class="px-4 py-3 text-body">封じ込め</td><td class="px-4 py-3 text-body">モンスター侵入防止エリア</td></tr>
-              <tr><td class="px-4 py-3 text-body">動物召喚</td><td class="px-4 py-3 text-body">動物を5体召喚</td></tr>
-            </tbody>
-          </table>
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ワールドエフェクト儀式</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">儀式</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">台座素材</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Source</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">豊穣</td><td class="px-4 py-3 text-body">半径10ブロックの作物を成長促進</td><td class="px-4 py-3 text-body">骨粉×4, ソースジェム</td><td class="px-4 py-3 text-body">300</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">天候操作</td><td class="px-4 py-3 text-body">天候を切り替え（晴れ↔雨）</td><td class="px-4 py-3 text-body">プリズマリンの欠片×2, 避雷針×2, ソースジェム×2</td><td class="px-4 py-3 text-body">1,000</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">飛行</td><td class="px-4 py-3 text-body">300秒間の飛行能力を付与</td><td class="px-4 py-3 text-body">羽×4, ファントムの皮膜×2, ソースジェム×2</td><td class="px-4 py-3 text-body">2,000</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">月落とし</td><td class="px-4 py-3 text-body">時刻を夕暮れに変更</td><td class="px-4 py-3 text-body">時計, グロウストーンダスト×2, ソースジェム</td><td class="px-4 py-3 text-body">500</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">日の出</td><td class="px-4 py-3 text-body">時刻を朝に変更</td><td class="px-4 py-3 text-body">時計, ヒマワリ×2, ソースジェム</td><td class="px-4 py-3 text-body">500</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">修復</td><td class="px-4 py-3 text-body">コアに置いた装備の耐久値を全回復</td><td class="px-4 py-3 text-body">鉄インゴット×2, ダイヤモンド, ソースジェム×2</td><td class="px-4 py-3 text-body">800</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">帰還設定</td><td class="px-4 py-3 text-body">現在地を帰還ポイントに設定</td><td class="px-4 py-3 text-body">エンダーパール×2, コンパス, ソースジェム</td><td class="px-4 py-3 text-body">300</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">帰還</td><td class="px-4 py-3 text-body">保存した帰還ポイントへテレポート</td><td class="px-4 py-3 text-body">エンダーパール×4, ソースジェム×2</td><td class="px-4 py-3 text-body">1,500</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">封じ込め</td><td class="px-4 py-3 text-body">半径30ブロックのモンスター侵入防止エリアを5分間生成</td><td class="px-4 py-3 text-body">鉄格子×4, 松明×2, ソースジェム×2</td><td class="px-4 py-3 text-body">1,000</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">動物召喚</td><td class="px-4 py-3 text-body">ランダムな動物を5体召喚</td><td class="px-4 py-3 text-body">小麦×2, ニンジン×2, ソースジェム</td><td class="px-4 py-3 text-body">400</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          全レシピは <code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars recipes</code> コマンドでゲーム内から閲覧できます。
         </div>
       </section>
 
-      <!-- エンチャント -->
-      <section id="enchantments">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">エンチャント</h2>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
+      <!-- ===== エンチャント ===== -->
+      <section id="enchantments" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">エンチャント</h2>
+        <p class="text-body leading-relaxed mb-4">Paper Registry APIで登録されたカスタムエンチャント。儀式でエンチャント本を作成し、<strong>金床で防具/スペルブックに適用</strong>します。エンチャント台からは出現しません。</p>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
           <table class="w-full text-left">
             <thead class="border-b border-slate-200 bg-gray-50">
               <tr>
                 <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">エンチャント</th>
                 <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">対象</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">最大レベル</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">最大Lv</th>
                 <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">効果</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">マナ加速</td><td class="px-4 py-3 text-body">メイジアーマー</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">リジェン +1 / +2 / +3</td></tr>
-              <tr><td class="px-4 py-3 text-body">マナ上昇</td><td class="px-4 py-3 text-body">メイジアーマー</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">マナ +15 / +30 / +50</td></tr>
-              <tr><td class="px-4 py-3 text-body">共有</td><td class="px-4 py-3 text-body">スペルブック</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">他プレイヤーが使用可能になる</td></tr>
+              <tr><td class="px-4 py-3 text-body font-medium">マナ加速</td><td class="px-4 py-3 text-body">メイジアーマー</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">Lv1: リジェン+1, Lv2: +2, Lv3: +3</td></tr>
+              <tr><td class="px-4 py-3 text-body font-medium">マナ上昇</td><td class="px-4 py-3 text-body">メイジアーマー</td><td class="px-4 py-3 text-body">3</td><td class="px-4 py-3 text-body">Lv1: マナ+15, Lv2: +30, Lv3: +50</td></tr>
+              <tr><td class="px-4 py-3 text-body font-medium">共有</td><td class="px-4 py-3 text-body">スペルブック</td><td class="px-4 py-3 text-body">1</td><td class="px-4 py-3 text-body">他プレイヤーがスペルブックを使用可能に</td></tr>
             </tbody>
           </table>
         </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">エンチャント本の入手（儀式で作成）</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">本</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">コアアイテム</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">台座素材</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Source</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body font-medium">マナ加速 I</td><td class="px-4 py-3 text-body">本</td><td class="px-4 py-3 text-body">ソースジェム×2, ガストの涙, ラピスラズリ×2</td><td class="px-4 py-3 text-body">500</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">マナ加速 II</td><td class="px-4 py-3 text-body">本</td><td class="px-4 py-3 text-body">ソースジェム×3, ガストの涙×2, ダイヤブロック</td><td class="px-4 py-3 text-body">1,000</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">マナ加速 III</td><td class="px-4 py-3 text-body">本</td><td class="px-4 py-3 text-body">ソースジェム×4, ガストの涙×2, ネザースター</td><td class="px-4 py-3 text-body">2,000</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">マナ上昇 I</td><td class="px-4 py-3 text-body">本</td><td class="px-4 py-3 text-body">ソースジェム×2, エコーの欠片, ラピスラズリ×2</td><td class="px-4 py-3 text-body">500</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">マナ上昇 II</td><td class="px-4 py-3 text-body">本</td><td class="px-4 py-3 text-body">ソースジェム×3, エコーの欠片, ダイヤブロック</td><td class="px-4 py-3 text-body">1,000</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">マナ上昇 III</td><td class="px-4 py-3 text-body">本</td><td class="px-4 py-3 text-body">ソースジェム×4, エコーの欠片, ネザースター</td><td class="px-4 py-3 text-body">2,000</td></tr>
+                <tr><td class="px-4 py-3 text-body font-medium">共有</td><td class="px-4 py-3 text-body">本</td><td class="px-4 py-3 text-body">ソースジェムブロック×2, エンダーアイ×4, ネザースター, ダイヤブロック</td><td class="px-4 py-3 text-body">3,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
 
-      <!-- 設定ファイル -->
-      <section id="config">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">設定ファイル</h2>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
+      <!-- ===== ルートチェスト ===== -->
+      <section id="loot-chests" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">ルートチェスト</h2>
+        <p class="text-body leading-relaxed mb-4">バニラのダンジョンや神殿のルートチェストから、カスタムエンチャント本がランダムで出現します。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">出現アイテム</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-left">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">アイテム</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">デフォルト確率</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">内容</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">カスタムエンチャント本</td><td class="px-4 py-3 text-body">5%</td><td class="px-4 py-3 text-body">マナ加速/マナ上昇/共有からランダム、レベルもランダム</td></tr>
+              <tr><td class="px-4 py-3 text-body">エンチャント金リンゴ</td><td class="px-4 py-3 text-body">1%</td><td class="px-4 py-3 text-body">バニラのエンチャント金リンゴ（ゴッドアップル）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">対象ストラクチャー</h3>
+        <p class="text-body leading-relaxed mb-4">希少なストラクチャーのチェストのみが対象です。</p>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-left">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">ストラクチャー</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">備考</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-4 py-3 text-body">廃坑</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">砂漠の神殿</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">ジャングルの寺院</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">ダンジョン（スポナー部屋）</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">要塞（通路・交差点・図書室）</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">森の洋館</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">エンドシティ</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">砦の遺跡（全タイプ）</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">古代都市</td><td class="px-4 py-3 text-body"></td></tr>
+              <tr><td class="px-4 py-3 text-body">埋蔵金</td><td class="px-4 py-3 text-body"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          村・トライアルチャンバー・難破船・ネザー要塞はチェストが多すぎるため除外されています。
+        </div>
+      </section>
+
+      <!-- ===== 設定ファイル ===== -->
+      <section id="config" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">設定ファイル</h2>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
           <table class="w-full text-left">
             <thead class="border-b border-slate-200 bg-gray-50">
               <tr>
@@ -658,47 +983,55 @@ tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">config.yml</code></td><td class="px-4 py-3 text-body">マナ基礎値、Geyser互換設定</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">glyphs.yml</code></td><td class="px-4 py-3 text-body">グリフのティア・マナコスト・解放コスト</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">items.yml</code></td><td class="px-4 py-3 text-body">アイテムレシピ（作業台+儀式）</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">materials.yml</code></td><td class="px-4 py-3 text-body">中間素材定義</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">armors.yml</code></td><td class="px-4 py-3 text-body">防具セット定義</td></tr>
-              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">threads.yml</code></td><td class="px-4 py-3 text-body">スレッド定義</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">config.yml</code></td><td class="px-4 py-3 text-body">マナ基礎値、Geyser互換設定、ルートチェスト確率</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">glyphs.yml</code></td><td class="px-4 py-3 text-body">グリフのティア・マナコスト・解放コスト・増強上限・交換/粉砕マッピング</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">items.yml</code></td><td class="px-4 py-3 text-body">アイテムレシピ（作業台+儀式）と儀式エフェクト定義</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">materials.yml</code></td><td class="px-4 py-3 text-body">中間素材定義（ソースジェム等）</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">armors.yml</code></td><td class="px-4 py-3 text-body">防具セット定義（ステータス・色・防御値・スレッドスロット数）</td></tr>
+              <tr><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">threads.yml</code></td><td class="px-4 py-3 text-body">スレッド定義（効果量・レシピ・重複設定）</td></tr>
             </tbody>
           </table>
         </div>
+        <p class="text-body leading-relaxed mb-4">全設定は <code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">/ars reload</code> でホットリロード可能（マナ回復間隔の変更のみサーバ再起動が必要）。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">Geyser設定</h3>
+        <p class="text-body leading-relaxed mb-4"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">config.yml</code> で <code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">geyser.disable-custom-model-data: true</code> にすると、CustomModelDataを設定せずにアイテムを生成します。統合版でアイテムが透明になる問題を回避できます。</p>
       </section>
 
-      <!-- Geyser互換性 -->
-      <section id="geyser">
-        <h2 class="text-xl font-semibold text-slate-900 mt-12 mb-4">Geyser互換性</h2>
-        <p class="text-body leading-relaxed mb-4">統合版（Bedrock）プレイヤーとの互換性情報です。</p>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-4">
-          <table class="w-full text-left">
-            <thead class="border-b border-slate-200 bg-gray-50">
-              <tr>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">機能</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Java版</th>
-                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">統合版（Geyser）</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="px-4 py-3 text-body">スペル発動</td><td class="px-4 py-3 text-body">右クリック</td><td class="px-4 py-3 text-body">右クリック</td></tr>
-              <tr><td class="px-4 py-3 text-body">GUI操作</td><td class="px-4 py-3 text-body">ボタン式</td><td class="px-4 py-3 text-body">ボタン式</td></tr>
-              <tr><td class="px-4 py-3 text-body">スロット切替</td><td class="px-4 py-3 text-body">スニーク+右クリック</td><td class="px-4 py-3 text-body">スニーク+右クリック</td></tr>
-              <tr><td class="px-4 py-3 text-body">スレッドGUI</td><td class="px-4 py-3 text-body">スニーク+右クリック</td><td class="px-4 py-3 text-body">スニーク+右クリック</td></tr>
-              <tr><td class="px-4 py-3 text-body">スペル作成GUI</td><td class="px-4 py-3 text-body">スニーク+左クリック</td><td class="px-4 py-3 text-body">スニーク+左クリック※</td></tr>
-              <tr><td class="px-4 py-3 text-body">アイテム表示</td><td class="px-4 py-3 text-body">CustomModelData対応</td><td class="px-4 py-3 text-body">disable推奨</td></tr>
-              <tr><td class="px-4 py-3 text-body">パーティクル</td><td class="px-4 py-3 text-body">全対応</td><td class="px-4 py-3 text-body">一部簡略化</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-lg text-sm mb-4">
-          <div>
-            <div class="font-medium text-amber-700 mb-1">統合版での注意点</div>
-            <p class="text-amber-700">スペル作成GUIはスニーク+左クリックで開きますが、統合版では一部操作に制限がある場合があります。アイテム表示のCustomModelDataは統合版では正しく表示されないため、disable設定を推奨します。</p>
+      <!-- ===== Geyser互換性 ===== -->
+      <section id="geyser" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">Geyser互換性</h2>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">対応状況</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead class="border-b border-slate-200 bg-gray-50">
+                <tr>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">機能</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Java版</th>
+                  <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-4 py-3 text-left">Bedrock版(Geyser)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="px-4 py-3 text-body">スペル発動</td><td class="px-4 py-3 text-body">右クリック</td><td class="px-4 py-3 text-body">右クリック</td></tr>
+                <tr><td class="px-4 py-3 text-body">GUI操作</td><td class="px-4 py-3 text-body">ボタン式</td><td class="px-4 py-3 text-body">ボタン式</td></tr>
+                <tr><td class="px-4 py-3 text-body">スロット切替</td><td class="px-4 py-3 text-body">スニーク+右クリック</td><td class="px-4 py-3 text-body">スニーク+右クリック</td></tr>
+                <tr><td class="px-4 py-3 text-body">スレッドGUI</td><td class="px-4 py-3 text-body">スニーク+右クリック(防具)</td><td class="px-4 py-3 text-body">スニーク+右クリック(防具)</td></tr>
+                <tr><td class="px-4 py-3 text-body">スペル作成GUI</td><td class="px-4 py-3 text-body">スニーク+左クリック</td><td class="px-4 py-3 text-body">スニーク+左クリック ※</td></tr>
+                <tr><td class="px-4 py-3 text-body">アイテム表示</td><td class="px-4 py-3 text-body">CustomModelData対応</td><td class="px-4 py-3 text-body"><code class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-sm font-mono">disable-custom-model-data: true</code> 推奨</td></tr>
+                <tr><td class="px-4 py-3 text-body">パーティクル</td><td class="px-4 py-3 text-body">全対応</td><td class="px-4 py-3 text-body">一部簡略化</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <div class="font-medium text-amber-700 mb-1">統合版での注意点</div>
+          <p class="text-amber-700">Bedrock版のスニーク+左クリックは不安定な場合があります。</p>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">リソースパック未使用時</h3>
+        <p class="text-body leading-relaxed mb-4">CustomModelDataが無効の場合でも、アイテムは表示名・ロア・エンチャントグローで区別できます。機能面は完全に動作します。</p>
       </section>
 
       <!-- Footer -->
@@ -707,10 +1040,10 @@ tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:
     </div>
   </main>
 
-<script>
-const menuBtn=document.getElementById('menu-btn'),sidebar=document.getElementById('sidebar'),overlay=document.getElementById('overlay');
-function toggleSidebar(){sidebar.classList.toggle('-translate-x-full');overlay.classList.toggle('hidden')}
-menuBtn?.addEventListener('click',toggleSidebar);
-overlay?.addEventListener('click',toggleSidebar);
-</script>
+  <!-- Back to top -->
+  <button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center text-slate-500 hover:bg-gray-50 transition-all opacity-0 pointer-events-none z-50" aria-label="トップへ戻る">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+<script src="js/main.js"></script>
 </body></html>

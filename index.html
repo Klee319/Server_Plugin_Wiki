@@ -55,26 +55,55 @@
       <!-- Hero -->
       <div class="mb-10">
         <h1 class="text-3xl font-bold text-slate-900 mb-3">Server Plugin Wiki</h1>
-        <p class="text-body leading-relaxed max-w-2xl">当サーバーで稼働中のプラグインの完全なドキュメント。各プラグインの使い方、設定値、レシピ、コマンドを網羅しています。</p>
+        <p class="text-body leading-relaxed max-w-2xl">当サーバーで使える全プラグインのガイドです。何ができるか、どう始めるか、レシピやコマンドまで全てここで確認できます。</p>
       </div>
 
+      <!-- Quick Start -->
+      <section class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6">まずやること</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+            <div class="text-sm font-semibold text-primary-500 mb-2">Step 1</div>
+            <div class="font-medium text-slate-900 mb-1">魔法を始める</div>
+            <p class="text-sm text-body">鉄装備を集めて<strong>見習いの魔法書</strong>をクラフト。刻印台でグリフを解放してスペルを組もう。</p>
+            <a href="ars-noveau.html#intro" class="inline-block mt-3 text-sm text-primary-500 hover:text-primary-700 font-medium">Ars Noveau &rarr;</a>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+            <div class="text-sm font-semibold text-primary-500 mb-2">Step 2</div>
+            <div class="font-medium text-slate-900 mb-1">ペットを仲間にする</div>
+            <p class="text-sm text-body"><strong>金のリンゴ</strong>でモブを右クリック → <code class="bg-slate-100 px-1 py-0.5 rounded text-xs">/pettame 名前</code> で命名してテイム完了。</p>
+            <a href="mypet.html#taming" class="inline-block mt-3 text-sm text-primary-500 hover:text-primary-700 font-medium">MyPet &rarr;</a>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+            <div class="text-sm font-semibold text-primary-500 mb-2">Step 3</div>
+            <div class="font-medium text-slate-900 mb-1">装備を限界突破する</div>
+            <p class="text-sm text-body">ダイヤを圧縮して<strong>圧縮ダイヤ</strong>を作り、金床でエンチャントをバニラ上限の2倍まで強化。</p>
+            <a href="diamond-compressor.html#over-enchant" class="inline-block mt-3 text-sm text-primary-500 hover:text-primary-700 font-medium">Diamond Compressor &rarr;</a>
+          </div>
+        </div>
+      </section>
+
       <!-- Stats -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
         <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
           <div class="text-2xl font-bold text-slate-900">5</div>
           <div class="text-sm text-slate-500 mt-1">プラグイン</div>
         </div>
         <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
           <div class="text-2xl font-bold text-slate-900">60+</div>
-          <div class="text-sm text-slate-500 mt-1">スペル</div>
+          <div class="text-sm text-slate-500 mt-1">スペル &amp; グリフ</div>
         </div>
         <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
           <div class="text-2xl font-bold text-slate-900">30+</div>
-          <div class="text-sm text-slate-500 mt-1">エンチャント上限突破</div>
+          <div class="text-sm text-slate-500 mt-1">限界突破エンチャント</div>
         </div>
         <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
           <div class="text-2xl font-bold text-slate-900">50+</div>
-          <div class="text-sm text-slate-500 mt-1">ペット種類</div>
+          <div class="text-sm text-slate-500 mt-1">テイム可能モブ</div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <div class="text-2xl font-bold text-slate-900">7</div>
+          <div class="text-sm text-slate-500 mt-1">ドロワーティア</div>
         </div>
       </div>
 
@@ -84,53 +113,61 @@
 
         <a href="ars-noveau.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
           <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">Ars Noveau</h3>
-          <p class="text-sm text-body leading-relaxed mb-4">Ars Nouveau MODの魔法システムを再現。60以上のスペル、9種の防具セット、15種のスレッド強化。</p>
+          <p class="text-sm text-body leading-relaxed mb-3">Ars Nouveau MODの魔法システムをPaperで再現。形態+効果+増強を組み合わせてオリジナルスペルを作成。3段階の魔法書、9種の防具セット、15種のスレッド強化、儀式クラフトシステムを搭載。</p>
+          <div class="text-xs text-body mb-3">始め方: 鉄装備5種で<strong>見習いの魔法書</strong>をクラフト → 刻印台でグリフ解放 → スペル作成</div>
           <div class="flex flex-wrap gap-2">
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">魔法</span>
             <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">スペル</span>
             <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">防具</span>
             <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">儀式</span>
-          </div>
-        </a>
-
-        <a href="diamond-compressor.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
-          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">Diamond Compressor</h3>
-          <p class="text-sm text-body leading-relaxed mb-4">ダイヤモンドを圧縮してエンチャントを限界突破。バニラの最大レベルを超える強化が可能。</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">圧縮</span>
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">エンチャント</span>
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">強化</span>
-          </div>
-        </a>
-
-        <a href="storage-drawers.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
-          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">Storage Drawers</h3>
-          <p class="text-sm text-body leading-relaxed mb-4">大量のアイテムを効率的に管理。7段階のティアと最大131,072アイテムの収納力。</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ストレージ</span>
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">収納</span>
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ホッパー</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">スレッド</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">Geyser対応</span>
           </div>
         </a>
 
         <a href="mypet.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
           <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">MyPet</h3>
-          <p class="text-sm text-body leading-relaxed mb-4">50以上のモブをペットに。レアリティ、性格、進化、装備、図鑑コンプリートを目指そう。</p>
+          <p class="text-sm text-body leading-relaxed mb-3">50以上のモブをペットにテイム。6段階レアリティ、8種の性格、16種のスキルツリー、進化システム、装備、図鑑コンプリートで報酬獲得。</p>
+          <div class="text-xs text-body mb-3">始め方: 金のリンゴで動物を右クリック → <code class="bg-slate-100 px-1 py-0.5 rounded">/pettame 名前</code> で命名</div>
           <div class="flex flex-wrap gap-2">
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ペット</span>
             <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">テイム</span>
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">進化</span>
             <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">レアリティ</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">進化</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">スキルツリー</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">図鑑</span>
+          </div>
+        </a>
+
+        <a href="diamond-compressor.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
+          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">Diamond Compressor</h3>
+          <p class="text-sm text-body leading-relaxed mb-3">ダイヤモンドを4倍〜1024倍に圧縮。圧縮ダイヤを金床で使い、エンチャントをバニラ上限の最大2倍まで強化（成功確率10%〜90%）。</p>
+          <div class="text-xs text-body mb-3">始め方: ダイヤ4個を2×2で圧縮 → 圧縮ダイヤを持って金床を右クリック → 強化GUI</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">圧縮ダイヤ</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">オーバーエンチャント</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">金床</span>
+          </div>
+        </a>
+
+        <a href="storage-drawers.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group">
+          <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">Storage Drawers</h3>
+          <p class="text-sm text-body leading-relaxed mb-3">1種類のアイテムを最大131,072個収納できるドロワーブロック。7段階ティア、ドロワーキーによるロック、ホッパー自動搬入対応。</p>
+          <div class="text-xs text-body mb-3">始め方: 板材8個+チェスト1個で基本のドロワーをクラフト → 右クリックで格納</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">大量収納</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ホッパー連携</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ボイドドロワー</span>
           </div>
         </a>
 
         <a href="levelmobs.html" class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200 no-underline group md:col-span-2">
           <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary-500 transition-colors mb-2">LevelledMobs</h3>
-          <p class="text-sm text-body leading-relaxed mb-4">距離・高度・プレイヤー数に応じたモブレベリング。カスタムドロップと難易度調整。</p>
+          <p class="text-sm text-body leading-relaxed mb-3">スポーン地点からの距離・高度に応じてモブにレベルが付与される動的難易度システム。高レベルモブはHPとダメージが増加し、カスタムドロップの可能性も。MyPetのレアリティにも影響。</p>
+          <div class="text-xs text-body mb-3">知っておくこと: 遠くへ行くほどモブが強くなる。高レベルモブはペットのレアリティに好影響</div>
           <div class="flex flex-wrap gap-2">
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">モブ</span>
-            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">レベル</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">モブレベル</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">動的難易度</span>
             <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">ドロップ</span>
+            <span class="bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full text-xs font-medium">MyPet連携</span>
           </div>
         </a>
       </div>
@@ -146,9 +183,66 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 font-medium text-slate-900">対応バージョン</td><td class="px-6 py-3 text-body">Minecraft 1.21 / Paper</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-slate-900">対応バージョン</td><td class="px-6 py-3 text-body">Minecraft 1.21.4+ / Paper</td></tr>
             <tr><td class="px-6 py-3 font-medium text-slate-900">統合版対応</td><td class="px-6 py-3 text-body">Geyser + Floodgate による Bedrock Edition 互換</td></tr>
             <tr><td class="px-6 py-3 font-medium text-slate-900">プラグイン数</td><td class="px-6 py-3 text-body">5 (Ars Noveau, Diamond Compressor, Storage Drawers, MyPet, LevelledMobs)</td></tr>
+            <tr><td class="px-6 py-3 font-medium text-slate-900">Java版 / 統合版</td><td class="px-6 py-3 text-body">両対応。全プラグインがGeyser経由でBedrock Editionから利用可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Useful Commands -->
+      <h2 class="text-xl font-semibold text-slate-900 mb-4">よく使うコマンド</h2>
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-12">
+        <table class="w-full text-sm">
+          <thead class="border-b border-slate-200 bg-gray-50">
+            <tr>
+              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">コマンド</th>
+              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">プラグイン</th>
+              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">説明</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr>
+              <td class="px-6 py-3 font-mono text-sm text-slate-900">/ars mana</td>
+              <td class="px-6 py-3 text-body">Ars Noveau</td>
+              <td class="px-6 py-3 text-body">現在のマナ/最大マナを表示</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono text-sm text-slate-900">/ars recipes</td>
+              <td class="px-6 py-3 text-body">Ars Noveau</td>
+              <td class="px-6 py-3 text-body">全レシピをGUIで閲覧</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono text-sm text-slate-900">/pettame &lt;名前&gt;</td>
+              <td class="px-6 py-3 text-body">MyPet</td>
+              <td class="px-6 py-3 text-body">テイム時にペットに名前を付ける</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono text-sm text-slate-900">/petcall</td>
+              <td class="px-6 py-3 text-body">MyPet</td>
+              <td class="px-6 py-3 text-body">ペットを呼び出す</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono text-sm text-slate-900">/petinfo</td>
+              <td class="px-6 py-3 text-body">MyPet</td>
+              <td class="px-6 py-3 text-body">ペット情報を表示</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono text-sm text-slate-900">/petevolve</td>
+              <td class="px-6 py-3 text-body">MyPet</td>
+              <td class="px-6 py-3 text-body">ペットを進化させる</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono text-sm text-slate-900">/petdex</td>
+              <td class="px-6 py-3 text-body">MyPet</td>
+              <td class="px-6 py-3 text-body">ペット図鑑を開く</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono text-sm text-slate-900">/drawer give</td>
+              <td class="px-6 py-3 text-body">Storage Drawers</td>
+              <td class="px-6 py-3 text-body">ドロワーアイテムを付与</td>
+            </tr>
           </tbody>
         </table>
       </div>

@@ -2,535 +2,770 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diamond Compressor - Server Wiki</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:'#1a40b5',900:'#0e266a'}},fontFamily:{sans:['Inter','Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','sans-serif']}}}}</script>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f5ff',500:'#2b70ef',700:'#1a40b5',900:'#0e266a'}},fontFamily:{sans:['Inter','Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP','sans-serif']}}}}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50 min-h-screen text-slate-900">
 
-<!-- Header -->
-<header class="fixed top-0 inset-x-0 h-16 bg-white/80 backdrop-blur border-b border-slate-200 z-50 flex items-center px-4 lg:px-8">
-  <button id="menu-btn" class="lg:hidden mr-3 p-2 rounded-lg hover:bg-gray-50" aria-label="メニュー">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-  </button>
-  <a href="index.html" class="flex items-center gap-2 text-slate-900 no-underline">
-    <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-      <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"/></svg>
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 h-16 bg-white/80 backdrop-blur border-b border-slate-200 z-50 flex items-center px-4 lg:px-8">
+    <button id="menu-btn" class="lg:hidden mr-3 p-2 rounded-lg hover:bg-gray-50" aria-label="メニュー">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <a href="index.html" class="flex items-center gap-2 text-slate-900 no-underline">
+      <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"/></svg>
+      </div>
+      <span class="font-semibold text-lg hidden sm:inline">Server Wiki</span>
+    </a>
+    <div id="search-box" class="relative ml-auto w-64 hidden sm:block">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input id="search-input" type="text" placeholder="検索..." class="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500">
+      <div id="search-results" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden z-50"></div>
     </div>
-    <span class="font-semibold text-lg hidden sm:inline">Server Wiki</span>
-  </a>
-  <div class="relative ml-auto w-64 hidden sm:block">
-    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-    <input type="text" placeholder="検索..." class="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500">
-  </div>
-</header>
+  </header>
 
-<!-- Overlay -->
-<div id="overlay" class="hidden fixed inset-0 bg-black/30 z-40 lg:hidden"></div>
+  <!-- Overlay -->
+  <div id="overlay" class="hidden fixed inset-0 bg-black/30 z-40 lg:hidden"></div>
 
-<!-- Sidebar -->
-<aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-56 bg-white border-r border-slate-200 z-40 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform duration-200">
-  <nav class="p-4 space-y-1">
-    <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">プラグイン</p>
-    <a href="index.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">ホーム</a>
-    <a href="ars-noveau.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Ars Noveau</a>
-    <a href="diamond-compressor.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-primary-50 text-primary-700 font-medium">Diamond Compressor</a>
-    <a href="storage-drawers.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Storage Drawers</a>
-    <a href="mypet.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">MyPet</a>
-    <a href="levelmobs.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">LevelledMobs</a>
-  </nav>
-  <div id="toc" class="px-4 pb-4">
-    <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">目次</p>
-    <nav class="space-y-0.5">
-      <a href="#overview" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">概要</a>
-      <a href="#crafting" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">圧縮ダイヤの作り方</a>
-      <a href="#decompress" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">展開</a>
-      <a href="#overenchant" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">オーバーエンチャント</a>
-      <a href="#gui" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">強化GUI</a>
-      <a href="#anvil" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">金床</a>
-      <a href="#rates" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">成功確率</a>
-      <a href="#enchant-list" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">エンチャント一覧</a>
-      <a href="#faq" class="block px-3 py-1.5 text-sm text-slate-500 hover:text-primary-700 rounded-lg hover:bg-gray-50">FAQ</a>
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-56 bg-white border-r border-slate-200 z-40 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform duration-200">
+    <nav class="p-4 space-y-1">
+      <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">プラグイン</p>
+      <a href="index.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">ホーム</a>
+      <a href="ars-noveau.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Ars Noveau</a>
+      <a href="diamond-compressor.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-primary-50 text-primary-700 font-medium">Diamond Compressor</a>
+      <a href="storage-drawers.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Storage Drawers</a>
+      <a href="mypet.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">MyPet</a>
+      <a href="levelmobs.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">LevelledMobs</a>
     </nav>
-  </div>
-</aside>
-
-<!-- Main -->
-<main class="pt-16 lg:pl-56">
-  <div class="max-w-5xl mx-auto px-6 lg:px-12 py-10">
-
-    <!-- Breadcrumb -->
-    <div class="flex items-center gap-2 text-sm text-slate-400 mb-6">
-      <a href="index.html" class="hover:text-primary-500 transition-colors">ホーム</a>
-      <span>/</span>
-      <span class="text-slate-600">Diamond Compressor</span>
+    <div id="toc" class="p-4 border-t border-slate-200">
+      <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">目次</p>
+      <div class="space-y-0.5">
+        <a href="#what-is" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">圧縮ダイヤモンドとは</a>
+        <a href="#crafting" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">圧縮ダイヤの作り方</a>
+        <a href="#decompress" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">展開（元に戻す）</a>
+        <a href="#enchant-boost" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">エンチャント強化</a>
+        <a href="#gui" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">強化GUIの使い方</a>
+        <a href="#anvil" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">金床での適用</a>
+        <a href="#rates" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">成功確率一覧</a>
+        <a href="#enchant-list" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">強化可能なエンチャント一覧</a>
+        <a href="#faq" class="block px-3 py-1.5 text-sm text-slate-500 rounded-lg hover:bg-gray-50">FAQ</a>
+      </div>
     </div>
+  </aside>
 
-    <!-- Page Header -->
-    <div class="mb-10">
+  <!-- Main -->
+  <main class="pt-16 lg:pl-56">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12 py-10">
+
+      <!-- Breadcrumb -->
+      <div class="text-sm text-slate-500 mb-6">
+        <a href="index.html" class="hover:text-primary-500">ホーム</a>
+        <span class="mx-1">/</span>
+        <span>Diamond Compressor</span>
+      </div>
+
+      <!-- Page title -->
       <h1 class="text-3xl font-bold text-slate-900 mb-3">Diamond Compressor</h1>
-      <p class="text-slate-500 leading-relaxed max-w-2xl">ダイヤモンドを圧縮してエンチャントを限界突破させるプラグイン。5ティアの圧縮ダイヤとオーバーエンチャントシステム。</p>
+      <p class="text-body leading-relaxed mb-10">ダイヤモンドを圧縮して、エンチャントを限界突破させよう！バニラの最大レベルを超えるオーバーエンチャントが可能です。</p>
+
+      <!-- 圧縮ダイヤモンドとは -->
+      <section id="what-is" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">圧縮ダイヤモンドとは</h2>
+        <p class="text-body leading-relaxed mb-6">圧縮ダイヤモンドは、複数のダイヤモンドを1つに圧縮したカスタムアイテムです。大量のダイヤモンドをコンパクトに管理できるだけでなく、<strong>エンチャント強化（オーバーエンチャント）</strong>の素材として使用できます。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">圧縮ダイヤの種類</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">アイテム名</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">ダイヤ換算</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">見た目</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 font-medium text-slate-900">4倍圧縮ダイヤ</td><td class="px-6 py-3 text-body text-center">4個分</td><td class="px-6 py-3 text-body">水色の名前のダイヤモンド</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">16倍圧縮ダイヤ</td><td class="px-6 py-3 text-body text-center">16個分</td><td class="px-6 py-3 text-body">水色の名前のダイヤモンド</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">64倍圧縮ダイヤ</td><td class="px-6 py-3 text-body text-center">64個分</td><td class="px-6 py-3 text-body">水色の名前のダイヤモンド</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">256倍圧縮ダイヤ</td><td class="px-6 py-3 text-body text-center">256個分</td><td class="px-6 py-3 text-body">水色の名前のダイヤモンド</td></tr>
+              <tr><td class="px-6 py-3 font-medium text-slate-900">1024倍圧縮ダイヤ</td><td class="px-6 py-3 text-body text-center">1024個分</td><td class="px-6 py-3 text-body">水色の名前のダイヤモンド</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          各圧縮ダイヤのアイテム説明には「ダイヤモンド X個分」「クラフトで展開可能」と表示されます。
+        </div>
+      </section>
+
+      <!-- 圧縮ダイヤの作り方 -->
+      <section id="crafting" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">圧縮ダイヤの作り方</h2>
+        <p class="text-body leading-relaxed mb-6">クラフトテーブルの <strong>2x2</strong> の範囲に同じ種類のダイヤ（または圧縮ダイヤ）を4つ並べることで、1つ上の圧縮ダイヤを作成できます。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">圧縮レシピ</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">素材</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center"></th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">完成品</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 text-body">ダイヤモンド x4</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">4倍圧縮ダイヤ x1</td></tr>
+              <tr><td class="px-6 py-3 text-body">4倍圧縮ダイヤ x4</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">16倍圧縮ダイヤ x1</td></tr>
+              <tr><td class="px-6 py-3 text-body">16倍圧縮ダイヤ x4</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">64倍圧縮ダイヤ x1</td></tr>
+              <tr><td class="px-6 py-3 text-body">64倍圧縮ダイヤ x4</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">256倍圧縮ダイヤ x1</td></tr>
+              <tr><td class="px-6 py-3 text-body">256倍圧縮ダイヤ x4</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">1024倍圧縮ダイヤ x1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">クラフト配置例（4倍圧縮ダイヤの場合）</h3>
+        <div class="flex items-center gap-8 mb-6">
+          <div>
+            <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+              <div class="w-14 h-14 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-700">ダイヤ</div>
+              <div class="w-14 h-14 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-700">ダイヤ</div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-700">ダイヤ</div>
+              <div class="w-14 h-14 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-700">ダイヤ</div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+            </div>
+            <p class="text-sm text-body">左上2x2にダイヤモンドを配置</p>
+          </div>
+          <div class="text-2xl text-slate-400">→</div>
+          <div>
+            <div class="w-14 h-14 bg-cyan-200 border-2 border-cyan-400 rounded flex items-center justify-center text-xs font-bold text-cyan-800">4x</div>
+            <p class="text-sm text-body mt-2">4倍圧縮ダイヤ</p>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">クラフト配置例（16倍圧縮ダイヤの場合）</h3>
+        <div class="flex items-center gap-8 mb-6">
+          <div>
+            <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+              <div class="w-14 h-14 bg-cyan-200 border border-cyan-400 rounded flex items-center justify-center text-xs font-medium text-cyan-800">4x</div>
+              <div class="w-14 h-14 bg-cyan-200 border border-cyan-400 rounded flex items-center justify-center text-xs font-medium text-cyan-800">4x</div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-cyan-200 border border-cyan-400 rounded flex items-center justify-center text-xs font-medium text-cyan-800">4x</div>
+              <div class="w-14 h-14 bg-cyan-200 border border-cyan-400 rounded flex items-center justify-center text-xs font-medium text-cyan-800">4x</div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+            </div>
+            <p class="text-sm text-body">左上2x2に4倍圧縮ダイヤを配置</p>
+          </div>
+          <div class="text-2xl text-slate-400">→</div>
+          <div>
+            <div class="w-14 h-14 bg-cyan-300 border-2 border-cyan-500 rounded flex items-center justify-center text-xs font-bold text-cyan-900">16x</div>
+            <p class="text-sm text-body mt-2">16倍圧縮ダイヤ</p>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <strong>注意:</strong> 一部の圧縮レシピはサーバー設定で無効化されている場合があります。サーバー管理者に確認してください。
+        </div>
+      </section>
+
+      <!-- 展開（元に戻す） -->
+      <section id="decompress" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">展開（元に戻す）</h2>
+        <p class="text-body leading-relaxed mb-6">圧縮ダイヤをクラフトテーブルに1つ置くだけで、1段階下のダイヤ4つに展開（分解）できます。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">展開レシピ</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">素材</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center"></th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">展開結果</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-6 py-3 text-body">4倍圧縮ダイヤ x1</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">ダイヤモンド x4</td></tr>
+              <tr><td class="px-6 py-3 text-body">16倍圧縮ダイヤ x1</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">4倍圧縮ダイヤ x4</td></tr>
+              <tr><td class="px-6 py-3 text-body">64倍圧縮ダイヤ x1</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">16倍圧縮ダイヤ x4</td></tr>
+              <tr><td class="px-6 py-3 text-body">256倍圧縮ダイヤ x1</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">64倍圧縮ダイヤ x4</td></tr>
+              <tr><td class="px-6 py-3 text-body">1024倍圧縮ダイヤ x1</td><td class="px-6 py-3 text-body text-center">→</td><td class="px-6 py-3 font-medium text-slate-900">256倍圧縮ダイヤ x4</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          展開レシピは常に利用可能です（サーバー設定で無効化できません）。
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">展開の配置例</h3>
+        <div class="flex items-center gap-8 mb-6">
+          <div>
+            <div class="grid grid-cols-3 gap-1 w-fit mb-4">
+              <div class="w-14 h-14 bg-cyan-200 border border-cyan-400 rounded flex items-center justify-center text-xs font-medium text-cyan-800">4x</div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+              <div class="w-14 h-14 bg-slate-100 border border-slate-200 rounded flex items-center justify-center text-xs text-slate-400"></div>
+            </div>
+            <p class="text-sm text-body">圧縮ダイヤを1つだけ配置</p>
+          </div>
+          <div class="text-2xl text-slate-400">→</div>
+          <div>
+            <div class="grid grid-cols-2 gap-1 w-fit">
+              <div class="w-14 h-14 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-700">ダイヤ</div>
+              <div class="w-14 h-14 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-700">ダイヤ</div>
+              <div class="w-14 h-14 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-700">ダイヤ</div>
+              <div class="w-14 h-14 bg-cyan-100 border border-cyan-300 rounded flex items-center justify-center text-xs font-medium text-cyan-700">ダイヤ</div>
+            </div>
+            <p class="text-sm text-body mt-2">ダイヤモンド x4</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- エンチャント強化 -->
+      <section id="enchant-boost" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">エンチャント強化</h2>
+        <p class="text-body leading-relaxed mb-4">このプラグインの目玉機能です。<strong>バニラの最大レベルを超えて</strong>エンチャントを強化できます！</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">仕組み</h3>
+        <ul class="list-disc list-inside space-y-2 text-body leading-relaxed mb-6">
+          <li>圧縮ダイヤを消費して、エンチャント本のレベルを <strong>+1</strong> 強化します</li>
+          <li>ただし、<strong>成功するとは限りません</strong></li>
+          <li><strong>成功:</strong> エンチャントレベルが1上がります</li>
+          <li><strong>失敗:</strong> エンチャントレベルが <strong>レベル1に戻ります</strong></li>
+        </ul>
+
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <strong>重要:</strong> 失敗するとレベル1に戻るため、ハイリスク・ハイリターンです！強化する際は慎重に判断しましょう。
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">強化の条件</h3>
+        <ul class="list-disc list-inside space-y-2 text-body leading-relaxed mb-6">
+          <li>エンチャント本が<strong>バニラの最大レベル以上</strong>であること</li>
+          <li>サーバーで設定された<strong>上限レベルに達していない</strong>こと</li>
+          <li>圧縮ダイヤを所持していること</li>
+        </ul>
+      </section>
+
+      <!-- 強化GUIの使い方 -->
+      <section id="gui" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">強化GUIの使い方</h2>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">GUIの開き方</h3>
+        <ol class="list-decimal list-inside space-y-2 text-body leading-relaxed mb-6">
+          <li><strong>圧縮ダイヤ</strong>をメインハンド（右手）に持つ</li>
+          <li><strong>金床</strong>を右クリックする</li>
+          <li>「エンチャント強化」GUIが開きます</li>
+        </ol>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">GUI画面のレイアウト</h3>
+        <div class="bg-slate-800 text-slate-100 rounded-lg p-4 text-sm overflow-x-auto mb-6">
+<pre class="font-mono">┌─────────────────────────────────┐
+│  [本の説明] [ダイヤの説明]       │
+│                                 │
+│  [エンチャ] [圧縮ダイヤ]  [強化!]│
+│  [ント本  ] [         ]  [ボタン]│
+│                                 │
+│            [使い方]              │
+└─────────────────────────────────┘</pre>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">手順</h3>
+        <ol class="list-decimal list-inside space-y-2 text-body leading-relaxed mb-6">
+          <li><strong>左のスロット</strong>にエンチャント本を置く</li>
+          <li><strong>右のスロット</strong>に圧縮ダイヤを置く</li>
+          <li>成功確率が表示された<strong>「強化する！」ボタン</strong>をクリック</li>
+        </ol>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">強化結果</h3>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">結果</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エフェクト</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">メッセージ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="px-6 py-3 font-medium text-green-700">成功</td>
+                <td class="px-6 py-3 text-body">レベルアップ音 + 音符パーティクル</td>
+                <td class="px-6 py-3 text-body">「成功！ ○○ が Lv.X になりました！」</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3 font-medium text-red-700">失敗</td>
+                <td class="px-6 py-3 text-body">盾破壊音 + 怒り村人パーティクル</td>
+                <td class="px-6 py-3 text-body">「失敗... ○○ が Lv.1 に戻ってしまいました...」</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          GUIを閉じると、スロットに置いたアイテムは自動でインベントリに返却されます。インベントリが一杯の場合は足元にドロップされます。
+        </div>
+      </section>
+
+      <!-- 金床での適用 -->
+      <section id="anvil" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">金床での適用</h2>
+        <p class="text-body leading-relaxed mb-6">強化したエンチャント本は、<strong>金床</strong>を使って通常通りツールや防具に適用できます。</p>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">特徴</h3>
+        <ul class="list-disc list-inside space-y-2 text-body leading-relaxed mb-6">
+          <li>バニラの「高すぎる！」制限が<strong>解除</strong>されています</li>
+          <li>オーバーエンチャントが付与されたアイテム同士の合成では、<strong>高い方のレベルが採用</strong>されます</li>
+          <li>同じレベル同士の合成による自動レベルアップは<strong>できません</strong>（意図しない強化の防止）</li>
+        </ul>
+      </section>
+
+      <!-- 成功確率一覧 -->
+      <section id="rates" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">成功確率一覧</h2>
+        <p class="text-body leading-relaxed mb-6">使用する圧縮ダイヤのランクが高いほど、強化の成功確率が上がります。</p>
+
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+          <table class="w-full text-sm">
+            <thead class="border-b border-slate-200 bg-gray-50">
+              <tr>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">圧縮ダイヤ</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">成功確率</th>
+                <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">必要ダイヤ換算</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="px-6 py-3 font-medium text-slate-900">4倍圧縮ダイヤ</td>
+                <td class="px-6 py-3 text-center"><span class="inline-block bg-red-100 text-red-700 px-2.5 py-0.5 rounded-full text-xs font-semibold">10%</span></td>
+                <td class="px-6 py-3 text-body text-center">4個</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3 font-medium text-slate-900">16倍圧縮ダイヤ</td>
+                <td class="px-6 py-3 text-center"><span class="inline-block bg-orange-100 text-orange-700 px-2.5 py-0.5 rounded-full text-xs font-semibold">25%</span></td>
+                <td class="px-6 py-3 text-body text-center">16個</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3 font-medium text-slate-900">64倍圧縮ダイヤ</td>
+                <td class="px-6 py-3 text-center"><span class="inline-block bg-yellow-100 text-yellow-700 px-2.5 py-0.5 rounded-full text-xs font-semibold">40%</span></td>
+                <td class="px-6 py-3 text-body text-center">64個</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3 font-medium text-slate-900">256倍圧縮ダイヤ</td>
+                <td class="px-6 py-3 text-center"><span class="inline-block bg-emerald-100 text-emerald-700 px-2.5 py-0.5 rounded-full text-xs font-semibold">60%</span></td>
+                <td class="px-6 py-3 text-body text-center">256個</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3 font-medium text-slate-900">1024倍圧縮ダイヤ</td>
+                <td class="px-6 py-3 text-center"><span class="inline-block bg-green-100 text-green-700 px-2.5 py-0.5 rounded-full text-xs font-semibold">90%</span></td>
+                <td class="px-6 py-3 text-body text-center">1024個</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+          <strong>ヒント:</strong> 成功確率はサーバー設定で変更されている場合があります。GUIの強化ボタンに表示される確率を確認してください。
+        </div>
+      </section>
+
+      <!-- 強化可能なエンチャント一覧 -->
+      <section id="enchant-list" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">強化可能なエンチャント一覧</h2>
+        <p class="text-body leading-relaxed mb-6">以下はサーバー推奨設定における、各エンチャントの強化上限レベルです。（実際の上限はサーバーごとに異なる場合があります）</p>
+
+        <!-- Tabs -->
+        <div data-tab-group>
+          <div class="flex flex-wrap border-b border-slate-200 mb-6 gap-0">
+            <button data-tab-btn="sword" class="px-4 py-2.5 text-sm font-medium border-b-2 text-primary-500 border-primary-500 whitespace-nowrap">剣</button>
+            <button data-tab-btn="tool" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">ツール</button>
+            <button data-tab-btn="bow" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">弓</button>
+            <button data-tab-btn="armor" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">防具</button>
+            <button data-tab-btn="helmet" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">ヘルメット</button>
+            <button data-tab-btn="boots" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">ブーツ</button>
+            <button data-tab-btn="leggings" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">レギンス</button>
+            <button data-tab-btn="fishing" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">釣竿</button>
+            <button data-tab-btn="trident" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">トライデント</button>
+            <button data-tab-btn="crossbow" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">クロスボウ</button>
+            <button data-tab-btn="mace" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">メイス</button>
+            <button data-tab-btn="noboost" class="px-4 py-2.5 text-sm font-medium border-b-2 text-slate-500 border-transparent whitespace-nowrap hover:text-slate-700">強化不可</button>
+          </div>
+
+          <!-- 剣 -->
+          <div data-tab-panel="sword">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">鋭さ <span class="text-slate-400">(Sharpness)</span></td><td class="px-6 py-3 text-body text-center">5</td><td class="px-6 py-3 text-center font-semibold text-primary-700">10</td></tr>
+                  <tr><td class="px-6 py-3 text-body">アンデッド特効 <span class="text-slate-400">(Smite)</span></td><td class="px-6 py-3 text-body text-center">5</td><td class="px-6 py-3 text-center font-semibold text-primary-700">10</td></tr>
+                  <tr><td class="px-6 py-3 text-body">虫特効 <span class="text-slate-400">(Bane of Arthropods)</span></td><td class="px-6 py-3 text-body text-center">5</td><td class="px-6 py-3 text-center font-semibold text-primary-700">10</td></tr>
+                  <tr><td class="px-6 py-3 text-body">ノックバック <span class="text-slate-400">(Knockback)</span></td><td class="px-6 py-3 text-body text-center">2</td><td class="px-6 py-3 text-center font-semibold text-primary-700">5</td></tr>
+                  <tr><td class="px-6 py-3 text-body">火属性 <span class="text-slate-400">(Fire Aspect)</span></td><td class="px-6 py-3 text-body text-center">2</td><td class="px-6 py-3 text-center font-semibold text-primary-700">5</td></tr>
+                  <tr><td class="px-6 py-3 text-body">ドロップ増加 <span class="text-slate-400">(Looting)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                  <tr><td class="px-6 py-3 text-body">範囲ダメージ増加 <span class="text-slate-400">(Sweeping Edge)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ツール -->
+          <div data-tab-panel="tool" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">効率強化 <span class="text-slate-400">(Efficiency)</span></td><td class="px-6 py-3 text-body text-center">5</td><td class="px-6 py-3 text-center font-semibold text-primary-700">10</td></tr>
+                  <tr><td class="px-6 py-3 text-body">幸運 <span class="text-slate-400">(Fortune)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                  <tr><td class="px-6 py-3 text-body">耐久力 <span class="text-slate-400">(Unbreaking)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 弓 -->
+          <div data-tab-panel="bow" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">射撃ダメージ増加 <span class="text-slate-400">(Power)</span></td><td class="px-6 py-3 text-body text-center">5</td><td class="px-6 py-3 text-center font-semibold text-primary-700">10</td></tr>
+                  <tr><td class="px-6 py-3 text-body">パンチ <span class="text-slate-400">(Punch)</span></td><td class="px-6 py-3 text-body text-center">2</td><td class="px-6 py-3 text-center font-semibold text-primary-700">5</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 防具（共通） -->
+          <div data-tab-panel="armor" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">ダメージ軽減 <span class="text-slate-400">(Protection)</span></td><td class="px-6 py-3 text-body text-center">4</td><td class="px-6 py-3 text-center font-semibold text-primary-700">8</td></tr>
+                  <tr><td class="px-6 py-3 text-body">火炎耐性 <span class="text-slate-400">(Fire Protection)</span></td><td class="px-6 py-3 text-body text-center">4</td><td class="px-6 py-3 text-center font-semibold text-primary-700">8</td></tr>
+                  <tr><td class="px-6 py-3 text-body">爆発耐性 <span class="text-slate-400">(Blast Protection)</span></td><td class="px-6 py-3 text-body text-center">4</td><td class="px-6 py-3 text-center font-semibold text-primary-700">8</td></tr>
+                  <tr><td class="px-6 py-3 text-body">飛び道具耐性 <span class="text-slate-400">(Projectile Protection)</span></td><td class="px-6 py-3 text-body text-center">4</td><td class="px-6 py-3 text-center font-semibold text-primary-700">8</td></tr>
+                  <tr><td class="px-6 py-3 text-body">棘の鎧 <span class="text-slate-400">(Thorns)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ヘルメット -->
+          <div data-tab-panel="helmet" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">水中呼吸 <span class="text-slate-400">(Respiration)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ブーツ -->
+          <div data-tab-panel="boots" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">落下耐性 <span class="text-slate-400">(Feather Falling)</span></td><td class="px-6 py-3 text-body text-center">4</td><td class="px-6 py-3 text-center font-semibold text-primary-700">8</td></tr>
+                  <tr><td class="px-6 py-3 text-body">水中歩行 <span class="text-slate-400">(Depth Strider)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                  <tr><td class="px-6 py-3 text-body">氷渡り <span class="text-slate-400">(Frost Walker)</span></td><td class="px-6 py-3 text-body text-center">2</td><td class="px-6 py-3 text-center font-semibold text-primary-700">5</td></tr>
+                  <tr><td class="px-6 py-3 text-body">ソウルスピード <span class="text-slate-400">(Soul Speed)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- レギンス -->
+          <div data-tab-panel="leggings" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">スニーク速度上昇 <span class="text-slate-400">(Swift Sneak)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 釣竿 -->
+          <div data-tab-panel="fishing" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">宝釣り <span class="text-slate-400">(Luck of the Sea)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                  <tr><td class="px-6 py-3 text-body">入れ食い <span class="text-slate-400">(Lure)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- トライデント -->
+          <div data-tab-panel="trident" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">激流 <span class="text-slate-400">(Riptide)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                  <tr><td class="px-6 py-3 text-body">忠誠 <span class="text-slate-400">(Loyalty)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                  <tr><td class="px-6 py-3 text-body">水生特効 <span class="text-slate-400">(Impaling)</span></td><td class="px-6 py-3 text-body text-center">5</td><td class="px-6 py-3 text-center font-semibold text-primary-700">10</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- クロスボウ -->
+          <div data-tab-panel="crossbow" class="hidden">
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">高速装填 <span class="text-slate-400">(Quick Charge)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                  <tr><td class="px-6 py-3 text-body">貫通 <span class="text-slate-400">(Piercing)</span></td><td class="px-6 py-3 text-body text-center">4</td><td class="px-6 py-3 text-center font-semibold text-primary-700">8</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- メイス -->
+          <div data-tab-panel="mace" class="hidden">
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-4 text-sm text-body">
+              メイスは Minecraft 1.21 で追加された新武器です。
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">バニラ最大</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-center">強化上限</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">防具貫通 <span class="text-slate-400">(Breach)</span></td><td class="px-6 py-3 text-body text-center">4</td><td class="px-6 py-3 text-center font-semibold text-primary-700">8</td></tr>
+                  <tr><td class="px-6 py-3 text-body">重力 <span class="text-slate-400">(Density)</span></td><td class="px-6 py-3 text-body text-center">5</td><td class="px-6 py-3 text-center font-semibold text-primary-700">10</td></tr>
+                  <tr><td class="px-6 py-3 text-body">風爆発 <span class="text-slate-400">(Wind Burst)</span></td><td class="px-6 py-3 text-body text-center">3</td><td class="px-6 py-3 text-center font-semibold text-primary-700">6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 強化不可 -->
+          <div data-tab-panel="noboost" class="hidden">
+            <p class="text-body leading-relaxed mb-4">以下のエンチャントはレベル1が最大のため、オーバーエンチャントの対象外です。</p>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+              <table class="w-full text-sm">
+                <thead class="border-b border-slate-200 bg-gray-50">
+                  <tr>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
+                    <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">理由</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="px-6 py-3 text-body">修繕 <span class="text-slate-400">(Mending)</span></td><td class="px-6 py-3 text-body">最大レベルが1</td></tr>
+                  <tr><td class="px-6 py-3 text-body">シルクタッチ <span class="text-slate-400">(Silk Touch)</span></td><td class="px-6 py-3 text-body">最大レベルが1</td></tr>
+                  <tr><td class="px-6 py-3 text-body">フレイム <span class="text-slate-400">(Flame)</span></td><td class="px-6 py-3 text-body">最大レベルが1</td></tr>
+                  <tr><td class="px-6 py-3 text-body">無限 <span class="text-slate-400">(Infinity)</span></td><td class="px-6 py-3 text-body">最大レベルが1</td></tr>
+                  <tr><td class="px-6 py-3 text-body">水中採掘 <span class="text-slate-400">(Aqua Affinity)</span></td><td class="px-6 py-3 text-body">最大レベルが1</td></tr>
+                  <tr><td class="px-6 py-3 text-body">拡散 <span class="text-slate-400">(Multishot)</span></td><td class="px-6 py-3 text-body">最大レベルが1</td></tr>
+                  <tr><td class="px-6 py-3 text-body">召雷 <span class="text-slate-400">(Channeling)</span></td><td class="px-6 py-3 text-body">最大レベルが1</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="mb-12">
+        <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">FAQ</h2>
+
+        <div class="space-y-2">
+          <!-- FAQ 1 -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50 transition-colors">
+              <span>Q. 圧縮ダイヤが見た目は普通のダイヤと同じに見えます</span>
+              <span data-icon class="text-slate-400 text-lg flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-6 pb-4 text-sm text-body leading-relaxed">
+              <strong>A.</strong> リソースパック（テクスチャパック）が適用されていない場合、見た目は通常のダイヤモンドと同じです。アイテム名（水色の文字）と説明文で見分けてください。統合版（Bedrock）の場合はGeyser用リソースパックが必要です。
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50 transition-colors">
+              <span>Q. 金床を右クリックしてもGUIが開きません</span>
+              <span data-icon class="text-slate-400 text-lg flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-6 pb-4 text-sm text-body leading-relaxed">
+              <strong>A.</strong> メインハンド（右手）に<strong>圧縮ダイヤ</strong>を持っている必要があります。通常のダイヤモンドでは開きません。
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50 transition-colors">
+              <span>Q. 「強化不可」と表示されます</span>
+              <span data-icon class="text-slate-400 text-lg flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-6 pb-4 text-sm text-body leading-relaxed">
+              <strong>A.</strong> 以下のいずれかの原因が考えられます:
+              <ul class="list-disc list-inside mt-2 space-y-1">
+                <li>エンチャント本がバニラの最大レベルに達していない（最大レベル以上が必要）</li>
+                <li>サーバーで設定された強化上限に達している</li>
+                <li>強化不可のエンチャント（修繕、シルクタッチなど）を強化しようとしている</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50 transition-colors">
+              <span>Q. 強化に失敗するとどうなりますか？</span>
+              <span data-icon class="text-slate-400 text-lg flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-6 pb-4 text-sm text-body leading-relaxed">
+              <strong>A.</strong> エンチャントレベルが<strong>1に戻ります</strong>。使用した圧縮ダイヤも消費されます。高レベルのエンチャントを強化する際は、より高ランクの圧縮ダイヤを使用して成功確率を上げることをお勧めします。
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50 transition-colors">
+              <span>Q. エンチャント本に複数のエンチャントがある場合はどうなりますか？</span>
+              <span data-icon class="text-slate-400 text-lg flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-6 pb-4 text-sm text-body leading-relaxed">
+              <strong>A.</strong> 強化可能なエンチャントの中から<strong>ランダムに1つ</strong>が選ばれて強化されます。特定のエンチャントを狙いたい場合は、1種類のエンチャントのみの本を使用してください。
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50 transition-colors">
+              <span>Q. 金床の「高すぎる！」は出ますか？</span>
+              <span data-icon class="text-slate-400 text-lg flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-6 pb-4 text-sm text-body leading-relaxed">
+              <strong>A.</strong> このプラグインにより、金床のコスト上限が解除されています。「高すぎる！」と表示されることなく、オーバーエンチャントされたアイテムを自由に合成できます。
+            </div>
+          </div>
+
+          <!-- FAQ 7 -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50 transition-colors">
+              <span>Q. 圧縮ダイヤでダイヤブロックを作れますか？</span>
+              <span data-icon class="text-slate-400 text-lg flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-6 pb-4 text-sm text-body leading-relaxed">
+              <strong>A.</strong> いいえ。圧縮ダイヤを素材にダイヤブロックをクラフトすることはできません。これはバグ防止のための仕様です。
+            </div>
+          </div>
+
+          <!-- FAQ 8 -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <button data-faq class="w-full flex items-center justify-between px-6 py-4 text-left text-sm font-medium text-slate-900 hover:bg-gray-50 transition-colors">
+              <span>Q. 統合版（Bedrock / スマホ / Switch）でも使えますか？</span>
+              <span data-icon class="text-slate-400 text-lg flex-shrink-0 ml-4">+</span>
+            </button>
+            <div class="hidden px-6 pb-4 text-sm text-body leading-relaxed">
+              <strong>A.</strong> Geyserプラグインを使用しているサーバーであれば、統合版からも利用可能です。専用のリソースパックが同梱されており、圧縮ダイヤのテクスチャも表示されます。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="pt-8 border-t border-slate-200 text-center text-sm text-slate-400">
+        Server Plugin Wiki &copy; 2026
+      </footer>
     </div>
+  </main>
 
-    <!-- 概要 -->
-    <section id="overview" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-4">概要</h2>
-      <p class="text-slate-600 leading-relaxed mb-6">ダイヤモンドを圧縮してエンチャントを限界突破させるプラグインです。5段階の圧縮ダイヤを素材として使用し、オーバーエンチャントシステムによりバニラの最大レベルを超えた強化が可能になります。</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">圧縮ダイヤ</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">ダイヤ換算</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">4倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">4個分</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">16倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">16個分</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">64倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">64個分</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">256倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">256個分</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">1024倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">1024個分</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- 圧縮ダイヤの作り方 -->
-    <section id="crafting" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-4">圧縮ダイヤの作り方</h2>
-      <p class="text-slate-600 leading-relaxed mb-6">2&times;2のクラフトグリッドで圧縮します。各ティアは前段階のダイヤ4個を組み合わせて作成します。</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">素材</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">個数</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">完成品</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">ダイヤモンド</td><td class="px-6 py-3 text-slate-600">&times;4</td><td class="px-6 py-3 text-slate-600">4倍圧縮ダイヤ</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">4倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">&times;4</td><td class="px-6 py-3 text-slate-600">16倍圧縮ダイヤ</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">16倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">&times;4</td><td class="px-6 py-3 text-slate-600">64倍圧縮ダイヤ</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">64倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">&times;4</td><td class="px-6 py-3 text-slate-600">256倍圧縮ダイヤ</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">256倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">&times;4</td><td class="px-6 py-3 text-slate-600">1024倍圧縮ダイヤ</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- 展開 -->
-    <section id="decompress" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-4">展開</h2>
-      <p class="text-slate-600 leading-relaxed mb-6">圧縮ダイヤをクラフトグリッドに1つ置くだけで、1段階下の圧縮ダイヤ&times;4に分解できます。この操作は常に利用可能です。</p>
-      <div class="bg-primary-50 border border-primary-200 rounded-lg px-5 py-4">
-        <p class="text-sm font-medium text-primary-700 mb-1">展開について</p>
-        <p class="text-sm text-slate-600">例: 64倍圧縮ダイヤ &rarr; 16倍圧縮ダイヤ &times;4</p>
-      </div>
-    </section>
-
-    <!-- オーバーエンチャント -->
-    <section id="overenchant" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-4">オーバーエンチャント</h2>
-      <p class="text-slate-600 leading-relaxed mb-4">圧縮ダイヤを消費してエンチャント本のレベルを+1します。成功すればレベルアップ、失敗するとレベル1に戻るハイリスク・ハイリターンなシステムです。</p>
-      <h4 class="text-base font-semibold text-slate-900 mb-2">条件</h4>
-      <ul class="list-disc list-inside text-slate-600 text-sm space-y-1 mb-6">
-        <li>エンチャント本がバニラ最大レベル以上であること</li>
-        <li>サーバー上限に未達であること</li>
-        <li>圧縮ダイヤを所持していること</li>
-      </ul>
-      <div class="bg-red-50 border border-red-200 rounded-lg px-5 py-4">
-        <p class="text-sm font-medium text-red-700 mb-1">失敗リスク</p>
-        <p class="text-sm text-slate-600">強化に失敗するとエンチャントレベルが1に戻ります。使用した圧縮ダイヤも消費されるため、高レベルの強化は慎重に行いましょう。</p>
-      </div>
-    </section>
-
-    <!-- 強化GUI -->
-    <section id="gui" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-4">強化GUI</h2>
-      <p class="text-slate-600 leading-relaxed mb-4">圧縮ダイヤをメインハンドに持った状態で<strong class="text-slate-900">金床を右クリック</strong>すると、専用の強化GUIが開きます。</p>
-      <h4 class="text-base font-semibold text-slate-900 mb-2">操作手順</h4>
-      <ol class="list-decimal list-inside text-slate-600 text-sm space-y-1 mb-6">
-        <li>左スロットにエンチャント本を配置</li>
-        <li>右スロットに圧縮ダイヤを配置</li>
-        <li>強化ボタンをクリック</li>
-      </ol>
-      <h4 class="text-base font-semibold text-slate-900 mb-3">結果演出</h4>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">結果</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サウンド</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">パーティクル</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 font-medium text-slate-900">成功</td><td class="px-6 py-3 text-slate-600">レベルアップ音</td><td class="px-6 py-3 text-slate-600">音符パーティクル</td></tr>
-            <tr><td class="px-6 py-3 font-medium text-slate-900">失敗</td><td class="px-6 py-3 text-slate-600">盾破壊音</td><td class="px-6 py-3 text-slate-600">怒り村人パーティクル</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- 金床 -->
-    <section id="anvil" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-4">金床</h2>
-      <p class="text-slate-600 leading-relaxed mb-6">バニラの「高すぎる！」制限は<strong class="text-slate-900">解除</strong>されています。合成時は高レベルのエンチャントが優先されます。</p>
-      <div class="bg-amber-50 border border-amber-200 rounded-lg px-5 py-4">
-        <p class="text-sm font-medium text-amber-700 mb-1">注意</p>
-        <p class="text-sm text-slate-600">同レベルのエンチャント本同士を合成しても自動レベルアップは発生しません。レベルを上げるにはオーバーエンチャントを使用してください。</p>
-      </div>
-    </section>
-
-    <!-- 成功確率 -->
-    <section id="rates" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-4">成功確率</h2>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">圧縮ダイヤ</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">成功確率</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">ダイヤ換算コスト</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">4倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">10%</td><td class="px-6 py-3 text-slate-600">4個</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">16倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">25%</td><td class="px-6 py-3 text-slate-600">16個</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">64倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">40%</td><td class="px-6 py-3 text-slate-600">64個</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">256倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">60%</td><td class="px-6 py-3 text-slate-600">256個</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">1024倍圧縮ダイヤ</td><td class="px-6 py-3 text-slate-600">90%</td><td class="px-6 py-3 text-slate-600">1024個</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- エンチャント一覧 -->
-    <section id="enchant-list" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-6">エンチャント一覧</h2>
-
-      <!-- 剣 -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">剣</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">鋭さ</td><td class="px-6 py-3 text-slate-600">5</td><td class="px-6 py-3 text-slate-600">10</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">アンデッド特効</td><td class="px-6 py-3 text-slate-600">5</td><td class="px-6 py-3 text-slate-600">10</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">虫特効</td><td class="px-6 py-3 text-slate-600">5</td><td class="px-6 py-3 text-slate-600">10</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">ノックバック</td><td class="px-6 py-3 text-slate-600">2</td><td class="px-6 py-3 text-slate-600">5</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">火属性</td><td class="px-6 py-3 text-slate-600">2</td><td class="px-6 py-3 text-slate-600">5</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">ドロップ増加</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">範囲ダメージ増加</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ツール -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">ツール</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">効率強化</td><td class="px-6 py-3 text-slate-600">5</td><td class="px-6 py-3 text-slate-600">10</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">幸運</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">耐久力</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- 弓 -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">弓</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">射撃ダメージ増加</td><td class="px-6 py-3 text-slate-600">5</td><td class="px-6 py-3 text-slate-600">10</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">パンチ</td><td class="px-6 py-3 text-slate-600">2</td><td class="px-6 py-3 text-slate-600">5</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- 防具共通 -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">防具共通</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">ダメージ軽減</td><td class="px-6 py-3 text-slate-600">4</td><td class="px-6 py-3 text-slate-600">8</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">火炎耐性</td><td class="px-6 py-3 text-slate-600">4</td><td class="px-6 py-3 text-slate-600">8</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">爆発耐性</td><td class="px-6 py-3 text-slate-600">4</td><td class="px-6 py-3 text-slate-600">8</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">飛び道具耐性</td><td class="px-6 py-3 text-slate-600">4</td><td class="px-6 py-3 text-slate-600">8</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">棘の鎧</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ヘルメット -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">ヘルメット</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">水中呼吸</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ブーツ -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">ブーツ</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">落下耐性</td><td class="px-6 py-3 text-slate-600">4</td><td class="px-6 py-3 text-slate-600">8</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">水中歩行</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">氷渡り</td><td class="px-6 py-3 text-slate-600">2</td><td class="px-6 py-3 text-slate-600">5</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">ソウルスピード</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- レギンス -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">レギンス</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">スニーク速度上昇</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- 釣り竿 -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">釣り竿</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">宝釣り</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">入れ食い</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- トライデント -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">トライデント</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">激流</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">忠誠</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">水生特効</td><td class="px-6 py-3 text-slate-600">5</td><td class="px-6 py-3 text-slate-600">10</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- クロスボウ -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">クロスボウ</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">高速装填</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">貫通</td><td class="px-6 py-3 text-slate-600">4</td><td class="px-6 py-3 text-slate-600">8</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- メイス -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">メイス</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto mb-6">
-        <table class="w-full text-sm">
-          <thead class="border-b border-slate-200 bg-gray-50">
-            <tr>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">エンチャント</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">バニラ最大</th>
-              <th class="text-xs font-medium text-slate-500 uppercase tracking-wide px-6 py-3 text-left">サーバー上限</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            <tr><td class="px-6 py-3 text-slate-900">防具貫通</td><td class="px-6 py-3 text-slate-600">4</td><td class="px-6 py-3 text-slate-600">8</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">重力</td><td class="px-6 py-3 text-slate-600">5</td><td class="px-6 py-3 text-slate-600">10</td></tr>
-            <tr><td class="px-6 py-3 text-slate-900">風爆発</td><td class="px-6 py-3 text-slate-600">3</td><td class="px-6 py-3 text-slate-600">6</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- 強化不可エンチャント -->
-      <h3 class="text-lg font-semibold text-slate-900 mb-3">強化不可エンチャント</h3>
-      <div class="bg-amber-50 border border-amber-200 rounded-lg px-5 py-4">
-        <p class="text-sm font-medium text-amber-700 mb-1">以下のエンチャントはオーバーエンチャント不可</p>
-        <p class="text-sm text-slate-600">修繕、シルクタッチ、フレイム、無限、水中採掘、拡散、召雷</p>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="mb-10">
-      <h2 class="text-xl font-semibold text-slate-900 mb-6">FAQ</h2>
-      <div class="space-y-3">
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <div data-faq class="flex items-center justify-between px-5 py-4 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-            <span class="text-sm font-medium text-slate-900">見た目が普通のダイヤと同じなのですが？</span>
-            <svg class="w-4 h-4 text-slate-400 shrink-0 ml-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="hidden px-5 pb-4">
-            <p class="text-sm text-slate-600">リソースパックが未適用の場合、圧縮ダイヤの見た目は通常のダイヤモンドと同じになります。アイテムの名前と説明文で区別してください。</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <div data-faq class="flex items-center justify-between px-5 py-4 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-            <span class="text-sm font-medium text-slate-900">GUIが開かないのですが？</span>
-            <svg class="w-4 h-4 text-slate-400 shrink-0 ml-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="hidden px-5 pb-4">
-            <p class="text-sm text-slate-600">強化GUIを開くにはメインハンドに圧縮ダイヤを持った状態で金床を右クリックする必要があります。通常のダイヤモンドでは開きません。</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <div data-faq class="flex items-center justify-between px-5 py-4 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-            <span class="text-sm font-medium text-slate-900">「強化不可」と表示されます</span>
-            <svg class="w-4 h-4 text-slate-400 shrink-0 ml-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="hidden px-5 pb-4">
-            <p class="text-sm text-slate-600 mb-2">以下のいずれかに該当する場合に表示されます。</p>
-            <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
-              <li>エンチャントがバニラ最大レベルに達していない</li>
-              <li>エンチャントがサーバー上限に到達済み</li>
-              <li>強化不可に指定されているエンチャント（修繕、シルクタッチなど）</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <div data-faq class="flex items-center justify-between px-5 py-4 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-            <span class="text-sm font-medium text-slate-900">失敗するとどうなりますか？</span>
-            <svg class="w-4 h-4 text-slate-400 shrink-0 ml-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="hidden px-5 pb-4">
-            <p class="text-sm text-slate-600">エンチャントレベルが1に戻ります。使用した圧縮ダイヤも消費されます。高レベルからの強化は十分な準備をしてから挑みましょう。</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <div data-faq class="flex items-center justify-between px-5 py-4 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-            <span class="text-sm font-medium text-slate-900">複数エンチャントが付いた本はどうなりますか？</span>
-            <svg class="w-4 h-4 text-slate-400 shrink-0 ml-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="hidden px-5 pb-4">
-            <p class="text-sm text-slate-600">複数のエンチャントが付いたエンチャント本を使用した場合、強化対象のエンチャントはランダムに1つ選ばれます。</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <div data-faq class="flex items-center justify-between px-5 py-4 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-            <span class="text-sm font-medium text-slate-900">「高すぎる！」は表示されますか？</span>
-            <svg class="w-4 h-4 text-slate-400 shrink-0 ml-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="hidden px-5 pb-4">
-            <p class="text-sm text-slate-600">いいえ。当サーバーでは金床の「高すぎる！」制限は解除されています。</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <div data-faq class="flex items-center justify-between px-5 py-4 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-            <span class="text-sm font-medium text-slate-900">圧縮ダイヤでダイヤブロックを作れますか？</span>
-            <svg class="w-4 h-4 text-slate-400 shrink-0 ml-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="hidden px-5 pb-4">
-            <p class="text-sm text-slate-600">いいえ。バグ防止のため、圧縮ダイヤからダイヤブロックを作成することはできません。</p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <div data-faq class="flex items-center justify-between px-5 py-4 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-            <span class="text-sm font-medium text-slate-900">統合版（Bedrock Edition）で使えますか？</span>
-            <svg class="w-4 h-4 text-slate-400 shrink-0 ml-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="hidden px-5 pb-4">
-            <p class="text-sm text-slate-600">Geyserサーバーを経由している場合は利用可能です。ただし、一部の演出が正常に表示されない場合があります。</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="pt-8 border-t border-slate-200 text-center text-sm text-slate-400">
-      Server Plugin Wiki &copy; 2026
-    </footer>
-  </div>
-</main>
-
-<button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center text-slate-500 hover:bg-gray-50 transition-all opacity-0 pointer-events-none z-50" aria-label="トップへ戻る">
-  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
-</button>
-<script src="js/main.js"></script>
+  <button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center text-slate-500 hover:bg-gray-50 transition-all opacity-0 pointer-events-none z-50" aria-label="トップへ戻る">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+  <script src="js/main.js"></script>
 </body>
 </html>

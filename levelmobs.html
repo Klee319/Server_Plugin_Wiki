@@ -47,15 +47,12 @@
     <p class="px-2 mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Contents</p>
     <nav id="toc" class="flex flex-col gap-0.5 text-sm">
       <a href="#overview" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">概要</a>
-      <a href="#strategies" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">レベリング戦略</a>
-      <a href="#presets" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">難易度プリセット</a>
-      <a href="#nametag" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">ネームタグ</a>
+      <a href="#leveling" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">レベリングの仕組み</a>
+      <a href="#display" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">モブの表示</a>
+      <a href="#difficulty" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">難易度の変化</a>
       <a href="#drops" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">カスタムドロップ</a>
-      <a href="#rules" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">ルール設定</a>
-      <a href="#plugins" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">外部プラグイン連携</a>
-      <a href="#settings" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">基本設定</a>
-      <a href="#commands" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">コマンド</a>
-      <a href="#mob-groups" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">モブグループ</a>
+      <a href="#tips" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">攻略のヒント</a>
+      <a href="#faq" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">FAQ</a>
     </nav>
   </div>
 </aside>
@@ -74,369 +71,331 @@
     <!-- Page Header -->
     <header class="mb-10">
       <h1 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">LevelledMobs</h1>
-      <p class="text-base text-slate-500 leading-relaxed max-w-3xl">LevelledMobs 4.x - モブレベリングシステム。距離、高度、プレイヤー数に応じてモブにレベルを付与し、戦闘の難易度とドロップ報酬をダイナミックに調整します。</p>
+      <p class="text-base text-slate-500 leading-relaxed max-w-3xl">このサーバーでは LevelledMobs プラグインが導入されており、全てのモブにレベルが付与されます。スポーン地点からの距離やプレイヤーのレベルに応じて、モブの強さが動的に変化します。冒険の先に進むほど手強い敵が待ち受けますが、その分報酬も豊かになります。</p>
     </header>
 
     <!-- Stats -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm px-5 py-4 text-center">
-        <div class="text-2xl font-bold text-slate-900">4</div>
-        <div class="text-xs text-slate-500 mt-1">戦略</div>
+        <div class="text-2xl font-bold text-slate-900">1〜100</div>
+        <div class="text-xs text-slate-500 mt-1">モブレベル範囲</div>
       </div>
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm px-5 py-4 text-center">
-        <div class="text-2xl font-bold text-slate-900">13</div>
-        <div class="text-xs text-slate-500 mt-1">プリセット</div>
+        <div class="text-2xl font-bold text-slate-900">7</div>
+        <div class="text-xs text-slate-500 mt-1">レベル色ティア</div>
       </div>
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm px-5 py-4 text-center">
-        <div class="text-2xl font-bold text-slate-900">100+</div>
-        <div class="text-xs text-slate-500 mt-1">ドロップ設定</div>
+        <div class="text-2xl font-bold text-slate-900">8</div>
+        <div class="text-xs text-slate-500 mt-1">鉱石ドロップ種</div>
       </div>
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm px-5 py-4 text-center">
-        <div class="text-2xl font-bold text-slate-900">12</div>
-        <div class="text-xs text-slate-500 mt-1">プラグイン連携</div>
+        <div class="text-2xl font-bold text-slate-900">3</div>
+        <div class="text-xs text-slate-500 mt-1">ワールド対応</div>
       </div>
     </div>
 
     <!-- 概要 -->
-    <section class="mb-12">
-      <h2 id="overview" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">概要</h2>
-      <p class="mb-3 leading-relaxed">LevelledMobs 4.x は、サーバー内のモブにレベルを付与する高度なモブレベリングシステムです。スポーン地点からの距離、Y座標の高度、周囲のプレイヤー数などの条件に基づき、モブのレベルが自動的に決定されます。</p>
-      <p class="mb-4 leading-relaxed">レベルが高いモブほどHP・攻撃力・防御力が上昇し、より良いドロップアイテムを落とすようになります。これにより、探索が進むほど歯ごたえのある戦闘と、それに見合った報酬が得られるプログレッション体験を実現しています。</p>
-      <div class="bg-primary-50 border border-blue-200 rounded-xl px-5 py-4 text-sm leading-relaxed">
-        <p class="font-semibold text-slate-800 mb-1">ポイント</p>
-        <p class="text-slate-600">レベルは1〜100の範囲で付与され、4種類の戦略を組み合わせることで多様なレベリングパターンを構築できます。</p>
+    <section id="overview" class="mb-12">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">概要</h2>
+      <p class="text-body mb-4">LevelledMobs は、サーバー上の全てのモブにレベル（Lv1〜100）を自動的に割り当てるプラグインです。バニラのマインクラフトではどこにいても敵の強さは同じですが、このプラグインにより<strong>探索の深さに比例した歯応えのある戦闘</strong>が実現されています。</p>
+      <p class="text-body mb-4">レベルが高いモブほど体力・攻撃力・防御力が上昇し、倒しにくくなる反面、ドロップアイテムや経験値も増加します。また、高レベルモブからは通常では手に入らない特別な鉱石アイテムがドロップすることもあります。</p>
+
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+        <strong>ポイント:</strong> レベルはモブがスポーンした瞬間に決定されます。一度付与されたレベルは変わりません。安全な拠点周辺では低レベルのモブが出現し、遠くへ冒険するほど高レベルのモブと遭遇します。
       </div>
     </section>
 
-    <!-- レベリング戦略 -->
-    <section class="mb-12">
-      <h2 id="strategies" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">レベリング戦略</h2>
-      <p class="mb-6 leading-relaxed">モブのレベルを決定する4つの戦略が用意されています。サーバーの目的やワールドの構成に合わせて最適な戦略を選択できます。</p>
+    <!-- レベリングの仕組み -->
+    <section id="leveling" class="mb-12">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">レベリングの仕組み</h2>
+      <p class="text-body mb-4">モブのレベルは複数の要素を組み合わせて決定されます。プレイヤーとして意識すべき主なポイントは以下の通りです。</p>
 
-      <h3 class="text-lg font-semibold text-slate-800 mb-2">1. ランダム</h3>
-      <p class="mb-6 leading-relaxed">最もシンプルな戦略です。モブがスポーンした際に、設定された範囲内でランダムにレベルが割り当てられます。条件に依存しないため、均等な難易度分布を実現します。</p>
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">スポーン地点からの距離</h3>
+      <p class="text-body mb-4">最も大きな要素です。ワールドのスポーン地点を中心に、遠ざかるほどモブのレベルが上がります。スポーン地点から約250ブロック以内はバッファゾーンとして比較的安全で、そこから210ブロックごとにレベル帯が1段階ずつ上がっていきます。</p>
 
-      <h3 class="text-lg font-semibold text-slate-800 mb-2">2. 重み付きランダム</h3>
-      <p class="mb-3 leading-relaxed">ランダム戦略の拡張版です。レベル範囲1〜50に対して重み（0〜100）を設定でき、特定のレベル帯が出現しやすくなるよう調整可能です。低レベルの出現率を高めつつ、稀に高レベルモブが出現するような設計に向いています。</p>
-      <div class="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 text-sm leading-relaxed mb-6">
-        <p class="font-semibold text-slate-800 mb-1">重みの設定</p>
-        <p class="text-slate-600">重みが0のレベルは出現しません。すべての重みを均等にすると通常のランダムと同じ挙動になります。</p>
-      </div>
-
-      <h3 class="text-lg font-semibold text-slate-800 mb-2">3. 距離ベース</h3>
-      <p class="mb-3 leading-relaxed">ワールドのスポーン地点からの距離に基づいてレベルが決定されます。拠点周辺は安全で、遠征するほど強敵が出現するRPG的なゲーム体験を提供します。</p>
-      <ul class="mb-4 space-y-1 text-sm leading-relaxed list-disc list-inside text-slate-600">
-        <li><strong class="text-slate-700">バッファ距離:</strong> 250ブロック（スポーン周辺の安全圏）</li>
-        <li><strong class="text-slate-700">リング幅:</strong> 210ブロック単位でゾーンが拡大</li>
-      </ul>
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <pre class="px-5 py-4 text-sm text-slate-600 leading-relaxed overflow-x-auto"><code>スポーン地点からの距離とレベルゾーン
-
-[Spawn] --250b--> [Zone 1: Lv1-10] --210b--> [Zone 2: Lv11-20]
-                  --210b--> [Zone 3: Lv21-35] --210b--> [Zone 4: Lv36-50]
-                  --210b--> [Zone 5: Lv51-65] --210b--> [Zone 6: Lv66-80]
-                  --210b--> [Zone 7: Lv81-100]
-
-※ バッファ圏内（250ブロック以内）ではモブにレベルが付与されません</code></pre>
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">スポーン地点からの距離</th><th class="px-4 py-3 font-semibold text-slate-700">おおよそのレベル帯</th><th class="px-4 py-3 font-semibold text-slate-700">体感難易度</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-4 py-3">0〜250ブロック</td><td class="px-4 py-3">Lv 1〜5</td><td class="px-4 py-3">バニラとほぼ同じ</td></tr>
+            <tr><td class="px-4 py-3">250〜700ブロック</td><td class="px-4 py-3">Lv 5〜15</td><td class="px-4 py-3">やや手強い</td></tr>
+            <tr><td class="px-4 py-3">700〜1500ブロック</td><td class="px-4 py-3">Lv 15〜35</td><td class="px-4 py-3">しっかり装備が必要</td></tr>
+            <tr><td class="px-4 py-3">1500〜3000ブロック</td><td class="px-4 py-3">Lv 35〜60</td><td class="px-4 py-3">鉄以上の装備推奨</td></tr>
+            <tr><td class="px-4 py-3">3000ブロック以上</td><td class="px-4 py-3">Lv 60〜100</td><td class="px-4 py-3">ダイヤ装備・エンチャント必須</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h3 class="text-lg font-semibold text-slate-800 mb-2">4. Y座標ベース</h3>
-      <p class="mb-3 leading-relaxed">モブのスポーンしたY座標（高度）に基づいてレベルが決定されます。地下深くに潜るほど強力なモブが出現する、洞窟探索向けの戦略です。</p>
-      <ul class="space-y-1 text-sm leading-relaxed list-disc list-inside text-slate-600">
-        <li><strong class="text-slate-700">開始Y座標:</strong> Y=100（レベル最低）</li>
-        <li><strong class="text-slate-700">終了Y座標:</strong> Y=20（レベル最大）</li>
-        <li>深いほど高レベル -- ディープダーク付近では最高レベルのモブが出現</li>
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">高度（Y座標）の影響</h3>
+      <p class="text-body mb-4">Y=62（海面）を基準に、地下深くへ潜るほどモブのレベルにボーナスが加算されます。15ブロックごとにわずかにレベルが上昇するため、ディープダーク等の深層バイオームでは地上より強いモブが出現します。逆に高所では若干レベルが下がる傾向があります。</p>
+
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">プレイヤーレベルの反映</h3>
+      <p class="text-body mb-4">あなた自身の経験値レベルもモブのレベルに影響します。プレイヤーレベルが高いほど、周囲にスポーンするモブのレベルも上がりやすくなります。</p>
+
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">プレイヤーレベル</th><th class="px-4 py-3 font-semibold text-slate-700">モブへの追加レベル</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-4 py-3">Lv 0〜15</td><td class="px-4 py-3">+1〜3</td></tr>
+            <tr><td class="px-4 py-3">Lv 16〜30</td><td class="px-4 py-3">+2〜5</td></tr>
+            <tr><td class="px-4 py-3">Lv 31〜45</td><td class="px-4 py-3">+3〜7</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+        <strong>ヒント:</strong> エンチャントなどでレベルを消費した直後は、周囲にスポーンするモブのレベルが一時的に下がることがあります。これはプレイヤーレベル連動の仕組みによるものです。
+      </div>
+
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ネザーのレベリング</h3>
+      <p class="text-body mb-4">ネザーではスポーン地点からの距離ではなく、<strong>Y座標（高度）</strong>を基準にレベルが決まります。Y=100付近が最も低レベルで、Y=60以下に向かうほどレベルが上がります。溶岩の海付近は特に危険です。</p>
+
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">エンドのレベリング</h3>
+      <p class="text-body mb-4">エンドでは座標 (0, 0) を中心とした距離ベースのレベリングが適用されます。バッファ距離が1000ブロックと広く設定されているため、メインアイランド周辺は比較的安全です。アウターエンドへ行くほどモブのレベルが上昇します。</p>
+    </section>
+
+    <!-- モブの表示 -->
+    <section id="display" class="mb-12">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">モブの表示</h2>
+      <p class="text-body mb-4">レベル付きモブには特別なネームタグが表示されます。モブをターゲット（照準を合わせる）したり、攻撃を受けたりすると、ネームタグが5秒間表示されます。</p>
+
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">ネームタグの読み方</h3>
+      <p class="text-body mb-4">敵対モブのネームタグは以下の形式で表示されます:</p>
+
+      <div class="bg-slate-900 rounded-xl p-5 mb-6 font-mono text-center">
+        <span class="text-white text-sm">LVL</span><span class="text-green-400 text-sm">15</span>
+        <span class="text-gray-400 text-sm font-bold mx-1">&lsaquo;</span>
+        <span class="text-white text-sm">ゾンビ</span>
+        <span class="text-gray-400 text-sm font-bold mx-1">&rsaquo;</span>
+        <span class="text-green-400 text-sm">42HP</span>
+      </div>
+
+      <p class="text-body mb-2">左から順に:</p>
+      <ul class="list-disc list-inside text-body mb-4 space-y-1 ml-2">
+        <li><strong>LVL + 数字</strong> - モブのレベル（色はレベル帯によって変化）</li>
+        <li><strong>モブ名</strong> - クライアント言語に合わせた名前</li>
+        <li><strong>HP</strong> - 現在の体力（色はレベル帯と同じ）</li>
       </ul>
-    </section>
 
-    <!-- 難易度プリセット -->
-    <section class="mb-12">
-      <h2 id="presets" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">難易度プリセット</h2>
-      <p class="mb-4 leading-relaxed">13段階の難易度プリセットが用意されており、サーバー全体の難易度を簡単に調整できます。各プリセットはHP・攻撃力・防御力・速度・経験値の倍率を定義しています。</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-slate-500">
-              <tr>
-                <th class="px-5 py-3 font-semibold">プリセット</th>
-                <th class="px-5 py-3 font-semibold">HP倍率</th>
-                <th class="px-5 py-3 font-semibold">攻撃力倍率</th>
-                <th class="px-5 py-3 font-semibold">防御力倍率</th>
-                <th class="px-5 py-3 font-semibold">速度倍率</th>
-                <th class="px-5 py-3 font-semibold">経験値倍率</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Vanilla</td><td class="px-5 py-2.5">x1.0</td><td class="px-5 py-2.5">x1.0</td><td class="px-5 py-2.5">x1.0</td><td class="px-5 py-2.5">x1.0</td><td class="px-5 py-2.5">x1.0</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Easy</td><td class="px-5 py-2.5">x1.5</td><td class="px-5 py-2.5">x1.25</td><td class="px-5 py-2.5">x1.2</td><td class="px-5 py-2.5">x1.0</td><td class="px-5 py-2.5">x1.5</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Normal</td><td class="px-5 py-2.5">x2.0</td><td class="px-5 py-2.5">x1.5</td><td class="px-5 py-2.5">x1.5</td><td class="px-5 py-2.5">x1.05</td><td class="px-5 py-2.5">x2.0</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Hard</td><td class="px-5 py-2.5">x2.5</td><td class="px-5 py-2.5">x1.75</td><td class="px-5 py-2.5">x1.75</td><td class="px-5 py-2.5">x1.1</td><td class="px-5 py-2.5">x2.5</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Hardcore</td><td class="px-5 py-2.5">x3.0</td><td class="px-5 py-2.5">x2.0</td><td class="px-5 py-2.5">x2.0</td><td class="px-5 py-2.5">x1.15</td><td class="px-5 py-2.5">x3.0</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Extreme</td><td class="px-5 py-2.5">x3.25</td><td class="px-5 py-2.5">x2.25</td><td class="px-5 py-2.5">x2.25</td><td class="px-5 py-2.5">x1.15</td><td class="px-5 py-2.5">x3.25</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Insane</td><td class="px-5 py-2.5">x3.5</td><td class="px-5 py-2.5">x2.5</td><td class="px-5 py-2.5">x2.5</td><td class="px-5 py-2.5">x1.2</td><td class="px-5 py-2.5">x3.5</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Nightmare</td><td class="px-5 py-2.5">x3.75</td><td class="px-5 py-2.5">x2.75</td><td class="px-5 py-2.5">x2.75</td><td class="px-5 py-2.5">x1.2</td><td class="px-5 py-2.5">x3.75</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Apocalypse</td><td class="px-5 py-2.5">x4.0</td><td class="px-5 py-2.5">x3.0</td><td class="px-5 py-2.5">x3.0</td><td class="px-5 py-2.5">x1.25</td><td class="px-5 py-2.5">x4.0</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Inferno</td><td class="px-5 py-2.5">x4.25</td><td class="px-5 py-2.5">x3.25</td><td class="px-5 py-2.5">x3.25</td><td class="px-5 py-2.5">x1.25</td><td class="px-5 py-2.5">x4.25</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Titanium</td><td class="px-5 py-2.5">x4.5</td><td class="px-5 py-2.5">x3.5</td><td class="px-5 py-2.5">x3.5</td><td class="px-5 py-2.5">x1.3</td><td class="px-5 py-2.5">x4.5</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Diamond</td><td class="px-5 py-2.5">x4.75</td><td class="px-5 py-2.5">x3.75</td><td class="px-5 py-2.5">x3.75</td><td class="px-5 py-2.5">x1.3</td><td class="px-5 py-2.5">x4.75</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Platinum</td><td class="px-5 py-2.5">x5.0+</td><td class="px-5 py-2.5">x4.0+</td><td class="px-5 py-2.5">x4.0+</td><td class="px-5 py-2.5">x1.35+</td><td class="px-5 py-2.5">x5.0+</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <p class="text-body mb-2">パッシブモブ（動物など）やボス級モブには簡略化されたネームタグが表示されます:</p>
+      <div class="bg-slate-900 rounded-xl p-5 mb-6 font-mono text-center">
+        <span class="text-white text-sm">ヒツジ</span>
+        <span class="text-gray-400 text-sm font-bold mx-1">&rsaquo;</span>
+        <span class="text-green-400 text-sm">8HP</span>
       </div>
-      <div class="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 text-sm leading-relaxed">
-        <p class="font-semibold text-slate-800 mb-1">高難度プリセット</p>
-        <p class="text-slate-600">Apocalypse以上のプリセットでは、フル装備のプレイヤーでも複数人での協力が推奨されます。ソロプレイには十分な準備が必要です。</p>
+
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">レベル色とティア</h3>
+      <p class="text-body mb-4">ネームタグのレベル表示は、レベル帯に応じて色が変わります。色を見れば一目でモブの大まかな強さがわかります。</p>
+
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">レベル帯</th><th class="px-4 py-3 font-semibold text-slate-700">色</th><th class="px-4 py-3 font-semibold text-slate-700">脅威度</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-4 py-3">Lv 1〜15</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#22E76B"></span>緑</span></td><td class="px-4 py-3">安全 - 初心者向け</td></tr>
+            <tr><td class="px-4 py-3">Lv 16〜30</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#528CFF"></span>青</span></td><td class="px-4 py-3">注意 - 基本装備を推奨</td></tr>
+            <tr><td class="px-4 py-3">Lv 31〜45</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#FFCD56"></span>黄</span></td><td class="px-4 py-3">警戒 - 鉄装備以上</td></tr>
+            <tr><td class="px-4 py-3">Lv 46〜60</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#FE803C"></span>橙</span></td><td class="px-4 py-3">危険 - ダイヤ装備推奨</td></tr>
+            <tr><td class="px-4 py-3">Lv 61〜75</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#F2003D"></span>赤</span></td><td class="px-4 py-3">高危険 - エンチャント必須</td></tr>
+            <tr><td class="px-4 py-3">Lv 76〜90</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#B447FF"></span>紫</span></td><td class="px-4 py-3">極危険 - 万全の準備を</td></tr>
+            <tr><td class="px-4 py-3">Lv 91〜100</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#FFD700"></span>金</span></td><td class="px-4 py-3">最高危険 - 熟練者向け</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+        <strong>表示タイミング:</strong> ネームタグはモブをターゲットした時、攻撃を受けた時、モブの追跡中に表示されます。パッシブモブは近接攻撃時と被ダメージ時のみ表示されます。常時表示ではないため、画面がスッキリしたまま遊べます。
       </div>
     </section>
 
-    <!-- ネームタグ -->
-    <section class="mb-12">
-      <h2 id="nametag" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">ネームタグ</h2>
-      <p class="mb-4 leading-relaxed">レベル付きモブには自動的にネームタグが表示されます。Java EditionとBedrock Editionの両方に対応しており、レベルに応じたティアカラーでモブの強さを視覚的に識別できます。最大表示距離は<strong class="text-slate-800">30ブロック</strong>です。</p>
+    <!-- 難易度の変化 -->
+    <section id="difficulty" class="mb-12">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">難易度の変化</h2>
+      <p class="text-body mb-4">このサーバーでは「シルバーチャレンジ」難易度が標準適用されています。モブのレベルが上がるにつれて、以下のステータスが強化されます。</p>
 
-      <h3 class="text-lg font-semibold text-slate-800 mb-3">ティアカラーリング（7段階）</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-slate-500">
-              <tr>
-                <th class="px-5 py-3 font-semibold">レベル範囲</th>
-                <th class="px-5 py-3 font-semibold">カラー</th>
-                <th class="px-5 py-3 font-semibold">危険度</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 1 - 10</td><td class="px-5 py-2.5"><span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#50c878"></span>緑</span></td><td class="px-5 py-2.5">安全</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 11 - 20</td><td class="px-5 py-2.5"><span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#8bc34a"></span>黄緑</span></td><td class="px-5 py-2.5">低</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 21 - 35</td><td class="px-5 py-2.5"><span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#ffd54f"></span>黄</span></td><td class="px-5 py-2.5">注意</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 36 - 50</td><td class="px-5 py-2.5"><span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#ff9800"></span>オレンジ</span></td><td class="px-5 py-2.5">警戒</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 51 - 65</td><td class="px-5 py-2.5"><span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#ef5350"></span>赤</span></td><td class="px-5 py-2.5">危険</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 66 - 85</td><td class="px-5 py-2.5"><span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#b71c1c"></span>暗赤</span></td><td class="px-5 py-2.5">非常に危険</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 86 - 100</td><td class="px-5 py-2.5"><span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#ce93d8"></span>紫</span></td><td class="px-5 py-2.5">致命的</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">敵対モブのステータス強化</h3>
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">ステータス</th><th class="px-4 py-3 font-semibold text-slate-700">変化</th><th class="px-4 py-3 font-semibold text-slate-700">プレイヤーへの影響</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-4 py-3">最大体力</td><td class="px-4 py-3">レベルに応じて大幅増加</td><td class="px-4 py-3">モブを倒すのに時間がかかる</td></tr>
+            <tr><td class="px-4 py-3">攻撃力</td><td class="px-4 py-3">レベルに応じて増加</td><td class="px-4 py-3">被ダメージが増える</td></tr>
+            <tr><td class="px-4 py-3">遠距離攻撃力</td><td class="px-4 py-3">レベルに応じて増加</td><td class="px-4 py-3">スケルトン等の矢ダメージ増</td></tr>
+            <tr><td class="px-4 py-3">移動速度</td><td class="px-4 py-3">わずかに上昇</td><td class="px-4 py-3">逃げにくくなる</td></tr>
+            <tr><td class="px-4 py-3">クリーパー爆発力</td><td class="px-4 py-3">レベルに応じて増加</td><td class="px-4 py-3">爆発ダメージと破壊範囲拡大</td></tr>
+            <tr><td class="px-4 py-3">防御力</td><td class="px-4 py-3">アーマーボーナス付与</td><td class="px-4 py-3">与ダメージが軽減される</td></tr>
+            <tr><td class="px-4 py-3">アイテムドロップ</td><td class="px-4 py-3">レベルに応じて増加</td><td class="px-4 py-3">報酬が増える</td></tr>
+            <tr><td class="px-4 py-3">経験値ドロップ</td><td class="px-4 py-3">レベルに応じて大幅増加</td><td class="px-4 py-3">効率よくレベル上げが可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">モブ種別ごとの難易度差</h3>
+      <p class="text-body mb-4">全てのモブが同じ強さではありません。モブの種類によって適用される難易度が異なります。</p>
+
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">モブカテゴリ</th><th class="px-4 py-3 font-semibold text-slate-700">難易度</th><th class="px-4 py-3 font-semibold text-slate-700">対象の例</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-4 py-3">一般敵対モブ</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 bg-gray-200 text-gray-700 rounded text-xs font-medium">シルバー</span></td><td class="px-4 py-3">ゾンビ、スケルトン、スパイダーなど</td></tr>
+            <tr><td class="px-4 py-3">特殊敵対モブ</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-medium">ブロンズ</span></td><td class="px-4 py-3">ファントム、ラヴェジャー、ピグリンゾンビ、シュルカーなど</td></tr>
+            <tr><td class="px-4 py-3">パッシブモブ</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium">バニラ</span></td><td class="px-4 py-3">牛、豚、羊、鶏など（レベル表示はあるが強化なし）</td></tr>
+            <tr><td class="px-4 py-3">ボスモブ</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-medium">ブロンズ</span></td><td class="px-4 py-3">エンダードラゴン、ウィザー、ウォーデン、エルダーガーディアン</td></tr>
+            <tr><td class="px-4 py-3">スポナー産モブ</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-medium">ブロンズ</span></td><td class="px-4 py-3">スポナーから出たモブ（名前に「Spawner」が付く）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+        <strong>補足:</strong> エンダーマン・エンダーマイト・シルバーフィッシュは体力強化が半分に抑えられ、移動速度は変化しません。クリーパーも移動速度の上昇がごくわずかに抑えられています。
       </div>
     </section>
 
     <!-- カスタムドロップ -->
-    <section class="mb-12">
-      <h2 id="drops" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">カスタムドロップ</h2>
-      <p class="mb-4 leading-relaxed">レベル付きモブを倒すと、レベル帯に応じた追加ドロップアイテムが入手できます。高レベルのモブほど貴重なアイテムをドロップします。</p>
+    <section id="drops" class="mb-12">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">カスタムドロップ</h2>
+      <p class="text-body mb-4">高レベルの敵対モブを倒すと、通常のドロップに加えて特別なアイテムがドロップすることがあります。全てプレイヤーが直接倒した場合のみ有効です。</p>
 
-      <h3 class="text-lg font-semibold text-slate-800 mb-2">基本設定</h3>
-      <ul class="mb-6 space-y-1 text-sm leading-relaxed list-disc list-inside text-slate-600">
-        <li><strong class="text-slate-700">ドロップ確率 (chance):</strong> 0.2（20%）</li>
-        <li><strong class="text-slate-700">トリガー条件:</strong> プレイヤー起因のキルのみ</li>
-        <li><strong class="text-slate-700">全体倍率 (overall):</strong> 1.0</li>
-      </ul>
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">鉱石ドロップ</h3>
+      <p class="text-body mb-4">全ての敵対モブから、レベルに応じた鉱石がドロップする可能性があります。レベルが高いほどレアな鉱石がドロップします。</p>
 
-      <h3 class="text-lg font-semibold text-slate-800 mb-3">レベル帯別ドロップテーブル</h3>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-slate-500">
-              <tr>
-                <th class="px-5 py-3 font-semibold">レベル帯</th>
-                <th class="px-5 py-3 font-semibold">ドロップアイテム</th>
-                <th class="px-5 py-3 font-semibold">レアリティ</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 1 - 25</td><td class="px-5 py-2.5">石炭 / 銅インゴット / ラピスラズリ</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-slate-100 text-slate-600">コモン</span></td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 20 - 50</td><td class="px-5 py-2.5">鉄インゴット / 金インゴット</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">アンコモン</span></td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 40 - 75</td><td class="px-5 py-2.5">エメラルド / レッドストーン</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-blue-50 text-blue-700">レア</span></td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5">Lv 70 - 100</td><td class="px-5 py-2.5">ダイヤモンド / ネザライトの欠片</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-amber-50 text-amber-700">レジェンダリー</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="bg-primary-50 border border-blue-200 rounded-xl px-5 py-4 text-sm leading-relaxed">
-        <p class="font-semibold text-slate-800 mb-1">ドロップの重複</p>
-        <p class="text-slate-600">レベル帯が重複する範囲（Lv20-25, Lv40-50, Lv70-75）では、複数のドロップテーブルから同時に抽選が行われます。</p>
-      </div>
-    </section>
-
-    <!-- ルール設定 -->
-    <section class="mb-12">
-      <h2 id="rules" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">ルール設定</h2>
-      <p class="mb-4 leading-relaxed">11のカスタムルールにより、ワールドやモブの種類ごとに細かいレベリング設定を行えます。</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-slate-500">
-              <tr>
-                <th class="px-5 py-3 font-semibold w-10">#</th>
-                <th class="px-5 py-3 font-semibold">ルール名</th>
-                <th class="px-5 py-3 font-semibold">説明</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">1</td><td class="px-5 py-2.5 font-medium text-slate-800">オーバーワールド基本</td><td class="px-5 py-2.5">通常ワールドのデフォルトレベリング設定</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">2</td><td class="px-5 py-2.5 font-medium text-slate-800">ネザー基本</td><td class="px-5 py-2.5">ネザーワールド専用の高難度設定</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">3</td><td class="px-5 py-2.5 font-medium text-slate-800">エンド基本</td><td class="px-5 py-2.5">エンドワールド専用の最高難度設定</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">4</td><td class="px-5 py-2.5 font-medium text-slate-800">アンデッドグループ</td><td class="px-5 py-2.5">ゾンビ・スケルトン系モブの強化ルール</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">5</td><td class="px-5 py-2.5 font-medium text-slate-800">ボスモブ</td><td class="px-5 py-2.5">ウィザー・エンダードラゴンの特別設定</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">6</td><td class="px-5 py-2.5 font-medium text-slate-800">スポナー対策</td><td class="px-5 py-2.5">スポナー産モブのレベル制限（トラップ対策）</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">7</td><td class="px-5 py-2.5 font-medium text-slate-800">プレイヤー変数</td><td class="px-5 py-2.5">プレイヤー数に応じた動的レベル調整</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">8</td><td class="px-5 py-2.5 font-medium text-slate-800">夜間強化</td><td class="px-5 py-2.5">夜間にスポーンするモブのレベル上昇</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">9</td><td class="px-5 py-2.5 font-medium text-slate-800">洞窟ルール</td><td class="px-5 py-2.5">Y座標に基づく地下専用レベリング</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">10</td><td class="px-5 py-2.5 font-medium text-slate-800">バイオーム別</td><td class="px-5 py-2.5">特定バイオームでのレベル補正</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 text-slate-400">11</td><td class="px-5 py-2.5 font-medium text-slate-800">イベントルール</td><td class="px-5 py-2.5">特定条件トリガーによる一時的レベル変更</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- 外部プラグイン連携 -->
-    <section class="mb-12">
-      <h2 id="plugins" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">外部プラグイン連携</h2>
-      <p class="mb-4 leading-relaxed">LevelledMobsは12の外部プラグインと連携し、レベリング対象の除外や特別な処理を適用できます。</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-slate-500">
-              <tr>
-                <th class="px-5 py-3 font-semibold">プラグイン</th>
-                <th class="px-5 py-3 font-semibold">ステータス</th>
-                <th class="px-5 py-3 font-semibold">説明</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">MyPet</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">ペット化モブのレベリング除外</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">MythicMobs</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">MythicMobsのカスタムモブとの互換</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">ShopKeepers</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">ショップキーパーNPCの除外</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">EcoBosses</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">EcoBossesのボスモブとの統合</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">EliteMobs</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">EliteMobsのエリートモブとの連携</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">InfernalMobs</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">インファーナルモブの特殊処理</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Citizens</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">CitizensのNPCを除外</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Dangerous Caves</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">洞窟カスタムモブとの統合</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">WorldGuard</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">リージョン別レベリング制御</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">PlaceholderAPI</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">プレースホルダー変数の提供</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">NBT-API</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">NBTタグ経由のカスタムデータ</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">ProtocolLib</td><td class="px-5 py-2.5"><span class="inline-block px-2 py-0.5 text-xs font-medium rounded bg-green-50 text-green-700">有効</span></td><td class="px-5 py-2.5">パケットレベルのネームタグ制御</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- 基本設定 -->
-    <section class="mb-12">
-      <h2 id="settings" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">基本設定</h2>
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-slate-500">
-              <tr>
-                <th class="px-5 py-3 font-semibold">設定項目</th>
-                <th class="px-5 py-3 font-semibold">値</th>
-                <th class="px-5 py-3 font-semibold">説明</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">Debug</td><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">false</code></td><td class="px-5 py-2.5">デバッグモード（無効）</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">AsyncTaskPeriod</td><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">3 ticks</code></td><td class="px-5 py-2.5">非同期タスクの実行間隔</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">MaxBlocks</td><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">320</code></td><td class="px-5 py-2.5">距離計算の最大ブロック数</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5 font-medium text-slate-800">MaxPlayers</td><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">10</code></td><td class="px-5 py-2.5">レベル計算に影響するプレイヤー上限</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">ドロップアイテム</th><th class="px-4 py-3 font-semibold text-slate-700">必要モブレベル</th><th class="px-4 py-3 font-semibold text-slate-700">ドロップ確率</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-4 py-3">石炭鉱石</td><td class="px-4 py-3">Lv 1〜25</td><td class="px-4 py-3">2%</td></tr>
+            <tr><td class="px-4 py-3">銅鉱石</td><td class="px-4 py-3">Lv 1〜25</td><td class="px-4 py-3">2%</td></tr>
+            <tr><td class="px-4 py-3">鉄鉱石</td><td class="px-4 py-3">Lv 20〜50</td><td class="px-4 py-3">1.5%</td></tr>
+            <tr><td class="px-4 py-3">金鉱石</td><td class="px-4 py-3">Lv 20〜50</td><td class="px-4 py-3">1%</td></tr>
+            <tr><td class="px-4 py-3">ラピスラズリ鉱石</td><td class="px-4 py-3">Lv 45〜75</td><td class="px-4 py-3">1%</td></tr>
+            <tr><td class="px-4 py-3">レッドストーン鉱石</td><td class="px-4 py-3">Lv 45〜75</td><td class="px-4 py-3">1%</td></tr>
+            <tr><td class="px-4 py-3">ダイヤモンド鉱石</td><td class="px-4 py-3">Lv 70〜100</td><td class="px-4 py-3">0.5%</td></tr>
+            <tr><td class="px-4 py-3">エメラルド鉱石</td><td class="px-4 py-3">Lv 70〜100</td><td class="px-4 py-3">0.5%</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h3 class="text-lg font-semibold text-slate-800 mb-2">キルスキップ条件</h3>
-      <p class="mb-3 text-sm leading-relaxed">以下の条件に該当するモブはレベリングの対象から除外されます。</p>
-      <ul class="mb-6 space-y-1 text-sm leading-relaxed list-disc list-inside text-slate-600">
-        <li><strong class="text-slate-700">名札付き:</strong> プレイヤーが名札で名前を付けたモブ</li>
-        <li><strong class="text-slate-700">テイム済み:</strong> プレイヤーに懐いたモブ（オオカミ、猫など）</li>
-        <li><strong class="text-slate-700">リーシュ付き:</strong> リードで繋がれたモブ</li>
-        <li><strong class="text-slate-700">変身中:</strong> 変身プラグインによる変身状態のモブ</li>
-        <li><strong class="text-slate-700">村人:</strong> 村人および行商人</li>
-      </ul>
+      <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">装備ドロップ</h3>
+      <p class="text-body mb-4">ゾンビ、ハスク、ピグリン、ゾンビピグリンは鉄装備を装着してスポーンすることがあり（確率5%）、倒すとその装備をドロップする場合があります。</p>
 
-      <h3 class="text-lg font-semibold text-slate-800 mb-2">イベント優先順位</h3>
-      <p class="text-sm leading-relaxed">レベル付与イベントの優先順位設定により、他プラグインとの競合を制御できます。デフォルトでは<code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">NORMAL</code>に設定されており、大半のプラグインとの互換性を維持しています。</p>
-    </section>
-
-    <!-- コマンド -->
-    <section class="mb-12">
-      <h2 id="commands" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">コマンド</h2>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-slate-500">
-              <tr>
-                <th class="px-5 py-3 font-semibold">コマンド</th>
-                <th class="px-5 py-3 font-semibold">説明</th>
-                <th class="px-5 py-3 font-semibold">権限</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">/lm debug</code></td><td class="px-5 py-2.5">デバッグモードの切替</td><td class="px-5 py-2.5 text-slate-500">levelledmobs.admin</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">/lm egg</code></td><td class="px-5 py-2.5">指定レベルのモブエッグを生成</td><td class="px-5 py-2.5 text-slate-500">levelledmobs.admin</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">/lm help</code></td><td class="px-5 py-2.5">ヘルプメッセージの表示</td><td class="px-5 py-2.5 text-slate-500">levelledmobs.use</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">/lm info</code></td><td class="px-5 py-2.5">ターゲットモブの情報を表示</td><td class="px-5 py-2.5 text-slate-500">levelledmobs.use</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">/lm kill</code></td><td class="px-5 py-2.5">レベル付きモブの一括キル</td><td class="px-5 py-2.5 text-slate-500">levelledmobs.admin</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">/lm reload</code></td><td class="px-5 py-2.5">設定ファイルのリロード</td><td class="px-5 py-2.5 text-slate-500">levelledmobs.admin</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">/lm rules</code></td><td class="px-5 py-2.5">現在のルール設定を表示</td><td class="px-5 py-2.5 text-slate-500">levelledmobs.admin</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">/lm summon</code></td><td class="px-5 py-2.5">モブを召喚（here / atPlayer / atLocation）</td><td class="px-5 py-2.5 text-slate-500">levelledmobs.admin</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">装備カテゴリ</th><th class="px-4 py-3 font-semibold text-slate-700">対象アイテム</th><th class="px-4 py-3 font-semibold text-slate-700">ドロップ確率</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="px-4 py-3">鉄防具</td><td class="px-4 py-3">ヘルメット / チェストプレート / レギンス / ブーツ</td><td class="px-4 py-3">各0.5%（最大2個まで）</td></tr>
+            <tr><td class="px-4 py-3">鉄武器</td><td class="px-4 py-3">剣 / 斧</td><td class="px-4 py-3">各0.5%（最大1個まで）</td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="bg-primary-50 border border-blue-200 rounded-xl px-5 py-4 text-sm leading-relaxed">
-        <p class="font-semibold text-slate-800 mb-1">summon サブコマンド</p>
-        <p class="text-slate-600"><code class="px-1.5 py-0.5 text-xs bg-white/60 rounded text-slate-700">/lm summon</code> は3つの召喚モードに対応しています:<br>
-        <strong>here</strong> - 実行者の現在地に召喚<br>
-        <strong>atPlayer &lt;player&gt;</strong> - 指定プレイヤーの位置に召喚<br>
-        <strong>atLocation &lt;x&gt; &lt;y&gt; &lt;z&gt;</strong> - 指定座標に召喚</p>
+
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
+        <strong>注意:</strong> 同じチャンクで短時間に大量のモブを倒すと、アイテムと経験値のボーナスが一時的に無効化されます（1チャンクあたり15体が上限）。これはファーム対策のための仕組みで、通常の戦闘では影響しません。クールタイムは10分です。
       </div>
     </section>
 
-    <!-- モブグループ -->
-    <section class="mb-12">
-      <h2 id="mob-groups" class="text-xl font-bold text-slate-900 mb-4 scroll-mt-20">モブグループ</h2>
-      <p class="mb-4 leading-relaxed">ルール設定で使用できるモブグループの一覧です。グループ名を指定することで、複数のモブに一括でルールを適用できます。</p>
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-xs uppercase tracking-wider text-slate-500">
-              <tr>
-                <th class="px-5 py-3 font-semibold">グループ名</th>
-                <th class="px-5 py-3 font-semibold">説明</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100">
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_mobs</code></td><td class="px-5 py-2.5">全モブ</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_levellable_mobs</code></td><td class="px-5 py-2.5">レベル付与可能な全モブ</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_hostile_mobs</code></td><td class="px-5 py-2.5">全ての敵対モブ</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_passive_mobs</code></td><td class="px-5 py-2.5">全ての中立・友好モブ</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_overworld_mobs</code></td><td class="px-5 py-2.5">オーバーワールドのモブ</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_nether_mobs</code></td><td class="px-5 py-2.5">ネザーのモブ</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_flying_mobs</code></td><td class="px-5 py-2.5">飛行モブ（ファントム、ブレイズ等）</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_ground_mobs</code></td><td class="px-5 py-2.5">地上モブ</td></tr>
-              <tr class="hover:bg-gray-50/50"><td class="px-5 py-2.5"><code class="px-1.5 py-0.5 text-xs bg-slate-100 rounded text-slate-700">all_aquatic_mobs</code></td><td class="px-5 py-2.5">水生モブ（ドラウンド、ガーディアン等）</td></tr>
-            </tbody>
-          </table>
+    <!-- 攻略のヒント -->
+    <section id="tips" class="mb-12">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">攻略のヒント</h2>
+
+      <div class="grid gap-4 sm:grid-cols-2 mb-6">
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">段階的に冒険範囲を広げる</h3>
+          <p class="text-sm text-body">スポーン地点の近くで装備を整えてから、徐々に遠くへ冒険しましょう。無理に遠出すると高レベルモブに圧倒されます。250ブロック以内のバッファゾーンを拠点づくりに活用するのがおすすめです。</p>
         </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">ネームタグの色で判断する</h3>
+          <p class="text-sm text-body">緑や青のモブは比較的安全です。黄色以降は油断禁物。赤や紫のモブを見かけたら、装備が十分か確認してから挑みましょう。金色のモブ（Lv91以上）は最強クラスです。</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">地下探索は慎重に</h3>
+          <p class="text-sm text-body">Y座標が低いほどモブが強くなります。ディープダークやディープスレート層では、地上より数レベル高いモブが出現するため注意が必要です。松明やベッドを多めに持っていきましょう。</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">高レベルモブで効率よく稼ぐ</h3>
+          <p class="text-sm text-body">装備が整ったら、高レベルモブを積極的に狙いましょう。経験値ドロップが大幅に増加し、Lv70以上のモブからはダイヤやエメラルドの鉱石もドロップします。リスクに見合ったリターンがあります。</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">クリーパーに要注意</h3>
+          <p class="text-sm text-body">高レベルのクリーパーは爆発力が大幅に強化されています。盾やブラストプロテクションのエンチャントが有効です。レベル表示が橙以上のクリーパーには特に気をつけましょう。</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">ネザーでは高所を確保</h3>
+          <p class="text-sm text-body">ネザーではY座標が高いほどモブのレベルが低くなります。ネザーの天井付近を移動すれば比較的安全に探索できます。低地の溶岩海付近は最も危険なエリアです。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mb-12">
+      <h2 class="text-xl font-semibold text-slate-900 mb-6 pb-2 border-b border-slate-200">よくある質問（FAQ）</h2>
+
+      <div class="space-y-3">
+        <details data-faq class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <summary class="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-slate-900 hover:bg-gray-50">
+            <span>モブのレベルはリログやチャンク再読み込みで変わりますか？</span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-4 text-sm text-body">いいえ、一度スポーンしたモブのレベルは変わりません。ただし、チャンクが再読み込みされた際にレベルが正しく適用されているか再チェックが行われます。</div>
+        </details>
+
+        <details data-faq class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <summary class="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-slate-900 hover:bg-gray-50">
+            <span>動物（パッシブモブ）もレベルで強くなりますか？</span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-4 text-sm text-body">いいえ。牛・豚・羊などのパッシブモブにはレベル表示はされますが、ステータスの強化は行われません（バニラチャレンジが適用されています）。通常通り倒せます。</div>
+        </details>
+
+        <details data-faq class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <summary class="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-slate-900 hover:bg-gray-50">
+            <span>ネームタグが表示されないモブがいますが？</span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-4 text-sm text-body">ネームタグはターゲットや攻撃時にのみ表示される仕組みです。パッシブモブは近接攻撃時と被ダメージ時のみの表示になっています。また、MyPetやMythicMobs等の外部プラグインが管理するモブにはレベリングが適用されません。</div>
+        </details>
+
+        <details data-faq class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <summary class="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-slate-900 hover:bg-gray-50">
+            <span>スポナーから出たモブは通常と違いますか？</span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-4 text-sm text-body">はい。スポナーから出たモブは名前に「Spawner」が付き、ブロンズ難易度が適用されます。通常の敵対モブ（シルバー）より若干弱めに設定されています。</div>
+        </details>
+
+        <details data-faq class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <summary class="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-slate-900 hover:bg-gray-50">
+            <span>同じ場所でモブを大量に倒しているとドロップが減りました。なぜですか？</span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-4 text-sm text-body">ファーム対策として、1チャンク（とその周辺5チャンク）で15体以上のレベル付きモブを短時間に倒すと、アイテムと経験値のレベルボーナスが10分間停止します。バニラのドロップは引き続き入手できます。場所を変えて戦闘するか、クールタイムを待ちましょう。</div>
+        </details>
+
+        <details data-faq class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <summary class="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-slate-900 hover:bg-gray-50">
+            <span>名札を付けたモブやペットはレベリングされますか？</span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-4 text-sm text-body">名札を付けたモブやテイムされたペットにもレベルは付与されますが、管理者コマンドによるキル対象からは除外されます。MyPetプラグインで登録されたペットにはレベリングが適用されません。</div>
+        </details>
+
+        <details data-faq class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <summary class="flex items-center justify-between px-5 py-4 cursor-pointer text-sm font-medium text-slate-900 hover:bg-gray-50">
+            <span>鉱石ドロップはシルクタッチのツルハシで採掘したときのように鉱石ブロックが手に入りますか？</span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-4 text-sm text-body">はい、鉱石ブロックそのものがドロップします。かまどで精錬するか、シルクタッチなしのツルハシで設置後に採掘してアイテムを取り出してください。</div>
+        </details>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-200 pt-8 pb-4 text-center text-xs text-slate-400">
-      <p>Server Plugin Wiki &copy; 2026 &mdash; All Rights Reserved</p>
-    </footer>
-
+    <footer class="pt-8 border-t border-slate-200 text-center text-sm text-slate-400">Server Plugin Wiki &copy; 2026</footer>
   </div>
 </main>
 
-<!-- Back to Top -->
-<button id="btt" class="fixed bottom-6 right-6 z-50 w-10 h-10 bg-white border border-slate-200 shadow-sm rounded-full flex items-center justify-center text-slate-500 hover:text-primary-500 transition opacity-0 pointer-events-none">
-  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 15l7-7 7 7"/></svg>
+<!-- Back to top -->
+<button id="btt" class="hidden fixed bottom-6 right-6 z-50 w-10 h-10 bg-white border border-slate-200 rounded-full shadow-sm text-slate-500 hover:text-primary-500 hover:border-primary-200 transition">
+  <svg class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 15l7-7 7 7"/></svg>
 </button>
 
 <script src="js/main.js"></script>
-</body>
-</html>
+</body></html>
