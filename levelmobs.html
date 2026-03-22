@@ -7,54 +7,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-gray-50 font-sans text-slate-700 antialiased">
+<body class="bg-gray-50 min-h-screen text-slate-900">
 
 <!-- Header -->
-<header class="fixed top-0 left-0 right-0 z-50 h-16 bg-white/80 backdrop-blur border-b border-slate-200">
-  <div class="h-full max-w-screen-2xl mx-auto flex items-center justify-between px-4 lg:px-8">
-    <a href="index.html" class="flex items-center gap-3 text-slate-900 no-underline">
-      <svg class="w-7 h-7 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-      <span class="text-lg font-bold tracking-tight">Server Wiki</span>
-    </a>
-    <div id="search-box" class="relative hidden sm:block w-64">
-      <input id="search-input" type="text" placeholder="検索..." class="w-full h-9 pl-9 pr-3 text-sm bg-gray-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500">
-      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <div id="search-results" class="hidden absolute top-full left-0 right-0 mt-1 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden z-50"></div>
-    </div>
-    <button id="menu-btn" class="lg:hidden p-2 text-slate-600 hover:text-slate-900">
-      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<header class="fixed top-0 inset-x-0 h-16 bg-white/80 backdrop-blur border-b border-slate-200 z-50 flex items-center px-4 lg:px-8">
+    <button id="menu-btn" class="lg:hidden mr-3 p-2 rounded-lg hover:bg-gray-50" aria-label="メニュー">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
-  </div>
+    <a href="index.html" class="flex items-center gap-2 text-slate-900 no-underline">
+      <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"/></svg>
+      </div>
+      <span class="font-semibold text-lg hidden sm:inline">Server Wiki</span>
+    </a>
+    <div id="search-box" class="relative ml-auto w-64 hidden sm:block">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input id="search-input" type="text" placeholder="検索..." class="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500">
+      <div id="search-results" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden z-50"></div>
+    </div>
 </header>
 
 <!-- Overlay -->
 <div id="overlay" class="hidden fixed inset-0 z-40 bg-black/30 lg:hidden"></div>
 
 <!-- Sidebar -->
-<aside id="sidebar" class="fixed top-16 left-0 bottom-0 z-40 w-56 bg-white border-r border-slate-200 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform">
-  <div class="py-6 px-4">
-    <p class="px-2 mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Plugins</p>
-    <nav class="flex flex-col gap-0.5 text-sm">
-      <a href="index.html" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-slate-600 hover:bg-gray-50">Home</a>
-      <a href="ars-noveau.html" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-slate-600 hover:bg-gray-50">Ars Noveau</a>
-      <a href="diamond-compressor.html" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-slate-600 hover:bg-gray-50">Diamond Compressor</a>
-      <a href="storage-drawers.html" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-slate-600 hover:bg-gray-50">Storage Drawers</a>
-      <a href="mypet.html" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-slate-600 hover:bg-gray-50">MyPet</a>
-      <a href="levelmobs.html" class="flex items-center gap-2 px-2 py-1.5 rounded-md bg-primary-50 text-primary-700 font-medium">LevelledMobs</a>
+<aside id="sidebar" class="fixed top-16 left-0 bottom-0 w-56 bg-white border-r border-slate-200 z-40 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform duration-200">
+    <nav class="p-4 space-y-1">
+      <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">プラグイン</p>
+      <a href="index.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">ホーム</a>
+      <a href="ars-noveau.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Ars Noveau</a>
+      <a href="diamond-compressor.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Diamond Compressor</a>
+      <a href="storage-drawers.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">Storage Drawers</a>
+      <a href="mypet.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">MyPet</a>
+      <a href="levelmobs.html" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">LevelledMobs</a>
     </nav>
-  </div>
-  <div class="py-4 px-4 border-t border-slate-100">
-    <p class="px-2 mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Contents</p>
-    <nav id="toc" class="flex flex-col gap-0.5 text-sm">
-      <a href="#overview" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">概要</a>
-      <a href="#leveling" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">レベリングの仕組み</a>
-      <a href="#display" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">モブの表示</a>
-      <a href="#difficulty" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">難易度の変化</a>
-      <a href="#drops" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">カスタムドロップ</a>
-      <a href="#tips" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">攻略のヒント</a>
-      <a href="#faq" class="px-2 py-1 rounded text-slate-500 hover:text-primary-700">FAQ</a>
-    </nav>
-  </div>
+    <div id="toc" class="p-4 border-t border-slate-200">
+      <p class="px-3 py-2 text-xs font-medium text-slate-400 uppercase tracking-wide">目次</p>
+      <div class="space-y-0.5">
+        <a href="#overview" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">概要</a>
+        <a href="#leveling" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">レベリングの仕組み</a>
+        <a href="#display" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">モブの表示</a>
+        <a href="#difficulty" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">難易度の変化</a>
+        <a href="#drops" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">カスタムドロップ</a>
+        <a href="#tips" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">攻略のヒント</a>
+        <a href="#faq" class="flex items-center gap-2 px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-gray-50">FAQ</a>
+      </div>
+    </div>
 </aside>
 
 <!-- Main -->
@@ -114,7 +112,7 @@
       <p class="text-body mb-4">最も大きな要素です。オーバーワールドではスポーン地点を中心に、遠ざかるほどモブのレベルが上がります。スポーン地点から約250ブロック以内はバッファゾーンとして比較的安全で、そこから210ブロックごとにレベル帯が1段階ずつ上がっていきます。</p>
 
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
+        <div class="overflow-x-auto"><table class="w-full text-sm">
           <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">スポーン地点からの距離</th><th class="px-4 py-3 font-semibold text-slate-700">おおよそのレベル帯</th><th class="px-4 py-3 font-semibold text-slate-700">体感難易度</th></tr></thead>
           <tbody class="divide-y divide-slate-100">
             <tr><td class="px-4 py-3">0〜250ブロック</td><td class="px-4 py-3">Lv 1〜10</td><td class="px-4 py-3">バニラとほぼ同じ</td></tr>
@@ -125,7 +123,7 @@
             <tr><td class="px-4 py-3">6000〜10000ブロック</td><td class="px-4 py-3">Lv 80〜160</td><td class="px-4 py-3">フル装備・ポーション必須</td></tr>
             <tr><td class="px-4 py-3">10000ブロック以上</td><td class="px-4 py-3">Lv 120〜200</td><td class="px-4 py-3">最高難易度 - 万全の準備を</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
 
       <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">重み付きランダム</h3>
@@ -135,14 +133,14 @@
       <p class="text-body mb-4">あなた自身の経験値レベルもモブのレベルに影響します。プレイヤーレベルが高いほど、周囲にスポーンするモブのレベルも上がりやすくなります。レベル補正の上限は+25です。</p>
 
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
+        <div class="overflow-x-auto"><table class="w-full text-sm">
           <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">プレイヤーレベル</th><th class="px-4 py-3 font-semibold text-slate-700">モブへの追加レベル</th></tr></thead>
           <tbody class="divide-y divide-slate-100">
             <tr><td class="px-4 py-3">Lv 0〜15</td><td class="px-4 py-3">+1</td></tr>
             <tr><td class="px-4 py-3">Lv 16〜30</td><td class="px-4 py-3">+2</td></tr>
             <tr><td class="px-4 py-3">Lv 31〜45</td><td class="px-4 py-3">+3</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
 
       <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
@@ -156,14 +154,14 @@
       <p class="text-body mb-4">エンドでは座標 (0, 0) を中心とした距離ベースのレベリングが適用されます。バッファ距離が1000ブロックと広く設定されているため、メインアイランド周辺は比較的安全です。200ブロックごとにレベル帯が上がり、アウターエンドへ行くほどモブのレベルが上昇します。</p>
 
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
+        <div class="overflow-x-auto"><table class="w-full text-sm">
           <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">ワールド</th><th class="px-4 py-3 font-semibold text-slate-700">基準点</th><th class="px-4 py-3 font-semibold text-slate-700">バッファ距離</th><th class="px-4 py-3 font-semibold text-slate-700">レベル刻み</th></tr></thead>
           <tbody class="divide-y divide-slate-100">
             <tr><td class="px-4 py-3">オーバーワールド</td><td class="px-4 py-3">スポーン地点</td><td class="px-4 py-3">250ブロック</td><td class="px-4 py-3">210ブロック毎</td></tr>
             <tr><td class="px-4 py-3">ネザー</td><td class="px-4 py-3">座標 (0, 0)</td><td class="px-4 py-3">125ブロック</td><td class="px-4 py-3">105ブロック毎</td></tr>
             <tr><td class="px-4 py-3">エンド</td><td class="px-4 py-3">座標 (0, 0)</td><td class="px-4 py-3">1000ブロック</td><td class="px-4 py-3">200ブロック毎</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
     </section>
 
@@ -201,7 +199,7 @@
       <p class="text-body mb-4">ネームタグのレベル表示は、レベル帯に応じて色が変わります。色を見れば一目でモブの大まかな強さがわかります。Lv101以上は白色で表示されます。</p>
 
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
+        <div class="overflow-x-auto"><table class="w-full text-sm">
           <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">レベル帯</th><th class="px-4 py-3 font-semibold text-slate-700">色</th><th class="px-4 py-3 font-semibold text-slate-700">脅威度</th></tr></thead>
           <tbody class="divide-y divide-slate-100">
             <tr><td class="px-4 py-3">Lv 1〜15</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#22E76B"></span>緑</span></td><td class="px-4 py-3">安全 - 初心者向け</td></tr>
@@ -213,7 +211,7 @@
             <tr><td class="px-4 py-3">Lv 91〜100</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#FFD700"></span>金</span></td><td class="px-4 py-3">最高危険 - 熟練者向け</td></tr>
             <tr><td class="px-4 py-3">Lv 101〜200</td><td class="px-4 py-3"><span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:#FFFFFF;border:1px solid #cbd5e1"></span>白</span></td><td class="px-4 py-3">超越 - エンドゲームコンテンツ</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
 
       <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
@@ -228,7 +226,7 @@
 
       <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">敵対モブのステータス強化（シルバーチャレンジ）</h3>
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
+        <div class="overflow-x-auto"><table class="w-full text-sm">
           <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">ステータス</th><th class="px-4 py-3 font-semibold text-slate-700">倍率</th><th class="px-4 py-3 font-semibold text-slate-700">プレイヤーへの影響</th></tr></thead>
           <tbody class="divide-y divide-slate-100">
             <tr><td class="px-4 py-3">最大体力</td><td class="px-4 py-3">x18.0</td><td class="px-4 py-3">モブを倒すのに大幅に時間がかかる</td></tr>
@@ -241,14 +239,14 @@
             <tr><td class="px-4 py-3">アイテムドロップ</td><td class="px-4 py-3">x0.5</td><td class="px-4 py-3">報酬が微増</td></tr>
             <tr><td class="px-4 py-3">経験値ドロップ</td><td class="px-4 py-3">x5.0</td><td class="px-4 py-3">効率よくレベル上げが可能</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
 
       <h3 class="text-lg font-semibold text-slate-900 mt-8 mb-4">モブ種別ごとの難易度差</h3>
       <p class="text-body mb-4">全てのモブが同じ強さではありません。モブの種類によって適用される難易度が異なります。</p>
 
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
+        <div class="overflow-x-auto"><table class="w-full text-sm">
           <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">モブカテゴリ</th><th class="px-4 py-3 font-semibold text-slate-700">難易度</th><th class="px-4 py-3 font-semibold text-slate-700">対象の例</th></tr></thead>
           <tbody class="divide-y divide-slate-100">
             <tr><td class="px-4 py-3">一般敵対モブ</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 bg-gray-200 text-gray-700 rounded text-xs font-medium">シルバー</span></td><td class="px-4 py-3">ゾンビ、スケルトン、スパイダー、ウィッチなど</td></tr>
@@ -257,7 +255,7 @@
             <tr><td class="px-4 py-3">ボスモブ</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-medium">ブロンズ</span></td><td class="px-4 py-3">エンダードラゴン、ウィザー、ウォーデン、エルダーガーディアン</td></tr>
             <tr><td class="px-4 py-3">スポナー産モブ</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-medium">ブロンズ</span></td><td class="px-4 py-3">スポナーから出たモブ（名前に「Spawner」が付く）</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
 
       <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-6 text-sm text-body">
@@ -275,16 +273,16 @@
 
       <!-- Tabs for drop tables -->
       <div class="mb-6">
-        <div class="flex gap-1 border-b border-slate-200 mb-0">
-          <button onclick="showDropTab('medium')" id="tab-medium" class="px-4 py-2 text-sm font-medium border-b-2 border-primary-500 text-primary-700">中モブ（標準）</button>
-          <button onclick="showDropTab('weak')" id="tab-weak" class="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700">弱モブ</button>
-          <button onclick="showDropTab('strong')" id="tab-strong" class="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700">強モブ</button>
+        <div class="flex gap-1 border-b border-slate-200 mb-0 overflow-x-auto">
+          <button onclick="showDropTab('medium')" id="tab-medium" class="px-4 py-2 text-sm font-medium border-b-2 border-primary-500 text-primary-700 whitespace-nowrap">中モブ（標準）</button>
+          <button onclick="showDropTab('weak')" id="tab-weak" class="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">弱モブ</button>
+          <button onclick="showDropTab('strong')" id="tab-strong" class="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 whitespace-nowrap">強モブ</button>
         </div>
 
         <!-- Medium mobs -->
         <div id="drop-medium" class="bg-white rounded-b-xl border border-t-0 border-slate-200 shadow-sm overflow-hidden">
           <div class="px-4 py-3 bg-slate-50 text-xs text-slate-500">対象: ゾンビ、スケルトン、クリーパー、スパイダー、ドラウンド、ハスク、ブレイズ、ウィッチなど一般的な敵対モブ</div>
-          <table class="w-full text-sm">
+          <div class="overflow-x-auto"><table class="w-full text-sm">
             <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">ドロップアイテム</th><th class="px-4 py-3 font-semibold text-slate-700">必要レベル</th><th class="px-4 py-3 font-semibold text-slate-700">確率</th><th class="px-4 py-3 font-semibold text-slate-700">個数</th></tr></thead>
             <tbody class="divide-y divide-slate-100">
               <tr><td class="px-4 py-3">石炭鉱石</td><td class="px-4 py-3">Lv 1+</td><td class="px-4 py-3">24%</td><td class="px-4 py-3">1</td></tr>
@@ -297,13 +295,13 @@
               <tr><td class="px-4 py-3">エメラルド鉱石</td><td class="px-4 py-3">Lv 70+</td><td class="px-4 py-3">20%</td><td class="px-4 py-3">1</td></tr>
               <tr><td class="px-4 py-3">古代の残骸</td><td class="px-4 py-3">Lv 90+</td><td class="px-4 py-3">10%</td><td class="px-4 py-3">1</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <!-- Weak mobs -->
         <div id="drop-weak" class="hidden bg-white rounded-b-xl border border-t-0 border-slate-200 shadow-sm overflow-hidden">
           <div class="px-4 py-3 bg-slate-50 text-xs text-slate-500">対象: シルバーフィッシュ、エンダーマイト、スライム、マグマキューブ、洞窟グモ、ファントム、ヴェックス、村人ゾンビ、ゾンビピグリン、シュルカー、ストレイ</div>
-          <table class="w-full text-sm">
+          <div class="overflow-x-auto"><table class="w-full text-sm">
             <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">ドロップアイテム</th><th class="px-4 py-3 font-semibold text-slate-700">必要レベル</th><th class="px-4 py-3 font-semibold text-slate-700">確率</th><th class="px-4 py-3 font-semibold text-slate-700">個数</th></tr></thead>
             <tbody class="divide-y divide-slate-100">
               <tr><td class="px-4 py-3">石炭鉱石</td><td class="px-4 py-3">Lv 1+</td><td class="px-4 py-3">12%</td><td class="px-4 py-3">1</td></tr>
@@ -316,13 +314,13 @@
               <tr><td class="px-4 py-3">エメラルド鉱石</td><td class="px-4 py-3">Lv 70+</td><td class="px-4 py-3">10%</td><td class="px-4 py-3">1</td></tr>
               <tr><td class="px-4 py-3">古代の残骸</td><td class="px-4 py-3">Lv 90+</td><td class="px-4 py-3">5%</td><td class="px-4 py-3">1</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <!-- Strong mobs -->
         <div id="drop-strong" class="hidden bg-white rounded-b-xl border border-t-0 border-slate-200 shadow-sm overflow-hidden">
           <div class="px-4 py-3 bg-slate-50 text-xs text-slate-500">対象: ウォーデン、ウィザー、エンダードラゴン、エルダーガーディアン、ラヴェジャー、ヴィンディケーター、ピグリンブルート、エヴォーカー、ウィザースケルトン、ホグリン、アイアンゴーレム</div>
-          <table class="w-full text-sm">
+          <div class="overflow-x-auto"><table class="w-full text-sm">
             <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">ドロップアイテム</th><th class="px-4 py-3 font-semibold text-slate-700">必要レベル</th><th class="px-4 py-3 font-semibold text-slate-700">確率</th><th class="px-4 py-3 font-semibold text-slate-700">個数</th></tr></thead>
             <tbody class="divide-y divide-slate-100">
               <tr><td class="px-4 py-3">石炭鉱石</td><td class="px-4 py-3">Lv 1+</td><td class="px-4 py-3">40%</td><td class="px-4 py-3">1〜2</td></tr>
@@ -335,7 +333,7 @@
               <tr><td class="px-4 py-3">エメラルド鉱石</td><td class="px-4 py-3">Lv 70+</td><td class="px-4 py-3">35%</td><td class="px-4 py-3">1</td></tr>
               <tr><td class="px-4 py-3">古代の残骸</td><td class="px-4 py-3">Lv 90+</td><td class="px-4 py-3">20%</td><td class="px-4 py-3">1</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
       </div>
 
@@ -343,13 +341,13 @@
       <p class="text-body mb-4">ゾンビ、ハスク、ピグリン、ゾンビピグリンは鉄装備を装着してスポーンすることがあり（確率5%）、倒すとその装備をドロップする場合があります。</p>
 
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-        <table class="w-full text-sm">
+        <div class="overflow-x-auto"><table class="w-full text-sm">
           <thead><tr class="bg-slate-50 text-left"><th class="px-4 py-3 font-semibold text-slate-700">装備カテゴリ</th><th class="px-4 py-3 font-semibold text-slate-700">対象アイテム</th><th class="px-4 py-3 font-semibold text-slate-700">ドロップ確率</th></tr></thead>
           <tbody class="divide-y divide-slate-100">
             <tr><td class="px-4 py-3">鉄防具</td><td class="px-4 py-3">ヘルメット / チェストプレート / レギンス / ブーツ</td><td class="px-4 py-3">各0.5%（最大2個まで）</td></tr>
             <tr><td class="px-4 py-3">鉄武器</td><td class="px-4 py-3">剣 / 斧</td><td class="px-4 py-3">各0.5%（最大1個まで）</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
 
       <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6 text-sm text-body">
@@ -474,8 +472,8 @@
 </main>
 
 <!-- Back to top -->
-<button id="btt" class="hidden fixed bottom-6 right-6 z-50 w-10 h-10 bg-white border border-slate-200 rounded-full shadow-sm text-slate-500 hover:text-primary-500 hover:border-primary-200 transition">
-  <svg class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 15l7-7 7 7"/></svg>
+<button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-white border border-slate-200 rounded-lg shadow-sm flex items-center justify-center text-slate-500 hover:bg-gray-50 transition-all opacity-0 pointer-events-none z-50" aria-label="トップへ戻る">
+  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 15l7-7 7 7"/></svg>
 </button>
 
 <script src="js/main.js"></script>
